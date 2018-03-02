@@ -2,6 +2,12 @@ services:
     _defaults:
         public: '%public.services%'
 
+    hbpf.influxdb_sender:
+        class: Hanaboso\CommonsBundle\Metrics\InfluxDbSender
+        arguments:
+            - '@udp_metrics_sender'
+            - '%influx.fpm_table%'
+
     hbpf.transport.curl_client_factory:
         class: Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory
 
