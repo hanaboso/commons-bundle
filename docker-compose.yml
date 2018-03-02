@@ -1,0 +1,63 @@
+version: '3'
+services:
+  app:
+    image: dkr.hanaboso.net/pipes/pipes/php-dev:dev
+    user: ${DEV_UID}:${DEV_GID}
+    volumes:
+      - ./:/srv/project
+#      - ${SSH_AUTH_SOCK}:/tmp/bound-ssh-agent
+#      - ${HOME}/.composer:/srv/.composer
+    environment:
+      - APP_ENV=dev
+      - DEV_UID=${DEV_UID}
+      - DEV_GID=${DEV_GID}
+    depends_on:
+      - mongo
+      - redis
+      - mariadb
+      - influxdb
+    links:
+      - mongo
+      - redis
+      - mariadb
+      - influxdb
+
+  mongo:
+      image: mongo:latest
+      ports:
+        - ${DEV_IP}:27017:27017
+      volumes:
+        - mongo:/data/db
+
+  mariadb:
+      image: mariadb:10.3
+      command: "mysqld --innodb_flush_method=nosync"
+      environment:
+       MYSQL_ROOT_PASSWORD: root
+      ports:
+       - ${DEV_IP}:3306:3306
+      volumes:
+       - mariadb:/var/lib/mysql
+
+  redis:
+    image: redis:3.2-alpine
+    ports:
+      - ${DEV_IP}:6379:6379
+    volumes:
+      - redis:/data
+
+  influxdb:
+    image: influxdb:1.2-alpine
+    ports:
+    - ${DEV_IP}:8083:8083
+    - ${DEV_IP}:8086:8086
+    - ${DEV_IP}:8089:8089/udp
+    volumes:
+    - influxdb:/var/lib/influxdb
+    - ./tests/testApp/influx/influxdb.conf:/etc/influxdb/influxdb.conf
+
+volumes:
+  mongo: {}
+  mariadb: {}
+  redis: {}
+  influxdb: {}

@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: '%public.services%'
+
+    hbpf.ftp.ftp_adapter:
+        class: Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter
+
+    hbpf.ftp.sftp_adapter:
+        class: Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter
+
+    hbpf.ftp.service.factory:
+        class: Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory
+        arguments:
+            - '@hbpf.ftp.ftp_adapter'
+            - '@hbpf.ftp.sftp_adapter'
+            - '@monolog.logger.ftp'
+            - '@service_container'

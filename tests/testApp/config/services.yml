@@ -1,0 +1,4 @@
+services:
+    Tests\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']

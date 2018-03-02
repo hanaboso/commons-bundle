@@ -1,0 +1,31 @@
+parameters:
+     # InfluxDb
+    influx.host: influxdb
+    influx.api_port: 8086
+    influx.udp_port: 8089
+    influx.user: admin
+    influx.password: password
+    influx.database: pipes
+    influx.node_table: pipes_node
+    influx.fpm_table: pipes_monolith_fpm
+    influx.rabbit_table: rabbitmq_queue
+    influx.counter_table: pipes_counter
+
+    # FTP
+    ftp.host: ''
+    ftp.port: 21
+    ftp.ssl: false
+    ftp.timeout: 15
+    ftp.user: ''
+    ftp.password: ''
+
+    # SFTP
+    sftp.host: ''
+    sftp.port: 22
+    sftp.timeout: 15
+    sftp.user: ''
+    sftp.password: ''
+
+    kernel.secret: 'SomeSecretSomething'
+    stdout_path: "%kernel.logs_dir%/stdout_%kernel.environment%.log"
+    public.services: true

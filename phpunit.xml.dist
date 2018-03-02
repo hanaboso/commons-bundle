@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.5/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="vendor/autoload.php"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         beStrictAboutTestSize="false"
+         beStrictAboutOutputDuringTests="false"
+         beStrictAboutChangesToGlobalState="false"
+         checkForUnintentionallyCoveredCode="false"
+         convertNoticesToExceptions="false"
+         convertErrorsToExceptions="false"
+         convertWarningsToExceptions="false"
+         verbose="false"
+>
+
+    <php>
+        <env name="KERNEL_CLASS" value="Tests\Kernel" />
+    </php>
+
+    <testsuite name="default">
+        <directory suffix="Test.php">tests</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
