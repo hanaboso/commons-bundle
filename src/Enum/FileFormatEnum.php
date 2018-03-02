@@ -23,6 +23,7 @@ final class FileFormatEnum extends EnumAbstract
     public const XLS  = 'xls';
     public const XLSX = 'xlsx';
     public const ODS  = 'ods';
+    public const PDF  = 'pdf';
 
     /**
      * @var string[]
@@ -33,6 +34,7 @@ final class FileFormatEnum extends EnumAbstract
         self::CSV  => 'CSV',
         self::XLSX => 'XLSX',
         self::ODS  => 'ODS',
+        self::PDF  => 'PDF',
     ];
 
 }
