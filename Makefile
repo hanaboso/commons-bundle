@@ -51,7 +51,7 @@ codesniffer:
 	$(DE) ./vendor/bin/phpcs --standard=./ruleset.xml --colors -p src/ tests/
 
 phpstan:
-	$(DE) ./vendor/bin/phpstan --memory-limit=200M analyse -c ./vendor/hanaboso/php-check-utils/phpstan.neon -l 7 src/
+	$(DE) ./vendor/bin/phpstan analyse -c ./vendor/hanaboso/php-check-utils/phpstan.neon -l 7 src/
 
 phpunit:
 	$(DE) ./vendor/bin/phpunit -c phpunit.xml.dist --colors --stderr tests/Unit
