@@ -38,12 +38,6 @@ services:
 #        calls:
 #            - ['setLogger', ['@monolog.logger.commons']]
 
-#    hbpf.influxdb_sender:
-#        class: Hanaboso\CommonsBundle\Metrics\InfluxDbSender
-#        arguments:
-#            - '@udp_metrics_sender'
-#            - '%influx.fpm_table%'
-
 
     ##########################
     #      File Storage      #
