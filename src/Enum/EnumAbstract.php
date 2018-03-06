@@ -13,31 +13,9 @@ abstract class EnumAbstract
 {
 
     /**
-     * @var string
-     */
-    protected $val;
-
-    /**
      * @var string[]
      */
     protected static $choices = [];
-
-    /**
-     * EnumAbstract constructor.
-     *
-     * @param string $val
-     * @throws EnumException
-     */
-    function __construct(string $val)
-    {
-        if (!self::isValid($val)) {
-            throw new EnumException(
-                sprintf('[%s] is not a valid option from [%s].', $val, __CLASS__),
-                EnumException::INVALID_CHOICE
-            );
-        }
-        $this->val = $val;
-    }
 
     /**
      * @return string[]
@@ -50,19 +28,19 @@ abstract class EnumAbstract
     /**
      * @param string $val
      *
-     * @return bool
-     */
-    public static function isValid(string $val): bool
-    {
-        return array_key_exists($val, static::$choices);
-    }
-
-    /**
      * @return string
+     * @throws EnumException
      */
-    public function getValue(): string
+    public static function isValid(string $val): string
     {
-        return $this->val;
+        if (!array_key_exists($val, static::$choices)) {
+            throw new EnumException(
+                sprintf('[%s] is not a valid option from [%s].', $val, __CLASS__),
+                EnumException::INVALID_CHOICE
+            );
+        }
+
+        return $val;
     }
 
 }
