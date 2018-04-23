@@ -31,7 +31,7 @@ services:
         public: '%public.services%'
 
     logstash_formatter:
-        class: Hanaboso\PipesFramework\Commons\Monolog\LogstashFormatter
+        class: Hanaboso\CommonsBundle\Monolog\LogstashFormatter
 
     udp_sender:
         class: Hanaboso\CommonsBundle\Metrics\UDPSender

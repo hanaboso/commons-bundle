@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class CommonsExtension extends Extension implements PrependExtensionInterface
+class HbPFCommonsExtension extends Extension implements PrependExtensionInterface
 {
 
     /**
