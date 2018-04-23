@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e01a1f6955da512879afb56011eff64",
+    "content-hash": "9c28605dd953229e240ba91420ed7928",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1963,51 +1963,67 @@
         },
         {
             "name": "paragonie/halite",
-            "version": "v3.4.0",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/halite.git",
-                "reference": "e1c194ea9bfa8600b5e0c1ac66659d59dddcceca"
+                "reference": "cbda59b8e39bfb02924cc6e2ee1c63accfda5da3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/halite/zipball/e1c194ea9bfa8600b5e0c1ac66659d59dddcceca",
-                "reference": "e1c194ea9bfa8600b5e0c1ac66659d59dddcceca",
+                "url": "https://api.github.com/repos/paragonie/halite/zipball/cbda59b8e39bfb02924cc6e2ee1c63accfda5da3",
+                "reference": "cbda59b8e39bfb02924cc6e2ee1c63accfda5da3",
                 "shasum": ""
             },
             "require": {
                 "paragonie/constant_time_encoding": "^2",
-                "paragonie/sodium_compat": "^1",
-                "php": "^7"
+                "paragonie/sodium_compat": "^1.6",
+                "php": "^7.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6"
-            },
-            "suggest": {
-                "ext-libsodium": "^1.0.6 - Legacy",
-                "ext-sodium": "^2.0.4 - Preferred"
+                "phpunit/phpunit": "^7",
+                "vimeo/psalm": "^1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "ParagonIE\\Halite\\": "src"
-                },
-                "files": [
-                    "stub/Sodium.stub.php"
-                ]
+                    "ParagonIE\\Halite\\": "./src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL3"
+                "MPL-2.0"
             ],
             "authors": [
                 {
                     "name": "Paragon Initiative Enterprises",
-                    "email": "info@paragonie.com"
+                    "email": "info@paragonie.com",
+                    "homepage": "https://paragonie.com"
                 }
             ],
             "description": "High-level cryptography interface powered by libsodium",
-            "time": "2018-01-29T15:42:43+00:00"
+            "homepage": "https://github.com/paragonie/halite",
+            "keywords": [
+                "Argon2i",
+                "BLAKE",
+                "BLAKE2",
+                "BLAKE2b",
+                "Curve25519",
+                "Ed25519",
+                "X25519",
+                "Xsalsa20",
+                "argon2",
+                "cryptography",
+                "encryption",
+                "ext-sodium",
+                "hashing",
+                "libsodium",
+                "password",
+                "public-key",
+                "signatures",
+                "sodium"
+            ],
+            "time": "2018-03-27T14:50:52+00:00"
         },
         {
             "name": "paragonie/random_compat",
