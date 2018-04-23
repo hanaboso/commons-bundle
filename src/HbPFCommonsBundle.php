@@ -5,11 +5,11 @@ namespace Hanaboso\CommonsBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class CommonsBundle
+ * Class HbPFCommonsBundle
  *
  * @package Hanaboso\CommonsBundle
  */
-class CommonsBundle extends Bundle
+class HbPFCommonsBundle extends Bundle
 {
 
 }
