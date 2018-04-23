@@ -428,9 +428,6 @@
     "symfony/http-kernel": {
         "version": "v4.0.4"
     },
-    "symfony/intl": {
-        "version": "v4.0.4"
-    },
     "symfony/lts": {
         "version": "4-dev"
     },
@@ -448,9 +445,6 @@
     },
     "symfony/options-resolver": {
         "version": "v4.0.4"
-    },
-    "symfony/polyfill-intl-icu": {
-        "version": "v1.7.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.7.0"

@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle;
 use FOS\RestBundle\FOSRestBundle;
-use Hanaboso\CommonsBundle\CommonsBundle;
+use Hanaboso\CommonsBundle\HbPFCommonsBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Snc\RedisBundle\SncRedisBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -61,7 +61,7 @@ class Kernel extends BaseKernel
             JMSSerializerBundle::class    => ['all' => TRUE],
             FOSRestBundle::class          => ['all' => TRUE],
             SncRedisBundle::class         => ['all' => TRUE],
-            CommonsBundle::class          => ['all' => TRUE],
+            HbPFCommonsBundle::class      => ['all' => TRUE],
 
         ];
         foreach ($contents as $class => $envs) {
