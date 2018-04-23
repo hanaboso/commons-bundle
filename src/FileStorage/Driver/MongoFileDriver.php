@@ -47,6 +47,8 @@ class MongoFileDriver extends FileStorageDriverAbstract
 
     /**
      * @param string $fileId
+     *
+     * @throws FileStorageException
      */
     public function delete(string $fileId): void
     {

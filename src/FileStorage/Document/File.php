@@ -12,6 +12,7 @@ namespace Hanaboso\CommonsBundle\FileStorage\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Hanaboso\CommonsBundle\Enum\FileFormatEnum;
 use Hanaboso\CommonsBundle\Enum\StorageTypeEnum;
+use Hanaboso\CommonsBundle\Exception\EnumException;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Entity\FileInterface;
 use Hanaboso\CommonsBundle\FileStorage\FileTypes;
@@ -104,6 +105,7 @@ class File implements FileInterface
      *
      * @return FileInterface
      * @throws FileStorageException
+     * @throws EnumException
      */
     public function setFileFormat(string $fileFormat): FileInterface
     {
@@ -114,7 +116,7 @@ class File implements FileInterface
             );
         }
 
-        $this->mimeType = FileTypes::fromExtension($fileFormat);
+        $this->mimeType   = FileTypes::fromExtension($fileFormat);
         $this->fileFormat = $fileFormat;
 
         return $this;
@@ -181,6 +183,7 @@ class File implements FileInterface
      *
      * @return FileInterface
      * @throws FileStorageException
+     * @throws EnumException
      */
     public function setStorageType(string $storageType): FileInterface
     {

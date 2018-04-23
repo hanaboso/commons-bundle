@@ -952,6 +952,7 @@ final class FileTypes
      * @param string $filename
      *
      * @return string
+     * @throws FileStorageException
      */
     public static function fromFilename(string $filename): string
     {

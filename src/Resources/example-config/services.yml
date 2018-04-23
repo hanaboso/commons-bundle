@@ -23,7 +23,7 @@ services:
     hbpf.system_metrics_listener:
         class: Hanaboso\CommonsBundle\Listener\SystemMetricsListener
         arguments:
-            - '@hbpf.influxdb_sender'
+            - '@hbpf.influxdb_sender_monolith'
         calls:
             - ['setLogger', ['@monolog.logger.commons']]
         tags:
@@ -33,8 +33,8 @@ services:
     udp_metrics_sender:
         class: Hanaboso\CommonsBundle\Metrics\UDPSender
         arguments:
-            - '%influx.host%'
-            - '%influx.udp_port%'
+            - '%kapacitor.host%'
+            - '%kapacitor.port%'
         calls:
             - ['setLogger', ['@monolog.logger.commons']]
 

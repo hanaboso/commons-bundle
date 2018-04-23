@@ -11,6 +11,7 @@ namespace Hanaboso\CommonsBundle\FileStorage\Dto;
 
 use Hanaboso\CommonsBundle\Enum\FileFormatEnum;
 use Hanaboso\CommonsBundle\Enum\StorageTypeEnum;
+use Hanaboso\CommonsBundle\Exception\EnumException;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 
 /**
@@ -88,6 +89,7 @@ class FileContentDto
      * @param string $type
      *
      * @return FileContentDto
+     * @throws EnumException
      * @throws FileStorageException
      */
     public function setStorageType(string $type): FileContentDto
@@ -136,9 +138,10 @@ class FileContentDto
      * @param string $format
      *
      * @return FileContentDto
+     * @throws EnumException
      * @throws FileStorageException
      */
-    public function setFormat($format): FileContentDto
+    public function setFormat(string $format): FileContentDto
     {
         if (!FileFormatEnum::isValid($format)) {
             throw new FileStorageException(

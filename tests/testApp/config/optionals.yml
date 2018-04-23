@@ -1,11 +1,11 @@
-parameters:
-    database_type: 'ODM'
-
 services:
     _defaults:
         public: '%public.services%'
 
-    # Handlers
+    ##########################
+    #    Session Handlers    #
+    ##########################
+
     hbpf.commons.session_handler:
         class: Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler
         arguments:
@@ -16,15 +16,32 @@ services:
         arguments:
             - '@snc_redis.sessions'
 
+    ##########################
+    #        Metrics         #
+    ##########################
+
     hbpf.system_metrics_listener:
         class: Hanaboso\CommonsBundle\Listener\SystemMetricsListener
         arguments:
-            - '@hbpf.influxdb_sender'
+            - '@hbpf.influxdb_sender_monolith'
         calls:
             - ['setLogger', ['@monolog.logger.commons']]
         tags:
             - { name: kernel.event_subscriber, event: kernel.terminate }
             - { name: kernel.event_subscriber, event: kernel.controller }
+
+    udp_metrics_sender:
+        class: Hanaboso\CommonsBundle\Metrics\UDPSender
+        arguments:
+            - '%kapacitor.host%'
+            - '%kapacitor.port%'
+        calls:
+            - ['setLogger', ['@monolog.logger.commons']]
+
+
+    ##########################
+    #      File Storage      #
+    ##########################
 
     hbpf.file_storage.driver.mongo:
         class: Hanaboso\CommonsBundle\FileStorage\Driver\MongoFileDriver
@@ -50,36 +67,13 @@ services:
             - '@hbpf.database_manager_locator'
             - 'Hanaboso\CommonsBundle\FileStorage\Document\File'
 
+    ##########################
+    #    Database Locator    #
+    ##########################
+
     hbpf.database_manager_locator:
         class: Hanaboso\CommonsBundle\DatabaseManager\DatabaseManagerLocator
         arguments:
             - '@doctrine_mongodb.odm.default_document_manager'
             - null
             - '%database_type%'
-
-    udp_metrics_sender:
-        class: Hanaboso\CommonsBundle\Metrics\UDPSender
-        arguments:
-            - '%influx.host%'
-            - '%influx.udp_port%'
-        calls:
-            - ['setLogger', ['@monolog.logger.commons']]
-
-    hbpf.influxdb_sender:
-        class: Hanaboso\CommonsBundle\Metrics\InfluxDbSender
-        arguments:
-            - '@udp_metrics_sender'
-            - '%influx.fpm_table%'
-
-    hbpf.docker.handler.docker_handler:
-        class: Hanaboso\CommonsBundle\Docker\Handler\DockerHandler
-        arguments: ['@hbpf.docker.docker']
-
-    hbpf.docker.docker:
-        class: Hanaboso\CommonsBundle\Docker\Docker
-        arguments: ['@hbpf.commons.docker.docker_client']
-
-    hbpf.commons.docker.docker_client:
-        class: Hanaboso\CommonsBundle\Docker\DockerClient
-        arguments:
-            - '%docker.connection.settings%'

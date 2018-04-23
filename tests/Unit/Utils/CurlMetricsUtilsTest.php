@@ -2,6 +2,8 @@
 
 namespace Tests\Unit\Utils;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
@@ -17,22 +19,21 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 {
 
     /**
-     *
+     * @throws Exception
+     * @throws GuzzleException
      */
     public function testCurlMetrics(): void
     {
         $influx = $this->createMock(InfluxDbSender::class);
-        $influx->expects($this->once())
+        $influx
             ->method('send')->will($this->returnCallback(
                 function (array $times, array $data): bool {
                     self::assertGreaterThan(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
-                    self::assertNotEmpty($data[MetricsEnum::HOST]);
-                    self::assertEquals(str_replace('=','',base64_encode('http://google.com')), $data[MetricsEnum::URI]);
 
                     return TRUE;
                 }
             ));
-        $this->container->set('hbpf.influxdb_sender', $influx);
+        $this->container->set('hbpf.influxdb_sender_connector', $influx);
 
         $manager = $this->container->get('hbpf.transport.curl_manager');
         $dto     = new RequestDto('GET', new Uri('http://google.com'));

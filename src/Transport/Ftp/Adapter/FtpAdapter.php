@@ -116,6 +116,7 @@ class FtpAdapter implements FtpAdapterInterface
      * @param string $dir
      *
      * @return bool
+     * @throws FtpException
      */
     public function dirExists(string $dir): bool
     {
@@ -200,8 +201,9 @@ class FtpAdapter implements FtpAdapterInterface
      * @param string $file
      *
      * @return bool
+     * @throws FtpException
      */
-    public function isFile($file): bool
+    public function isFile(string $file): bool
     {
         return @ftp_size($this->getResource(), $file) !== -1;
     }

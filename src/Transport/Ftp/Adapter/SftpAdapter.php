@@ -49,7 +49,7 @@ class SftpAdapter implements FtpAdapterInterface
     }
 
     /**
-     *
+     * @throws FtpException
      */
     public function disconnect(): void
     {
@@ -112,6 +112,7 @@ class SftpAdapter implements FtpAdapterInterface
      * @param string $dir
      *
      * @return bool
+     * @throws FtpException
      */
     public function dirExists(string $dir): bool
     {
@@ -190,8 +191,9 @@ class SftpAdapter implements FtpAdapterInterface
      * @param string $file
      *
      * @return bool
+     * @throws FtpException
      */
-    public function isFile($file): bool
+    public function isFile(string $file): bool
     {
         return $this->getResource()->is_file($file);
     }

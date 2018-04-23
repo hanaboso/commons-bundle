@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Transport\Soap;
 
+use Exception;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
@@ -23,6 +24,8 @@ final class SoapManagerTest extends TestCase
 
     /**
      * @covers SoapManager::send()
+     *
+     * @throws Exception
      */
     public function testSend(): void
     {

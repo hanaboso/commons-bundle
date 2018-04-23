@@ -40,7 +40,7 @@ class ResponseDto
         $this->lastResponseHeaders = $lastResponseHeaders;
 
         //@todo fatal error
-        $parsedHeaders           = SoapHelper::parseResponseHeaders(implode('\n', $outputHeaders ?? []));
+        $parsedHeaders           = SoapHelper::parseResponseHeaders(implode("\n", $outputHeaders ?? []));
         $this->responseHeaderDto = new ResponseHeaderDto(
             $parsedHeaders['headers'],
             $parsedHeaders['version'],
