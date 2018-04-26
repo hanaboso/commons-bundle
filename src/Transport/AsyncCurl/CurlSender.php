@@ -140,7 +140,7 @@ class CurlSender implements LoggerAwareInterface
             $request->getBody()->getContents()
         );
 
-        $this->logger->info($message, $debugInfo);
+        $this->logger->debug($message, $debugInfo);
     }
 
     /**
@@ -155,7 +155,7 @@ class CurlSender implements LoggerAwareInterface
             $response->getHeaders(),
             $response->getBody()->getContents()
         );
-        $this->logger->info($message, $debugInfo);
+        $this->logger->debug($message, $debugInfo);
 
         $response->getBody()->rewind();
     }
