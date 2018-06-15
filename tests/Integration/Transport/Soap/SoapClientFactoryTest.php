@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Transport\Soap;
 
+use Exception;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto as RequestDtoNonWsdl;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto as RequestDtoWsdl;
@@ -28,6 +29,7 @@ final class SoapClientFactoryTest extends TestCase
 
     /**
      * @covers SoapClientFactory::create()
+     * @throws Exception
      */
     public function testCreateSoapClientWsdlFail(): void
     {
@@ -43,6 +45,7 @@ final class SoapClientFactoryTest extends TestCase
 
     /**
      * @covers SoapClientFactory::create()
+     * @throws Exception
      */
     public function testCreateSoapClientNonWsdl(): void
     {

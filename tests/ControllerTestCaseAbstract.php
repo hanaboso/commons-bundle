@@ -3,11 +3,9 @@
 namespace Tests;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Nette\Utils\Json;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -22,11 +20,6 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
      * @var Client
      */
     protected $client;
-
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
 
     /**
      * @var DocumentManager
@@ -49,8 +42,8 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     {
         parent::__construct($name, $data, $dataName);
         self::bootKernel();
-        $this->container = self::$kernel->getContainer();
-        $this->dm        = $this->container->get('doctrine_mongodb.odm.default_document_manager');
+        $container = self::$kernel->getContainer();
+        $this->dm  = $container->get('doctrine_mongodb.odm.default_document_manager');
     }
 
     /**
@@ -64,7 +57,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     }
 
     /**
-     * @param object $document
+     * @param mixed $document
      */
     protected function persistAndFlush($document): void
     {
@@ -84,7 +77,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
 
         return (object) [
             'status'  => $response->getStatusCode(),
-            'content' => Json::decode($response->getContent()),
+            'content' => json_decode($response->getContent()),
         ];
     }
 
@@ -97,12 +90,12 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
      */
     protected function sendPost(string $url, array $parameters, ?array $content = NULL): stdClass
     {
-        $this->client->request('POST', $url, $parameters, [], [], $content ? Json::encode($content) : '');
+        $this->client->request('POST', $url, $parameters, [], [], $content ? json_encode($content) : '');
         $response = $this->client->getResponse();
 
         return (object) [
             'status'  => $response->getStatusCode(),
-            'content' => Json::decode($response->getContent()),
+            'content' => json_decode($response->getContent()),
         ];
     }
 
@@ -115,12 +108,12 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
      */
     protected function sendPut(string $url, array $parameters, ?array $content = NULL): stdClass
     {
-        $this->client->request('PUT', $url, $parameters, [], [], $content ? Json::encode($content) : '');
+        $this->client->request('PUT', $url, $parameters, [], [], $content ? json_encode($content) : '');
         $response = $this->client->getResponse();
 
         return (object) [
             'status'  => $response->getStatusCode(),
-            'content' => Json::decode($response->getContent()),
+            'content' => json_decode($response->getContent()),
         ];
     }
 
@@ -136,7 +129,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
 
         return (object) [
             'status'  => $response->getStatusCode(),
-            'content' => Json::decode($response->getContent()),
+            'content' => json_decode($response->getContent()),
         ];
     }
 

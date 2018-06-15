@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Transport\Soap;
 
+use Exception;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
@@ -13,7 +14,7 @@ use Tests\KernelTestCaseAbstract;
  *
  * @package Tests\Integration\Transport\Soap
  */
-class SoapManagerTest extends KernelTestCaseAbstract
+final class SoapManagerTest extends KernelTestCaseAbstract
 {
 
     /**
@@ -27,11 +28,11 @@ class SoapManagerTest extends KernelTestCaseAbstract
     protected function setUp(): void
     {
         parent::setUp();
-        $this->soap = $this->container->get('hbpf.transport.soap_manager');
+        $this->soap = $this->c->get('hbpf.transport.soap_manager');
     }
 
     /**
-     *
+     * @throws Exception
      */
     public function testSendInvalidWsdl(): void
     {

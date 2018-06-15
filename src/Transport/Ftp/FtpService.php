@@ -4,7 +4,6 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp;
 
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapterInterface;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
-use Nette\Utils\FileSystem;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -83,7 +82,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
         }
 
         $filename = tempnam(sys_get_temp_dir(), 'tmp');
-        FileSystem::write($filename, $content);
+        file_put_contents($filename, $content);
 
         try {
             $this->adapter->uploadFile($remoteFile, $filename);
@@ -92,7 +91,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->logger->error($e->getMessage());
             throw $e;
         } finally {
-            FileSystem::delete($filename);
+            unlink($filename);
             $this->disconnect();
         }
 

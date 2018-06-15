@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package Tests\Integration\Metrics
  */
-class InfluxDbSenderTest extends TestCase
+final class InfluxDbSenderTest extends TestCase
 {
 
     /**

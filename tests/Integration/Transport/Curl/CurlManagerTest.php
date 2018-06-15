@@ -2,6 +2,8 @@
 
 namespace Tests\Integration\Transport\Curl;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
@@ -13,7 +15,7 @@ use Tests\KernelTestCaseAbstract;
  *
  * @package Tests\Integration\Transport\Curl
  */
-class CurlManagerTest extends KernelTestCaseAbstract
+final class CurlManagerTest extends KernelTestCaseAbstract
 {
 
     /**
@@ -27,11 +29,12 @@ class CurlManagerTest extends KernelTestCaseAbstract
     protected function setUp(): void
     {
         parent::setUp();
-        $this->curl = $this->container->get('hbpf.transport.curl_manager');
+        $this->curl = $this->c->get('hbpf.transport.curl_manager');
     }
 
     /**
-     *
+     * @throws Exception
+     * @throws GuzzleException
      */
     public function testSend(): void
     {
@@ -41,7 +44,8 @@ class CurlManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     *
+     * @throws Exception
+     * @throws GuzzleException
      */
     public function testSendNotFound(): void
     {

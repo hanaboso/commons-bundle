@@ -14,7 +14,7 @@ use Tests\ControllerTestCaseAbstract;
  *
  * @package Tests\Controller\Listener
  */
-class SystemMetricsListenerTest extends ControllerTestCaseAbstract
+final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 {
 
     /**

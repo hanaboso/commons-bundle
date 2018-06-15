@@ -10,7 +10,7 @@ use Tests\KernelTestCaseAbstract;
  *
  * @package Tests\Integration\Session\Handler
  */
-class RedisSessionHandlerTest extends KernelTestCaseAbstract
+final class RedisSessionHandlerTest extends KernelTestCaseAbstract
 {
 
     /**
@@ -23,7 +23,7 @@ class RedisSessionHandlerTest extends KernelTestCaseAbstract
      */
     public function setUp(): void
     {
-        $this->handler = $this->container->get('hbpf.commons.session_handler');
+        $this->handler = $this->c->get('hbpf.commons.session_handler');
     }
 
     /**

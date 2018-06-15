@@ -33,9 +33,9 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
                     return TRUE;
                 }
             ));
-        $this->container->set('hbpf.influxdb_sender_connector', $influx);
+        $this->c->set('hbpf.influxdb_sender_connector', $influx);
 
-        $manager = $this->container->get('hbpf.transport.curl_manager');
+        $manager = $this->c->get('hbpf.transport.curl_manager');
         $dto     = new RequestDto('GET', new Uri('http://google.com'));
         $manager->send($dto);
     }

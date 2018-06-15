@@ -36,7 +36,7 @@ final class SystemMetricsTest extends TestCase
         $this->assertArrayHasKey(SystemMetrics::CPU_TIME_KERNEL, $before);
         $this->assertArrayHasKey(SystemMetrics::CPU_START_TIME, $before);
         $this->assertGreaterThan(0, $before[SystemMetrics::CPU_TIME_USER]);
-        $this->assertGreaterThan(0, $before[SystemMetrics::CPU_TIME_KERNEL]);
+        $this->assertGreaterThanOrEqual(0, $before[SystemMetrics::CPU_TIME_KERNEL]);
         $this->assertGreaterThan(0, $before[SystemMetrics::CPU_START_TIME]);
 
         $cpuUsageBefore = SystemMetrics::getCpuUsage();

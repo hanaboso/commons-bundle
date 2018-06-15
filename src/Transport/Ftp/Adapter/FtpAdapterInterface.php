@@ -15,16 +15,20 @@ interface FtpAdapterInterface
 
     /**
      * @param FtpConfig $ftpConfig
+     *
+     * @throws FtpException
      */
     public function connect(FtpConfig $ftpConfig): void;
 
     /**
-     *
+     * @throws FtpException
      */
     public function disconnect(): void;
 
     /**
      * @param FtpConfig $ftpConfig
+     *
+     * @throws FtpException
      */
     public function login(FtpConfig $ftpConfig): void;
 
@@ -48,6 +52,7 @@ interface FtpAdapterInterface
      * @param string $dir
      *
      * @return array
+     * @throws FtpException
      */
     public function listDir(string $dir): array;
 

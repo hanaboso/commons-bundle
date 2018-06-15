@@ -9,6 +9,7 @@
 
 namespace Tests\Integration\FileStorage;
 
+use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileMongo;
 use Hanaboso\CommonsBundle\FileStorage\Driver\MongoFileDriver;
@@ -19,7 +20,7 @@ use Tests\DatabaseTestCaseAbstract;
  *
  * @package Tests\Integration\FileStorage
  */
-class MongoFileDriverTest extends DatabaseTestCaseAbstract
+final class MongoFileDriverTest extends DatabaseTestCaseAbstract
 {
 
     /**
@@ -27,11 +28,12 @@ class MongoFileDriverTest extends DatabaseTestCaseAbstract
      * @covers MongoFileDriver::get()
      * @covers MongoFileDriver::delete()
      * @covers MongoFileDriver::generatePath()
+     * @throws Exception
      */
     public function testFileStorage(): void
     {
         /** @var MongoFileDriver $driver */
-        $driver = $this->container->get('hbpf.file_storage.driver.mongo');
+        $driver = $this->c->get('hbpf.file_storage.driver.mongo');
 
         $res = $driver->save('test_content', 'test_name');
         $this->dm->clear();

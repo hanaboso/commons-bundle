@@ -33,8 +33,6 @@ abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
     public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        self::bootKernel();
-        $this->dm      = $this->container->get('doctrine_mongodb.odm.default_document_manager');
         $this->session = new Session();
     }
 
@@ -50,7 +48,7 @@ abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
     }
 
     /**
-     * @param object $document
+     * @param mixed $document
      */
     protected function persistAndFlush($document): void
     {

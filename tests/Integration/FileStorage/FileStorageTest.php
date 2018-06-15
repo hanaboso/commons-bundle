@@ -24,7 +24,7 @@ use Tests\DatabaseTestCaseAbstract;
  *
  * @package Tests\Integration\FileStorage
  */
-class FileStorageTest extends DatabaseTestCaseAbstract
+final class FileStorageTest extends DatabaseTestCaseAbstract
 {
 
     /**
@@ -68,7 +68,7 @@ class FileStorageTest extends DatabaseTestCaseAbstract
 
         $locator = new FileStorageDriverLocator($driver, $driver, $driver);
 
-        $storage = new FileStorage($locator, $this->container->get('hbpf.database_manager_locator'),
+        $storage = new FileStorage($locator, $this->c->get('hbpf.database_manager_locator'),
             'Hanaboso\CommonsBundle\FileStorage\Document\File');
 
         return $storage;

@@ -1,13 +1,12 @@
 <?php declare(strict_types=1);
 
 namespace Hanaboso\CommonsBundle\Utils;
-/**
- * Created by PhpStorm.
- * User: radek.jirsa
- * Date: 5.10.17
- * Time: 15:41
- */
 
+/**
+ * Class Base64
+ *
+ * @package Hanaboso\CommonsBundle\Utils
+ */
 final class Base64
 {
 
