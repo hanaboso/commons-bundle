@@ -33,21 +33,25 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender
+     * @var InfluxDbSender|null
      */
     private $influxSender;
+
+    /**
+     * @var array
+     */
+    private $startTimes = [];
 
     /**
      * SoapManager constructor.
      *
      * @param SoapClientFactory $soapClientFactory
-     * @param InfluxDbSender    $influxSender
      */
-    public function __construct(SoapClientFactory $soapClientFactory, InfluxDbSender $influxSender)
+    public function __construct(SoapClientFactory $soapClientFactory)
     {
         $this->soapClientFactory = $soapClientFactory;
         $this->logger            = new NullLogger();
-        $this->influxSender      = $influxSender;
+        $this->influxSender      = NULL;
     }
 
     /**
@@ -58,6 +62,18 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     public function setLogger(LoggerInterface $logger): SoapManager
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * @param InfluxDbSender $influxSender
+     *
+     * @return SoapManager
+     */
+    public function setInfluxSender(InfluxDbSender $influxSender): SoapManager
+    {
+        $this->influxSender = $influxSender;
 
         return $this;
     }
@@ -82,7 +98,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                 $request->getPassword()
             ));
 
-            $startTimes       = CurlMetricUtils::getCurrentMetrics();
+            $this->startTimes = CurlMetricUtils::getCurrentMetrics();
             $soapCallResponse = $client->__soapCall(
                 $request->getFunction(),
                 SoapHelper::composeArguments($request),
@@ -90,14 +106,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                 SoapHelper::composeRequestHeaders($request),
                 $outputHeaders
             );
-            $times            = CurlMetricUtils::getTimes($startTimes);
-            $info             = $request->getHeader()->getParams();
-            CurlMetricUtils::sendCurlMetrics(
-                $this->influxSender,
-                $times,
-                $info['node_id'][0] ?? NULL,
-                $info['correlation_id'][0] ?? NULL
-            );
+            $this->sendMetrics($request);
 
             return $this->handleResponse(
                 $soapCallResponse,
@@ -197,6 +206,24 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         }
 
         return mb_substr($string, 0, -2);
+    }
+
+    /**
+     * @param RequestDtoAbstract $dto
+     */
+    protected function sendMetrics(RequestDtoAbstract $dto): void
+    {
+        if ($this->influxSender !== NULL) {
+            $info  = $dto->getHeader()->getParams();
+            $times = CurlMetricUtils::getTimes($this->startTimes);
+
+            CurlMetricUtils::sendCurlMetrics(
+                $this->influxSender,
+                $times,
+                $info['node_id'][0] ?? NULL,
+                $info['correlation_id'][0] ?? NULL
+            );
+        }
     }
 
 }

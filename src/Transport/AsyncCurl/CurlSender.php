@@ -45,21 +45,25 @@ class CurlSender implements LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender
+     * @var InfluxDbSender|null
      */
     private $influxSender;
 
     /**
+     * @var array
+     */
+    private $startTimes = [];
+
+    /**
      * CurlSender constructor.
      *
-     * @param Browser        $browser
-     * @param InfluxDbSender $influxSender
+     * @param Browser $browser
      */
-    public function __construct(Browser $browser, InfluxDbSender $influxSender)
+    public function __construct(Browser $browser)
     {
         $this->browser      = $browser;
         $this->logger       = new NullLogger();
-        $this->influxSender = $influxSender;
+        $this->influxSender = NULL;
     }
 
     /**
@@ -68,6 +72,18 @@ class CurlSender implements LoggerAwareInterface
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * @param InfluxDbSender $influxSender
+     *
+     * @return CurlSender
+     */
+    public function setInfluxSender(InfluxDbSender $influxSender): CurlSender
+    {
+        $this->influxSender = $influxSender;
+
+        return $this;
     }
 
     /**
@@ -80,30 +96,18 @@ class CurlSender implements LoggerAwareInterface
         $request = new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
 
         $this->logRequest($request, $dto->getDebugInfo());
-        $startTimes = CurlMetricUtils::getCurrentMetrics();
-        $info       = $dto->getDebugInfo();
+        $this->startTimes = CurlMetricUtils::getCurrentMetrics();
 
         return $this
             ->sendRequest($request)
-            ->then(function (ResponseInterface $response) use ($dto, $startTimes, $info) {
+            ->then(function (ResponseInterface $response) use ($dto) {
                 $this->logResponse($response, $dto->getDebugInfo());
-                $times = CurlMetricUtils::getTimes($startTimes);
-                CurlMetricUtils::sendCurlMetrics(
-                    $this->influxSender,
-                    $times,
-                    $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL
-                );
+                $this->sendMetrics($dto);
 
                 return resolve($response);
-            }, function (Exception $e) use ($dto, $startTimes, $info) {
-                $times = CurlMetricUtils::getTimes($startTimes);
-                CurlMetricUtils::sendCurlMetrics(
-                    $this->influxSender,
-                    $times,
-                    $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL
-                );
+            }, function (Exception $e) use ($dto) {
+                $this->sendMetrics($dto);
+
                 if ($e instanceof ResponseException) {
                     $this->logResponse($e->getResponse(), $dto->getDebugInfo());
                 } else {
@@ -158,6 +162,24 @@ class CurlSender implements LoggerAwareInterface
         $this->logger->debug($message, $debugInfo);
 
         $response->getBody()->rewind();
+    }
+
+    /**
+     * @param RequestDto $dto
+     */
+    protected function sendMetrics(RequestDto $dto): void
+    {
+        if ($this->influxSender !== NULL) {
+            $info  = $dto->getDebugInfo();
+            $times = CurlMetricUtils::getTimes($this->startTimes);
+
+            CurlMetricUtils::sendCurlMetrics(
+                $this->influxSender,
+                $times,
+                $info['node_id'][0] ?? NULL,
+                $info['correlation_id'][0] ?? NULL
+            );
+        }
     }
 
 }

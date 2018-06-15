@@ -43,21 +43,25 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender
+     * @var InfluxDbSender|null
      */
     private $influxSender;
+
+    /**
+     * @var array
+     */
+    private $startTimes = [];
 
     /**
      * CurlManager constructor.
      *
      * @param CurlClientFactory $curlClientFactory
-     * @param InfluxDbSender    $influxSender
      */
-    public function __construct(CurlClientFactory $curlClientFactory, InfluxDbSender $influxSender)
+    public function __construct(CurlClientFactory $curlClientFactory)
     {
         $this->curlClientFactory = $curlClientFactory;
         $this->logger            = new NullLogger();
-        $this->influxSender      = $influxSender;
+        $this->influxSender      = NULL;
     }
 
     /**
@@ -68,6 +72,18 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     public function setLogger(LoggerInterface $logger): CurlManager
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * @param InfluxDbSender $influxSender
+     *
+     * @return CurlManager
+     */
+    public function setInfluxSender(InfluxDbSender $influxSender): CurlManager
+    {
+        $this->influxSender = $influxSender;
 
         return $this;
     }
@@ -98,12 +114,9 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      */
     public function send(RequestDto $dto, array $options = []): ResponseDto
     {
-        $startTimes = CurlMetricUtils::getCurrentMetrics();
-        $request    = new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
-        $info       = $dto->getDebugInfo();
+        $request = new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
 
         try {
-
             $this->logger->debug(TransportFormatter::requestToString(
                 $dto->getMethod(),
                 (string) $dto->getUri(),
@@ -113,14 +126,9 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 
             $client = $this->curlClientFactory->create();
 
-            $psrResponse = $client->send($request, $this->prepareOptions($options));
-            $times       = CurlMetricUtils::getTimes($startTimes);
-            CurlMetricUtils::sendCurlMetrics(
-                $this->influxSender,
-                $times,
-                $info['node_id'][0] ?? NULL,
-                $info['correlation_id'][0] ?? NULL
-            );
+            $this->startTimes = CurlMetricUtils::getCurrentMetrics();
+            $psrResponse      = $client->send($request, $this->prepareOptions($options));
+            $this->sendMetrics($dto);
 
             $response = new ResponseDto(
                 $psrResponse->getStatusCode(),
@@ -138,13 +146,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 
             unset($psrResponse);
         } catch (RequestException $exception) {
-            $times = CurlMetricUtils::getTimes($startTimes);
-            CurlMetricUtils::sendCurlMetrics(
-                $this->influxSender,
-                $times,
-                $info['node_id'][0] ?? NULL,
-                $info['correlation_id'][0] ?? NULL
-            );
+            $this->sendMetrics($dto);
             $response = $exception->getResponse();
             $message  = $exception->getMessage();
             if ($response) {
@@ -160,13 +162,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $response
             );
         } catch (Exception $exception) {
-            $times = CurlMetricUtils::getTimes($startTimes);
-            CurlMetricUtils::sendCurlMetrics(
-                $this->influxSender,
-                $times,
-                $info['node_id'][0] ?? NULL,
-                $info['correlation_id'][0] ?? NULL
-            );
+            $this->sendMetrics($dto);
             $this->logger->error(sprintf('CurlManager::send() failed: %s', $exception->getMessage()));
             throw new CurlException(
                 sprintf('CurlManager::send() failed: %s', $exception->getMessage()),
@@ -186,6 +182,24 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     protected function prepareOptions(array $options): array
     {
         return $options;
+    }
+
+    /**
+     * @param RequestDto $dto
+     */
+    protected function sendMetrics(RequestDto $dto): void
+    {
+        if ($this->influxSender !== NULL) {
+            $info  = $dto->getDebugInfo();
+            $times = CurlMetricUtils::getTimes($this->startTimes);
+
+            CurlMetricUtils::sendCurlMetrics(
+                $this->influxSender,
+                $times,
+                $info['node_id'][0] ?? NULL,
+                $info['correlation_id'][0] ?? NULL
+            );
+        }
     }
 
 }

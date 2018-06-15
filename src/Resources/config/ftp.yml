@@ -13,5 +13,6 @@ services:
         arguments:
             - '@hbpf.ftp.ftp_adapter'
             - '@hbpf.ftp.sftp_adapter'
-            - '@monolog.logger.ftp'
             - '@service_container'
+        calls:
+            - ['setLogger',['@monolog.logger.ftp']]

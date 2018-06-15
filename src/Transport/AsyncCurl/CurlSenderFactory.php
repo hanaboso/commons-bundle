@@ -32,27 +32,41 @@ class CurlSenderFactory implements LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender
+     * @var InfluxDbSender|null
      */
     private $influxSender;
 
     /**
      * CurlFactory constructor.
-     *
-     * @param InfluxDbSender $influxSender
      */
-    public function __construct(InfluxDbSender $influxSender)
+    public function __construct()
     {
-        $this->logger = new NullLogger();
-        $this->influxSender = $influxSender;
+        $this->logger       = new NullLogger();
+        $this->influxSender = NULL;
     }
 
     /**
      * @param LoggerInterface $logger
+     *
+     * @return CurlSenderFactory
      */
-    public function setLogger(LoggerInterface $logger): void
+    public function setLogger(LoggerInterface $logger): CurlSenderFactory
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * @param InfluxDbSender $influxSender
+     *
+     * @return CurlSenderFactory
+     */
+    public function setInfluxSender(InfluxDbSender $influxSender): CurlSenderFactory
+    {
+        $this->influxSender = $influxSender;
+
+        return $this;
     }
 
     /**
@@ -74,8 +88,12 @@ class CurlSenderFactory implements LoggerAwareInterface
             $browser = new Browser($loop, new SecureConnector(new Connector($loop), $loop, $context));
         }
 
-        $curlSender = new CurlSender($browser, $this->influxSender);
+        $curlSender = new CurlSender($browser);
         $curlSender->setLogger($this->logger);
+
+        if ($this->influxSender) {
+            $curlSender->setInfluxSender($this->influxSender);
+        }
 
         return $curlSender;
     }

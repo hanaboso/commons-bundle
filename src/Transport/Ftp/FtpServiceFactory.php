@@ -5,7 +5,9 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -13,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp
  */
-class FtpServiceFactory
+class FtpServiceFactory implements LoggerAwareInterface
 {
 
     public const ADAPTER_FTP  = 'ftp';
@@ -44,20 +46,32 @@ class FtpServiceFactory
      *
      * @param FtpAdapter         $ftpAdapter
      * @param SftpAdapter        $sftpAdapter
-     * @param LoggerInterface    $logger
      * @param ContainerInterface $container
      */
     public function __construct(
         FtpAdapter $ftpAdapter,
         SftpAdapter $sftpAdapter,
-        LoggerInterface $logger,
         ContainerInterface $container
     )
     {
         $this->ftpAdapter  = $ftpAdapter;
         $this->sftpAdapter = $sftpAdapter;
-        $this->logger      = $logger;
         $this->container   = $container;
+        $this->logger      = new NullLogger();
+    }
+
+    /**
+     * Sets a logger instance on the object.
+     *
+     * @param LoggerInterface $logger
+     *
+     * @return FtpServiceFactory
+     */
+    public function setLogger(LoggerInterface $logger): FtpServiceFactory
+    {
+        $this->logger = $logger;
+
+        return $this;
     }
 
     /**
