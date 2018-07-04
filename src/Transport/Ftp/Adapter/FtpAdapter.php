@@ -14,7 +14,7 @@ class FtpAdapter implements FtpAdapterInterface
 {
 
     /**
-     * @var resource
+     * @var resource|bool
      */
     private $ftp;
 
@@ -120,7 +120,7 @@ class FtpAdapter implements FtpAdapterInterface
      */
     public function dirExists(string $dir): bool
     {
-        $current = ftp_pwd($this->getResource());
+        $current = (string) ftp_pwd($this->getResource());
         if (@ftp_chdir($this->getResource(), $dir)) {
             ftp_chdir($this->getResource(), $current);
 
@@ -155,7 +155,7 @@ class FtpAdapter implements FtpAdapterInterface
      */
     public function makeDirRecursive($dir): void
     {
-        $current = @ftp_pwd($this->getResource());
+        $current = (string) @ftp_pwd($this->getResource());
         $parts   = explode('/', trim($dir, '/'));
 
         foreach ($parts as $part) {

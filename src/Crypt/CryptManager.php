@@ -18,6 +18,7 @@ class CryptManager
      * @param mixed $data
      *
      * @return string
+     * @throws CryptException
      */
     public static function encrypt($data): string
     {

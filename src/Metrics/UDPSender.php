@@ -102,7 +102,8 @@ class UDPSender implements LoggerAwareInterface
      */
     public function send(string $message): bool
     {
-        $ip     = $this->refreshIp();
+        $ip = $this->refreshIp();
+        /** @var resource $socket */
         $socket = $this->getSocket();
 
         try {
@@ -112,6 +113,7 @@ class UDPSender implements LoggerAwareInterface
                 );
             }
 
+            /** @var int|false $sent */
             $sent = @socket_sendto($socket, $message, strlen($message), 0, $ip, $this->collectorPort);
 
             if ($sent === FALSE) {

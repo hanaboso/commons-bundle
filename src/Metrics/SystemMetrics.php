@@ -31,8 +31,8 @@ class SystemMetrics
     public static function getCpuUsage(): float
     {
         try {
-            $upTimeContent = file_get_contents(self::FILE_PROC_UPTIME);
-            $upTime        = explode(' ', $upTimeContent)[0];
+            $upTimeContent = (string) file_get_contents(self::FILE_PROC_UPTIME);
+            $upTime        = (float) explode(' ', $upTimeContent)[0];
 
             $cpuTimes  = self::getCpuTimes();
             $totalTime = $cpuTimes[self::CPU_TIME_USER] + $cpuTimes[self::CPU_TIME_KERNEL];
@@ -52,13 +52,13 @@ class SystemMetrics
         try {
             $pid         = getmypid();
             $statFile    = sprintf(self::FILE_PROC_STAT, $pid);
-            $statContent = file_get_contents($statFile);
+            $statContent = (string) file_get_contents($statFile);
             $stats       = explode(' ', $statContent);
 
-            $uTime     = $stats[13];
-            $sTime     = $stats[14];
-            $cuTime    = $stats[15];
-            $csTime    = $stats[16];
+            $uTime     = (float) $stats[13];
+            $sTime     = (float) $stats[14];
+            $cuTime    = (float) $stats[15];
+            $csTime    = (float) $stats[16];
             $startTime = $stats[21];
 
             return [

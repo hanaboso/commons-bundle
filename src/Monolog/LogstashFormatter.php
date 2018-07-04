@@ -98,8 +98,7 @@ class LogstashFormatter extends NormalizerFormatter
      */
     protected function normalizeException($e): array
     {
-        // TODO 2.0 only check for Throwable
-        if (!$e instanceof Exception && !$e instanceof Throwable) {
+        if (!$e instanceof Throwable) {
             throw new InvalidArgumentException('Exception/Throwable expected, got ' . gettype($e) . ' / ' . get_class($e));
         }
 
@@ -127,7 +126,9 @@ class LogstashFormatter extends NormalizerFormatter
         $data['trace'] = $this->toJson($e->getTraceAsString());
 
         if ($e->getPrevious()) {
-            $data['previous'] = $this->normalizeException($e->getPrevious());
+            /** @var Throwable $previous */
+            $previous         = $e->getPrevious();
+            $data['previous'] = $this->normalizeException($previous);
         }
 
         return $data;

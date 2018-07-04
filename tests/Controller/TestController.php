@@ -3,9 +3,8 @@
 namespace Tests\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class TestController
@@ -16,8 +15,7 @@ class TestController extends FOSRestController
 {
 
     /**
-     * @Route("/test/route")
-     * @Method({"GET", "OPTIONS"})
+     * @Route("/test/route", methods={"GET", "OPTIONS"})
      *
      * @return Response
      */

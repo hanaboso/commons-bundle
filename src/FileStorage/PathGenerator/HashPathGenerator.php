@@ -38,7 +38,7 @@ class HashPathGenerator implements PathGeneratorInterface
         if (!$filename) {
             $filename = uniqid();
 
-            $chunks = str_split($filename, $this->segment);
+            $chunks = (array) str_split($filename, $this->segment);
             for ($i = 0; $i < $this->levels; $i++) {
                 $res .= array_shift($chunks) . DIRECTORY_SEPARATOR;
             }

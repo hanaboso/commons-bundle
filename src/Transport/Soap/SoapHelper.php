@@ -72,7 +72,7 @@ class SoapHelper
         }
 
         $headers = explode("\n", $headers);
-        $parts   = explode(' ', array_shift($headers), 3);
+        $parts   = explode(' ', (string) array_shift($headers), 3);
 
         if (count($parts) > 2) {
             $result['version']    = explode('/', $parts[0])[1];
@@ -127,7 +127,7 @@ class SoapHelper
                 $params[] = self::composeDataForSoapParam($subName, $subArg);
             }
 
-            return new SoapVar($params, SOAP_ENC_OBJECT, $nodeName, NULL, $nodeName);
+            return new SoapVar($params, SOAP_ENC_OBJECT, $nodeName, '', $nodeName);
         }
 
         throw new InvalidArgumentException(sprintf('Type %s is not supported.', gettype($data)));

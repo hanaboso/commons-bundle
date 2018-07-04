@@ -6,11 +6,11 @@ use Exception;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
+use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use SoapFault;
 
 /**
  * Class SoapManager
@@ -101,8 +101,8 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
             $this->startTimes = CurlMetricUtils::getCurrentMetrics();
             $soapCallResponse = $client->__soapCall(
                 $request->getFunction(),
-                SoapHelper::composeArguments($request),
-                NULL,
+                (array) SoapHelper::composeArguments($request),
+                [],
                 SoapHelper::composeRequestHeaders($request),
                 $outputHeaders
             );
@@ -118,9 +118,6 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         } catch (SoapException $e) {
             $this->logger->error($e->getMessage());
             throw $e;
-        } catch (SoapFault $e) {
-            $this->logger->error(sprintf('Invalid function call: %s', $e->getMessage()));
-            throw new SoapException('Invalid function call.', SoapException::INVALID_FUNCTION_CALL, $e);
         } catch (Exception $e) {
             $this->logger->error(sprintf('Unknown exception: %s', $e->getMessage()));
             throw new SoapException('Unknown exception.', SoapException::UNKNOWN_EXCEPTION, $e);
@@ -145,9 +142,11 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         $response = new ResponseDto($soapCallResponse, $lastResponseHeaders, $outputHeaders);
 
         if ($response->getResponseHeaderDto()) {
+            /** @var ResponseHeaderDto $headers */
+            $headers = $response->getResponseHeaderDto();
             $this->logger->debug(sprintf('Response: Status Code: %s, Reason Phrase: %s, Headers: %s, Body: %s',
-                $response->getResponseHeaderDto()->getHttpStatusCode(),
-                $response->getResponseHeaderDto()->getHttpReason(),
+                $headers->getHttpStatusCode(),
+                $headers->getHttpReason(),
                 $response->getLastResponseHeaders(),
                 $response->getSoapCallResponse()
             ));

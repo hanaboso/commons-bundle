@@ -8,7 +8,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SoapClient;
-use SoapFault;
+use Throwable;
 
 /**
  * Class SoapClientFactory
@@ -61,7 +61,7 @@ class SoapClientFactory implements LoggerAwareInterface
 
             return new SoapClient($wsdl, $options);
 
-        } catch (SoapFault $e) {
+        } catch (Throwable $e) {
             $this->logger->error(sprintf('Invalid WSDL: %s', $e->getMessage()));
             throw new SoapException('Invalid WSDL.', SoapException::INVALID_WSDL, $e);
         }

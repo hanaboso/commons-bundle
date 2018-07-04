@@ -81,7 +81,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->adapter->makeDirRecursive(dirname($remoteFile));
         }
 
-        $filename = tempnam(sys_get_temp_dir(), 'tmp');
+        $filename = (string) tempnam(sys_get_temp_dir(), 'tmp');
         file_put_contents($filename, $content);
 
         try {

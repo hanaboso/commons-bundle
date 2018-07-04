@@ -2,6 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\DependencyInjection;
 
+use Exception;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -20,6 +21,8 @@ class HbPFCommonsExtension extends Extension implements PrependExtensionInterfac
      * Allow an extension to prepend the extension configurations.
      *
      * @param ContainerBuilder $container
+     *
+     * @throws Exception
      */
     public function prepend(ContainerBuilder $container): void
     {
@@ -32,6 +35,8 @@ class HbPFCommonsExtension extends Extension implements PrependExtensionInterfac
     /**
      * @param array            $configs
      * @param ContainerBuilder $container
+     *
+     * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
     {

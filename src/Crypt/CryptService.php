@@ -10,11 +10,11 @@
 namespace Hanaboso\CommonsBundle\Crypt;
 
 use ParagonIE\Halite\Alerts\InvalidKey;
-use ParagonIE\Halite\Alerts\InvalidMessage;
 use ParagonIE\Halite\HiddenString;
 use ParagonIE\Halite\KeyFactory;
 use ParagonIE\Halite\Symmetric\Crypto;
 use ParagonIE\Halite\Symmetric\EncryptionKey;
+use Throwable;
 
 /**
  * Class CryptService
@@ -32,13 +32,17 @@ class CryptService implements CryptInterface
      * @param mixed $data
      *
      * @return string
-     * @throws InvalidKey
+     * @throws CryptException
      */
     public static function encrypt($data): string
     {
         $hiddenString = new HiddenString(serialize($data));
 
-        return self::PREFIX . Crypto::encrypt($hiddenString, self::buildEncryptionKey());
+        try {
+            return self::PREFIX . Crypto::encrypt($hiddenString, self::buildEncryptionKey());
+        } catch (Throwable $t) {
+            throw new CryptException($t->getMessage(), $t->getCode());
+        }
     }
 
     /**
@@ -46,8 +50,6 @@ class CryptService implements CryptInterface
      *
      * @return mixed
      * @throws CryptException
-     * @throws InvalidMessage
-     * @throws InvalidKey
      */
     public static function decrypt(string $hash)
     {
@@ -55,7 +57,11 @@ class CryptService implements CryptInterface
             throw new CryptException('Unknown prefix in hash.', CryptException::UNKNOWN_PREFIX);
         }
 
-        $hiddenString = Crypto::decrypt(substr($hash, strlen(self::PREFIX)), self::buildEncryptionKey());
+        try {
+            $hiddenString = Crypto::decrypt(substr($hash, strlen(self::PREFIX)), self::buildEncryptionKey());
+        } catch (Throwable $t) {
+            throw new CryptException($t->getMessage(), $t->getCode());
+        }
 
         return unserialize($hiddenString->getString());
     }

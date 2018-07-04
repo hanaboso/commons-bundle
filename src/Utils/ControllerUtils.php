@@ -27,7 +27,7 @@ class ControllerUtils
             'message'    => $exception->getMessage(),
         ];
 
-        return json_encode($output);
+        return (string) json_encode($output);
     }
 
     /**

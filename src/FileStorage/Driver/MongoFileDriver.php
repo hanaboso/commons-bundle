@@ -80,7 +80,7 @@ class MongoFileDriver extends FileStorageDriverAbstract
      */
     private function getDocument(string $fileId): FileMongo
     {
-        /** @var FileMongo $file */
+        /** @var FileMongo|null $file */
         $file = $this->dm->getRepository(FileMongo::class)->find($fileId);
 
         if (!$file) {

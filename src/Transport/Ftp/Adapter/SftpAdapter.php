@@ -53,9 +53,8 @@ class SftpAdapter implements FtpAdapterInterface
      */
     public function disconnect(): void
     {
-        if ($this->getResource()) {
-            $this->sftp = NULL;
-        }
+        $this->getResource();
+        $this->sftp = NULL;
     }
 
     /**
