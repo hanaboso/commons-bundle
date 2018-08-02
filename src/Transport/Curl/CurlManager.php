@@ -2,7 +2,6 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl;
 
-use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
@@ -15,6 +14,7 @@ use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Throwable;
 
 /**
  * Class CurlManager
@@ -110,7 +110,6 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      *
      * @return ResponseDto
      * @throws CurlException
-     * @throws GuzzleException
      */
     public function send(RequestDto $dto, array $options = []): ResponseDto
     {
@@ -161,7 +160,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $exception->getPrevious(),
                 $response
             );
-        } catch (Exception $exception) {
+        } catch (Throwable | GuzzleException $exception) {
             $this->sendMetrics($dto);
             $this->logger->error(sprintf('CurlManager::send() failed: %s', $exception->getMessage()));
             throw new CurlException(

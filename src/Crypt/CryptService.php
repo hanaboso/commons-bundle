@@ -72,7 +72,7 @@ class CryptService implements CryptInterface
      */
     private static function buildEncryptionKey(): EncryptionKey
     {
-        $hiddenString = new HiddenString(KeyFactory::getKeyDataFromString(hex2bin(self::SECRET_KEY)));
+        $hiddenString = new HiddenString(KeyFactory::getKeyDataFromString((string) hex2bin(self::SECRET_KEY)));
 
         return new EncryptionKey($hiddenString);
     }
