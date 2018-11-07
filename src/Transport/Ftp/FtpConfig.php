@@ -52,9 +52,9 @@ class FtpConfig
      */
     public function __construct(
         string $host,
-        bool $ssl = FALSE,
-        int $port = 21,
-        int $timeout = 15,
+        bool $ssl,
+        int $port,
+        int $timeout,
         string $username,
         string $password
     )

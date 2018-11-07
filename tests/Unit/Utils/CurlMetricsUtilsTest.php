@@ -28,6 +28,8 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $influx
             ->method('send')->will($this->returnCallback(
                 function (array $times, array $data): bool {
+                    $data;
+
                     self::assertGreaterThan(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
 
                     return TRUE;

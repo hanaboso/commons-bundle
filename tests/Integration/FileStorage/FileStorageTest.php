@@ -66,12 +66,11 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
         $driver->method('delete')->willReturn('');
         $driver->method('get')->willReturn('test_content');
 
-        $locator = new FileStorageDriverLocator($driver, $driver, $driver);
-
-        $storage = new FileStorage($locator, $this->c->get('hbpf.database_manager_locator'),
-            'Hanaboso\CommonsBundle\FileStorage\Document\File');
-
-        return $storage;
+        return new FileStorage(
+            new FileStorageDriverLocator($driver, $driver, $driver),
+            $this->c->get('hbpf.database_manager_locator'),
+            'Hanaboso\CommonsBundle\FileStorage\Document\File'
+        );
     }
 
 }

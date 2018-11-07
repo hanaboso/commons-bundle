@@ -14,10 +14,10 @@
   "require": {
     "php": "^7.2",
     "alcaeus/mongo-php-adapter": "^1.1",
-    "clue/buzz-react": "^2.3",
+    "clue/buzz-react": "^2.5",
     "doctrine/doctrine-bundle": "^1.9",
     "doctrine/doctrine-fixtures-bundle": "^3.0",
-    "doctrine/mongodb-odm-bundle": "^3.4",
+    "doctrine/mongodb-odm-bundle": "^3.5",
     "doctrine/orm": "^2.6",
     "guzzlehttp/guzzle": "^6.3",
     "jms/serializer-bundle": "^2.4",
@@ -27,7 +27,7 @@
     "predis/predis": "^1.1"
   },
   "require-dev": {
-    "friendsofsymfony/rest-bundle": "^2.3",
+    "friendsofsymfony/rest-bundle": "^2.4",
     "hanaboso/php-check-utils": "^1.0",
     "snc/redis-bundle": "^2.1",
     "symfony/monolog-bundle": "^3.3",

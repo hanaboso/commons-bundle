@@ -35,7 +35,7 @@ abstract class EnumAbstract
     {
         if (!array_key_exists($val, static::$choices)) {
             throw new EnumException(
-                sprintf('[%s] is not a valid option from [%s].', $val, __CLASS__),
+                sprintf('[%s] is not a valid option from [%s].', $val, static::class),
                 EnumException::INVALID_CHOICE
             );
         }

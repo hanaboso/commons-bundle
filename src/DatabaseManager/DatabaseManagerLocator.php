@@ -36,11 +36,7 @@ class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
      * @param EntityManager   $entityManager
      * @param string          $db
      */
-    public function __construct(
-        ?DocumentManager $documentManager = NULL,
-        ?EntityManager $entityManager = NULL,
-        string $db
-    )
+    public function __construct(?DocumentManager $documentManager, ?EntityManager $entityManager, string $db)
     {
         $this->documentManager = $documentManager;
         $this->entityManager   = $entityManager;

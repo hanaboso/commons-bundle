@@ -56,8 +56,10 @@ abstract class RequestDtoAbstract
      * @param string $namespace
      * @param Uri    $uri
      */
-    public function __construct(string $function, array $arguments = [], string $namespace, Uri $uri)
+    public function __construct(string $function, array $arguments, string $namespace, Uri $uri)
     {
+        $arguments;
+
         $this->function  = $function;
         $this->arguments = $arguments;
         $this->uri       = $uri;

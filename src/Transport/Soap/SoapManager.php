@@ -134,8 +134,8 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
      */
     private function handleResponse(
         $soapCallResponse,
-        ?string $lastResponseHeaders = NULL,
-        ?array $outputHeaders = NULL,
+        ?string $lastResponseHeaders,
+        ?array $outputHeaders,
         RequestDtoAbstract $request
     ): ResponseDto
     {

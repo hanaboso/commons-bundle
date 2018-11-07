@@ -142,15 +142,9 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
      */
     private function isPipesRequest(Request $request): bool
     {
-        if (
-            $request->headers->has(PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID))
+        return $request->headers->has(PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID))
             && $request->headers->has(PipesHeaders::createKey(PipesHeaders::CORRELATION_ID))
-            && $request->headers->has(PipesHeaders::createKey(PipesHeaders::NODE_ID))
-        ) {
-            return TRUE;
-        }
-
-        return FALSE;
+            && $request->headers->has(PipesHeaders::createKey(PipesHeaders::NODE_ID));
     }
 
 }

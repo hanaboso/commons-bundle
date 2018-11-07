@@ -28,6 +28,7 @@ final class TypeEnum extends EnumAbstract
     public const XML_PARSER      = 'xml_parser';
     public const START           = 'start';
     public const GATEWAY         = 'gateway';
+    public const USER            = 'user';
 
     /**
      * @var string[]
@@ -51,6 +52,7 @@ final class TypeEnum extends EnumAbstract
         self::XML_PARSER      => self::XML_PARSER,
         self::START           => self::START,
         self::GATEWAY         => self::GATEWAY,
+        self::USER            => self::USER,
     ];
 
 }

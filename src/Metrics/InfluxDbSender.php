@@ -103,7 +103,7 @@ class InfluxDbSender
             } elseif (is_bool($tag)) {
                 $tag = ($tag ? "true" : "false");
             } elseif (is_null($tag)) {
-                $tag = ("null");
+                $tag = "null";
             }
         }
 

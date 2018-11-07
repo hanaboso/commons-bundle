@@ -47,6 +47,7 @@ class LogstashFormatter extends NormalizerFormatter
     {
         $record = parent::format($record);
 
+        $message              = [];
         $message['timestamp'] = round(microtime(TRUE) * 1000);
         $message['hostname']  = gethostname();
         $message['type']      = $this->serviceType;

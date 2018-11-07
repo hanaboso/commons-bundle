@@ -43,6 +43,9 @@ final class RedisSessionHandler implements SessionHandlerInterface
      */
     public function open($savePath, $name): bool
     {
+        $savePath;
+        $name;
+
         return TRUE;
     }
 
@@ -96,6 +99,8 @@ final class RedisSessionHandler implements SessionHandlerInterface
      */
     public function gc($maxLifeTime): bool
     {
+        $maxLifeTime;
+
         return TRUE;
     }
 
