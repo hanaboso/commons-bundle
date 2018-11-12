@@ -83,6 +83,21 @@ class LogstashFormatter extends NormalizerFormatter
             unset($record['context']['node_id']);
         }
 
+        if (isset($record['context']['node_name'])) {
+            $message['node_name'] = $record['context']['node_name'];
+            unset($record['context']['node_name']);
+        }
+
+        if (isset($record['context']['topology_id'])) {
+            $message['topology_id'] = $record['context']['topology_id'];
+            unset($record['context']['topology_id']);
+        }
+
+        if (isset($record['context']['topology_name'])) {
+            $message['topology_name'] = $record['context']['topology_name'];
+            unset($record['context']['topology_name']);
+        }
+
         if (!empty($record['context'])) {
             foreach ($record['context'] as $key => $val) {
                 $message[$key] = $val;

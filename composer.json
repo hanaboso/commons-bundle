@@ -13,6 +13,11 @@
   },
   "require": {
     "php": "^7.2",
+    "ext-soap": "*",
+    "ext-apcu": "*",
+    "ext-json": "*",
+    "ext-ftp": "*",
+    "ext-sockets": "*",
     "alcaeus/mongo-php-adapter": "^1.1",
     "clue/buzz-react": "^2.5",
     "doctrine/doctrine-bundle": "^1.9",
