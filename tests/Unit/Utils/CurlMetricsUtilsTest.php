@@ -3,7 +3,6 @@
 namespace Tests\Unit\Utils;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
@@ -20,7 +19,6 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 
     /**
      * @throws Exception
-     * @throws GuzzleException
      */
     public function testCurlMetrics(): void
     {

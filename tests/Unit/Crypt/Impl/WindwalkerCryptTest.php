@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Crypt;
+namespace Tests\Unit\Crypt\Impl;
 
 use Exception;
-use Hanaboso\CommonsBundle\Crypt\CryptException;
-use Hanaboso\CommonsBundle\Crypt\CryptService;
+use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
+use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
 use stdClass;
 use Tests\KernelTestCaseAbstract;
 
 /**
- * Class CryptServiceTest
+ * Class WindwalkerCryptTest
  *
- * @package Tests\Unit\Crypt
+ * @package Tests\Unit\Crypt\Impl
  */
-final class CryptServiceTest extends KernelTestCaseAbstract
+final class WindwalkerCryptTest extends KernelTestCaseAbstract
 {
 
     /**
@@ -36,8 +36,9 @@ final class CryptServiceTest extends KernelTestCaseAbstract
         $arr[]           = $stdClass;
 
         foreach ($arr as $item) {
-            $encrypted = CryptService::encrypt($item);
-            $decrypted = CryptService::decrypt($encrypted);
+            $encrypted = WindwalkerCrypt::encrypt($item);
+            $decrypted = WindwalkerCrypt::decrypt($encrypted);
+
             $this->assertEquals($item, $decrypted);
         }
     }
@@ -52,12 +53,12 @@ final class CryptServiceTest extends KernelTestCaseAbstract
     {
         $str = 'Some random text';
 
-        $encrypted = CryptService::encrypt($str);
+        $encrypted = WindwalkerCrypt::encrypt($str);
 
         $this->expectException(CryptException::class);
         $this->expectExceptionCode(CryptException::UNKNOWN_PREFIX);
 
-        CryptService::decrypt('abc' . $encrypted);
+        WindwalkerCrypt::decrypt('abc' . $encrypted);
     }
 
     /**
@@ -69,13 +70,13 @@ final class CryptServiceTest extends KernelTestCaseAbstract
     public function testEncryptAndDecrypt2(): void
     {
         $str          = 'asdf12342~!@#$%^&*()_+{}|:"<>?[]\;,./';
-        $encryptedStr = CryptService::encrypt($str);
+        $encryptedStr = WindwalkerCrypt::encrypt($str);
 
         $arr          = ['key' => 'val', 'str' => $encryptedStr];
-        $encryptedArr = CryptService::encrypt($arr);
+        $encryptedArr = WindwalkerCrypt::encrypt($arr);
 
-        $decryptedArr = CryptService::decrypt($encryptedArr);
-        $decryptedStr = CryptService::decrypt($decryptedArr['str']);
+        $decryptedArr = WindwalkerCrypt::decrypt($encryptedArr);
+        $decryptedStr = WindwalkerCrypt::decrypt($decryptedArr['str']);
 
         $this->assertEquals($str, $decryptedStr);
         $this->assertEquals($arr, $decryptedArr);

@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Crypt;
 
+use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
+
 /**
  * Interface CryptInterface
  *
@@ -14,6 +16,7 @@ interface CryptInterface
      * @param mixed $data
      *
      * @return string
+     * @throws CryptException
      */
     public static function encrypt($data): string;
 
@@ -21,6 +24,7 @@ interface CryptInterface
      * @param string $data
      *
      * @return mixed
+     * @throws CryptException
      */
     public static function decrypt(string $data);
 

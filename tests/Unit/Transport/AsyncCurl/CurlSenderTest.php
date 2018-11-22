@@ -11,6 +11,7 @@ namespace Tests\Unit\Transport\AsyncCurl;
 
 use Clue\React\Buzz\Browser;
 use Clue\React\Buzz\Message\ResponseException;
+use Exception;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
@@ -32,6 +33,7 @@ class CurlSenderTest extends TestCase
 
     /**
      * @covers CurlSender::send()
+     * @throws Exception
      */
     public function testSend(): void
     {
@@ -42,7 +44,8 @@ class CurlSenderTest extends TestCase
         /** @var InfluxDbSender $influx */
         $influx = $this->createMock(InfluxDbSender::class);
 
-        $curl    = new CurlSender($browser, $influx);
+        $curl = new CurlSender($browser);
+        $curl->setInfluxSender($influx);
         $request = new RequestDto('GET', new Uri('https://cleverconn.stage.hanaboso.net/api/'));
 
         $curl
@@ -55,6 +58,7 @@ class CurlSenderTest extends TestCase
 
     /**
      * @covers CurlSender::send()
+     * @throws Exception
      */
     public function testSendException(): void
     {
@@ -62,10 +66,7 @@ class CurlSenderTest extends TestCase
         $browser = $this->createMock(Browser::class);
         $browser->method('send')->willReturn(reject(new ResponseException(new Response(401))));
 
-        /** @var InfluxDbSender $influx */
-        $influx = $this->createMock(InfluxDbSender::class);
-
-        $curl    = new CurlSender($browser, $influx);
+        $curl    = new CurlSender($browser);
         $request = new RequestDto('GET', new Uri('https://cleverconn.stage.hanaboso.net/api/'));
 
         $curl

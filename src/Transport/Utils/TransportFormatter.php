@@ -26,10 +26,10 @@ class TransportFormatter
     {
         $tmpHeaders = [];
         foreach ($headers as $key => $values) {
-            if(is_array($values)) {
+            if (is_array($values)) {
                 $tmpHeaders[] = sprintf('%s=[%s]', $key, implode(", ", $values));
-            }else {
-                $tmpHeaders[] = sprintf('%s=%s', $key,  $values);
+            } else {
+                $tmpHeaders[] = sprintf('%s=%s', $key, $values);
             }
         }
 

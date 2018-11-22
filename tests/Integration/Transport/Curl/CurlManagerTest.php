@@ -3,7 +3,6 @@
 namespace Tests\Integration\Transport\Curl;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
@@ -34,7 +33,6 @@ final class CurlManagerTest extends KernelTestCaseAbstract
 
     /**
      * @throws Exception
-     * @throws GuzzleException
      */
     public function testSend(): void
     {
@@ -45,7 +43,6 @@ final class CurlManagerTest extends KernelTestCaseAbstract
 
     /**
      * @throws Exception
-     * @throws GuzzleException
      */
     public function testSendNotFound(): void
     {

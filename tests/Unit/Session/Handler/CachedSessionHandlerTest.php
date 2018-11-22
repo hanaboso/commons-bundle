@@ -20,7 +20,7 @@ final class CachedSessionHandlerTest extends TestCase
     private $csh;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     public function setUp(): void
     {

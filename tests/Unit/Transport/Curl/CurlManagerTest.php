@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Transport\Curl;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
@@ -24,6 +25,8 @@ final class CurlManagerTest extends TestCase
 
     /**
      * @covers CurlManager::send()
+     *
+     * @throws Exception
      */
     public function testSend(): void
     {
@@ -45,8 +48,9 @@ final class CurlManagerTest extends TestCase
         /** @var InfluxDbSender $influx */
         $influx = $this->createMock(InfluxDbSender::class);
 
-        $curlManager = new CurlManager($curlClientFactory, $influx);
-        $result      = $curlManager->send($requestDto);
+        $curlManager = new CurlManager($curlClientFactory);
+        $curlManager->setInfluxSender($influx);
+        $result = $curlManager->send($requestDto);
 
         $this->assertInstanceOf(ResponseDto::class, $result);
         $this->assertEquals(200, $result->getStatusCode());
@@ -57,21 +61,24 @@ final class CurlManagerTest extends TestCase
 
     /**
      * @covers CurlManager::send()
+     * @throws Exception
      */
     public function testSendFail(): void
     {
         $this->expectException(CurlException::class);
-        $requestDto  = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
+        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
 
         /** @var InfluxDbSender $influx */
         $influx = $this->createMock(InfluxDbSender::class);
 
-        $curlManager = new CurlManager(new CurlClientFactory(), $influx);
+        $curlManager = new CurlManager(new CurlClientFactory());
+        $curlManager->setInfluxSender($influx);
         $curlManager->send($requestDto, ['headers' => 123]);
     }
 
     /**
      * @covers CurlManager::send()
+     * @throws Exception
      */
     public function testSendFailMethod(): void
     {
@@ -82,6 +89,7 @@ final class CurlManagerTest extends TestCase
 
     /**
      * @covers CurlManager::send()
+     * @throws Exception
      */
     public function testSendFailBody(): void
     {

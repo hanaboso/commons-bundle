@@ -35,7 +35,6 @@ abstract class FileStorageDriverAbstract implements FileStorageDriverInterface
      */
     protected $pathGenerator;
 
-
     /**
      * FileStorageDriverAbstract constructor.
      *

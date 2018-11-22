@@ -13,6 +13,11 @@ interface FileInterface
     /**
      * @return string
      */
+    public function getId(): string;
+
+    /**
+     * @return string
+     */
     public function getFilename(): string;
 
     /**

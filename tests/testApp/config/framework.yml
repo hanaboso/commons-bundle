@@ -1,4 +1,5 @@
 framework:
+    test: ~
 #    secret: "%secret%"
 #    csrf_protection:
 #        enabled: false
@@ -6,7 +7,6 @@ framework:
 #    trusted_hosts: ~
 #    fragments: ~
 #    http_method_override: true
-    test: ~
 #    session:
 #        storage_id: session.storage.mock_file
 #    router:

@@ -2,6 +2,9 @@
 
 namespace Hanaboso\CommonsBundle\Crypt;
 
+use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
+use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
+
 /**
  * Class CryptManager
  *
@@ -15,14 +18,15 @@ class CryptManager
     /**
      * Encrypt data by concrete crypt service impl
      *
-     * @param mixed $data
+     * @param mixed  $data
+     * @param string $prefix
      *
      * @return string
      * @throws CryptException
      */
-    public static function encrypt($data): string
+    public static function encrypt($data, string $prefix = WindwalkerCrypt::PREFIX): string
     {
-        return CryptService::encrypt($data);
+        return self::getImplementation($prefix)::encrypt($data);
     }
 
     /**
@@ -37,10 +41,27 @@ class CryptManager
     {
         $prefix = substr($data, 0, self::PREFIX_LENGTH);
 
+        return self::getImplementation($prefix)::decrypt($data);
+    }
+
+    /**
+     * ---------------------------------------- HELPERS --------------------------------------
+     */
+
+    /**
+     * @param string $prefix
+     *
+     * @return CryptInterface
+     * @throws CryptException
+     */
+    private static function getImplementation(string $prefix): CryptInterface
+    {
         switch ($prefix) {
             // add new implementation of crypt services as you wish
-            case CryptService::PREFIX:
-                return CryptService::decrypt($data);
+            case WindwalkerCrypt::PREFIX:
+                return new WindwalkerCrypt();
+            case '00_':
+                throw new CryptException('The prefix was removed for license reasons.', CryptException::UNKNOWN_PREFIX);
             default:
                 throw new CryptException('Unknown crypt service prefix', CryptException::UNKNOWN_PREFIX);
         }

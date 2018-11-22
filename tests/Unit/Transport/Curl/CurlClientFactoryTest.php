@@ -20,7 +20,7 @@ final class CurlClientFactoryTest extends TestCase
     public function testCreate(): void
     {
         $curlClientFactory = new CurlClientFactory();
-        $result = $curlClientFactory->create();
+        $result            = $curlClientFactory->create();
 
         $this->assertInstanceOf(Client::class, $result);
     }

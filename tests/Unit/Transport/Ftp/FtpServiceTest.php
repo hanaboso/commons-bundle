@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Transport\Ftp;
 
+use Exception;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpService;
@@ -19,6 +20,7 @@ final class FtpServiceTest extends TestCase
 
     /**
      * @covers FtpService::uploadFile()
+     * @throws Exception
      */
     public function testUploadFile(): void
     {
@@ -42,6 +44,7 @@ final class FtpServiceTest extends TestCase
 
     /**
      * @covers FtpService::downloadFile()
+     * @throws Exception
      */
     public function testDownloadFile(): void
     {
@@ -64,6 +67,7 @@ final class FtpServiceTest extends TestCase
 
     /**
      * @covers FtpService::downloadFiles()
+     * @throws Exception
      */
     public function testDownloadFiles(): void
     {
@@ -79,8 +83,8 @@ final class FtpServiceTest extends TestCase
         $adapter->method('downloadFile')->willReturn(TRUE);
 
         $service = new FtpService($adapter, $this->getFtpConfig());
-        /** @var SplFileInfo[] $result */
-        $result  = $service->downloadFiles('abc');
+        /** @var SplFileInfo[]|iterable $result */
+        $result = $service->downloadFiles('abc');
 
         self::assertCount(2, $result);
         self::assertInstanceOf(SplFileInfo::class, $result[0]);

@@ -36,9 +36,9 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
     public function testListenerWithPipesHeader(): void
     {
         $headers = [
-            'HTTP_' . PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID) => 'topoId',
+            'HTTP_' . PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID)    => 'topoId',
             'HTTP_' . PipesHeaders::createKey(PipesHeaders::CORRELATION_ID) => 'correlationId',
-            'HTTP_' . PipesHeaders::createKey(PipesHeaders::NODE_ID) => 'nodeId',
+            'HTTP_' . PipesHeaders::createKey(PipesHeaders::NODE_ID)        => 'nodeId',
         ];
         $this->client->request('GET', '/test/route', [], [], $headers);
 

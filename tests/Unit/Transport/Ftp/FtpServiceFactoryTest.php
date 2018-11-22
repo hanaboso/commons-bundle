@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Transport\Ftp;
 
+use Exception;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
@@ -17,10 +18,12 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers FtpServiceFactory::getFtpService()
+     * @covers FtpServiceFactory::getFtpService().
+     * @throws Exception
      */
     public function testGetServiceFtp(): void
     {
+        /** @var FtpServiceFactory $factory */
         $factory = $this->c->get('hbpf.ftp.service.factory');
         $service = $factory->getFtpService(FtpServiceFactory::ADAPTER_FTP);
 
@@ -29,9 +32,11 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 
     /**
      * @covers FtpServiceFactory::getFtpService()
+     * @throws Exception
      */
     public function testGetServiceSftp(): void
     {
+        /** @var FtpServiceFactory $factory */
         $factory = $this->c->get('hbpf.ftp.service.factory');
         $service = $factory->getFtpService(FtpServiceFactory::ADAPTER_SFTP);
 

@@ -46,8 +46,9 @@ final class SoapManagerTest extends TestCase
         /** @var InfluxDbSender $influx */
         $influx = $this->createMock(InfluxDbSender::class);
 
-        $soapManager = new SoapManager($soapClientFactory, $influx);
-        $result      = $soapManager->send($request);
+        $soapManager = new SoapManager($soapClientFactory);
+        $soapManager->setInfluxSender($influx);
+        $result = $soapManager->send($request);
 
         $this->assertInstanceOf(ResponseDto::class, $result);
         $this->assertEquals($soapCallResponse, $result->getSoapCallResponse());
