@@ -2,6 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Metrics;
 
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use InvalidArgumentException;
 
 /**
@@ -39,6 +40,7 @@ class InfluxDbSender
      * @param array $tags
      *
      * @return bool
+     * @throws DateTimeException
      */
     public function send(array $fields, array $tags = []): bool
     {

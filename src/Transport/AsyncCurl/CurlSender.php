@@ -13,7 +13,9 @@ use Clue\React\Buzz\Browser;
 use Clue\React\Buzz\Message\ResponseException;
 use Exception;
 use GuzzleHttp\Psr7\Request;
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
@@ -166,6 +168,8 @@ class CurlSender implements LoggerAwareInterface
 
     /**
      * @param RequestDto $dto
+     *
+     * @throws CurlException
      */
     protected function sendMetrics(RequestDto $dto): void
     {
@@ -173,12 +177,16 @@ class CurlSender implements LoggerAwareInterface
             $info  = $dto->getDebugInfo();
             $times = CurlMetricUtils::getTimes($this->startTimes);
 
-            CurlMetricUtils::sendCurlMetrics(
-                $this->influxSender,
-                $times,
-                $info['node_id'][0] ?? NULL,
-                $info['correlation_id'][0] ?? NULL
-            );
+            try {
+                CurlMetricUtils::sendCurlMetrics(
+                    $this->influxSender,
+                    $times,
+                    $info['node_id'][0] ?? NULL,
+                    $info['correlation_id'][0] ?? NULL
+                );
+            } catch (DateTimeException $e) {
+                throw new CurlException($e->getMessage(), $e->getCode(), $e);
+            }
         }
     }
 

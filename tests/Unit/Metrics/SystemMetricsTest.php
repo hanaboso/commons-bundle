@@ -19,7 +19,7 @@ final class SystemMetricsTest extends TestCase
     public function testGetCurrentTimestamp(): void
     {
         $ts = SystemMetrics::getCurrentTimestamp();
-        $this->assertInternalType('int', $ts);
+        $this->assertTrue(is_numeric($ts));
 
         $ts2 = SystemMetrics::getCurrentTimestamp();
         $this->assertGreaterThanOrEqual($ts, $ts2);
@@ -31,7 +31,6 @@ final class SystemMetricsTest extends TestCase
     public function testGetCpuTimes(): void
     {
         $before = SystemMetrics::getCpuTimes();
-        $this->assertInternalType('array', $before);
         $this->assertArrayHasKey(SystemMetrics::CPU_TIME_USER, $before);
         $this->assertArrayHasKey(SystemMetrics::CPU_TIME_KERNEL, $before);
         $this->assertArrayHasKey(SystemMetrics::CPU_START_TIME, $before);

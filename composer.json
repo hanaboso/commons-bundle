@@ -38,6 +38,6 @@
     "hanaboso/php-check-utils": "^1.0",
     "snc/redis-bundle": "^2.1",
     "symfony/monolog-bundle": "^3.3",
-    "symfony/symfony": "^4.1"
+    "symfony/symfony": "^4.2"
   }
 }

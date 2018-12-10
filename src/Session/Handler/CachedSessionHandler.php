@@ -2,7 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Session\Handler;
 
-use DateTime;
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
+use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
 use SessionHandlerInterface;
 
 /**
@@ -51,6 +52,7 @@ class CachedSessionHandler implements SessionHandlerInterface
      * @param string $session_id
      *
      * @return string
+     * @throws DateTimeException
      */
     public function read($session_id): string
     {
@@ -59,7 +61,7 @@ class CachedSessionHandler implements SessionHandlerInterface
 
         // return cached value if found in cache and is not too old
         if (count(apcu_exists([$dataKey, $timeKey])) === 2 &&
-            (new DateTime())->getTimestamp() < (int) apcu_fetch($timeKey) + $this->timeout
+            (DateTimeUtils::getUTCDateTime())->getTimestamp() < (int) apcu_fetch($timeKey) + $this->timeout
         ) {
             return (string) apcu_fetch($dataKey);
         }
@@ -75,6 +77,7 @@ class CachedSessionHandler implements SessionHandlerInterface
      * @param string $session_data
      *
      * @return bool
+     * @throws DateTimeException
      */
     public function write($session_id, $session_data): bool
     {
@@ -128,11 +131,16 @@ class CachedSessionHandler implements SessionHandlerInterface
     /**
      * @param string $session_id
      * @param string $session_data
+     *
+     * @throws DateTimeException
      */
     private function updateCache(string $session_id, string $session_data): void
     {
         apcu_store(self::APCU_DATA_KEY . self::APCU_DELIMITER . $session_id, $session_data);
-        apcu_store(self::APCU_TIME_KEY . self::APCU_DELIMITER . $session_id, (new DateTime())->getTimestamp());
+        apcu_store(
+            self::APCU_TIME_KEY . self::APCU_DELIMITER . $session_id,
+            DateTimeUtils::getUTCDateTime()->getTimestamp()
+        );
     }
 
 }

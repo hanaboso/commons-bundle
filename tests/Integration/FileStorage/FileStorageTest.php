@@ -16,7 +16,7 @@ use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
 use Hanaboso\CommonsBundle\FileStorage\FileStorage;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Tests\DatabaseTestCaseAbstract;
 
 /**
@@ -60,7 +60,7 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
      */
     private function mockStorageService(): FileStorage
     {
-        /** @var FileStorageDriverInterface|PHPUnit_Framework_MockObject_MockObject $driver */
+        /** @var FileStorageDriverInterface|MockObject $driver */
         $driver = $this->createPartialMock(FileStorageDriverInterface::class, ['save', 'delete', 'get']);
         $driver->method('save')->willReturn(new FileInfoDto('fileUrl', '7'));
         $driver->method('delete')->willReturn('');

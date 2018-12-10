@@ -9,6 +9,7 @@
 
 namespace Hanaboso\CommonsBundle\Monolog;
 
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\UDPSender;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
@@ -45,6 +46,7 @@ class UdpHandler extends AbstractProcessingHandler
      * @param  array $record
      *
      * @return void
+     * @throws DateTimeException
      */
     protected function write(array $record): void
     {

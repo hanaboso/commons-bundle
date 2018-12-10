@@ -9,9 +9,10 @@
 
 namespace Hanaboso\CommonsBundle\Metrics;
 
-use DateTime;
 use Exception;
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\Exception\SystemMetricException;
+use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
 use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -99,6 +100,7 @@ class UDPSender implements LoggerAwareInterface
      * @param string $message
      *
      * @return bool
+     * @throws DateTimeException
      */
     public function send(string $message): bool
     {
@@ -159,16 +161,17 @@ class UDPSender implements LoggerAwareInterface
      * Does the periodical checks
      *
      * @return string
+     * @throws DateTimeException
      */
     public function refreshIp(): string
     {
         // we want to refresh it only in predefined time periods
-        if ((new DateTime())->getTimestamp() <= $this->lastIPRefresh + self::REFRESH_INTERVAL) {
+        if (DateTimeUtils::getUTCDateTime()->getTimestamp() <= $this->lastIPRefresh + self::REFRESH_INTERVAL) {
             return $this->ip;
         }
 
         $this->ip            = $this->getIp($this->collectorHost);
-        $this->lastIPRefresh = (new DateTime())->getTimestamp();
+        $this->lastIPRefresh = DateTimeUtils::getUTCDateTime()->getTimestamp();
 
         apcu_delete(self::APCU_IP . $this->collectorHost);
         apcu_delete(self::APCU_REFRESH . $this->collectorHost);

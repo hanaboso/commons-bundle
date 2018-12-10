@@ -5,6 +5,7 @@ namespace Hanaboso\CommonsBundle\Transport\Curl;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
@@ -185,6 +186,8 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 
     /**
      * @param RequestDto $dto
+     *
+     * @throws CurlException
      */
     protected function sendMetrics(RequestDto $dto): void
     {
@@ -192,12 +195,16 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
             $info  = $dto->getDebugInfo();
             $times = CurlMetricUtils::getTimes($this->startTimes);
 
-            CurlMetricUtils::sendCurlMetrics(
-                $this->influxSender,
-                $times,
-                $info['node_id'][0] ?? NULL,
-                $info['correlation_id'][0] ?? NULL
-            );
+            try {
+                CurlMetricUtils::sendCurlMetrics(
+                    $this->influxSender,
+                    $times,
+                    $info['node_id'][0] ?? NULL,
+                    $info['correlation_id'][0] ?? NULL
+                );
+            } catch (DateTimeException $e) {
+                throw new CurlException($e->getMessage(), $e->getCode(), $e);
+            }
         }
     }
 

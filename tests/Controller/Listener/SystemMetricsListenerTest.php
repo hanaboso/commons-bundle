@@ -49,7 +49,6 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 
         $metrics = $request->attributes->get(SystemMetricsListener::METRICS_ATTRIBUTES_KEY);
 
-        $this->assertInternalType('array', $metrics);
         $this->assertArrayHasKey(CurlMetricUtils::KEY_TIMESTAMP, $metrics);
         $timestamp = $metrics[CurlMetricUtils::KEY_TIMESTAMP];
         $this->assertGreaterThan(SystemMetrics::getCurrentTimestamp() - 5000, $timestamp);

@@ -3,7 +3,9 @@
 namespace Hanaboso\CommonsBundle\Transport\Soap;
 
 use Exception;
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
@@ -209,6 +211,8 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
 
     /**
      * @param RequestDtoAbstract $dto
+     *
+     * @throws CurlException
      */
     protected function sendMetrics(RequestDtoAbstract $dto): void
     {
@@ -216,12 +220,16 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
             $info  = $dto->getHeader()->getParams();
             $times = CurlMetricUtils::getTimes($this->startTimes);
 
-            CurlMetricUtils::sendCurlMetrics(
-                $this->influxSender,
-                $times,
-                $info['node_id'][0] ?? NULL,
-                $info['correlation_id'][0] ?? NULL
-            );
+            try {
+                CurlMetricUtils::sendCurlMetrics(
+                    $this->influxSender,
+                    $times,
+                    $info['node_id'][0] ?? NULL,
+                    $info['correlation_id'][0] ?? NULL
+                );
+            } catch (DateTimeException $e) {
+                throw new CurlException($e->getMessage(), $e->getCode(), $e);
+            }
         }
     }
 

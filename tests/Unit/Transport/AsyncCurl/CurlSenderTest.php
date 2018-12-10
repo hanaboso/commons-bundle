@@ -17,8 +17,8 @@ use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
 use Hanaboso\CommonsBundle\Transport\AsyncCurl\CurlSender;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use Psr\Http\Message\ResponseInterface;
 use function React\Promise\reject;
 use function React\Promise\resolve;
@@ -37,7 +37,7 @@ class CurlSenderTest extends TestCase
      */
     public function testSend(): void
     {
-        /** @var Browser|PHPUnit_Framework_MockObject_MockObject $browser */
+        /** @var Browser|MockObject $browser */
         $browser = $this->createMock(Browser::class);
         $browser->method('send')->willReturn(resolve(new Response(201)));
 
@@ -62,7 +62,7 @@ class CurlSenderTest extends TestCase
      */
     public function testSendException(): void
     {
-        /** @var Browser|PHPUnit_Framework_MockObject_MockObject $browser */
+        /** @var Browser|MockObject $browser */
         $browser = $this->createMock(Browser::class);
         $browser->method('send')->willReturn(reject(new ResponseException(new Response(401))));
 

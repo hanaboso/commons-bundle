@@ -12,8 +12,8 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Class CurlManagerTest
@@ -35,11 +35,11 @@ final class CurlManagerTest extends TestCase
 
         $psr7Response = new Response(200, $headers, $body);
 
-        /** @var PHPUnit_Framework_MockObject_MockObject|Client $client */
+        /** @var MockObject|Client $client */
         $client = $this->createPartialMock(Client::class, ['send']);
         $client->method('send')->willReturn($psr7Response);
 
-        /** @var PHPUnit_Framework_MockObject_MockObject|CurlClientFactory $curlClientFactory */
+        /** @var MockObject|CurlClientFactory $curlClientFactory */
         $curlClientFactory = $this->createPartialMock(CurlClientFactory::class, ['create']);
         $curlClientFactory->method('create')->willReturn($client);
 

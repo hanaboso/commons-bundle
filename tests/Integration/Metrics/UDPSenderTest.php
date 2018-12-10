@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Metrics;
 
+use Exception;
 use Hanaboso\CommonsBundle\Metrics\UDPSender;
 use PHPUnit\Framework\TestCase;
 
@@ -20,6 +21,7 @@ final class UDPSenderTest extends TestCase
      * Also tests if the resolving of invalid host does not take too long.
      *
      * @covers UDPSender::refreshIp()
+     * @throws Exception
      */
     public function testRefreshIp(): void
     {
@@ -46,6 +48,7 @@ final class UDPSenderTest extends TestCase
 
     /**
      * @covers UDPSender::send()
+     * @throws Exception
      */
     public function testSend(): void
     {
@@ -73,6 +76,7 @@ final class UDPSenderTest extends TestCase
 
     /**
      * @covers UDPSender::send()
+     * @throws Exception
      */
     public function testSendManyOnNonExistingHost(): void
     {

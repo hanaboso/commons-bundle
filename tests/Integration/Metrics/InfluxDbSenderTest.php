@@ -9,6 +9,7 @@
 
 namespace Tests\Integration\Metrics;
 
+use Exception;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
 use Hanaboso\CommonsBundle\Metrics\UDPSender;
@@ -23,7 +24,7 @@ final class InfluxDbSenderTest extends TestCase
 {
 
     /**
-     *
+     * @throws Exception
      */
     public function testSend(): void
     {

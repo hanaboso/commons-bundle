@@ -6,8 +6,8 @@ use Exception;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use SplFileInfo;
 
 /**
@@ -24,7 +24,7 @@ final class FtpServiceTest extends TestCase
      */
     public function testUploadFile(): void
     {
-        /** @var PHPUnit_Framework_MockObject_MockObject|FtpAdapter $adapter */
+        /** @var MockObject|FtpAdapter $adapter */
         $adapter = $this->createPartialMock(
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'dirExists', 'makeDirRecursive', 'uploadFile']
@@ -48,7 +48,7 @@ final class FtpServiceTest extends TestCase
      */
     public function testDownloadFile(): void
     {
-        /** @var PHPUnit_Framework_MockObject_MockObject|FtpAdapter $adapter */
+        /** @var MockObject|FtpAdapter $adapter */
         $adapter = $this->createPartialMock(
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'downloadFile']
@@ -71,7 +71,7 @@ final class FtpServiceTest extends TestCase
      */
     public function testDownloadFiles(): void
     {
-        /** @var PHPUnit_Framework_MockObject_MockObject|FtpAdapter $adapter */
+        /** @var MockObject|FtpAdapter $adapter */
         $adapter = $this->createPartialMock(
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'listDir', 'downloadFile']
