@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\Exception\SystemMetricException;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
+use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -76,7 +77,10 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
                 [self::METRICS_ATTRIBUTES_KEY => CurlMetricUtils::getCurrentMetrics()]
             );
         } catch (Exception $e) {
-            $this->logger->error('Metrics listener onKernelController exception', ['exception' => $e]);
+            $this->logger->error(
+                'Metrics listener onKernelController exception',
+                ExceptionContextLoader::getContextForLogger($e)
+            );
         }
     }
 
@@ -95,7 +99,10 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
 
             $this->sendMetrics($event->getRequest());
         } catch (Exception $e) {
-            $this->logger->error('Metrics listener onKernelTerminate exception', ['exception' => $e]);
+            $this->logger->error(
+                'Metrics listener onKernelTerminate exception',
+                ExceptionContextLoader::getContextForLogger($e)
+            );
         }
     }
 
@@ -130,7 +137,6 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
                 MetricsEnum::CPU_KERNEL_TIME        => $times[CurlMetricUtils::KEY_KERNEL_TIME],
             ],
             [
-                //MetricsEnum::HOST           => gethostname(),
                 MetricsEnum::TOPOLOGY_ID    => $headers->get(PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID)),
                 MetricsEnum::CORRELATION_ID => $headers->get(PipesHeaders::createKey(PipesHeaders::CORRELATION_ID)),
                 MetricsEnum::NODE_ID        => $headers->get(PipesHeaders::createKey(PipesHeaders::NODE_ID)),

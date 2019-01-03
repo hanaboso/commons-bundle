@@ -56,9 +56,7 @@ class CurlMetricUtils
         ?string $correlationId = NULL
     ): void
     {
-        $info = [
-            //MetricsEnum::HOST => gethostname(),
-        ];
+        $info = [];
 
         if ($nodeId) {
             $info[MetricsEnum::NODE_ID] = $nodeId;

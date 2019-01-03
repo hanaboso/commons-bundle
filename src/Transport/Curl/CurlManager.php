@@ -12,6 +12,7 @@ use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\CurlManagerInterface;
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
+use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -153,7 +154,10 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $message = $response->getBody()->getContents();
                 $response->getBody()->rewind();
             }
-            $this->logger->error(sprintf('CurlManager::send() failed: %s', $message));
+            $this->logger->error(
+                sprintf('CurlManager::send() failed: %s', $message),
+                ExceptionContextLoader::getContextForLogger($exception)
+            );
 
             throw new CurlException(
                 sprintf('CurlManager::send() failed: %s', $message),
@@ -163,7 +167,10 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
             );
         } catch (Throwable | GuzzleException $exception) {
             $this->sendMetrics($dto);
-            $this->logger->error(sprintf('CurlManager::send() failed: %s', $exception->getMessage()));
+            $this->logger->error(
+                sprintf('CurlManager::send() failed: %s', $exception->getMessage()),
+                ExceptionContextLoader::getContextForLogger($exception)
+            );
             throw new CurlException(
                 sprintf('CurlManager::send() failed: %s', $exception->getMessage()),
                 CurlException::REQUEST_FAILED,
@@ -181,7 +188,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      */
     protected function prepareOptions(array $options): array
     {
-        return $options;
+        return array_merge(['http_errors' => FALSE], $options);
     }
 
     /**

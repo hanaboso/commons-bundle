@@ -19,6 +19,7 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
+use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerAwareInterface;
@@ -102,25 +103,28 @@ class CurlSender implements LoggerAwareInterface
 
         return $this
             ->sendRequest($request)
-            ->then(function (ResponseInterface $response) use ($dto) {
-                $this->logResponse($response, $dto->getDebugInfo());
-                $this->sendMetrics($dto);
+            ->then(
+                function (ResponseInterface $response) use ($dto) {
+                    $this->logResponse($response, $dto->getDebugInfo());
+                    $this->sendMetrics($dto);
 
-                return resolve($response);
-            }, function (Exception $e) use ($dto) {
-                $this->sendMetrics($dto);
+                    return resolve($response);
+                },
+                function (Exception $e) use ($dto) {
+                    $this->sendMetrics($dto);
 
-                if ($e instanceof ResponseException) {
-                    $this->logResponse($e->getResponse(), $dto->getDebugInfo());
-                } else {
-                    $this->logger->error(
-                        sprintf('Async request error: %s', $e->getMessage()),
-                        array_merge(['exception' => $e], $dto->getDebugInfo())
-                    );
+                    if ($e instanceof ResponseException) {
+                        $this->logResponse($e->getResponse(), $dto->getDebugInfo());
+                    } else {
+                        $this->logger->error(
+                            sprintf('Async request error: %s', $e->getMessage()),
+                            array_merge(ExceptionContextLoader::getContextForLogger($e), $dto->getDebugInfo())
+                        );
+                    }
+
+                    return reject($e);
                 }
-
-                return reject($e);
-            });
+            );
     }
 
     /**

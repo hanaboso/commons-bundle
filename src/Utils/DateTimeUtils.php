@@ -19,8 +19,12 @@ use Throwable;
  *
  * @package Hanaboso\CommonsBundle\Utils
  */
-final class DateTimeUtils
+class DateTimeUtils
 {
+
+    public const DATE_TIME  = 'Y-m-d H:i:s';
+    public const DATE       = 'Y-m-d';
+    public const MYSQL_DATE = '%Y-%m-%d';
 
     /**
      * @param string $dateTime
@@ -35,6 +39,19 @@ final class DateTimeUtils
         } catch (Throwable $t) {
             throw new DateTimeException($t->getMessage(), $t->getCode(), $t);
         }
+    }
+
+    /**
+     * @param int $timeStamp
+     *
+     * @return DateTime
+     */
+    public static function getUTCDateTimeFromTimeStamp(int $timeStamp = 0): DateTime
+    {
+        /** @var DateTime $dateTime */
+        $dateTime = DateTime::createFromFormat('U', (string) $timeStamp, new DateTimeZone('UTC'));
+
+        return $dateTime;
     }
 
 }

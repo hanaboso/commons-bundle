@@ -10,6 +10,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
+use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -118,10 +119,13 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
             );
 
         } catch (SoapException $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
             throw $e;
         } catch (Exception $e) {
-            $this->logger->error(sprintf('Unknown exception: %s', $e->getMessage()));
+            $this->logger->error(
+                sprintf('Unknown exception: %s', $e->getMessage()),
+                ExceptionContextLoader::getContextForLogger($e)
+            );
             throw new SoapException('Unknown exception.', SoapException::UNKNOWN_EXCEPTION, $e);
         }
     }

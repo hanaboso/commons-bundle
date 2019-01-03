@@ -1,15 +1,8 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: stanislav.kundrat
- * Date: 8/8/17
- * Time: 2:44 PM
- */
-
 namespace Hanaboso\CommonsBundle\Utils;
 
-use Exception;
+use Throwable;
 
 /**
  * Class ExceptionContextLoader
@@ -18,11 +11,11 @@ class ExceptionContextLoader
 {
 
     /**
-     * @param Exception $e
+     * @param Throwable $e
      *
      * @return array
      */
-    public static function getContextForLogger(?Exception $e = NULL): array
+    public static function getContextForLogger(?Throwable $e = NULL): array
     {
         if ($e === NULL) {
             return [];
