@@ -76,10 +76,18 @@ class RequestDto
     public function getUri($asString = FALSE)
     {
         if ($asString) {
-            return (string) $this->uri;
+            return $this->getUriString();
         }
 
         return $this->uri;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUriString(): string
+    {
+        return (string) $this->uri;
     }
 
     /**

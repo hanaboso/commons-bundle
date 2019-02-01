@@ -33,7 +33,7 @@ class SoapHelper
 
         $headers = [];
         foreach ($requestHeader->getParams() as $key => $value) {
-            $headers[] = new SoapHeader($requestHeader->getNamespace(), $key, $value);
+            $headers[] = new SoapHeader($requestHeader->getNamespace(), (string) $key, $value);
         }
 
         return $headers;
@@ -98,7 +98,7 @@ class SoapHelper
 
         $soapParams = [];
         foreach ($request->getArguments() as $key => $value) {
-            $soapParams[] = new SoapParam(self::composeDataForSoapParam($key, $value), $key);
+            $soapParams[] = new SoapParam(self::composeDataForSoapParam((string) $key, $value), (string) $key);
         }
 
         return $soapParams;

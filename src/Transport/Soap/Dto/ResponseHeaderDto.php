@@ -13,7 +13,7 @@ class ResponseHeaderDto
 {
 
     /**
-     * @var HeaderBag
+     * @var HeaderBag|null
      */
     private $httpHeaders;
 
@@ -55,9 +55,9 @@ class ResponseHeaderDto
     }
 
     /**
-     * @return HeaderBag
+     * @return ?HeaderBag
      */
-    public function getHttpHeaders(): HeaderBag
+    public function getHttpHeaders(): ?HeaderBag
     {
         return $this->httpHeaders;
     }
