@@ -11,6 +11,7 @@
          convertErrorsToExceptions="false"
          convertWarningsToExceptions="false"
          verbose="false"
+         cacheResult="false"
 >
 
     <php>

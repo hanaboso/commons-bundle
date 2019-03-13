@@ -9,6 +9,8 @@
 
 namespace Hanaboso\CommonsBundle\FileStorage\PathGenerator;
 
+use Exception;
+
 /**
  * Class HashPathGenerator
  *
@@ -20,7 +22,7 @@ class HashPathGenerator implements PathGeneratorInterface
     /**
      * @var int
      */
-    private $levels = 3;
+    private $levels = 2;
 
     /**
      * @var int
@@ -31,12 +33,13 @@ class HashPathGenerator implements PathGeneratorInterface
      * @param string|null $filename
      *
      * @return string
+     * @throws Exception
      */
     public function generate(?string $filename): string
     {
         $res = '';
         if (!$filename) {
-            $filename = uniqid();
+            $filename = base_convert(bin2hex(random_bytes(16)), 16, 36);
 
             $chunks = (array) str_split($filename, $this->segment);
             for ($i = 0; $i < $this->levels; $i++) {
