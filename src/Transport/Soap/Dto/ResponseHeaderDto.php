@@ -55,7 +55,7 @@ class ResponseHeaderDto
     }
 
     /**
-     * @return ?HeaderBag
+     * @return HeaderBag|null ?HeaderBag
      */
     public function getHttpHeaders(): ?HeaderBag
     {

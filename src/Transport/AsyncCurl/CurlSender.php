@@ -32,7 +32,7 @@ use function React\Promise\resolve;
 /**
  * Class CurlSender
  *
- * @package Hanaboso\PipesFramework\RabbitMq\Async\Curl
+ * @package Hanaboso\CommonsBundle\Transport\AsyncCurl
  */
 class CurlSender implements LoggerAwareInterface
 {

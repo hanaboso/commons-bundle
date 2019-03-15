@@ -6,7 +6,7 @@ use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use InvalidArgumentException;
 
 /**
- * Class UDPService
+ * Class InfluxDbSender
  *
  * @package Hanaboso\CommonsBundle\Metrics
  */
@@ -24,7 +24,7 @@ class InfluxDbSender
     private $measurement;
 
     /**
-     * UDPService constructor.
+     * InfluxDbSender constructor.
      *
      * @param UDPSender $sender
      * @param string    $measurement

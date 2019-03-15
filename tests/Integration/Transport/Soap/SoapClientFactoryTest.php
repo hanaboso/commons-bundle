@@ -14,7 +14,7 @@ use SoapClient;
 /**
  * Class SoapClientFactoryTest
  *
- * @package Tests\Unit\Transport\Soap
+ * @package Tests\Integration\Transport\Soap
  */
 final class SoapClientFactoryTest extends TestCase
 {

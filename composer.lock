@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52c161b6d41f0b4fe6b85b61b1bc65c4",
+    "content-hash": "1f9976c0f3344130ac0771114cf78e95",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1131,16 +1131,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "1.2.7",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "0cd3c37dfc369abdb3cb8090a50def7ea161f469"
+                "reference": "4acb36955163b20e1ac3241c5fe354ea24337691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/0cd3c37dfc369abdb3cb8090a50def7ea161f469",
-                "reference": "0cd3c37dfc369abdb3cb8090a50def7ea161f469",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/4acb36955163b20e1ac3241c5fe354ea24337691",
+                "reference": "4acb36955163b20e1ac3241c5fe354ea24337691",
                 "shasum": ""
             },
             "require": {
@@ -1211,7 +1211,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2019-03-06T13:42:40+00:00"
+            "time": "2019-03-14T06:32:02+00:00"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -5268,16 +5268,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.11.3",
+            "version": "0.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e4644b4a8fd393c346f1137305fb2f76a7dc20a7"
+                "reference": "ccc4f854748664cc61d1f3d4ecb26810df1f0cd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e4644b4a8fd393c346f1137305fb2f76a7dc20a7",
-                "reference": "e4644b4a8fd393c346f1137305fb2f76a7dc20a7",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ccc4f854748664cc61d1f3d4ecb26810df1f0cd4",
+                "reference": "ccc4f854748664cc61d1f3d4ecb26810df1f0cd4",
                 "shasum": ""
             },
             "require": {
@@ -5337,7 +5337,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-03-10T16:25:30+00:00"
+            "time": "2019-03-14T14:46:15+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -6827,9 +6827,9 @@
         "ext-ftp": "*",
         "ext-json": "*",
         "ext-libsodium": "*",
+        "ext-pdo": "*",
         "ext-soap": "*",
-        "ext-sockets": "*",
-        "ext-pdo": "*"
+        "ext-sockets": "*"
     },
     "platform-dev": []
 }

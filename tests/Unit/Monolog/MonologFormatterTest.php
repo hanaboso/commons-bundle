@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package Tests\Unit\Monolog
  */
-class MonologFormatterTest extends TestCase
+final class MonologFormatterTest extends TestCase
 {
 
     /**

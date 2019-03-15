@@ -40,7 +40,7 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     private $sender;
 
     /**
-     * ControllerExceptionListener constructor.
+     * SystemMetricsListener constructor.
      *
      * @param InfluxDbSender $sender
      */

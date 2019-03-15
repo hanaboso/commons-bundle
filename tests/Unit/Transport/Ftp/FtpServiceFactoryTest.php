@@ -45,6 +45,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 
     /**
      * @covers FtpServiceFactory::getFtpService()
+     * @throws FtpException
      */
     public function testGetServiceUnknown(): void
     {

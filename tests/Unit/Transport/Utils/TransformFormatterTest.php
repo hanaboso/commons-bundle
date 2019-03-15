@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package Tests\Unit\Transport\Utils
  */
-class TransformFormatterTest extends TestCase
+final class TransformFormatterTest extends TestCase
 {
 
     /**

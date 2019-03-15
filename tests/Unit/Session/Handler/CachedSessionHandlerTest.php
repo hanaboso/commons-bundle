@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Session\Handler;
 
+use Exception;
 use Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler;
 use PHPUnit\Framework\TestCase;
 use SessionHandlerInterface;
@@ -20,7 +21,7 @@ final class CachedSessionHandlerTest extends TestCase
     private $csh;
 
     /**
-     *
+     * @throws Exception
      */
     public function setUp(): void
     {
@@ -34,7 +35,7 @@ final class CachedSessionHandlerTest extends TestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testApcu(): void
     {
@@ -59,7 +60,7 @@ final class CachedSessionHandlerTest extends TestCase
      * @covers CachedSessionHandler::read()
      * @covers CachedSessionHandler::write()
      * @covers CachedSessionHandler::destroy()
-     * @throws \Exception
+     * @throws Exception
      */
     public function testReadWriteDestroy(): void
     {
@@ -75,7 +76,7 @@ final class CachedSessionHandlerTest extends TestCase
 
     /**
      * @covers CachedSessionHandler::read()
-     * @throws \Exception
+     * @throws Exception
      */
     public function testCacheTimeout(): void
     {

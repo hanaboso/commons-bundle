@@ -10,9 +10,9 @@
 namespace Hanaboso\CommonsBundle\Utils;
 
 /**
- * Class Headers
+ * Class PipesHeaders
  *
- * @package Hanaboso\CommonsBundle\Pipes\Headers
+ * @package Hanaboso\CommonsBundle\Utils
  */
 class PipesHeaders
 {

@@ -36,7 +36,7 @@ class FileStorageDriverLocator
     private $public;
 
     /**
-     * FIleStorageDriverLocator constructor.
+     * FileStorageDriverLocator constructor.
      *
      * @param FileStorageDriverInterface $persistent
      * @param FileStorageDriverInterface $temporary

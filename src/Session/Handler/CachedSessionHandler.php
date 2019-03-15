@@ -30,7 +30,7 @@ class CachedSessionHandler implements SessionHandlerInterface
     private $timeout;
 
     /**
-     * CachedRedisSessionHandler constructor.
+     * CachedSessionHandler constructor.
      *
      * @param SessionHandlerInterface $handler
      */

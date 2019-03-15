@@ -20,6 +20,8 @@ use Psr\Log\NullLogger;
 
 /**
  * Class UDPSender
+ *
+ * @package Hanaboso\CommonsBundle\Metrics
  */
 class UDPSender implements LoggerAwareInterface
 {

@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 
 /**
- * Class RequestDto
+ * Class RequestDtoAbstract
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap\Dto
  */

@@ -28,7 +28,7 @@ use function React\Promise\resolve;
  *
  * @package Tests\Unit\Transport\AsyncCurl
  */
-class CurlSenderTest extends TestCase
+final class CurlSenderTest extends TestCase
 {
 
     /**

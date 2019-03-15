@@ -34,7 +34,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
     private $ftpConfig;
 
     /**
-     * FtpServiceAbstract constructor.
+     * FtpService constructor.
      *
      * @param FtpAdapterInterface $adapter
      * @param FtpConfig           $ftpConfig

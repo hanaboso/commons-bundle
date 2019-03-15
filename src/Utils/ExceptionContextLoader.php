@@ -6,6 +6,8 @@ use Throwable;
 
 /**
  * Class ExceptionContextLoader
+ *
+ * @package Hanaboso\CommonsBundle\Utils
  */
 class ExceptionContextLoader
 {

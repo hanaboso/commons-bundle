@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package Tests\Unit\Utils
  */
-class PipesHeadersTest extends TestCase
+final class PipesHeadersTest extends TestCase
 {
 
     /**

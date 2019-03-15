@@ -10,7 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class UDPServiceTest
+ * Class InfluxDbSenderTest
  *
  * @package Tests\Unit\Metrics
  */
@@ -42,6 +42,7 @@ final class InfluxDbSenderTest extends TestCase
      * @covers InfluxDbSender::prepareTags()
      * @covers InfluxDbSender::prepareFields()
      * @covers InfluxDbSender::escapeFieldValue()
+     * @throws Exception
      */
     public function testCreateMessage(): void
     {
@@ -64,6 +65,7 @@ final class InfluxDbSenderTest extends TestCase
 
     /**
      * @covers InfluxDbSender::createMessage()
+     * @throws Exception
      */
     public function testCreateMessageException(): void
     {

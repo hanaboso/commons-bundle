@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package Tests\Unit\Monolog
  */
-class LogstashFormatterTest extends TestCase
+final class LogstashFormatterTest extends TestCase
 {
 
     /**

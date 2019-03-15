@@ -12,7 +12,7 @@ namespace Hanaboso\CommonsBundle\FileStorage\Driver;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
 
 /**
- * Class FileStorageDriverInterface
+ * Interface FileStorageDriverInterface
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Driver
  */

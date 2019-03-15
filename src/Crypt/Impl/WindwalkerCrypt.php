@@ -9,7 +9,7 @@ use Windwalker\Crypt\Cipher\SodiumCipher;
 use Windwalker\Crypt\Crypt;
 
 /**
- * Class DefuseCrypt
+ * Class WindwalkerCrypt
  *
  * @package Hanaboso\CommonsBundle\Crypt\Impl
  */

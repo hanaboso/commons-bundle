@@ -19,9 +19,9 @@ use React\Socket\Connector;
 use React\Socket\SecureConnector;
 
 /**
- * Class CurlFactory
+ * Class CurlSenderFactory
  *
- * @package Hanaboso\PipesFramework\RabbitMq\Async\Curl
+ * @package Hanaboso\CommonsBundle\Transport\AsyncCurl
  */
 class CurlSenderFactory implements LoggerAwareInterface
 {
@@ -37,7 +37,7 @@ class CurlSenderFactory implements LoggerAwareInterface
     private $influxSender;
 
     /**
-     * CurlFactory constructor.
+     * CurlSenderFactory constructor.
      */
     public function __construct()
     {

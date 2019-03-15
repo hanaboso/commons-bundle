@@ -2,7 +2,7 @@
 
 namespace Tests\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package Tests\Controller
  */
-class TestController extends FOSRestController
+class TestController extends AbstractFOSRestController
 {
 
     /**
