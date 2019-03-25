@@ -2,14 +2,14 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Soap;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkException;
+use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
 
 /**
  * Class SoapException
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap
  */
-final class SoapException extends PipesFrameworkException
+final class SoapException extends PipesFrameworkExceptionAbstract
 {
 
     protected const OFFSET = 900;

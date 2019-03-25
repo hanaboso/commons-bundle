@@ -14,7 +14,7 @@ namespace Hanaboso\CommonsBundle\Exception;
  *
  * @package Hanaboso\CommonsBundle\Exception
  */
-final class FileStorageException extends PipesFrameworkException
+final class FileStorageException extends PipesFrameworkExceptionAbstract
 {
 
     protected const OFFSET = 1500;

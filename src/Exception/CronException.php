@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\Exception;
  *
  * @package Hanaboso\CommonsBundle\Exception
  */
-final class CronException extends PipesFrameworkException
+final class CronException extends PipesFrameworkExceptionAbstract
 {
 
     protected const OFFSET = 2700;

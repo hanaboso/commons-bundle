@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkException;
+use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
@@ -11,7 +11,7 @@ use Throwable;
  *
  * @package Hanaboso\CommonsBundle\Transport\Curl
  */
-final class CurlException extends PipesFrameworkException
+final class CurlException extends PipesFrameworkExceptionAbstract
 {
 
     protected const OFFSET = 300;

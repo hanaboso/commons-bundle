@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\Exception;
  *
  * @package Hanaboso\CommonsBundle\Exception
  */
-final class EnumException extends PipesFrameworkException
+final class EnumException extends PipesFrameworkExceptionAbstract
 {
 
     protected const OFFSET = 2000;

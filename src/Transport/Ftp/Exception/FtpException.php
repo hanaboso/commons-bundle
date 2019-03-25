@@ -2,14 +2,14 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Ftp\Exception;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkException;
+use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
 
 /**
  * Class FtpException
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp\Exception
  */
-class FtpException extends PipesFrameworkException
+class FtpException extends PipesFrameworkExceptionAbstract
 {
 
     protected const OFFSET = 2500;

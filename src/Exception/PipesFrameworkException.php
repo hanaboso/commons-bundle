@@ -9,14 +9,12 @@
 
 namespace Hanaboso\CommonsBundle\Exception;
 
-use Exception;
-
 /**
  * Class PipesFrameworkException
  *
  * @package Hanaboso\CommonsBundle\Exception
  */
-class PipesFrameworkException extends Exception
+class PipesFrameworkException extends PipesFrameworkExceptionAbstract
 {
 
     public const UNKNOWN_ERROR                = 1;

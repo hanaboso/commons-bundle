@@ -2,14 +2,14 @@
 
 namespace Hanaboso\CommonsBundle\Crypt\Exceptions;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkException;
+use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
 
 /**
  * Class CryptException
  *
  * @package Hanaboso\CommonsBundle\Crypt\Exceptions
  */
-class CryptException extends PipesFrameworkException
+class CryptException extends PipesFrameworkExceptionAbstract
 {
 
     protected const OFFSET = 1300;

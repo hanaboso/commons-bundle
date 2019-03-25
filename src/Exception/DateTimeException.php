@@ -9,14 +9,12 @@
 
 namespace Hanaboso\CommonsBundle\Exception;
 
-use Exception;
-
 /**
  * Class DateTimeException
  *
  * @package Hanaboso\CommonsBundle\Exception
  */
-final class DateTimeException extends Exception
+final class DateTimeException extends PipesFrameworkExceptionAbstract
 {
 
 }
