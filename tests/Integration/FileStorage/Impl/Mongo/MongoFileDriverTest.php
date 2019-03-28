@@ -1,18 +1,11 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: david.horacek
- * Date: 8/21/17
- * Time: 12:10 PM
- */
-
-namespace Tests\Integration\FileStorage;
+namespace Tests\Integration\FileStorage\Impl\Mongo;
 
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
-use Hanaboso\CommonsBundle\FileStorage\Driver\FileMongo;
-use Hanaboso\CommonsBundle\FileStorage\Driver\MongoFileDriver;
+use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo;
+use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver;
 use Tests\DatabaseTestCaseAbstract;
 
 /**
@@ -33,7 +26,7 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     public function testFileStorage(): void
     {
         /** @var MongoFileDriver $driver */
-        $driver = $this->c->get('hbpf.file_storage.driver.mongo');
+        $driver = self::$container->get('hbpf.file_storage.driver.mongo');
 
         $res = $driver->save('test_content', 'test_name');
         $this->dm->clear();

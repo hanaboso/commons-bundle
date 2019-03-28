@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Tests\KernelTestCaseAbstract;
 
@@ -33,9 +34,10 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
                     return TRUE;
                 }
             ));
-        $this->c->set('hbpf.influxdb_sender_connector', $influx);
+        self::$container->set('hbpf.influxdb_sender_connector', $influx);
 
-        $manager = $this->c->get('hbpf.transport.curl_manager');
+        /** @var CurlManager $manager */
+        $manager = self::$container->get('hbpf.transport.curl_manager');
         $dto     = new RequestDto('GET', new Uri('http://google.com'));
         $manager->send($dto);
     }

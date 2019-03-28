@@ -1,13 +1,6 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: david.horacek
- * Date: 8/21/17
- * Time: 10:29 AM
- */
-
-namespace Hanaboso\CommonsBundle\FileStorage\Driver;
+namespace Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo;
 
 use Doctrine\MongoDB\GridFSFile;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -16,7 +9,7 @@ use Hanaboso\CommonsBundle\Traits\Document\IdTrait;
 /**
  * Class FileMongo
  *
- * @package Hanaboso\CommonsBundle\FileStorage\Driver
+ * @package Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
  *
  * @ODM\Document()
  */

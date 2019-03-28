@@ -28,7 +28,9 @@ final class CurlManagerTest extends KernelTestCaseAbstract
     protected function setUp(): void
     {
         parent::setUp();
-        $this->curl = $this->c->get('hbpf.transport.curl_manager');
+        /** @var CurlManager $curlManager */
+        $curlManager = self::$container->get('hbpf.transport.curl_manager');
+        $this->curl = $curlManager;
     }
 
     /**

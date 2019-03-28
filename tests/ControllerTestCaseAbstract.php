@@ -6,6 +6,7 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -41,9 +42,6 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        self::bootKernel();
-        $container = self::$kernel->getContainer();
-        $this->dm  = $container->get('doctrine_mongodb.odm.default_document_manager');
     }
 
     /**
@@ -52,6 +50,12 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        self::bootKernel();
+        /** @var ContainerInterface $container */
+        $container = self::$kernel->getContainer();
+        /** @var DocumentManager $dm */
+        $dm       = $container->get('doctrine_mongodb.odm.default_document_manager');
+        $this->dm = $dm;
         $this->client = self::createClient([], []);
         $this->dm->getConnection()->dropDatabase('pipes');
     }
@@ -90,7 +94,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
      */
     protected function sendPost(string $url, array $parameters, ?array $content = NULL): stdClass
     {
-        $this->client->request('POST', $url, $parameters, [], [], $content ? json_encode($content) : '');
+        $this->client->request('POST', $url, $parameters, [], [], $content ? (string) json_encode($content) : '');
         $response = $this->client->getResponse();
 
         return (object) [
@@ -108,7 +112,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
      */
     protected function sendPut(string $url, array $parameters, ?array $content = NULL): stdClass
     {
-        $this->client->request('PUT', $url, $parameters, [], [], $content ? json_encode($content) : '');
+        $this->client->request('PUT', $url, $parameters, [], [], $content ? (string) json_encode($content) : '');
         $response = $this->client->getResponse();
 
         return (object) [

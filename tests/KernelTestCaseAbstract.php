@@ -1,16 +1,8 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: david.horacek
- * Date: 8/15/17
- * Time: 10:45 AM
- */
-
 namespace Tests;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -20,11 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 abstract class KernelTestCaseAbstract extends KernelTestCase
 {
-
-    /**
-     * @var ContainerInterface
-     */
-    protected $c;
 
     /**
      * @var DocumentManager
@@ -41,9 +28,18 @@ abstract class KernelTestCaseAbstract extends KernelTestCase
     public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
         self::bootKernel();
-        $this->c  = self::$kernel->getContainer();
-        $this->dm = $this->c->get('doctrine_mongodb.odm.default_document_manager');
+        /** @var DocumentManager $dm */
+        $dm       = self::$container->get('doctrine_mongodb.odm.default_document_manager');
+        $this->dm = $dm;
     }
 
 }

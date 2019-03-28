@@ -23,7 +23,10 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
      */
     public function setUp(): void
     {
-        $this->handler = $this->c->get('hbpf.commons.session_handler');
+        parent::setUp();
+        /** @var RedisSessionHandler $sessionHandler */
+        $sessionHandler = self::$container->get('hbpf.commons.session_handler');
+        $this->handler = $sessionHandler;
     }
 
     /**
@@ -53,7 +56,6 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
     {
         $this->assertTrue($this->handler->gc(0));
         $this->assertTrue($this->handler->gc(999));
-        $this->assertTrue($this->handler->gc("aaa"));
     }
 
     /**

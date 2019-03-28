@@ -22,7 +22,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
     public function testConnectDocumentManager(): void
     {
         /** @var DocumentManager $documentManager */
-        $documentManager = $this->c->get('doctrine_mongodb.odm.default_document_manager');
+        $documentManager = self::$container->get('doctrine_mongodb.odm.default_document_manager');
         $this->assertTrue(is_array($documentManager->getConnection()->listDatabases()));
     }
 
@@ -32,7 +32,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
     public function testConnectEntityManager(): void
     {
         /** @var EntityManager $entityManager */
-        $entityManager = $this->c->get('doctrine.orm.default_entity_manager');
+        $entityManager = self::$container->get('doctrine.orm.default_entity_manager');
 
         $query = $entityManager->getConnection()->query('SHOW DATABASES;');
         $query->execute();

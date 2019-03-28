@@ -1,22 +1,16 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: david.horacek
- * Date: 8/21/17
- * Time: 1:44 PM
- */
-
-namespace Hanaboso\CommonsBundle\FileStorage\Driver;
+namespace Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo;
 
 use Doctrine\MongoDB\GridFSFile;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
+use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverAbstract;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
 
 /**
  * Class MongoFileDriver
  *
- * @package Hanaboso\CommonsBundle\FileStorage\Driver
+ * @package Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
  */
 class MongoFileDriver extends FileStorageDriverAbstract
 {

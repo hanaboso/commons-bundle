@@ -1,15 +1,9 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: david.horacek
- * Date: 8/22/17
- * Time: 10:16 AM
- */
-
 namespace Tests\Integration\FileStorage;
 
 use Exception;
+use Hanaboso\CommonsBundle\DatabaseManager\DatabaseManagerLocator;
 use Hanaboso\CommonsBundle\FileStorage\Document\File;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverInterface;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
@@ -66,9 +60,12 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
         $driver->method('delete')->willReturn('');
         $driver->method('get')->willReturn('test_content');
 
+        /** @var DatabaseManagerLocator $managerLocator */
+        $managerLocator = self::$container->get('hbpf.database_manager_locator');
+
         return new FileStorage(
             new FileStorageDriverLocator($driver, $driver, $driver),
-            $this->c->get('hbpf.database_manager_locator'),
+            $managerLocator,
             'Hanaboso\CommonsBundle\FileStorage\Document\File'
         );
     }

@@ -30,7 +30,7 @@ final class CurlManagerTest extends TestCase
      */
     public function testSend(): void
     {
-        $body    = json_encode(['abc' => 'def']);
+        $body    = (string) json_encode(['abc' => 'def']);
         $headers = ['header_key' => 'header_value'];
 
         $psr7Response = new Response(200, $headers, $body);

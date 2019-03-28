@@ -24,7 +24,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     public function testGetServiceFtp(): void
     {
         /** @var FtpServiceFactory $factory */
-        $factory = $this->c->get('hbpf.ftp.service.factory');
+        $factory = self::$container->get('hbpf.ftp.service.factory');
         $service = $factory->getFtpService(FtpServiceFactory::ADAPTER_FTP);
 
         self::assertInstanceOf(FtpAdapter::class, $service->getAdapter());
@@ -37,7 +37,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     public function testGetServiceSftp(): void
     {
         /** @var FtpServiceFactory $factory */
-        $factory = $this->c->get('hbpf.ftp.service.factory');
+        $factory = self::$container->get('hbpf.ftp.service.factory');
         $service = $factory->getFtpService(FtpServiceFactory::ADAPTER_SFTP);
 
         self::assertInstanceOf(SftpAdapter::class, $service->getAdapter());
@@ -49,7 +49,8 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
      */
     public function testGetServiceUnknown(): void
     {
-        $factory = $this->c->get('hbpf.ftp.service.factory');
+        /** @var FtpServiceFactory $factory */
+        $factory = self::$container->get('hbpf.ftp.service.factory');
 
         self::expectException(FtpException::class);
         self::expectExceptionCode(FtpException::UNKNOWN_ADAPTER_TYPE);
