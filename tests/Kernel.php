@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Aws\Symfony\AwsBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
@@ -52,6 +53,7 @@ class Kernel extends BaseKernel
     public function registerBundles(): iterable
     {
         $contents = [
+            AwsBundle::class              => ['all' => TRUE],
             FrameworkBundle::class        => ['all' => TRUE],
             DoctrineCacheBundle::class    => ['all' => TRUE],
             DoctrineBundle::class         => ['all' => TRUE],

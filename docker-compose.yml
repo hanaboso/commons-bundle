@@ -56,6 +56,11 @@ services:
     - influxdb:/var/lib/influxdb
     - ./tests/testApp/influx/influxdb.conf:/etc/influxdb/influxdb.conf
 
+  fakes3:
+    image: olalond3/fakes3
+    ports:
+    - ${DEV_IP}:4567:4567
+
 volumes:
   mongo: {}
   mariadb: {}

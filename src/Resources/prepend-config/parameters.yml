@@ -1,2 +1,11 @@
 parameters:
     database_type: 'ODM' # 'ORM'
+
+    env(AWS_KEY): key
+    aws_key: '%env(AWS_KEY)%'
+
+    env(AWS_SECRET): secret
+    aws_secret: '%env(AWS_SECRET)%'
+
+    env(AWS_BUCKET): bucket
+    aws_bucket: '%env(AWS_BUCKET)%'

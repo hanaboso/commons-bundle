@@ -1,0 +1,6 @@
+aws:
+    use_path_style_endpoint: true
+    version: latest
+    region: eu-west-3
+    credentials: false
+    endpoint: http://fakes3:4567

@@ -61,6 +61,14 @@ services:
             - '@doctrine_mongodb.odm.default_document_manager'
             - '@hbpf.path_generator.hash'
 
+    hbpf.file_storage.driver.s3:
+        class: Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver
+        arguments:
+            - '@doctrine_mongodb.odm.default_document_manager'
+            - '@hbpf.path_generator.hash'
+            - '@aws.s3'
+            - '%aws_bucket%'
+
     hbpf.path_generator.hash:
         class: Hanaboso\CommonsBundle\FileStorage\PathGenerator\HashPathGenerator
         arguments:
