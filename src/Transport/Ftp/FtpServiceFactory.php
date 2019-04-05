@@ -109,12 +109,12 @@ class FtpServiceFactory implements LoggerAwareInterface
     private function prepareConfig(string $prefix): FtpConfig
     {
         return new FtpConfig(
-            $this->container->getParameter($prefix . '.host'),
-            $prefix == self::ADAPTER_FTP ? $this->container->getParameter($prefix . '.ssl') : FALSE,
-            $this->container->getParameter($prefix . '.port'),
-            $this->container->getParameter($prefix . '.timeout'),
-            $this->container->getParameter($prefix . '.user'),
-            $this->container->getParameter($prefix . '.password')
+            $this->container->getParameter(sprintf('%s.host', $prefix)),
+            $prefix == self::ADAPTER_FTP ? $this->container->getParameter(sprintf('%s.ssl', $prefix)) : FALSE,
+            $this->container->getParameter(sprintf('%s.port', $prefix)),
+            $this->container->getParameter(sprintf('%s.timeout', $prefix)),
+            $this->container->getParameter(sprintf('%s.user', $prefix)),
+            $this->container->getParameter(sprintf('%s.password', $prefix))
         );
     }
 

@@ -36,7 +36,7 @@ final class UDPSenderTest extends TestCase
 
         $sender = new UDPSender('google.com', 61999);
         $ip     = $sender->refreshIp();
-        $this->assertCount(4, explode(".", $ip));
+        $this->assertCount(4, explode('.', $ip));
 
         $sender = new UDPSender('invalidhostname', 61999);
         $ip     = $sender->refreshIp();

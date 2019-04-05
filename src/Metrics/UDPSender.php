@@ -39,7 +39,7 @@ class UDPSender implements LoggerAwareInterface
     /**
      * @var string
      */
-    private $ip = "";
+    private $ip = '';
 
     /**
      * @var string
@@ -73,11 +73,11 @@ class UDPSender implements LoggerAwareInterface
         $this->collectorPort = $collectorPort;
         $this->logger        = new NullLogger();
 
-        if (apcu_exists(self::APCU_IP . $collectorHost) &&
-            apcu_exists(self::APCU_REFRESH . $collectorHost)
+        if (apcu_exists(sprintf('%s%s', self::APCU_IP, $collectorHost)) &&
+            apcu_exists(sprintf('%s%s', self::APCU_REFRESH, $collectorHost))
         ) {
-            $this->ip            = apcu_fetch(self::APCU_IP . $collectorHost);
-            $this->lastIPRefresh = apcu_fetch(self::APCU_REFRESH . $collectorHost);
+            $this->ip            = apcu_fetch(sprintf('%s%s', self::APCU_IP, $collectorHost));
+            $this->lastIPRefresh = apcu_fetch(sprintf('%s%s', self::APCU_REFRESH, $collectorHost));
         }
 
         // limit the ip addr hostname resolution
@@ -111,7 +111,7 @@ class UDPSender implements LoggerAwareInterface
         $socket = $this->getSocket();
 
         try {
-            if ($ip === "") {
+            if ($ip === '') {
                 throw new SystemMetricException(
                     sprintf('Could not sent udp packet. IP address for "%s" not resolved', $this->collectorHost)
                 );
@@ -128,7 +128,10 @@ class UDPSender implements LoggerAwareInterface
 
             return TRUE;
         } catch (Exception $e) {
-            $this->logger->error('Udp sender err:' . $e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+            $this->logger->error(
+                sprintf('Udp sender err: %s', $e->getMessage()),
+                ExceptionContextLoader::getContextForLogger($e)
+            );
 
             return FALSE;
         }
@@ -168,18 +171,18 @@ class UDPSender implements LoggerAwareInterface
     public function refreshIp(): string
     {
         // we want to refresh it only in predefined time periods
-        if (DateTimeUtils::getUTCDateTime()->getTimestamp() <= $this->lastIPRefresh + self::REFRESH_INTERVAL) {
+        if (DateTimeUtils::getUtcDateTime()->getTimestamp() <= $this->lastIPRefresh + self::REFRESH_INTERVAL) {
             return $this->ip;
         }
 
         $this->ip            = $this->getIp($this->collectorHost);
-        $this->lastIPRefresh = DateTimeUtils::getUTCDateTime()->getTimestamp();
+        $this->lastIPRefresh = DateTimeUtils::getUtcDateTime()->getTimestamp();
 
-        apcu_delete(self::APCU_IP . $this->collectorHost);
-        apcu_delete(self::APCU_REFRESH . $this->collectorHost);
+        apcu_delete(sprintf('%s%s', self::APCU_IP, $this->collectorHost));
+        apcu_delete(sprintf('%s%s', self::APCU_REFRESH, $this->collectorHost));
 
-        apcu_store(self::APCU_IP . $this->collectorHost, $this->ip);
-        apcu_store(self::APCU_REFRESH . $this->collectorHost, $this->lastIPRefresh);
+        apcu_store(sprintf('%s%s', self::APCU_IP, $this->collectorHost), $this->ip);
+        apcu_store(sprintf('%s%s', self::APCU_REFRESH, $this->collectorHost), $this->lastIPRefresh);
 
         return $this->ip;
     }
@@ -198,7 +201,7 @@ class UDPSender implements LoggerAwareInterface
             return $ip;
         }
 
-        return "";
+        return '';
     }
 
 }

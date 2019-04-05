@@ -59,7 +59,7 @@ class InfluxDbSender
             throw new InvalidArgumentException('The fields must not be empty.');
         }
 
-        $nanoTimestamp = (round(microtime(TRUE) * 1000)) . '000000';
+        $nanoTimestamp = sprintf('%s%s', round(microtime(TRUE) * 1000), '000000');
 
         return sprintf(
             '%s,%s %s %s',
@@ -103,9 +103,9 @@ class InfluxDbSender
             if ($tag === '') {
                 $tag = '""';
             } elseif (is_bool($tag)) {
-                $tag = ($tag ? "true" : "false");
+                $tag = ($tag ? 'true' : 'false');
             } elseif (is_null($tag)) {
-                $tag = "null";
+                $tag = 'null';
             }
         }
 
@@ -127,9 +127,9 @@ class InfluxDbSender
             } elseif (is_string($field)) {
                 $field = $this->escapeFieldValue($field);
             } elseif (is_bool($field)) {
-                $field = ($field ? "true" : "false");
+                $field = ($field ? 'true' : 'false');
             } elseif (is_null($field)) {
-                $field = $this->escapeFieldValue("null");
+                $field = $this->escapeFieldValue('null');
             }
         }
 

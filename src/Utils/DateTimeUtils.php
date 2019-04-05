@@ -32,7 +32,7 @@ class DateTimeUtils
      * @return DateTime
      * @throws DateTimeException
      */
-    public static function getUTCDateTime(string $dateTime = 'NOW'): DateTime
+    public static function getUtcDateTime(string $dateTime = 'NOW'): DateTime
     {
         try {
             return new DateTime($dateTime, new DateTimeZone('UTC'));
@@ -46,7 +46,7 @@ class DateTimeUtils
      *
      * @return DateTime
      */
-    public static function getUTCDateTimeFromTimeStamp(int $timeStamp = 0): DateTime
+    public static function getUtcDateTimeFromTimeStamp(int $timeStamp = 0): DateTime
     {
         /** @var DateTime $dateTime */
         $dateTime = DateTime::createFromFormat('U', (string) $timeStamp, new DateTimeZone('UTC'));

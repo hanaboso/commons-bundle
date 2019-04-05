@@ -34,7 +34,7 @@ final class CurlException extends PipesFrameworkExceptionAbstract
      * @param ResponseInterface|NULL $response
      */
     public function __construct(
-        $message = "",
+        $message = '',
         $code = 0,
         ?Throwable $previous = NULL,
         ?ResponseInterface $response = NULL

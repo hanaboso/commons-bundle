@@ -25,7 +25,7 @@ final class InfluxDbSenderTest extends TestCase
     {
         /** @var MockObject|UDPSender $sender */
         $sender = $this->createPartialMock(UDPSender::class, ['send']);
-        $sender->method('send')->willReturn(TRUE);
+        $sender->expects($this->any())->method('send')->willReturn(TRUE);
 
         $service = new InfluxDbSender($sender, 'test_measurement');
 
@@ -48,7 +48,7 @@ final class InfluxDbSenderTest extends TestCase
     {
         /** @var MockObject|UDPSender $sender */
         $sender = $this->createPartialMock(UDPSender::class, ['send']);
-        $sender->method('send')->willReturn(TRUE);
+        $sender->expects($this->any())->method('send')->willReturn(TRUE);
 
         $service = new InfluxDbSender($sender, 'test_measurement');
 
@@ -71,7 +71,7 @@ final class InfluxDbSenderTest extends TestCase
     {
         /** @var MockObject|UDPSender $sender */
         $sender = $this->createPartialMock(UDPSender::class, ['send']);
-        $sender->method('send')->willReturn(TRUE);
+        $sender->expects($this->any())->method('send')->willReturn(TRUE);
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The fields must not be empty.');

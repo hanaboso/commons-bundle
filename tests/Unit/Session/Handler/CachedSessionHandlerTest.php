@@ -26,9 +26,9 @@ final class CachedSessionHandlerTest extends TestCase
     public function setUp(): void
     {
         $sh = $this->createMock(SessionHandlerInterface::class);
-        $sh->method('destroy')->willReturn(TRUE);
-        $sh->method('write')->willReturn(TRUE);
-        $sh->method('read')->willReturn('default');
+        $sh->expects($this->any())->method('destroy')->willReturn(TRUE);
+        $sh->expects($this->any())->method('write')->willReturn(TRUE);
+        $sh->expects($this->any())->method('read')->willReturn('default');
 
         /** @var SessionHandlerInterface $sh */
         $this->csh = new CachedSessionHandler($sh);

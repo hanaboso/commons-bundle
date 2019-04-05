@@ -39,7 +39,7 @@ final class CurlSenderTest extends TestCase
     {
         /** @var Browser|MockObject $browser */
         $browser = $this->createMock(Browser::class);
-        $browser->method('send')->willReturn(resolve(new Response(201)));
+        $browser->expects($this->any())->method('send')->willReturn(resolve(new Response(201)));
 
         /** @var InfluxDbSender $influx */
         $influx = $this->createMock(InfluxDbSender::class);
@@ -64,7 +64,7 @@ final class CurlSenderTest extends TestCase
     {
         /** @var Browser|MockObject $browser */
         $browser = $this->createMock(Browser::class);
-        $browser->method('send')->willReturn(reject(new ResponseException(new Response(401))));
+        $browser->expects($this->any())->method('send')->willReturn(reject(new ResponseException(new Response(401))));
 
         $curl    = new CurlSender($browser);
         $request = new RequestDto('GET', new Uri('https://cleverconn.stage.hanaboso.net/api/'));

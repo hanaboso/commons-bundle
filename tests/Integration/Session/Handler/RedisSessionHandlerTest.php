@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Session\Handler;
 
+use Exception;
 use Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler;
 use Tests\KernelTestCaseAbstract;
 
@@ -26,12 +27,12 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
         parent::setUp();
         /** @var RedisSessionHandler $sessionHandler */
         $sessionHandler = self::$container->get('hbpf.commons.session_handler');
-        $this->handler = $sessionHandler;
+        $this->handler  = $sessionHandler;
     }
 
     /**
      * @covers RedisSessionHandler::open()
-     * @throws \Exception
+     * @throws Exception
      */
     public function testOpen(): void
     {
@@ -41,7 +42,7 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
 
     /**
      * @covers RedisSessionHandler::close()
-     * @throws \Exception
+     * @throws Exception
      */
     public function testClose(): void
     {
@@ -50,7 +51,7 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
 
     /**
      * @covers RedisSessionHandler::gc()
-     * @throws \Exception
+     * @throws Exception
      */
     public function testGc(): void
     {
@@ -62,18 +63,18 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
      * @covers RedisSessionHandler::read()
      * @covers RedisSessionHandler::write()
      * @covers RedisSessionHandler::destroy()
-     * @throws \Exception
+     * @throws Exception
      */
     public function testReadWriteDestroy(): void
     {
-        $this->assertTrue($this->handler->destroy("foo"));
-        $this->assertEmpty($this->handler->read("foo"));
-        $this->assertTrue($this->handler->write("foo", "data"));
-        $this->assertEquals("data", $this->handler->read("foo"));
-        $this->assertTrue($this->handler->write("foo", "new data"));
-        $this->assertEquals("new data", $this->handler->read("foo"));
-        $this->assertTrue($this->handler->destroy("foo"));
-        $this->assertEmpty($this->handler->read("foo"));
+        $this->assertTrue($this->handler->destroy('foo'));
+        $this->assertEmpty($this->handler->read('foo'));
+        $this->assertTrue($this->handler->write('foo', 'data'));
+        $this->assertEquals('data', $this->handler->read('foo'));
+        $this->assertTrue($this->handler->write('foo', 'new data'));
+        $this->assertEquals('new data', $this->handler->read('foo'));
+        $this->assertTrue($this->handler->destroy('foo'));
+        $this->assertEmpty($this->handler->read('foo'));
     }
 
 }

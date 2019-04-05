@@ -56,9 +56,9 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
     {
         /** @var FileStorageDriverInterface|MockObject $driver */
         $driver = $this->createPartialMock(FileStorageDriverInterface::class, ['save', 'delete', 'get']);
-        $driver->method('save')->willReturn(new FileInfoDto('fileUrl', '7'));
-        $driver->method('delete')->willReturn('');
-        $driver->method('get')->willReturn('test_content');
+        $driver->expects($this->any())->method('save')->willReturn(new FileInfoDto('fileUrl', '7'));
+        $driver->expects($this->any())->method('delete')->willReturn('');
+        $driver->expects($this->any())->method('get')->willReturn('test_content');
 
         /** @var DatabaseManagerLocator $managerLocator */
         $managerLocator = self::$container->get('hbpf.database_manager_locator');

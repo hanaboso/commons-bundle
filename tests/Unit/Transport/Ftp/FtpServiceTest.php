@@ -29,12 +29,12 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'dirExists', 'makeDirRecursive', 'uploadFile']
         );
-        $adapter->method('connect')->willReturn(TRUE);
-        $adapter->method('login')->willReturn(TRUE);
-        $adapter->method('disconnect')->willReturn(TRUE);
-        $adapter->method('dirExists')->willReturn(FALSE);
-        $adapter->method('makeDirRecursive')->willReturn(TRUE);
-        $adapter->method('uploadFile')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('connect')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('login')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('disconnect')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('dirExists')->willReturn(FALSE);
+        $adapter->expects($this->any())->method('makeDirRecursive')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('uploadFile')->willReturn(TRUE);
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->uploadFile('abc', 'def');
@@ -53,10 +53,10 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'downloadFile']
         );
-        $adapter->method('connect')->willReturn(TRUE);
-        $adapter->method('login')->willReturn(TRUE);
-        $adapter->method('disconnect')->willReturn(TRUE);
-        $adapter->method('downloadFile')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('connect')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('login')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('disconnect')->willReturn(TRUE);
+        $adapter->expects($this->any())->method('downloadFile')->willReturn(TRUE);
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->downloadFile('abc');
@@ -76,11 +76,11 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'listDir', 'downloadFile']
         );
-        $adapter->method('connect')->willReturn(TRUE);
-        $adapter->method('login')->willReturn(TRUE);
-        $adapter->method('disconnect')->willReturn(TRUE);
-        $adapter->method('listDir')->willReturn(['abc', 'def']);
-        $adapter->method('downloadFile')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('connect')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('login')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('disconnect')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('listDir')->willReturn(['abc', 'def']);
+        $adapter->expects(self::any())->method('downloadFile')->willReturn(TRUE);
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         /** @var SplFileInfo[] $result */

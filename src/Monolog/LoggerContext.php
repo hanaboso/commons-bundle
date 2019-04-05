@@ -29,27 +29,27 @@ final class LoggerContext
     /**
      * @var string
      */
-    private $correlation_id = '';
+    private $correlationId = '';
 
     /**
      * @var string
      */
-    private $node_id = '';
+    private $nodeId = '';
 
     /**
      * @var string
      */
-    private $node_name = '';
+    private $nodeName = '';
 
     /**
      * @var string
      */
-    private $topology_id = '';
+    private $topologyId = '';
 
     /**
      * @var string
      */
-    private $topology_name = '';
+    private $topologyName = '';
 
     /**
      * @param Throwable $exception
@@ -72,11 +72,11 @@ final class LoggerContext
     {
         $headers = $dto->getHeaders();
 
-        $this->correlation_id = PipesHeaders::get(PipesHeaders::CORRELATION_ID, $headers) ?? '';
-        $this->node_id        = PipesHeaders::get(PipesHeaders::NODE_ID, $headers) ?? '';
-        $this->node_name      = PipesHeaders::get(PipesHeaders::NODE_NAME, $headers) ?? '';
-        $this->topology_id    = PipesHeaders::get(PipesHeaders::TOPOLOGY_ID, $headers) ?? '';
-        $this->topology_name  = PipesHeaders::get(PipesHeaders::TOPOLOGY_NAME, $headers) ?? '';
+        $this->correlationId = PipesHeaders::get(PipesHeaders::CORRELATION_ID, $headers) ?? '';
+        $this->nodeId        = PipesHeaders::get(PipesHeaders::NODE_ID, $headers) ?? '';
+        $this->nodeName      = PipesHeaders::get(PipesHeaders::NODE_NAME, $headers) ?? '';
+        $this->topologyId    = PipesHeaders::get(PipesHeaders::TOPOLOGY_ID, $headers) ?? '';
+        $this->topologyName  = PipesHeaders::get(PipesHeaders::TOPOLOGY_NAME, $headers) ?? '';
 
         return $this;
     }
@@ -88,11 +88,11 @@ final class LoggerContext
     {
         return [
             'exception'      => $this->exception,
-            'correlation_id' => $this->correlation_id,
-            'node_id'        => $this->node_id,
-            'node_name'      => $this->node_name,
-            'topology_id'    => $this->topology_id,
-            'topology_name'  => $this->topology_name,
+            'correlation_id' => $this->correlationId,
+            'node_id'        => $this->nodeId,
+            'node_name'      => $this->nodeName,
+            'topology_id'    => $this->topologyId,
+            'topology_name'  => $this->topologyName,
         ];
     }
 

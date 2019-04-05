@@ -62,7 +62,7 @@ abstract class FileStorageDriverAbstract implements FileStorageDriverInterface
      */
     protected function generatePath(?string $filename): string
     {
-        return $this->filePrefix . $this->pathGenerator->generate($filename);
+        return sprintf('%s%s', $this->filePrefix, $this->pathGenerator->generate($filename));
     }
 
 }

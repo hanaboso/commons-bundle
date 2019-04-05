@@ -43,11 +43,11 @@ class HashPathGenerator implements PathGeneratorInterface
 
             $chunks = (array) str_split($filename, $this->segment);
             for ($i = 0; $i < $this->levels; $i++) {
-                $res .= array_shift($chunks) . DIRECTORY_SEPARATOR;
+                $res .= sprintf('%s%s', array_shift($chunks), DIRECTORY_SEPARATOR);
             }
         }
 
-        return $res . $filename;
+        return sprintf('%s%s', $res, $filename);
     }
 
 }

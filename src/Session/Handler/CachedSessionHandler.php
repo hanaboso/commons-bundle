@@ -49,54 +49,55 @@ class CachedSessionHandler implements SessionHandlerInterface
     }
 
     /**
-     * @param string $session_id
+     * @param string $sessionId
      *
      * @return string
      * @throws DateTimeException
      */
-    public function read($session_id): string
+    public function read($sessionId): string
     {
-        $dataKey = self::APCU_DATA_KEY . self::APCU_DELIMITER . $session_id;
-        $timeKey = self::APCU_TIME_KEY . self::APCU_DELIMITER . $session_id;
+        $dataKey = sprintf('%s%s%s', self::APCU_DATA_KEY, self::APCU_DELIMITER, $sessionId);
+        $timeKey = sprintf('%s%s%s', self::APCU_TIME_KEY, self::APCU_DELIMITER, $sessionId);
 
         // return cached value if found in cache and is not too old
-        if (count(apcu_exists([$dataKey, $timeKey])) === 2 &&
-            (DateTimeUtils::getUTCDateTime())->getTimestamp() < (int) apcu_fetch($timeKey) + $this->timeout
+        if (
+            count(apcu_exists([$dataKey, $timeKey])) === 2 &&
+            (DateTimeUtils::getUtcDateTime())->getTimestamp() < (int) apcu_fetch($timeKey) + $this->timeout
         ) {
             return (string) apcu_fetch($dataKey);
         }
 
-        $data = $this->handler->read($session_id);
-        $this->updateCache($session_id, $data);
+        $data = $this->handler->read($sessionId);
+        $this->updateCache($sessionId, $data);
 
         return $data;
     }
 
     /**
-     * @param string $session_id
-     * @param string $session_data
+     * @param string $sessionId
+     * @param string $sessionData
      *
      * @return bool
      * @throws DateTimeException
      */
-    public function write($session_id, $session_data): bool
+    public function write($sessionId, $sessionData): bool
     {
-        $this->updateCache($session_id, $session_data);
+        $this->updateCache($sessionId, $sessionData);
 
-        return $this->handler->write($session_id, $session_data);
+        return $this->handler->write($sessionId, $sessionData);
     }
 
     /**
-     * @param string $session_id
+     * @param string $sessionId
      *
      * @return bool
      */
-    public function destroy($session_id): bool
+    public function destroy($sessionId): bool
     {
-        apcu_delete(self::APCU_DATA_KEY . self::APCU_DELIMITER . $session_id);
-        apcu_delete(self::APCU_TIME_KEY . self::APCU_DELIMITER . $session_id);
+        apcu_delete(sprintf('%s%s%s', self::APCU_DATA_KEY, self::APCU_DELIMITER, $sessionId));
+        apcu_delete(sprintf('%s%s%s', self::APCU_TIME_KEY, self::APCU_DELIMITER, $sessionId));
 
-        return $this->handler->destroy($session_id);
+        return $this->handler->destroy($sessionId);
     }
 
     /**
@@ -108,38 +109,38 @@ class CachedSessionHandler implements SessionHandlerInterface
     }
 
     /**
-     * @param int $maxlifetime
+     * @param int $maxLifetime
      *
      * @return bool
      */
-    public function gc($maxlifetime): bool
+    public function gc($maxLifetime): bool
     {
-        return $this->handler->gc($maxlifetime);
+        return $this->handler->gc($maxLifetime);
     }
 
     /**
-     * @param string $save_path
+     * @param string $savePath
      * @param string $name
      *
      * @return bool
      */
-    public function open($save_path, $name): bool
+    public function open($savePath, $name): bool
     {
-        return $this->handler->open($save_path, $name);
+        return $this->handler->open($savePath, $name);
     }
 
     /**
-     * @param string $session_id
-     * @param string $session_data
+     * @param string $sessionId
+     * @param string $sessionData
      *
      * @throws DateTimeException
      */
-    private function updateCache(string $session_id, string $session_data): void
+    private function updateCache(string $sessionId, string $sessionData): void
     {
-        apcu_store(self::APCU_DATA_KEY . self::APCU_DELIMITER . $session_id, $session_data);
+        apcu_store(sprintf('%s%s%s', self::APCU_DATA_KEY, self::APCU_DELIMITER, $sessionId), $sessionData);
         apcu_store(
-            self::APCU_TIME_KEY . self::APCU_DELIMITER . $session_id,
-            DateTimeUtils::getUTCDateTime()->getTimestamp()
+            sprintf('%s%s%s', self::APCU_TIME_KEY, self::APCU_DELIMITER, $sessionId),
+            DateTimeUtils::getUtcDateTime()->getTimestamp()
         );
     }
 

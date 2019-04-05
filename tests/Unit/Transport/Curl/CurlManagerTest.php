@@ -37,11 +37,11 @@ final class CurlManagerTest extends TestCase
 
         /** @var MockObject|Client $client */
         $client = $this->createPartialMock(Client::class, ['send']);
-        $client->method('send')->willReturn($psr7Response);
+        $client->expects($this->any())->method('send')->willReturn($psr7Response);
 
         /** @var MockObject|CurlClientFactory $curlClientFactory */
         $curlClientFactory = $this->createPartialMock(CurlClientFactory::class, ['create']);
-        $curlClientFactory->method('create')->willReturn($client);
+        $curlClientFactory->expects($this->any())->method('create')->willReturn($client);
 
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
 

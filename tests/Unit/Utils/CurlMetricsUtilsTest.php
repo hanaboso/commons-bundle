@@ -25,6 +25,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
     {
         $influx = $this->createMock(InfluxDbSender::class);
         $influx
+            ->expects(self::any())
             ->method('send')->will($this->returnCallback(
                 function (array $times, array $data): bool {
                     $data;

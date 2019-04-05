@@ -33,12 +33,12 @@ final class SoapManagerTest extends TestCase
         $lastResponseHeaders = 'def';
 
         $client = $this->createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
-        $client->method('__soapCall')->willReturn($soapCallResponse);
-        $client->method('__getLastResponseHeaders')->willReturn($lastResponseHeaders);
+        $client->expects(self::any())->method('__soapCall')->willReturn($soapCallResponse);
+        $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn($lastResponseHeaders);
 
         /** @var MockObject|SoapClientFactory $soapClientFactory */
         $soapClientFactory = $this->createPartialMock(SoapClientFactory::class, ['create']);
-        $soapClientFactory->method('create')->willReturn($client);
+        $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
 
         $request = new RequestDto('', [], '', new Uri(''));
         $request->setVersion(SOAP_1_2);

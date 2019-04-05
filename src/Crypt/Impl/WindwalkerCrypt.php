@@ -31,7 +31,7 @@ final class WindwalkerCrypt implements CryptInterface
         try {
             $crypt = self::getCrypt();
 
-            return self::PREFIX . $crypt->encrypt(serialize($data));
+            return sprintf('%s%s', self::PREFIX, $crypt->encrypt(serialize($data)));
         } catch (Throwable $t) {
             throw new CryptException($t->getMessage(), $t->getCode());
         }

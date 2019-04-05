@@ -106,7 +106,7 @@ class LogstashFormatter extends NormalizerFormatter
             }
         }
 
-        return $this->toJson($message) . "\n";
+        return sprintf('%s%s', $this->toJson($message), PHP_EOL);
     }
 
     /**
@@ -117,14 +117,16 @@ class LogstashFormatter extends NormalizerFormatter
     protected function normalizeException($e): array
     {
         if (!$e instanceof Throwable) {
-            throw new InvalidArgumentException('Exception/Throwable expected, got ' . gettype($e) . ' / ' . get_class($e));
+            throw new InvalidArgumentException(
+                sprintf('Exception/Throwable expected, got %s / %s', gettype($e), get_class($e))
+            );
         }
 
         $data = [
             'class'   => get_class($e),
             'message' => $e->getMessage(),
             'code'    => $e->getCode(),
-            'file'    => $e->getFile() . ':' . $e->getLine(),
+            'file'    => sprintf('%s:%s', $e->getFile(), $e->getLine()),
         ];
 
         if ($e instanceof SoapFault) {

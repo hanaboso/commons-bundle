@@ -22,7 +22,7 @@ final class Redirect implements RedirectInterface
      */
     public function make(string $url): void
     {
-        header('Location: ' . $url);
+        header(sprintf('Location: %s', $url));
         exit;
     }
 

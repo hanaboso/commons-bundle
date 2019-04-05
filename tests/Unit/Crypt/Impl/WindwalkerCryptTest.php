@@ -51,14 +51,13 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
      */
     public function testEncryptAndDecryptFail(): void
     {
-        $str = 'Some random text';
-
+        $str       = 'Some random text';
         $encrypted = WindwalkerCrypt::encrypt($str);
 
         $this->expectException(CryptException::class);
         $this->expectExceptionCode(CryptException::UNKNOWN_PREFIX);
 
-        WindwalkerCrypt::decrypt('abc' . $encrypted);
+        WindwalkerCrypt::decrypt(sprintf('abc%s', $encrypted));
     }
 
     /**

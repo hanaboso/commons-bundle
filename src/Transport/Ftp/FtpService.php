@@ -111,7 +111,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
         $this->login();
 
         $filename  = basename($remoteFile);
-        $localFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $filename;
+        $localFile = sprintf('%s%s%s', sys_get_temp_dir(), DIRECTORY_SEPARATOR, $filename);
 
         try {
             $this->adapter->downloadFile($remoteFile, $localFile);
@@ -144,7 +144,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->logger->debug(sprintf('Downloading files from %s directory', $dir));
 
             foreach ($list as $file) {
-                $downloaded[] = $this->downloadFile(trim($dir, '/') . '/' . $file);
+                $downloaded[] = $this->downloadFile(sprintf('%s/%s', trim($dir, '/'), $file));
             }
 
             $this->logger->debug('Downloading files finished successfully.');

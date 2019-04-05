@@ -32,15 +32,15 @@ class PipesHeaders
     public const RESULT_CODE         = 'result-code';
     public const RESULT_MESSAGE      = 'result-message';
     public const RESULT_DETAIL       = 'result-detail';
-    public const REPEAT_QUEUE        = "repeat-queue";
-    public const REPEAT_INTERVAL     = "repeat-interval";
-    public const REPEAT_MAX_HOPS     = "repeat-max-hops";
-    public const REPEAT_HOPS         = "repeat-hops";
-    public const CONTENT_TYPE        = "content-type";
-    public const PF_STOP             = "stop";
+    public const REPEAT_QUEUE        = 'repeat-queue';
+    public const REPEAT_INTERVAL     = 'repeat-interval';
+    public const REPEAT_MAX_HOPS     = 'repeat-max-hops';
+    public const REPEAT_HOPS         = 'repeat-hops';
+    public const CONTENT_TYPE        = 'content-type';
+    public const PF_STOP             = 'stop';
 
     // --- MicroTimestamp because Bunny
-    public const TIMESTAMP = "published-timestamp";
+    public const TIMESTAMP = 'published-timestamp';
 
     private const WHITE_LIST = ['content-type'];
 
@@ -78,7 +78,7 @@ class PipesHeaders
      */
     public static function get(string $key, array $headers): ?string
     {
-        $header = $headers[self::PF_PREFIX . $key] ?? NULL;
+        $header = $headers[sprintf('%s%s', self::PF_PREFIX, $key)] ?? NULL;
 
         if (is_array($header)) {
             $header = reset($header);

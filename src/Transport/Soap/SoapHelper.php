@@ -116,7 +116,7 @@ class SoapHelper
     private static function composeDataForSoapParam(string $nodeName, $data): SoapVar
     {
         if (strpos($nodeName, ':') === FALSE) {
-            $nodeName = 'ns1:' . $nodeName;
+            $nodeName = sprintf('ns1:%s', $nodeName);
         }
 
         if (is_scalar($data)) {

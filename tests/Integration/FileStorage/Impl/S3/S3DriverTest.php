@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\FileStorage\Impl\S3;
 
+use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
@@ -27,11 +28,11 @@ final class S3DriverTest extends KernelTestCaseAbstract
         parent::setUp();
         /** @var S3Driver $containerDriver */
         $containerDriver = self::$container->get('hbpf.file_storage.driver.s3');
-        $this->driver = $containerDriver;
+        $this->driver    = $containerDriver;
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testDriver(): void
     {
