@@ -110,6 +110,36 @@ class SftpAdapter implements FtpAdapterInterface
     /**
      * @param string $dir
      *
+     * @return array
+     * @throws FtpException
+     */
+    public function listDirAdvanced(string $dir): array
+    {
+        $list = $this->getResource()->rawlist($dir);
+
+        if (!$list) {
+            throw new FtpException('Failed to list files in directory.', FtpException::FILES_LISTING_FAILED);
+        }
+
+        $files = [];
+
+        foreach ($list as $item) {
+            if (!in_array($item['filename'], ['.', '..'], TRUE)) {
+                $files[] = [
+                    'name' => $item['filename'],
+                    'path' => sprintf('%s/%s', $dir, $item['filename']),
+                    'size' => $item['size'],
+                    'time' => $item['mtime'],
+                ];
+            }
+        }
+
+        return $files;
+    }
+
+    /**
+     * @param string $dir
+     *
      * @return bool
      * @throws FtpException
      */
