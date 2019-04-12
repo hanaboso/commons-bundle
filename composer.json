@@ -20,6 +20,7 @@
     "ext-pdo": "*",
     "ext-soap": "*",
     "ext-sockets": "*",
+    "php-imap/php-imap": "^3.0",
     "alcaeus/mongo-php-adapter": "^1.1",
     "aws/aws-sdk-php-symfony": "^2.0",
     "clue/buzz-react": "^2.6",
