@@ -23,7 +23,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
      */
     public function testCurlMetrics(): void
     {
-        $influx = $this->createMock(InfluxDbSender::class);
+        $influx = self::createMock(InfluxDbSender::class);
         $influx
             ->expects(self::any())
             ->method('send')->will($this->returnCallback(

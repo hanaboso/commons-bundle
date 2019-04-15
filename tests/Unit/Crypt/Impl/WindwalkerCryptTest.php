@@ -39,7 +39,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
             $encrypted = WindwalkerCrypt::encrypt($item);
             $decrypted = WindwalkerCrypt::decrypt($encrypted);
 
-            $this->assertEquals($item, $decrypted);
+            self::assertEquals($item, $decrypted);
         }
     }
 
@@ -54,8 +54,8 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
         $str       = 'Some random text';
         $encrypted = WindwalkerCrypt::encrypt($str);
 
-        $this->expectException(CryptException::class);
-        $this->expectExceptionCode(CryptException::UNKNOWN_PREFIX);
+        self::expectException(CryptException::class);
+        self::expectExceptionCode(CryptException::UNKNOWN_PREFIX);
 
         WindwalkerCrypt::decrypt(sprintf('abc%s', $encrypted));
     }
@@ -77,8 +77,8 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
         $decryptedArr = WindwalkerCrypt::decrypt($encryptedArr);
         $decryptedStr = WindwalkerCrypt::decrypt($decryptedArr['str']);
 
-        $this->assertEquals($str, $decryptedStr);
-        $this->assertEquals($arr, $decryptedArr);
+        self::assertEquals($str, $decryptedStr);
+        self::assertEquals($arr, $decryptedArr);
     }
 
 }

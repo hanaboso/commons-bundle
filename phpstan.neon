@@ -1,8 +1,13 @@
-parameters:
-	ignoreErrors:
-
 includes:
-	- vendor/phpstan/phpstan-doctrine/extension.neon
-	- vendor/phpstan/phpstan-phpunit/extension.neon
-	- vendor/hanaboso/php-check-utils/phpstan.neon
-	- vendor/phpstan/phpstan-phpunit/rules.neon
+	- vendor/phpstan/phpstan-symfony/extension.neon # symfony extension
+	- vendor/phpstan/phpstan-doctrine/extension.neon # doctrine extension
+	- vendor/phpstan/phpstan-phpunit/extension.neon # phpunit extension
+	- vendor/phpstan/phpstan-phpunit/rules.neon # phpunit rules
+	- vendor/hanaboso/php-check-utils/phpstan.neon # hanaboso rules
+
+parameters:
+	excludes_analyse:
+	ignoreErrors:
+		- '#PHPDoc tag @throws with type PhpImap\\Exception is not subtype of Throwable#'
+	symfony:
+		container_xml_path: %rootDir%/../../../var/cache/dev/testsTests_KernelDevDebugContainer.xml

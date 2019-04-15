@@ -32,28 +32,28 @@ final class SoapManagerTest extends TestCase
         $soapCallResponse    = 'abc';
         $lastResponseHeaders = 'def';
 
-        $client = $this->createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
+        $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
         $client->expects(self::any())->method('__soapCall')->willReturn($soapCallResponse);
         $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn($lastResponseHeaders);
 
         /** @var MockObject|SoapClientFactory $soapClientFactory */
-        $soapClientFactory = $this->createPartialMock(SoapClientFactory::class, ['create']);
+        $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
         $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
 
         $request = new RequestDto('', [], '', new Uri(''));
         $request->setVersion(SOAP_1_2);
 
         /** @var InfluxDbSender $influx */
-        $influx = $this->createMock(InfluxDbSender::class);
+        $influx = self::createMock(InfluxDbSender::class);
 
         $soapManager = new SoapManager($soapClientFactory);
         $soapManager->setInfluxSender($influx);
         $result = $soapManager->send($request);
 
-        $this->assertInstanceOf(ResponseDto::class, $result);
-        $this->assertEquals($soapCallResponse, $result->getSoapCallResponse());
-        $this->assertEquals($lastResponseHeaders, $result->getLastResponseHeaders());
-        $this->assertInstanceOf(ResponseHeaderDto::class, $result->getResponseHeaderDto());
+        self::assertInstanceOf(ResponseDto::class, $result);
+        self::assertEquals($soapCallResponse, $result->getSoapCallResponse());
+        self::assertEquals($lastResponseHeaders, $result->getLastResponseHeaders());
+        self::assertInstanceOf(ResponseHeaderDto::class, $result->getResponseHeaderDto());
     }
 
 }

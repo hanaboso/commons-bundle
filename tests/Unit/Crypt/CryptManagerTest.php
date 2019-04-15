@@ -37,7 +37,7 @@ final class CryptManagerTest extends KernelTestCaseAbstract
         foreach ($arr as $item) {
             $encrypted = CryptManager::encrypt($item);
             $decrypted = CryptManager::decrypt($encrypted);
-            $this->assertEquals($item, $decrypted);
+            self::assertEquals($item, $decrypted);
         }
     }
 

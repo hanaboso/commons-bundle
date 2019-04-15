@@ -19,10 +19,10 @@ final class SystemMetricsTest extends TestCase
     public function testGetCurrentTimestamp(): void
     {
         $ts = SystemMetrics::getCurrentTimestamp();
-        $this->assertTrue(is_numeric($ts));
+        self::assertTrue(is_numeric($ts));
 
         $ts2 = SystemMetrics::getCurrentTimestamp();
-        $this->assertGreaterThanOrEqual($ts, $ts2);
+        self::assertGreaterThanOrEqual($ts, $ts2);
     }
 
     /**
@@ -31,15 +31,15 @@ final class SystemMetricsTest extends TestCase
     public function testGetCpuTimes(): void
     {
         $before = SystemMetrics::getCpuTimes();
-        $this->assertArrayHasKey(SystemMetrics::CPU_TIME_USER, $before);
-        $this->assertArrayHasKey(SystemMetrics::CPU_TIME_KERNEL, $before);
-        $this->assertArrayHasKey(SystemMetrics::CPU_START_TIME, $before);
-        $this->assertGreaterThan(0, $before[SystemMetrics::CPU_TIME_USER]);
-        $this->assertGreaterThanOrEqual(0, $before[SystemMetrics::CPU_TIME_KERNEL]);
-        $this->assertGreaterThan(0, $before[SystemMetrics::CPU_START_TIME]);
+        self::assertArrayHasKey(SystemMetrics::CPU_TIME_USER, $before);
+        self::assertArrayHasKey(SystemMetrics::CPU_TIME_KERNEL, $before);
+        self::assertArrayHasKey(SystemMetrics::CPU_START_TIME, $before);
+        self::assertGreaterThan(0, $before[SystemMetrics::CPU_TIME_USER]);
+        self::assertGreaterThanOrEqual(0, $before[SystemMetrics::CPU_TIME_KERNEL]);
+        self::assertGreaterThan(0, $before[SystemMetrics::CPU_START_TIME]);
 
         $cpuUsageBefore = SystemMetrics::getCpuUsage();
-        $this->assertGreaterThan(0, $cpuUsageBefore);
+        self::assertGreaterThan(0, $cpuUsageBefore);
     }
 
 }

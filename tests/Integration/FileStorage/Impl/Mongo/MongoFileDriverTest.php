@@ -37,8 +37,8 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
 
         $this->dm->clear();
         $driver->delete($res->getUrl());
-        $this->expectException(FileStorageException::class);
-        $this->expectExceptionCode(FileStorageException::FILE_NOT_FOUND);
+        self::expectException(FileStorageException::class);
+        self::expectExceptionCode(FileStorageException::FILE_NOT_FOUND);
         $driver->get($res->getUrl());
     }
 

@@ -25,7 +25,7 @@ final class TransformFormatterTest extends TestCase
      */
     public function testHeadersToString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             'content-type=[application/json, application/js], pf_token=123',
             TransportFormatter::headersToString([
                 'content-type' => ['application/json', 'application/js'], 'pf_token' => '123',
@@ -38,7 +38,7 @@ final class TransformFormatterTest extends TestCase
      */
     public function testRequestToString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             'Request: Method: GET, Uri: http://localhost, Headers: content-type=application/json, Body: "{"data":[]}"',
             TransportFormatter::requestToString(
                 'get', 'http://localhost', ['content-type' => 'application/json'], '{"data":[]}'
@@ -51,7 +51,7 @@ final class TransformFormatterTest extends TestCase
      */
     public function testResponseToString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             'Response: Status Code: 400, Reason Phrase: Bad Request, Headers: content-type=application/json, Body: "{"data":[]}"',
             TransportFormatter::responseToString(
                 400, 'Bad Request', ['content-type' => 'application/json'], '{"data":[]}'

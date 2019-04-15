@@ -6,7 +6,6 @@ use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConnector;
 use Tests\DatabaseTestCaseAbstract;
-use Tests\PrivateTrait;
 use Throwable;
 
 /**
@@ -17,15 +16,13 @@ use Throwable;
 final class ImapConnectorTest extends DatabaseTestCaseAbstract
 {
 
-    use PrivateTrait;
-
     /**
      * @throws Throwable
      */
     public function testGetEmail(): void
     {
         $imap  = new ImapConnector();
-        $email = $imap->getConnector($this->getDto())->getMail('287');
+        $email = $imap->create($this->getDto())->getMail('287');
 
         self::assertEquals('287', $email->id);
     }
@@ -37,10 +34,10 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     public function testMoveEmail(): void
     {
         $imap = new ImapConnector();
-        $imap->getConnector($this->getDto())->moveMail('299', 'mailDestination');
+        $imap->create($this->getDto())->moveMail('299', 'mailDestination');
 
         $this->getDto()->setFolder('INBOX.mailDestination');
-        $email = $imap->getConnector($this->getDto())->getListOfMails();
+        $email = $imap->create($this->getDto())->listMails();
 
         self::assertArrayHasKey('id', $email[0]);
     }
@@ -52,7 +49,7 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     public function testGetAllEmails(): void
     {
         $imap    = new ImapConnector();
-        $mailBox = $imap->getConnector($this->getDto())->getListOfMails();
+        $mailBox = $imap->create($this->getDto())->listMails();
 
         self::assertArrayHasKey('id', $mailBox[0]);
     }

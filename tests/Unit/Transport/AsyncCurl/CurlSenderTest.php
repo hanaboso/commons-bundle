@@ -38,11 +38,11 @@ final class CurlSenderTest extends TestCase
     public function testSend(): void
     {
         /** @var Browser|MockObject $browser */
-        $browser = $this->createMock(Browser::class);
-        $browser->expects($this->any())->method('send')->willReturn(resolve(new Response(201)));
+        $browser = self::createMock(Browser::class);
+        $browser->expects(self::any())->method('send')->willReturn(resolve(new Response(201)));
 
         /** @var InfluxDbSender $influx */
-        $influx = $this->createMock(InfluxDbSender::class);
+        $influx = self::createMock(InfluxDbSender::class);
 
         $curl = new CurlSender($browser);
         $curl->setInfluxSender($influx);
@@ -51,7 +51,7 @@ final class CurlSenderTest extends TestCase
         $curl
             ->send($request)
             ->then(function (ResponseInterface $response): void {
-                $this->assertSame(201, $response->getStatusCode());
+                self::assertSame(201, $response->getStatusCode());
             })
             ->done();
     }
@@ -63,8 +63,8 @@ final class CurlSenderTest extends TestCase
     public function testSendException(): void
     {
         /** @var Browser|MockObject $browser */
-        $browser = $this->createMock(Browser::class);
-        $browser->expects($this->any())->method('send')->willReturn(reject(new ResponseException(new Response(401))));
+        $browser = self::createMock(Browser::class);
+        $browser->expects(self::any())->method('send')->willReturn(reject(new ResponseException(new Response(401))));
 
         $curl    = new CurlSender($browser);
         $request = new RequestDto('GET', new Uri('https://cleverconn.stage.hanaboso.net/api/'));
@@ -72,7 +72,7 @@ final class CurlSenderTest extends TestCase
         $curl
             ->send($request)
             ->then(NULL, function ($e): void {
-                $this->assertInstanceOf(ResponseException::class, $e);
+                self::assertInstanceOf(ResponseException::class, $e);
             })
             ->done();
     }

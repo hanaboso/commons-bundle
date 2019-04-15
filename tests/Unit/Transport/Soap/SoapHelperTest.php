@@ -27,7 +27,7 @@ final class SoapHelperTest extends TestCase
         $request = new RequestDtoNonWsdl('functionName', ['arguments'], 'namespace', new Uri(''));
         $result  = SoapHelper::composeRequestHeaders($request);
 
-        $this->assertNull($result);
+        self::assertNull($result);
     }
 
     /**
@@ -38,7 +38,7 @@ final class SoapHelperTest extends TestCase
         $request = new RequestDtoWsdl('functionName', ['arguments'], 'namespace', new Uri(''));
         $result  = SoapHelper::composeArguments($request);
 
-        $this->assertEquals($result, $request->getArguments());
+        self::assertEquals($result, $request->getArguments());
     }
 
     /**
@@ -51,7 +51,7 @@ final class SoapHelperTest extends TestCase
 
         $soapVar   = new SoapVar('value1', XSD_STRING, '', '', 'ns1:key1');
         $soapParam = new SoapParam($soapVar, 'key1');
-        $this->assertEquals([$soapParam], $result);
+        self::assertEquals([$soapParam], $result);
     }
 
     /**
@@ -62,7 +62,7 @@ final class SoapHelperTest extends TestCase
         $request = new RequestDtoNonWsdl('functionName', [], 'namespace', new Uri(''));
         $result  = SoapHelper::composeArguments($request);
 
-        $this->assertNull($result);
+        self::assertNull($result);
     }
 
     /**
@@ -75,25 +75,25 @@ Content-Type: text/xml; charset="utf-8"
 Content-Length: nnnn';
         $result  = SoapHelper::parseResponseHeaders($headers);
 
-        $this->assertTrue(is_array($result));
-        $this->assertArrayHasKey('version', $result);
-        $this->assertArrayHasKey('statusCode', $result);
-        $this->assertArrayHasKey('reason', $result);
-        $this->assertArrayHasKey('headers', $result);
+        self::assertTrue(is_array($result));
+        self::assertArrayHasKey('version', $result);
+        self::assertArrayHasKey('statusCode', $result);
+        self::assertArrayHasKey('reason', $result);
+        self::assertArrayHasKey('headers', $result);
 
-        $this->assertEquals('1.1', $result['version']);
-        $this->assertEquals(200, $result['statusCode']);
-        $this->assertEquals('OK', $result['reason']);
+        self::assertEquals('1.1', $result['version']);
+        self::assertEquals(200, $result['statusCode']);
+        self::assertEquals('OK', $result['reason']);
 
         /** @var HeaderBag $headerBag */
         $headerBag = $result['headers'];
-        $this->assertInstanceOf(HeaderBag::class, $headerBag);
+        self::assertInstanceOf(HeaderBag::class, $headerBag);
 
         $expectedValues = [
             'content-type'   => ['text/xml; charset="utf-8"'],
             'content-length' => ['nnnn'],
         ];
-        $this->assertEquals($expectedValues, $headerBag->all());
+        self::assertEquals($expectedValues, $headerBag->all());
     }
 
     /**
@@ -103,16 +103,16 @@ Content-Length: nnnn';
     {
         $result = SoapHelper::parseResponseHeaders(NULL);
 
-        $this->assertTrue(is_array($result));
-        $this->assertArrayHasKey('version', $result);
-        $this->assertArrayHasKey('statusCode', $result);
-        $this->assertArrayHasKey('reason', $result);
-        $this->assertArrayHasKey('headers', $result);
+        self::assertTrue(is_array($result));
+        self::assertArrayHasKey('version', $result);
+        self::assertArrayHasKey('statusCode', $result);
+        self::assertArrayHasKey('reason', $result);
+        self::assertArrayHasKey('headers', $result);
 
-        $this->assertNull($result['version']);
-        $this->assertNull($result['statusCode']);
-        $this->assertNull($result['reason']);
-        $this->assertNull($result['headers']);
+        self::assertNull($result['version']);
+        self::assertNull($result['statusCode']);
+        self::assertNull($result['reason']);
+        self::assertNull($result['headers']);
     }
 
 }

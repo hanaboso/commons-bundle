@@ -36,27 +36,27 @@ final class CurlManagerTest extends TestCase
         $psr7Response = new Response(200, $headers, $body);
 
         /** @var MockObject|Client $client */
-        $client = $this->createPartialMock(Client::class, ['send']);
-        $client->expects($this->any())->method('send')->willReturn($psr7Response);
+        $client = self::createPartialMock(Client::class, ['send']);
+        $client->expects(self::any())->method('send')->willReturn($psr7Response);
 
         /** @var MockObject|CurlClientFactory $curlClientFactory */
-        $curlClientFactory = $this->createPartialMock(CurlClientFactory::class, ['create']);
-        $curlClientFactory->expects($this->any())->method('create')->willReturn($client);
+        $curlClientFactory = self::createPartialMock(CurlClientFactory::class, ['create']);
+        $curlClientFactory->expects(self::any())->method('create')->willReturn($client);
 
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
 
         /** @var InfluxDbSender $influx */
-        $influx = $this->createMock(InfluxDbSender::class);
+        $influx = self::createMock(InfluxDbSender::class);
 
         $curlManager = new CurlManager($curlClientFactory);
         $curlManager->setInfluxSender($influx);
         $result = $curlManager->send($requestDto);
 
-        $this->assertInstanceOf(ResponseDto::class, $result);
-        $this->assertEquals(200, $result->getStatusCode());
-        $this->assertEquals('OK', $result->getReasonPhrase());
-        $this->assertEquals(['header_key' => ['header_value']], $result->getHeaders());
-        $this->assertEquals($body, $result->getBody());
+        self::assertInstanceOf(ResponseDto::class, $result);
+        self::assertEquals(200, $result->getStatusCode());
+        self::assertEquals('OK', $result->getReasonPhrase());
+        self::assertEquals(['header_key' => ['header_value']], $result->getHeaders());
+        self::assertEquals($body, $result->getBody());
     }
 
     /**
@@ -65,11 +65,11 @@ final class CurlManagerTest extends TestCase
      */
     public function testSendFail(): void
     {
-        $this->expectException(CurlException::class);
+        self::expectException(CurlException::class);
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
 
         /** @var InfluxDbSender $influx */
-        $influx = $this->createMock(InfluxDbSender::class);
+        $influx = self::createMock(InfluxDbSender::class);
 
         $curlManager = new CurlManager(new CurlClientFactory());
         $curlManager->setInfluxSender($influx);
@@ -82,8 +82,8 @@ final class CurlManagerTest extends TestCase
      */
     public function testSendFailMethod(): void
     {
-        $this->expectException(CurlException::class);
-        $this->expectExceptionCode(CurlException::INVALID_METHOD);
+        self::expectException(CurlException::class);
+        self::expectExceptionCode(CurlException::INVALID_METHOD);
         new RequestDto('nonsense', new Uri('http://example.com'));
     }
 
@@ -93,8 +93,8 @@ final class CurlManagerTest extends TestCase
      */
     public function testSendFailBody(): void
     {
-        $this->expectException(CurlException::class);
-        $this->expectExceptionCode(CurlException::BODY_ON_GET);
+        self::expectException(CurlException::class);
+        self::expectExceptionCode(CurlException::BODY_ON_GET);
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
         $requestDto->setBody('');
     }

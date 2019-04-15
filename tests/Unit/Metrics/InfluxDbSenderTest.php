@@ -24,8 +24,8 @@ final class InfluxDbSenderTest extends TestCase
     public function testSend(): void
     {
         /** @var MockObject|UDPSender $sender */
-        $sender = $this->createPartialMock(UDPSender::class, ['send']);
-        $sender->expects($this->any())->method('send')->willReturn(TRUE);
+        $sender = self::createPartialMock(UDPSender::class, ['send']);
+        $sender->expects(self::any())->method('send')->willReturn(TRUE);
 
         $service = new InfluxDbSender($sender, 'test_measurement');
 
@@ -33,7 +33,7 @@ final class InfluxDbSenderTest extends TestCase
         $tags   = ['environment' => 'test'];
 
         $result = $service->send($fields, $tags);
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     /**
@@ -47,8 +47,8 @@ final class InfluxDbSenderTest extends TestCase
     public function testCreateMessage(): void
     {
         /** @var MockObject|UDPSender $sender */
-        $sender = $this->createPartialMock(UDPSender::class, ['send']);
-        $sender->expects($this->any())->method('send')->willReturn(TRUE);
+        $sender = self::createPartialMock(UDPSender::class, ['send']);
+        $sender->expects(self::any())->method('send')->willReturn(TRUE);
 
         $service = new InfluxDbSender($sender, 'test_measurement');
 
@@ -59,8 +59,8 @@ final class InfluxDbSenderTest extends TestCase
         $expected = 'test_measurement,environment=test,host=localhost foo="bar\"s",baz=10,a=0,bool=true,nil="null" ';
 
         // expected is appended by current timestamp
-        $this->assertStringStartsWith($expected, $message);
-        $this->assertEquals(strlen($expected) + 19, strlen($message));
+        self::assertStringStartsWith($expected, $message);
+        self::assertEquals(strlen($expected) + 19, strlen($message));
     }
 
     /**
@@ -70,11 +70,11 @@ final class InfluxDbSenderTest extends TestCase
     public function testCreateMessageException(): void
     {
         /** @var MockObject|UDPSender $sender */
-        $sender = $this->createPartialMock(UDPSender::class, ['send']);
-        $sender->expects($this->any())->method('send')->willReturn(TRUE);
+        $sender = self::createPartialMock(UDPSender::class, ['send']);
+        $sender->expects(self::any())->method('send')->willReturn(TRUE);
 
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The fields must not be empty.');
+        self::expectException(InvalidArgumentException::class);
+        self::expectExceptionMessage('The fields must not be empty.');
         $service = new InfluxDbSender($sender, 'php_worker');
         $service->createMessage([]);
     }

@@ -36,8 +36,8 @@ final class SoapClientFactoryTest extends TestCase
         $request = new RequestDtoWsdl('functionName', [], 'namespace', new Uri('abc'));
         $request->setVersion(SOAP_1_2);
 
-        $this->expectException(SoapException::class);
-        $this->expectExceptionCode(SoapException::INVALID_WSDL);
+        self::expectException(SoapException::class);
+        self::expectExceptionCode(SoapException::INVALID_WSDL);
 
         $soapClientFactory = new SoapClientFactory();
         $soapClientFactory->create($request, ['uri' => '', 'location' => '']);
@@ -55,7 +55,7 @@ final class SoapClientFactoryTest extends TestCase
         $soapClientFactory = new SoapClientFactory();
         $result            = $soapClientFactory->create($request, ['uri' => '', 'location' => '']);
 
-        $this->assertInstanceOf(SoapClient::class, $result);
+        self::assertInstanceOf(SoapClient::class, $result);
     }
 
 }

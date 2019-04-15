@@ -22,7 +22,7 @@ final class CurlClientFactoryTest extends TestCase
         $curlClientFactory = new CurlClientFactory();
         $result            = $curlClientFactory->create();
 
-        $this->assertInstanceOf(Client::class, $result);
+        self::assertInstanceOf(Client::class, $result);
     }
 
 }

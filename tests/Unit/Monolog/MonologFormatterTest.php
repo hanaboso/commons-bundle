@@ -24,7 +24,7 @@ final class MonologFormatterTest extends TestCase
             'Hanaboso\CommonsBundle\Exception\CronException %s: Cron does not exists!',
             CronException::CRON_EXCEPTION
         );
-        $this->assertEquals($expected, MonologFormatter::formatException($exception));
+        self::assertEquals($expected, MonologFormatter::formatException($exception));
     }
 
     /**
@@ -32,7 +32,7 @@ final class MonologFormatterTest extends TestCase
      */
     public function testFormatString(): void
     {
-        $this->assertEquals('String :)', MonologFormatter::formatString('String :)'));
+        self::assertEquals('String :)', MonologFormatter::formatString('String :)'));
     }
 
 }

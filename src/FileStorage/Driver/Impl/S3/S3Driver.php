@@ -41,7 +41,12 @@ class S3Driver extends FileStorageDriverAbstract
      * @param S3Client               $client
      * @param string                 $bucket
      */
-    public function __construct(DocumentManager $dm, PathGeneratorInterface $generator, S3Client $client, string $bucket)
+    public function __construct(
+        DocumentManager $dm,
+        PathGeneratorInterface $generator,
+        S3Client $client,
+        string $bucket
+    )
     {
         parent::__construct($dm, $generator);
         $this->client = $client;

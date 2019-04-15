@@ -36,8 +36,8 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
      */
     public function testOpen(): void
     {
-        $this->assertTrue($this->handler->open('some/path', 'some name'));
-        $this->assertTrue($this->handler->open('some/path', 'another name'));
+        self::assertTrue($this->handler->open('some/path', 'some name'));
+        self::assertTrue($this->handler->open('some/path', 'another name'));
     }
 
     /**
@@ -46,7 +46,7 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
      */
     public function testClose(): void
     {
-        $this->assertTrue($this->handler->close());
+        self::assertTrue($this->handler->close());
     }
 
     /**
@@ -55,8 +55,8 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
      */
     public function testGc(): void
     {
-        $this->assertTrue($this->handler->gc(0));
-        $this->assertTrue($this->handler->gc(999));
+        self::assertTrue($this->handler->gc(0));
+        self::assertTrue($this->handler->gc(999));
     }
 
     /**
@@ -67,14 +67,14 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
      */
     public function testReadWriteDestroy(): void
     {
-        $this->assertTrue($this->handler->destroy('foo'));
-        $this->assertEmpty($this->handler->read('foo'));
-        $this->assertTrue($this->handler->write('foo', 'data'));
-        $this->assertEquals('data', $this->handler->read('foo'));
-        $this->assertTrue($this->handler->write('foo', 'new data'));
-        $this->assertEquals('new data', $this->handler->read('foo'));
-        $this->assertTrue($this->handler->destroy('foo'));
-        $this->assertEmpty($this->handler->read('foo'));
+        self::assertTrue($this->handler->destroy('foo'));
+        self::assertEmpty($this->handler->read('foo'));
+        self::assertTrue($this->handler->write('foo', 'data'));
+        self::assertEquals('data', $this->handler->read('foo'));
+        self::assertTrue($this->handler->write('foo', 'new data'));
+        self::assertEquals('new data', $this->handler->read('foo'));
+        self::assertTrue($this->handler->destroy('foo'));
+        self::assertEmpty($this->handler->read('foo'));
     }
 
 }

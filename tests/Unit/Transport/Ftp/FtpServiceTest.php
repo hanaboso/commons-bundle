@@ -25,16 +25,16 @@ final class FtpServiceTest extends TestCase
     public function testUploadFile(): void
     {
         /** @var MockObject|FtpAdapter $adapter */
-        $adapter = $this->createPartialMock(
+        $adapter = self::createPartialMock(
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'dirExists', 'makeDirRecursive', 'uploadFile']
         );
-        $adapter->expects($this->any())->method('connect')->willReturn(TRUE);
-        $adapter->expects($this->any())->method('login')->willReturn(TRUE);
-        $adapter->expects($this->any())->method('disconnect')->willReturn(TRUE);
-        $adapter->expects($this->any())->method('dirExists')->willReturn(FALSE);
-        $adapter->expects($this->any())->method('makeDirRecursive')->willReturn(TRUE);
-        $adapter->expects($this->any())->method('uploadFile')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('connect')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('login')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('disconnect')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('dirExists')->willReturn(FALSE);
+        $adapter->expects(self::any())->method('makeDirRecursive')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('uploadFile')->willReturn(TRUE);
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->uploadFile('abc', 'def');
@@ -49,14 +49,14 @@ final class FtpServiceTest extends TestCase
     public function testDownloadFile(): void
     {
         /** @var MockObject|FtpAdapter $adapter */
-        $adapter = $this->createPartialMock(
+        $adapter = self::createPartialMock(
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'downloadFile']
         );
-        $adapter->expects($this->any())->method('connect')->willReturn(TRUE);
-        $adapter->expects($this->any())->method('login')->willReturn(TRUE);
-        $adapter->expects($this->any())->method('disconnect')->willReturn(TRUE);
-        $adapter->expects($this->any())->method('downloadFile')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('connect')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('login')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('disconnect')->willReturn(TRUE);
+        $adapter->expects(self::any())->method('downloadFile')->willReturn(TRUE);
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->downloadFile('abc');
@@ -72,7 +72,7 @@ final class FtpServiceTest extends TestCase
     public function testDownloadFiles(): void
     {
         /** @var MockObject|FtpAdapter $adapter */
-        $adapter = $this->createPartialMock(
+        $adapter = self::createPartialMock(
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'listDir', 'downloadFile']
         );

@@ -29,21 +29,21 @@ final class UDPSenderTest extends TestCase
 
         $sender = new UDPSender('localhost', 61999);
         $ip     = $sender->refreshIp();
-        $this->assertEquals('127.0.0.1', $ip);
+        self::assertEquals('127.0.0.1', $ip);
 
         $ip = $sender->refreshIp();
-        $this->assertEquals('127.0.0.1', $ip);
+        self::assertEquals('127.0.0.1', $ip);
 
         $sender = new UDPSender('google.com', 61999);
         $ip     = $sender->refreshIp();
-        $this->assertCount(4, explode('.', $ip));
+        self::assertCount(4, explode('.', $ip));
 
         $sender = new UDPSender('invalidhostname', 61999);
         $ip     = $sender->refreshIp();
-        $this->assertEquals('', $ip);
+        self::assertEquals('', $ip);
 
         $end = microtime(TRUE);
-        $this->assertLessThanOrEqual(self::LIMIT, $end - $start);
+        self::assertLessThanOrEqual(self::LIMIT, $end - $start);
     }
 
     /**
@@ -58,11 +58,11 @@ final class UDPSenderTest extends TestCase
 
         $sender = new UDPSender('localhost', 61999);
         $result = $sender->send($message);
-        $this->assertTrue($result);
+        self::assertTrue($result);
 
         $sender = new UDPSender('invalidhost', 61999);
         $result = $sender->send($message);
-        $this->assertFalse($result);
+        self::assertFalse($result);
 
         // here we cannot assert result because we don't know if influxdb host exists
         // but we can check if packets are delivered right in influxdb container using tcpdump or similar tool
@@ -71,7 +71,7 @@ final class UDPSenderTest extends TestCase
 
         // Check if sending is not delaying too much
         $end = microtime(TRUE);
-        $this->assertLessThanOrEqual(self::LIMIT, $end - $start);
+        self::assertLessThanOrEqual(self::LIMIT, $end - $start);
     }
 
     /**
@@ -87,12 +87,12 @@ final class UDPSenderTest extends TestCase
 
         for ($i = 0; $i < 1000; $i++) {
             $result = $sender->send($message);
-            $this->assertFalse($result);
+            self::assertFalse($result);
         }
 
         // Check if sending is not delaying too much
         $end = microtime(TRUE);
-        $this->assertLessThanOrEqual(self::LIMIT, $end - $start);
+        self::assertLessThanOrEqual(self::LIMIT, $end - $start);
     }
 
 }

@@ -41,11 +41,11 @@ final class S3DriverTest extends KernelTestCaseAbstract
 
         $file = $this->driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
 
-        $this->assertInstanceOf(FileInfoDto::class, $file);
-        $this->assertEquals(file_get_contents($path), $this->driver->get($file->getUrl()));
+        self::assertInstanceOf(FileInfoDto::class, $file);
+        self::assertEquals(file_get_contents($path), $this->driver->get($file->getUrl()));
 
-        $this->expectException(FileStorageException::class);
-        $this->expectExceptionCode(FileStorageException::FILE_NOT_FOUND);
+        self::expectException(FileStorageException::class);
+        self::expectExceptionCode(FileStorageException::FILE_NOT_FOUND);
         $this->driver->delete($file->getUrl());
         $this->driver->get($file->getUrl());
     }

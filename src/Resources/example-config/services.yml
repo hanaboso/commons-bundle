@@ -39,10 +39,10 @@ services:
             - ['setLogger', ['@monolog.logger.commons']]
 
     hbpf.influxdb_sender_connector:
-            class: Hanaboso\CommonsBundle\Metrics\InfluxDbSender
-            arguments:
-                - '@udp_metrics_sender'
-                - '%influx.connector_table%'
+        class: Hanaboso\CommonsBundle\Metrics\InfluxDbSender
+        arguments:
+            - '@udp_metrics_sender'
+            - '%influx.connector_table%'
 
     hbpf.influxdb_sender_monolith:
         class: Hanaboso\CommonsBundle\Metrics\InfluxDbSender
@@ -108,7 +108,7 @@ services:
             - '@hbpf.transport.curl_client_factory'
         calls:
             - ['setLogger', ['@monolog.logger.commons']]
-#            - ['setInfluxSender', ['@hbpf.influxdb_sender_connector']] ## Optional metrics sender
+    #            - ['setInfluxSender', ['@hbpf.influxdb_sender_connector']] ## Optional metrics sender
 
     hbpf.transport.soap_manager:
         class: Hanaboso\CommonsBundle\Transport\Soap\SoapManager
@@ -116,7 +116,7 @@ services:
             - '@hbpf.transport.soap_client_factory'
         calls:
             - ['setLogger', ['@monolog.logger.commons']]
-#            - ['setInfluxSender', ['@hbpf.influxdb_sender_connector']] ## Optional metrics sender
+    #            - ['setInfluxSender', ['@hbpf.influxdb_sender_connector']] ## Optional metrics sender
 
     hbpf.transport.async_curl_factory:
         class: Hanaboso\CommonsBundle\Transport\AsyncCurl\CurlSenderFactory

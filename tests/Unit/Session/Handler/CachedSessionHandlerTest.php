@@ -4,6 +4,7 @@ namespace Tests\Unit\Session\Handler;
 
 use Exception;
 use Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SessionHandlerInterface;
 
@@ -25,12 +26,12 @@ final class CachedSessionHandlerTest extends TestCase
      */
     public function setUp(): void
     {
-        $sh = $this->createMock(SessionHandlerInterface::class);
-        $sh->expects($this->any())->method('destroy')->willReturn(TRUE);
-        $sh->expects($this->any())->method('write')->willReturn(TRUE);
-        $sh->expects($this->any())->method('read')->willReturn('default');
+        /** @var SessionHandlerInterface | MockObject $sh */
+        $sh = self::createMock(SessionHandlerInterface::class);
+        $sh->expects(self::any())->method('destroy')->willReturn(TRUE);
+        $sh->expects(self::any())->method('write')->willReturn(TRUE);
+        $sh->expects(self::any())->method('read')->willReturn('default');
 
-        /** @var SessionHandlerInterface $sh */
         $this->csh = new CachedSessionHandler($sh);
     }
 
@@ -39,21 +40,21 @@ final class CachedSessionHandlerTest extends TestCase
      */
     public function testApcu(): void
     {
-        $this->assertEquals([], apcu_exists(['foo', 'bar']));
+        self::assertEquals([], apcu_exists(['foo', 'bar']));
 
-        $this->assertTrue(apcu_add('foo', 'val'));
-        $this->assertEquals(['foo' => TRUE], apcu_exists(['foo', 'bar']));
-        $this->assertEquals('val', apcu_fetch('foo'));
-        $this->assertFalse(apcu_fetch('bar'));
+        self::assertTrue(apcu_add('foo', 'val'));
+        self::assertEquals(['foo' => TRUE], apcu_exists(['foo', 'bar']));
+        self::assertEquals('val', apcu_fetch('foo'));
+        self::assertFalse(apcu_fetch('bar'));
 
-        $this->assertTrue(apcu_add('bar', 'val'));
-        $this->assertEquals(['foo' => TRUE, 'bar' => TRUE], apcu_exists(['foo', 'bar']));
-        $this->assertEquals('val', apcu_fetch('foo'));
-        $this->assertEquals('val', apcu_fetch('bar'));
+        self::assertTrue(apcu_add('bar', 'val'));
+        self::assertEquals(['foo' => TRUE, 'bar' => TRUE], apcu_exists(['foo', 'bar']));
+        self::assertEquals('val', apcu_fetch('foo'));
+        self::assertEquals('val', apcu_fetch('bar'));
 
-        $this->assertTrue(apcu_delete('foo'));
-        $this->assertTrue(apcu_delete('bar'));
-        $this->assertEquals([], apcu_exists(['foo', 'bar']));
+        self::assertTrue(apcu_delete('foo'));
+        self::assertTrue(apcu_delete('bar'));
+        self::assertEquals([], apcu_exists(['foo', 'bar']));
     }
 
     /**
@@ -64,14 +65,14 @@ final class CachedSessionHandlerTest extends TestCase
      */
     public function testReadWriteDestroy(): void
     {
-        $this->assertTrue($this->csh->destroy('foo'));
-        $this->assertEquals('default', $this->csh->read('foo'));
+        self::assertTrue($this->csh->destroy('foo'));
+        self::assertEquals('default', $this->csh->read('foo'));
 
-        $this->assertTrue($this->csh->write('foo', 'bar'));
-        $this->assertEquals('bar', $this->csh->read('foo'));
+        self::assertTrue($this->csh->write('foo', 'bar'));
+        self::assertEquals('bar', $this->csh->read('foo'));
 
-        $this->assertTrue($this->csh->destroy('foo'));
-        $this->assertEquals('default', $this->csh->read('foo'));
+        self::assertTrue($this->csh->destroy('foo'));
+        self::assertEquals('default', $this->csh->read('foo'));
     }
 
     /**
@@ -82,14 +83,14 @@ final class CachedSessionHandlerTest extends TestCase
     {
         $this->csh->setTimeout(1);
 
-        $this->assertTrue($this->csh->destroy('foo'));
-        $this->assertEquals('default', $this->csh->read('foo'));
+        self::assertTrue($this->csh->destroy('foo'));
+        self::assertEquals('default', $this->csh->read('foo'));
 
-        $this->assertTrue($this->csh->write('foo', 'val'));
-        $this->assertEquals('val', $this->csh->read('foo'));
+        self::assertTrue($this->csh->write('foo', 'val'));
+        self::assertEquals('val', $this->csh->read('foo'));
 
         sleep(1);
-        $this->assertEquals('default', $this->csh->read('foo'));
+        self::assertEquals('default', $this->csh->read('foo'));
     }
 
 }

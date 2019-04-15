@@ -30,7 +30,7 @@ final class CurlManagerTest extends KernelTestCaseAbstract
         parent::setUp();
         /** @var CurlManager $curlManager */
         $curlManager = self::$container->get('hbpf.transport.curl_manager');
-        $this->curl = $curlManager;
+        $this->curl  = $curlManager;
     }
 
     /**
@@ -40,7 +40,7 @@ final class CurlManagerTest extends KernelTestCaseAbstract
     {
         $requestDto = (new RequestDto(CurlManager::METHOD_GET, new Uri('https://google.cz')))
             ->setHeaders(['Cache-Control' => 'private, max-age=0']);
-        $this->assertEquals(200, $this->curl->send($requestDto)->getStatusCode());
+        self::assertEquals(200, $this->curl->send($requestDto)->getStatusCode());
     }
 
     /**
@@ -48,8 +48,8 @@ final class CurlManagerTest extends KernelTestCaseAbstract
      */
     public function testSendNotFound(): void
     {
-        $this->expectException(CurlException::class);
-        $this->expectExceptionCode(303);
+        self::expectException(CurlException::class);
+        self::expectExceptionCode(303);
 
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('some-unknown-address'));
         $this->curl->send($requestDto)->getStatusCode();

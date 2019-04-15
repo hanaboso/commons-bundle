@@ -4,9 +4,9 @@ namespace Hanaboso\CommonsBundle\Transport\Imap;
 
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
+use PhpImap\Exception;
 use PhpImap\IncomingMail;
 use PhpImap\Mailbox;
-use Throwable;
 
 /**
  * Class ImapConnector
@@ -30,9 +30,9 @@ class ImapConnector
      * @param ImapConfigDto $dto
      *
      * @return ImapConnector
-     * @throws Throwable
+     * @throws Exception
      */
-    public function getConnector(ImapConfigDto $dto): ImapConnector
+    public function create(ImapConfigDto $dto): ImapConnector
     {
         $this->mailbox = new Mailbox(
             sprintf('{%s:993%s}%s', $dto->getHost(), $dto->getPath(), $dto->getFolder()),
@@ -46,7 +46,7 @@ class ImapConnector
      * @return array
      * @throws DateTimeException
      */
-    public function getListOfMails(): array
+    public function listMails(): array
     {
         $mailIds = $this->mailbox->searchMailbox();
         $mails   = [];
@@ -63,7 +63,6 @@ class ImapConnector
         }
 
         return $mails;
-
     }
 
     /**

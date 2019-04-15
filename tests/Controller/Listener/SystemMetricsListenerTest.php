@@ -27,7 +27,7 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
         /** @var Request $request */
         $request = $this->client->getRequest();
 
-        $this->assertArrayNotHasKey(SystemMetricsListener::METRICS_ATTRIBUTES_KEY, $request->attributes->all());
+        self::assertArrayNotHasKey(SystemMetricsListener::METRICS_ATTRIBUTES_KEY, $request->attributes->all());
     }
 
     /**
@@ -45,18 +45,18 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
         /** @var Request $request */
         $request = $this->client->getRequest();
 
-        $this->assertArrayHasKey(SystemMetricsListener::METRICS_ATTRIBUTES_KEY, $request->attributes->all());
+        self::assertArrayHasKey(SystemMetricsListener::METRICS_ATTRIBUTES_KEY, $request->attributes->all());
 
         $metrics = $request->attributes->get(SystemMetricsListener::METRICS_ATTRIBUTES_KEY);
 
-        $this->assertArrayHasKey(CurlMetricUtils::KEY_TIMESTAMP, $metrics);
+        self::assertArrayHasKey(CurlMetricUtils::KEY_TIMESTAMP, $metrics);
         $timestamp = $metrics[CurlMetricUtils::KEY_TIMESTAMP];
-        $this->assertGreaterThan(SystemMetrics::getCurrentTimestamp() - 5000, $timestamp);
-        $this->assertArrayHasKey(CurlMetricUtils::KEY_CPU, $metrics);
+        self::assertGreaterThan(SystemMetrics::getCurrentTimestamp() - 5000, $timestamp);
+        self::assertArrayHasKey(CurlMetricUtils::KEY_CPU, $metrics);
         $cpu = $metrics[CurlMetricUtils::KEY_CPU];
-        $this->assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_TIME_USER]);
-        $this->assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_TIME_KERNEL]);
-        $this->assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_START_TIME]);
+        self::assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_TIME_USER]);
+        self::assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_TIME_KERNEL]);
+        self::assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_START_TIME]);
     }
 
 }

@@ -49,7 +49,7 @@ final class LogstashFormatterTest extends TestCase
 
         $message = $this->correctMessage(json_decode($message, TRUE));
 
-        $this->assertEquals([
+        self::assertEquals([
             'timestamp' => 1505381163375,
             'hostname'  => 'localhost',
             'type'      => 'test-service',
@@ -76,7 +76,7 @@ final class LogstashFormatterTest extends TestCase
 
         $message = $this->correctMessage(json_decode($message, TRUE));
 
-        $this->assertEquals([
+        self::assertEquals([
             'timestamp'      => 1505381163375,
             'hostname'       => 'localhost',
             'type'           => 'test-service',
@@ -104,7 +104,7 @@ final class LogstashFormatterTest extends TestCase
 
         $message = $this->correctMessage(json_decode($message, TRUE));
 
-        $this->assertEquals([
+        self::assertEquals([
             'timestamp'  => 1505381163375,
             'hostname'   => 'localhost',
             'type'       => 'test-service',
@@ -139,7 +139,7 @@ final class LogstashFormatterTest extends TestCase
 
         $message = $this->correctMessage(json_decode($message, TRUE));
 
-        $this->assertEquals([
+        self::assertEquals([
             'timestamp'      => 1505381163375,
             'hostname'       => 'localhost',
             'type'           => 'test-service',
@@ -192,7 +192,7 @@ final class LogstashFormatterTest extends TestCase
 
         $message = $this->correctMessage(json_decode($message, TRUE));
 
-        $this->assertEquals([
+        self::assertEquals([
             'timestamp'     => 1505381163375,
             'hostname'      => 'localhost',
             'type'          => 'starting_point',

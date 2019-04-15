@@ -6,7 +6,6 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -51,11 +50,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     {
         parent::setUp();
         self::bootKernel();
-        /** @var ContainerInterface $container */
-        $container = self::$kernel->getContainer();
-        /** @var DocumentManager $dm */
-        $dm       = $container->get('doctrine_mongodb.odm.default_document_manager');
-        $this->dm = $dm;
+        $this->dm     = self::$container->get('doctrine_mongodb.odm.default_document_manager');
         $this->client = self::createClient([], []);
         $this->dm->getConnection()->dropDatabase('pipes');
     }

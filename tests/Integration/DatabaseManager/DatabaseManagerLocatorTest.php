@@ -23,7 +23,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
     {
         /** @var DocumentManager $documentManager */
         $documentManager = self::$container->get('doctrine_mongodb.odm.default_document_manager');
-        $this->assertTrue(is_array($documentManager->getConnection()->listDatabases()));
+        self::assertTrue(is_array($documentManager->getConnection()->listDatabases()));
     }
 
     /**
@@ -36,7 +36,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
 
         $query = $entityManager->getConnection()->query('SHOW DATABASES;');
         $query->execute();
-        $this->assertTrue(is_array($query->fetchAll(PDO::FETCH_OBJ)));
+        self::assertTrue(is_array($query->fetchAll(PDO::FETCH_OBJ)));
     }
 
 }
