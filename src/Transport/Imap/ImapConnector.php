@@ -27,17 +27,17 @@ class ImapConnector
     private $mailbox;
 
     /**
-     * @param ImapConfigDto $imap
+     * @param ImapConfigDto $dto
      *
      * @return ImapConnector
      * @throws Throwable
      */
-    public function getMailBox(ImapConfigDto $imap): ImapConnector
+    public function getConnector(ImapConfigDto $dto): ImapConnector
     {
         $this->mailbox = new Mailbox(
-            sprintf('{%s:993%s}%s', $imap->getHost(), $imap->getPath(), $imap->getFolder()),
-            $imap->getUser(),
-            $imap->getPassword());
+            sprintf('{%s:993%s}%s', $dto->getHost(), $dto->getPath(), $dto->getFolder()),
+            $dto->getUser(),
+            $dto->getPassword());
 
         return $this;
     }

@@ -25,7 +25,7 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     public function testGetEmail(): void
     {
         $imap  = new ImapConnector();
-        $email = $imap->getMailBox($this->getDto())->getMail('287');
+        $email = $imap->getConnector($this->getDto())->getMail('287');
 
         self::assertEquals('287', $email->id);
     }
@@ -37,10 +37,10 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     public function testMoveEmail(): void
     {
         $imap = new ImapConnector();
-        $imap->getMailBox($this->getDto())->moveMail('299', 'mailDestination');
+        $imap->getConnector($this->getDto())->moveMail('299', 'mailDestination');
 
         $this->getDto()->setFolder('INBOX.mailDestination');
-        $email = $imap->getMailBox($this->getDto())->getListOfMails();
+        $email = $imap->getConnector($this->getDto())->getListOfMails();
 
         self::assertArrayHasKey('id', $email[0]);
     }
@@ -52,7 +52,7 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     public function testGetAllEmails(): void
     {
         $imap    = new ImapConnector();
-        $mailBox = $imap->getMailBox($this->getDto())->getListOfMails();
+        $mailBox = $imap->getConnector($this->getDto())->getListOfMails();
 
         self::assertArrayHasKey('id', $mailBox[0]);
     }
