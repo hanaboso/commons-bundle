@@ -4,7 +4,6 @@ namespace Hanaboso\CommonsBundle\Transport\Imap;
 
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
-use PhpImap\Exception;
 use PhpImap\IncomingMail;
 use PhpImap\Mailbox;
 use Throwable;
@@ -22,34 +21,23 @@ class ImapConnector
     public const FROM_ADDRESS = 'fromAddress';
     public const SUBJECT      = 'subject';
 
-    /** @var Mailbox */
+    /**
+     * @var Mailbox
+     */
     private $mailbox;
 
-    /** @var ImapConfigDto */
-    private $imap;
-
     /**
-     * ImapConnector constructor.
+     * @param ImapConfigDto $imap
      *
-     * @param string $user
-     * @param string $password
-     * @param string $host
-     */
-    public function __construct(string $user, string $password, string $host)
-    {
-        $this->imap = new ImapConfigDto($user, $password, $host);
-    }
-
-    /**
      * @return ImapConnector
      * @throws Throwable
      */
-    public function getMailBox(): ImapConnector
+    public function getMailBox(ImapConfigDto $imap): ImapConnector
     {
         $this->mailbox = new Mailbox(
-            sprintf('{%s:993%s}%s', $this->imap->getHost(), $this->imap->getPath(), $this->imap->getFolder()),
-            $this->imap->getUser(),
-            $this->imap->getPassword());
+            sprintf('{%s:993%s}%s', $imap->getHost(), $imap->getPath(), $imap->getFolder()),
+            $imap->getUser(),
+            $imap->getPassword());
 
         return $this;
     }
@@ -121,14 +109,6 @@ class ImapConnector
         }
 
         return $mailboxes[0]['shortpath'];
-    }
-
-    /**
-     * @return ImapConfigDto
-     */
-    public function getImap(): ImapConfigDto
-    {
-        return $this->imap;
     }
 
 }

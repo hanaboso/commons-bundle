@@ -1,7 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Hanaboso\CommonsBundle\Transport\Imap;
 
+/**
+ * Class ImapConfigDto
+ *
+ * @package Hanaboso\CommonsBundle\Transport\Imap
+ */
 class ImapConfigDto
 {
 
@@ -9,10 +14,12 @@ class ImapConfigDto
      * @var string
      */
     private $user;
+
     /**
      * @var string
      */
     private $password;
+
     /**
      * @var string
      */

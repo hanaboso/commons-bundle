@@ -3,6 +3,7 @@
 namespace Tests\Live\Model\Imap;
 
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
+use Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConnector;
 use Tests\DatabaseTestCaseAbstract;
 use Tests\PrivateTrait;
@@ -23,8 +24,8 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
      */
     public function testGetEmail(): void
     {
-        $imap  = $this->getImapConnector();
-        $email = $imap->getMailBox()->getMail('287');
+        $imap  = new ImapConnector();
+        $email = $imap->getMailBox($this->getDto())->getMail('287');
 
         self::assertEquals('287', $email->id);
     }
@@ -35,11 +36,11 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
      */
     public function testMoveEmail(): void
     {
-        $imap = $this->getImapConnector();
-        $imap->getMailBox()->moveMail('299', 'mailDestination');
+        $imap = new ImapConnector();
+        $imap->getMailBox($this->getDto())->moveMail('299', 'mailDestination');
 
-        $imap->getImap()->setFolder('INBOX.mailDestination');
-        $email = $imap->getMailBox()->getListOfMails();
+        $this->getDto()->setFolder('INBOX.mailDestination');
+        $email = $imap->getMailBox($this->getDto())->getListOfMails();
 
         self::assertArrayHasKey('id', $email[0]);
     }
@@ -50,18 +51,18 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
      */
     public function testGetAllEmails(): void
     {
-        $imap    = $this->getImapConnector();
-        $mailBox = $imap->getMailBox()->getListOfMails();
+        $imap    = new ImapConnector();
+        $mailBox = $imap->getMailBox($this->getDto())->getListOfMails();
 
         self::assertArrayHasKey('id', $mailBox[0]);
     }
 
     /**
-     * @return ImapConnector
+     * @return ImapConfigDto
      */
-    private function getImapConnector(): ImapConnector
+    private function getDto(): ImapConfigDto
     {
-        return new ImapConnector('test20180502@seznam.cz', 'qwertz789', 'imap.seznam.cz');
+        return new ImapConfigDto('test20180502@seznam.cz', 'qwertz789', 'imap.seznam.cz');
     }
 
 }
