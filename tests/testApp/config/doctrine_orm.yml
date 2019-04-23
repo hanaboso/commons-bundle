@@ -13,10 +13,17 @@ doctrine:
     orm:
         default_entity_manager: ~
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
         connection: default
-        mappings:
-            HbPFCommonsBundle: ~
         proxy_dir: "%kernel.cache_dir%/doctrine/orm/Proxies"
         proxy_namespace: Proxies
+        mappings:
+            TestEntity:
+                type: annotation
+                dir: '%kernel.root_dir%/../tests/Integration/Database/Filters/ORM'
+                is_bundle: false
+                prefix: Tests\Integration\Database\Filters\ORM
+        filters:
+            deleted:
+                class: Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter
+                enabled: true

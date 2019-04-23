@@ -18,5 +18,9 @@ doctrine:
         connection: default
         mappings:
             CommonsBundle: ~
+        filters:
+            deleted:
+                class: Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter
+                enabled: true
         proxy_dir: "%kernel.cache_dir%/doctrine/orm/Proxies"
         proxy_namespace: Proxies
