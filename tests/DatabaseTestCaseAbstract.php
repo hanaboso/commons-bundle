@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use Doctrine\DBAL\Driver\Connection;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -48,9 +47,6 @@ abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
         $this->dm->getConnection()->dropDatabase('pipes');
         $this->session->invalidate();
         $this->session->clear();
-
-        /** @var Connection $connection */
-        $this->em->getConnection();
     }
 
     /**

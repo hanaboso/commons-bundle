@@ -3,10 +3,14 @@
 namespace Tests\Integration\Transport\Curl;
 
 use Exception;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
+use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
+use PHPUnit\Framework\MockObject\MockObject;
 use Tests\KernelTestCaseAbstract;
 
 /**
@@ -18,29 +22,24 @@ final class CurlManagerTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @var CurlManager
-     */
-    private $curl;
-
-    /**
-     *
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        /** @var CurlManager $curlManager */
-        $curlManager = self::$container->get('hbpf.transport.curl_manager');
-        $this->curl  = $curlManager;
-    }
-
-    /**
      * @throws Exception
      */
     public function testSend(): void
     {
-        $requestDto = (new RequestDto(CurlManager::METHOD_GET, new Uri('https://google.cz')))
-            ->setHeaders(['Cache-Control' => 'private, max-age=0']);
-        self::assertEquals(200, $this->curl->send($requestDto)->getStatusCode());
+        /** @var MockObject|Client $client */
+        $client = self::createMock(Client::class);
+        $client->method('send')->willReturn(new Response(200, [], ''));
+
+        /** @var MockObject|CurlClientFactory $factory */
+        $factory = self::createMock(CurlClientFactory::class);
+        $factory->method('create')->willReturn($client);
+
+        /** @var CurlManager $manager */
+        $curlManager = new CurlManager($factory);
+
+        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('https://google.cz'));
+        $requestDto->setHeaders(['Cache-Control' => 'private, max-age=0']);
+        self::assertEquals(200, $curlManager->send($requestDto)->getStatusCode());
     }
 
     /**
@@ -51,8 +50,11 @@ final class CurlManagerTest extends KernelTestCaseAbstract
         self::expectException(CurlException::class);
         self::expectExceptionCode(303);
 
+        /** @var CurlManager $curlManager */
+        $curlManager = self::$container->get('hbpf.transport.curl_manager');
+
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('some-unknown-address'));
-        $this->curl->send($requestDto)->getStatusCode();
+        $curlManager->send($requestDto)->getStatusCode();
     }
 
 }

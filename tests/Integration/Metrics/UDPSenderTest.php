@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 final class UDPSenderTest extends TestCase
 {
 
-    private const LIMIT = 1;
+    private const LIMIT = 20;
 
     /**
      * Test whether resolving ip address returns the ip address string or empty string if cannot be resolved.
