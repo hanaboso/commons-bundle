@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 abstract class KernelTestCaseAbstract extends KernelTestCase
 {
+
     use PrivateTrait;
 
     /**

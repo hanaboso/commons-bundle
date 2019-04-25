@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Integration\Database\Filters\ORM;
 
@@ -10,10 +10,12 @@ use Hanaboso\CommonsBundle\Traits\Entity\IdTrait;
  * Class TestEntity
  *
  * @package Tests\Integration\Database\Filters\ORM
+ *
  * @ORM\Entity()
  */
 class TestEntity
 {
+
     use IdTrait;
     use DeletedTrait;
 

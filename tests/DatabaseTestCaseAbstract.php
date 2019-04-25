@@ -4,8 +4,8 @@ namespace Tests;
 
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Doctrine\ORM\EntityManager;
-use Exception;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -50,25 +50,15 @@ abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
         $this->session->clear();
 
         /** @var Connection $connection */
-        $connection = $this->em->getConnection();
-
-        $parameters = $this->getProperty($connection, 'params');
-        $this->setProperty($connection, 'params',
-            array_merge($parameters, ['dbname' => $this->em->getConnection()->getDatabase()]));
-        $tables = $connection->getSchemaManager()->listTableNames();
-        $connection->exec('SET FOREIGN_KEY_CHECKS = 0;');
-        foreach ($tables as $table) {
-            $connection->exec(sprintf('TRUNCATE TABLE %s;', $table));
-        }
-        $connection->exec('SET FOREIGN_KEY_CHECKS = 1;');
-
+        $this->em->getConnection();
     }
 
     /**
-     * @param      $obj
-     * @param bool $isEm
+     * @param mixed $obj
+     * @param bool  $isEm
      *
-     * @throws Exception
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     protected function persistAndFlush($obj, bool $isEm = FALSE): void
     {

@@ -5,6 +5,11 @@ namespace Hanaboso\CommonsBundle\Database\Filters\ORM;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 
+/**
+ * Class DeletedFilter
+ *
+ * @package Hanaboso\CommonsBundle\Database\Filters\ORM
+ */
 class DeletedFilter extends SQLFilter
 {
 
