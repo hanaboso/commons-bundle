@@ -4,7 +4,7 @@ namespace Hanaboso\CommonsBundle\Transport\Imap;
 
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
-use PhpImap\Exception;
+use PhpImap\Exceptions\InvalidParameterException;
 use PhpImap\IncomingMail;
 use PhpImap\Mailbox;
 
@@ -30,7 +30,7 @@ class ImapConnector
      * @param ImapConfigDto $dto
      *
      * @return ImapConnector
-     * @throws Exception
+     * @throws InvalidParameterException
      */
     public function create(ImapConfigDto $dto): ImapConnector
     {
