@@ -74,16 +74,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.93.10",
+            "version": "3.94.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6ecd66087eb928b75ab1f645e57c85f597fd6548"
+                "reference": "96fd506d4000cc8f3909154e2dd1e4180835941e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6ecd66087eb928b75ab1f645e57c85f597fd6548",
-                "reference": "6ecd66087eb928b75ab1f645e57c85f597fd6548",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/96fd506d4000cc8f3909154e2dd1e4180835941e",
+                "reference": "96fd506d4000cc8f3909154e2dd1e4180835941e",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-05-15T18:08:48+00:00"
+            "time": "2019-05-22T18:11:35+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -2374,16 +2374,16 @@
         },
         {
             "name": "php-imap/php-imap",
-            "version": "3.0.16",
+            "version": "3.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barbushin/php-imap.git",
-                "reference": "72ead4eafacad003b322e4454e68591fe51eced9"
+                "reference": "b23e99b3885ba1fb4c7910928b5c1f95dd18df68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barbushin/php-imap/zipball/72ead4eafacad003b322e4454e68591fe51eced9",
-                "reference": "72ead4eafacad003b322e4454e68591fe51eced9",
+                "url": "https://api.github.com/repos/barbushin/php-imap/zipball/b23e99b3885ba1fb4c7910928b5c1f95dd18df68",
+                "reference": "b23e99b3885ba1fb4c7910928b5c1f95dd18df68",
                 "shasum": ""
             },
             "require": {
@@ -2420,7 +2420,7 @@
                 "pop3",
                 "receive emails"
             ],
-            "time": "2019-05-15T21:02:51+00:00"
+            "time": "2019-05-18T12:05:57+00:00"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3999,16 +3999,16 @@
         },
         {
             "name": "windwalker/crypt",
-            "version": "3.5.4",
+            "version": "3.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ventoviro/windwalker-crypt.git",
-                "reference": "3964bbe1f29711362b982d1001d826ccbae06929"
+                "reference": "7fc579ac41c423b3d1ed781ebb7783e83bd22991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ventoviro/windwalker-crypt/zipball/3964bbe1f29711362b982d1001d826ccbae06929",
-                "reference": "3964bbe1f29711362b982d1001d826ccbae06929",
+                "url": "https://api.github.com/repos/ventoviro/windwalker-crypt/zipball/7fc579ac41c423b3d1ed781ebb7783e83bd22991",
+                "reference": "7fc579ac41c423b3d1ed781ebb7783e83bd22991",
                 "shasum": ""
             },
             "require": {
@@ -4047,7 +4047,7 @@
                 "scrypt",
                 "windwalker"
             ],
-            "time": "2019-04-27T11:15:30+00:00"
+            "time": "2019-04-28T06:01:00+00:00"
         }
     ],
     "packages-dev": [
@@ -5570,16 +5570,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.11.6",
+            "version": "0.11.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81"
+                "reference": "32d87d746c70785f78d239855782d27cde0eb6ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
-                "reference": "7af8b9d02b3ab36444dbf4e1b9ca1c1bd5044d81",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/32d87d746c70785f78d239855782d27cde0eb6ee",
+                "reference": "32d87d746c70785f78d239855782d27cde0eb6ee",
                 "shasum": ""
             },
             "require": {
@@ -5588,6 +5588,7 @@
                 "nette/bootstrap": "^2.4 || ^3.0",
                 "nette/di": "^2.4.7 || ^3.0",
                 "nette/robot-loader": "^3.0.1",
+                "nette/schema": "^1.0",
                 "nette/utils": "^2.4.5 || ^3.0",
                 "nikic/php-parser": "^4.0.2",
                 "php": "~7.1",
@@ -5639,27 +5640,27 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-05-08T16:33:56+00:00"
+            "time": "2019-05-19T17:36:42+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.11.2",
+            "version": "0.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "f7ce9844788ff131bfb76d379d940617188b8239"
+                "reference": "d625bfba7a15c9224568ccedc5955a0730cb5d1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/f7ce9844788ff131bfb76d379d940617188b8239",
-                "reference": "f7ce9844788ff131bfb76d379d940617188b8239",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/d625bfba7a15c9224568ccedc5955a0730cb5d1d",
+                "reference": "d625bfba7a15c9224568ccedc5955a0730cb5d1d",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.0",
                 "php": "~7.1",
                 "phpstan/phpdoc-parser": "^0.3",
-                "phpstan/phpstan": "^0.11"
+                "phpstan/phpstan": "^0.11.7"
             },
             "conflict": {
                 "doctrine/collections": "<1.0",
@@ -5668,7 +5669,7 @@
                 "doctrine/orm": "<2.5"
             },
             "require-dev": {
-                "consistence/coding-standard": "^3.0.1",
+                "consistence/coding-standard": "^3.8",
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.7",
@@ -5679,12 +5680,18 @@
                 "phpstan/phpstan-phpunit": "^0.11",
                 "phpstan/phpstan-strict-rules": "^0.11",
                 "phpunit/phpunit": "^7.0",
-                "slevomat/coding-standard": "^4.5.2"
+                "slevomat/coding-standard": "^5.0.4"
             },
-            "type": "library",
+            "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "0.11-dev"
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon",
+                        "rules.neon"
+                    ]
                 }
             },
             "autoload": {
@@ -5697,27 +5704,27 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2019-03-11T11:44:21+00:00"
+            "time": "2019-05-21T10:47:03+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "0.11.1",
+            "version": "0.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "0d339995c3c6acc56bc912959f436298c70d13ab"
+                "reference": "fbf2ad56c3b13189d29655e226c9b1da47c2fad9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/0d339995c3c6acc56bc912959f436298c70d13ab",
-                "reference": "0d339995c3c6acc56bc912959f436298c70d13ab",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/fbf2ad56c3b13189d29655e226c9b1da47c2fad9",
+                "reference": "fbf2ad56c3b13189d29655e226c9b1da47c2fad9",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.0",
                 "php": "~7.1",
                 "phpstan/phpdoc-parser": "^0.3",
-                "phpstan/phpstan": "^0.11"
+                "phpstan/phpstan": "^0.11.4"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
@@ -5739,7 +5746,8 @@
                 },
                 "phpstan": {
                     "includes": [
-                        "extension.neon"
+                        "extension.neon",
+                        "rules.neon"
                     ]
                 }
             },
@@ -5753,27 +5761,27 @@
                 "MIT"
             ],
             "description": "PHPUnit extensions and rules for PHPStan",
-            "time": "2019-05-10T20:33:17+00:00"
+            "time": "2019-05-17T17:50:16+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "0.11.5",
+            "version": "0.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "490ff775bd3a6441f6794ae57911d4f9ba347a26"
+                "reference": "c7be3054c21fd472a52b1c38eb129c3f93776084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/490ff775bd3a6441f6794ae57911d4f9ba347a26",
-                "reference": "490ff775bd3a6441f6794ae57911d4f9ba347a26",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/c7be3054c21fd472a52b1c38eb129c3f93776084",
+                "reference": "c7be3054c21fd472a52b1c38eb129c3f93776084",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "nikic/php-parser": "^4.0",
                 "php": "^7.1",
-                "phpstan/phpstan": "^0.11.1"
+                "phpstan/phpstan": "^0.11.7"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
@@ -5782,6 +5790,7 @@
                 "consistence/coding-standard": "^3.0.1",
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
                 "jakub-onderka/php-parallel-lint": "^1.0",
+                "nette/di": "^3.0-stable",
                 "phing/phing": "^2.16.0",
                 "phpstan/phpstan-phpunit": "^0.11",
                 "phpstan/phpstan-strict-rules": "^0.11",
@@ -5793,10 +5802,15 @@
                 "symfony/messenger": "^4.2",
                 "symfony/serializer": "^3.0 || ^4.0"
             },
-            "type": "library",
+            "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "0.11-dev"
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
                 }
             },
             "autoload": {
@@ -5816,7 +5830,7 @@
                 }
             ],
             "description": "Symfony Framework extensions and rules for PHPStan",
-            "time": "2019-04-16T17:26:20+00:00"
+            "time": "2019-05-19T17:40:25+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
