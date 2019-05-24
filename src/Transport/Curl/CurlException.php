@@ -41,6 +41,7 @@ final class CurlException extends PipesFrameworkExceptionAbstract
     )
     {
         parent::__construct($message, $code, $previous);
+
         $this->response = $response;
     }
 

@@ -49,6 +49,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         self::bootKernel();
         $this->dm     = self::$container->get('doctrine_mongodb.odm.default_document_manager');
         $this->client = self::createClient([], []);

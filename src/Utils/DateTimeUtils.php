@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: radek.jirsa
- * Date: 10.12.18
- * Time: 10:56
- */
-
 namespace Hanaboso\CommonsBundle\Utils;
 
 use DateTime;

@@ -6,6 +6,8 @@ use Exception;
 
 /**
  * Class PipesFrameworkExceptionAbstract
+ *
+ * @package Hanaboso\CommonsBundle\Exception
  */
 abstract class PipesFrameworkExceptionAbstract extends Exception
 {

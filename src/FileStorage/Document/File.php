@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: david.horacek
- * Date: 8/22/17
- * Time: 9:25 AM
- */
-
 namespace Hanaboso\CommonsBundle\FileStorage\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;

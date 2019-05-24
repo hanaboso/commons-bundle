@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 10/12/17
- * Time: 1:26 PM
- */
-
 namespace Hanaboso\CommonsBundle\Utils;
 
 /**

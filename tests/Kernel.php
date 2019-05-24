@@ -24,7 +24,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 /**
  * Class Kernel
  *
- * @package App
+ * @package Tests
  */
 final class Kernel extends BaseKernel
 {

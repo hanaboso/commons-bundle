@@ -49,6 +49,7 @@ class S3Driver extends FileStorageDriverAbstract
     )
     {
         parent::__construct($dm, $generator);
+
         $this->client = $client;
         $this->bucket = $bucket;
     }

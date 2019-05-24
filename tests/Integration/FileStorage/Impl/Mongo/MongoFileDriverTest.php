@@ -11,7 +11,7 @@ use Tests\DatabaseTestCaseAbstract;
 /**
  * Class MongoFileDriverTest
  *
- * @package Tests\Integration\FileStorage
+ * @package Tests\Integration\FileStorage\Impl\Mongo
  */
 final class MongoFileDriverTest extends DatabaseTestCaseAbstract
 {

@@ -32,6 +32,7 @@ final class LogstashFormatterTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->logstashFormatter = new LogstashFormatter('test-service');
     }
 
@@ -115,7 +116,7 @@ final class LogstashFormatterTest extends TestCase
                 'class'   => 'Exception',
                 'message' => 'Default exception',
                 'code'    => 0,
-                'file'    => '/srv/project/tests/Unit/Monolog/LogstashFormatterTest.php:99',
+                'file'    => '/srv/project/tests/Unit/Monolog/LogstashFormatterTest.php:100',
                 'trace'   => '',
             ],
         ], $message);
@@ -150,7 +151,7 @@ final class LogstashFormatterTest extends TestCase
                 'class'   => 'Exception',
                 'message' => 'Default exception',
                 'code'    => 0,
-                'file'    => '/srv/project/tests/Unit/Monolog/LogstashFormatterTest.php:134',
+                'file'    => '/srv/project/tests/Unit/Monolog/LogstashFormatterTest.php:135',
                 'trace'   => '',
             ],
             'correlation_id' => '123',

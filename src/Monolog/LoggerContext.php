@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: radek.jirsa
- * Date: 12.11.18
- * Time: 8:55
- */
-
 namespace Hanaboso\CommonsBundle\Monolog;
 
 use Hanaboso\CommonsBundle\Process\ProcessDto;

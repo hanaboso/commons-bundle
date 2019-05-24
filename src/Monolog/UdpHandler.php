@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 15.9.17
- * Time: 11:05
- */
-
 namespace Hanaboso\CommonsBundle\Monolog;
 
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
@@ -37,6 +30,7 @@ class UdpHandler extends AbstractProcessingHandler
     public function __construct(UDPSender $UDPSender, $level = Logger::DEBUG, $bubble = TRUE)
     {
         parent::__construct($level, $bubble);
+
         $this->UDPSender = $UDPSender;
     }
 

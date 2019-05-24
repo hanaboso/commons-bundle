@@ -35,6 +35,7 @@ abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
     public function __construct($name = NULL, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
+
         $this->session = new Session();
     }
 
@@ -44,6 +45,7 @@ abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->dm->getConnection()->dropDatabase('pipes');
         $this->session->invalidate();
         $this->session->clear();

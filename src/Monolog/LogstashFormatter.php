@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 13.9.17
- * Time: 9:23
- */
-
 namespace Hanaboso\CommonsBundle\Monolog;
 
 use Exception;
@@ -37,6 +30,7 @@ class LogstashFormatter extends NormalizerFormatter
     {
         // logstash requires a ISO 8601 format date with optional millisecond precision.
         parent::__construct('Y-m-d\TH:i:s.uP');
+
         $this->serviceType = $serviceType;
     }
 

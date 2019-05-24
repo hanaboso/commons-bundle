@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: stanislav.kundrat
- * Date: 8/8/17
- * Time: 1:19 PM
- */
-
 namespace Hanaboso\CommonsBundle\Metrics;
 
 use Exception;

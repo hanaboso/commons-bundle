@@ -7,7 +7,7 @@ use Hanaboso\CommonsBundle\Traits\Document\DeletedTrait;
 use Hanaboso\CommonsBundle\Traits\Document\IdTrait;
 
 /**
- * Class TestClass
+ * Class TestDocument
  *
  * @package Tests\Integration\Database\Filters\ODM
  *

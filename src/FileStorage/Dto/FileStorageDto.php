@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: david.horacek
- * Date: 8/23/17
- * Time: 8:29 AM
- */
-
 namespace Hanaboso\CommonsBundle\FileStorage\Dto;
 
 use Hanaboso\CommonsBundle\FileStorage\Entity\FileInterface;

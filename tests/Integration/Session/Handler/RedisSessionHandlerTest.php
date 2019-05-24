@@ -25,6 +25,7 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
     public function setUp(): void
     {
         parent::setUp();
+
         /** @var RedisSessionHandler $sessionHandler */
         $sessionHandler = self::$container->get('hbpf.commons.session_handler');
         $this->handler  = $sessionHandler;

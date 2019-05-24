@@ -18,9 +18,9 @@ final class NotificationEventEnum extends EnumAbstract
      * @var string[]
      */
     protected static $choices = [
-        self::ACCESS_EXPIRATION   => self::ACCESS_EXPIRATION,
-        self::DATA_ERROR          => self::DATA_ERROR,
-        self::SERVICE_UNAVAILABLE => self::SERVICE_UNAVAILABLE,
+        self::ACCESS_EXPIRATION   => 'Access Expiration',
+        self::DATA_ERROR          => 'Data Error',
+        self::SERVICE_UNAVAILABLE => 'Service Unavailable',
     ];
 
 }

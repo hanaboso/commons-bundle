@@ -11,6 +11,8 @@ use Tests\KernelTestCaseAbstract;
 
 /**
  * Class S3DriverTest
+ *
+ * @package Tests\Integration\FileStorage\Impl\S3
  */
 final class S3DriverTest extends KernelTestCaseAbstract
 {
@@ -26,6 +28,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
     protected function setUp(): void
     {
         parent::setUp();
+
         /** @var S3Driver $containerDriver */
         $containerDriver = self::$container->get('hbpf.file_storage.driver.s3');
         $this->driver    = $containerDriver;
