@@ -116,7 +116,7 @@ final class LogstashFormatterTest extends TestCase
                 'class'   => 'Exception',
                 'message' => 'Default exception',
                 'code'    => 0,
-                'file'    => '/srv/project/tests/Unit/Monolog/LogstashFormatterTest.php:100',
+                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:100',
                 'trace'   => '',
             ],
         ], $message);
@@ -151,7 +151,7 @@ final class LogstashFormatterTest extends TestCase
                 'class'   => 'Exception',
                 'message' => 'Default exception',
                 'code'    => 0,
-                'file'    => '/srv/project/tests/Unit/Monolog/LogstashFormatterTest.php:135',
+                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:135',
                 'trace'   => '',
             ],
             'correlation_id' => '123',

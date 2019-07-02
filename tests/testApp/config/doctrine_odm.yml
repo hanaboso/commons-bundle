@@ -19,6 +19,11 @@ doctrine_mongodb:
     document_managers:
         default:
             mappings:
+                CommonsDocuments:
+                    type: annotation
+                    is_bundle: false
+                    dir: "%src_dir%/src/Document"
+                    prefix: Hanaboso\CommonsBundle\Document
                 FileDocument:
                     type: annotation
                     is_bundle: false
