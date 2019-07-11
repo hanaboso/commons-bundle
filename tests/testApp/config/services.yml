@@ -2,3 +2,6 @@ services:
     Tests\Controller\:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
+
+    hbpf.connector.null:
+        class: Tests\testApp\NullConnectorForLoaderTest

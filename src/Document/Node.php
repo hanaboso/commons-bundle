@@ -52,7 +52,7 @@ class Node
     /**
      * @var array|PersistentCollection
      *
-     * @MongoDB\EmbedMany(targetDocument="Hanaboso\PipesFramework\Configurator\Document\Embed\EmbedNode")
+     * @MongoDB\EmbedMany(targetDocument="Hanaboso\CommonsBundle\Document\Embed\EmbedNode")
      */
     protected $next = [];
 
