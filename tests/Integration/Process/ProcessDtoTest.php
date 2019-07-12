@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Process;
 
+use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Tests\DatabaseTestCaseAbstract;
 use Tests\PrivateTrait;
@@ -24,12 +25,13 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private const PF_RESULT_CODE = 'pf-result-code';
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testSetStopProcess(): void
     {
 
         $processDto = new ProcessDto();
+        $headers    = [];
 
         $processDto->setStopProcess(self::DO_NOT_CONTINUE);
         $headers[] = $processDto->getHeaders();
@@ -45,14 +47,14 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testSetRepeator()
+    public function testSetRepeator(): void
     {
 
         $processDto = new ProcessDto();
 
-        $processDto->setRepeater(SELF::REPEAT, 20, 15, 'queue');
+        $processDto->setRepeater(10, 20, 15, 'queue');
 
         self::assertEquals($this->getSetRepeaterHeaders(), $processDto->getHeaders());
 
@@ -76,10 +78,14 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetRepeaterHeaders(): array
     {
         return [
-            'pf-repeat-interval' => (string) SELF::REPEAT,
+            self::PF_RESULT_CODE => (string) SELF::REPEAT,
+            'pf-repeat-interval' => '10',
             'pf-repeat-max-hops' => '20',
             'pf-repeat-hops'     => '15',
             'pf-repeat-queue'    => (string) 'queue',
         ];
     }
+
 }
+
+

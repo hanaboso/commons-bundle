@@ -99,9 +99,8 @@ final class ProcessDto
     }
 
     /**
-     * @param string $value
+     * @param int $value
      *
-     * @return ProcessDto
      * @throws Exception
      */
     public function setStopProcess(int $value = self::DO_NOT_CONTINUE): void
@@ -115,33 +114,54 @@ final class ProcessDto
 
     }
 
-    public function setRepeater(int $interval = self::REPEAT, int $max_hops, ?int $repeat_hops = NULL,
+    /**
+     * @param int      $interval
+     * @param int      $maxHops
+     * @param int|null $repeatHops
+     * @param string   $queue
+     *
+     * @throws Exception
+     */
+    public function setRepeater(int $interval, int $maxHops, ?int $repeatHops = NULL,
                                 string $queue = ''): void
     {
         $pipesHeaders = new PipesHeaders();
 
-        $key_interval = $pipesHeaders->createKey(PipesHeaders::REPEAT_INTERVAL);
-        $this->addHeader($key_interval, (string) $interval);
+        $keyRepeat = $pipesHeaders->createKey(PipesHeaders::RESULT_CODE);
+        $this->addHeader($keyRepeat, (string) self::REPEAT);
 
-        if ($max_hops === NULL) {
-            throw new Exception('Value is obligatory and cant be NULL');
+        if ($interval < 1) {
+            throw new Exception('Value invertval is obligatory and cant be NULL');
         }
-        $key_max_hops = $pipesHeaders->createKey(PipesHeaders::REPEAT_MAX_HOPS);
-        $this->addHeader($key_max_hops, (string) $max_hops);
 
-        if ($repeat_hops !== NULL) {
-            $key_repeat_hops = $pipesHeaders->createKey(PipesHeaders::REPEAT_HOPS);
-            $this->addHeader($key_repeat_hops, (string) $repeat_hops);
+        $keyInterval = $pipesHeaders->createKey(PipesHeaders::REPEAT_INTERVAL);
+        $this->addHeader($keyInterval, (string) $interval);
+
+        if ($maxHops < 1) {
+            throw new Exception('Value maxHops is obligatory and cant be NULL');
+        }
+
+        $keyMaxHops = $pipesHeaders->createKey(PipesHeaders::REPEAT_MAX_HOPS);
+        $this->addHeader($keyMaxHops, (string) $maxHops);
+
+        if ($repeatHops !== NULL) {
+            $keyRepeatHops = $pipesHeaders->createKey(PipesHeaders::REPEAT_HOPS);
+            $this->addHeader($keyRepeatHops, (string) $repeatHops);
         }
 
         if ($queue !== '') {
-            $key_queue = $pipesHeaders->createKey(PipesHeaders::REPEAT_QUEUE);
-            $this->addHeader($key_queue, $queue);
+            $keyQueue = $pipesHeaders->createKey(PipesHeaders::REPEAT_QUEUE);
+            $this->addHeader($keyQueue, $queue);
         }
 
     }
 
-    private function validateStatus($value): void
+    /**
+     * @param int $value
+     *
+     * @throws Exception
+     */
+    private function validateStatus(int $value): void
     {
 
         if (!in_array($value, [self::DO_NOT_CONTINUE, self::SPLITTER_BATCH_END, self::STOP_AND_FAILED])) {
