@@ -4,7 +4,8 @@ namespace Tests\Unit\Transport\Soap;
 
 use Exception;
 use GuzzleHttp\Psr7\Uri;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
@@ -46,8 +47,10 @@ final class SoapManagerTest extends TestCase
         /** @var InfluxDbSender $influx */
         $influx = self::createMock(InfluxDbSender::class);
 
+        $loader = new MetricsSenderLoader('influx', $influx, NULL);
+
         $soapManager = new SoapManager($soapClientFactory);
-        $soapManager->setInfluxSender($influx);
+        $soapManager->setMetricsSender($loader);
         $result = $soapManager->send($request);
 
         self::assertInstanceOf(ResponseDto::class, $result);

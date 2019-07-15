@@ -4,7 +4,7 @@ namespace Hanaboso\CommonsBundle\Transport\Soap;
 
 use Exception;
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
@@ -36,9 +36,9 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender|null
+     * @var MetricsSenderLoader|null
      */
-    private $influxSender;
+    private $metricsSender;
 
     /**
      * @var array
@@ -54,7 +54,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     {
         $this->soapClientFactory = $soapClientFactory;
         $this->logger            = new NullLogger();
-        $this->influxSender      = NULL;
+        $this->metricsSender     = NULL;
     }
 
     /**
@@ -70,13 +70,13 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     }
 
     /**
-     * @param InfluxDbSender $influxSender
+     * @param MetricsSenderLoader $metricsSender
      *
      * @return SoapManager
      */
-    public function setInfluxSender(InfluxDbSender $influxSender): SoapManager
+    public function setMetricsSender(MetricsSenderLoader $metricsSender): SoapManager
     {
-        $this->influxSender = $influxSender;
+        $this->metricsSender = $metricsSender;
 
         return $this;
     }
@@ -220,13 +220,13 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
      */
     protected function sendMetrics(RequestDtoAbstract $dto): void
     {
-        if ($this->influxSender !== NULL) {
+        if ($this->metricsSender !== NULL) {
             $info  = $dto->getHeader()->getParams();
             $times = CurlMetricUtils::getTimes($this->startTimes);
 
             try {
                 CurlMetricUtils::sendCurlMetrics(
-                    $this->influxSender,
+                    $this->metricsSender->getSender(),
                     $times,
                     $info['node_id'][0] ?? NULL,
                     $info['correlation_id'][0] ?? NULL

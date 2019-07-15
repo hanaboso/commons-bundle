@@ -7,18 +7,18 @@
  * Time: 13:44
  */
 
-namespace Tests\Integration\Metrics;
+namespace Tests\Integration\Metrics\Impl;
 
 use Exception;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
-use Hanaboso\CommonsBundle\Metrics\UDPSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\UDPSender;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class InfluxDbSenderTest
  *
- * @package Tests\Integration\Metrics
+ * @package Tests\Integration\Metrics\Impl
  */
 final class InfluxDbSenderTest extends TestCase
 {

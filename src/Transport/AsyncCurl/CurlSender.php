@@ -7,7 +7,7 @@ use Clue\React\Buzz\Message\ResponseException;
 use Exception;
 use GuzzleHttp\Psr7\Request;
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
@@ -41,9 +41,9 @@ class CurlSender implements LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender|null
+     * @var MetricsSenderLoader|null
      */
-    private $influxSender;
+    private $metricsSender;
 
     /**
      * @var array
@@ -57,9 +57,9 @@ class CurlSender implements LoggerAwareInterface
      */
     public function __construct(Browser $browser)
     {
-        $this->browser      = $browser;
-        $this->logger       = new NullLogger();
-        $this->influxSender = NULL;
+        $this->browser       = $browser;
+        $this->logger        = new NullLogger();
+        $this->metricsSender = NULL;
     }
 
     /**
@@ -71,13 +71,13 @@ class CurlSender implements LoggerAwareInterface
     }
 
     /**
-     * @param InfluxDbSender $influxSender
+     * @param MetricsSenderLoader $metricsSender
      *
      * @return CurlSender
      */
-    public function setInfluxSender(InfluxDbSender $influxSender): CurlSender
+    public function setMetricsSender(MetricsSenderLoader $metricsSender): CurlSender
     {
-        $this->influxSender = $influxSender;
+        $this->metricsSender = $metricsSender;
 
         return $this;
     }
@@ -170,13 +170,13 @@ class CurlSender implements LoggerAwareInterface
      */
     protected function sendMetrics(RequestDto $dto): void
     {
-        if ($this->influxSender !== NULL) {
+        if ($this->metricsSender !== NULL) {
             $info  = $dto->getDebugInfo();
             $times = CurlMetricUtils::getTimes($this->startTimes);
 
             try {
                 CurlMetricUtils::sendCurlMetrics(
-                    $this->influxSender,
+                    $this->metricsSender->getSender(),
                     $times,
                     $info['node_id'][0] ?? NULL,
                     $info['correlation_id'][0] ?? NULL
