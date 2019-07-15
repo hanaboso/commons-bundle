@@ -18,10 +18,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('hb_pf_common');
-
-        return $treeBuilder;
+        return new TreeBuilder('hb_pf_common');
     }
 
 }

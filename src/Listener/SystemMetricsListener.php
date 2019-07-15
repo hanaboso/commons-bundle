@@ -15,8 +15,8 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -64,9 +64,9 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     /**
      * Adds system metrics values to request object
      *
-     * @param FilterControllerEvent $event
+     * @param ControllerEvent $event
      */
-    public function onKernelController(FilterControllerEvent $event): void
+    public function onKernelController(ControllerEvent $event): void
     {
         try {
             if (!$event->isMasterRequest() || !$this->isPipesRequest($event->getRequest())) {
@@ -85,9 +85,9 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     }
 
     /**
-     * @param PostResponseEvent $event
+     * @param TerminateEvent $event
      */
-    public function onKernelTerminate(PostResponseEvent $event): void
+    public function onKernelTerminate(TerminateEvent $event): void
     {
         try {
             if (!$event->isMasterRequest() || !$this->isPipesRequest($event->getRequest())) {

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Hanaboso\CommonsBundle\Reduction;
+namespace Hanaboso\CommonsBundle\Database\Reduction;
 
 /**
  * Class NodeReduction
  *
- * @package Hanaboso\CommonsBundle\Reduction
+ * @package Hanaboso\CommonsBundle\Database\Reduction
  */
 final class NodeReduction
 {

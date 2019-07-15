@@ -5,10 +5,10 @@ namespace Tests\Integration\Database\Repository;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Document\Node;
 use Hanaboso\CommonsBundle\Database\Document\Topology;
+use Hanaboso\CommonsBundle\Database\Reduction\NodeReduction;
 use Hanaboso\CommonsBundle\Database\Repository\NodeRepository;
 use Hanaboso\CommonsBundle\Enum\HandlerEnum;
 use Hanaboso\CommonsBundle\Enum\TypeEnum;
-use Hanaboso\CommonsBundle\Reduction\NodeReduction;
 use LogicException;
 use Tests\DatabaseTestCaseAbstract;
 

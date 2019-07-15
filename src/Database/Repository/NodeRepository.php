@@ -5,9 +5,9 @@ namespace Hanaboso\CommonsBundle\Database\Repository;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Hanaboso\CommonsBundle\Database\Document\Node;
 use Hanaboso\CommonsBundle\Database\Document\Topology;
+use Hanaboso\CommonsBundle\Database\Reduction\NodeReduction;
 use Hanaboso\CommonsBundle\Enum\HandlerEnum;
 use Hanaboso\CommonsBundle\Enum\TypeEnum;
-use Hanaboso\CommonsBundle\Reduction\NodeReduction;
 use LogicException;
 
 /**
