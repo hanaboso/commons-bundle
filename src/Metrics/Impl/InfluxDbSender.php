@@ -1,16 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Hanaboso\CommonsBundle\Metrics;
+namespace Hanaboso\CommonsBundle\Metrics\Impl;
 
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use InvalidArgumentException;
 
 /**
  * Class InfluxDbSender
  *
- * @package Hanaboso\CommonsBundle\Metrics
+ * @package Hanaboso\CommonsBundle\Metrics\Impl
  */
-class InfluxDbSender
+class InfluxDbSender implements MetricsSenderInterface
 {
 
     /**

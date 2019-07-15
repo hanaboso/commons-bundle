@@ -3,7 +3,7 @@
 namespace Hanaboso\CommonsBundle\Monolog;
 
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
-use Hanaboso\CommonsBundle\Metrics\UDPSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\UDPSender;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 

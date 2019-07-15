@@ -6,7 +6,8 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
@@ -48,8 +49,10 @@ final class CurlManagerTest extends TestCase
         /** @var InfluxDbSender $influx */
         $influx = self::createMock(InfluxDbSender::class);
 
+        $loader = new MetricsSenderLoader('influx', $influx, NULL);
+
         $curlManager = new CurlManager($curlClientFactory);
-        $curlManager->setInfluxSender($influx);
+        $curlManager->setMetricsSender($loader);
         $result = $curlManager->send($requestDto);
 
         self::assertInstanceOf(ResponseDto::class, $result);
@@ -70,9 +73,10 @@ final class CurlManagerTest extends TestCase
 
         /** @var InfluxDbSender $influx */
         $influx = self::createMock(InfluxDbSender::class);
+        $loader = new MetricsSenderLoader('influx', $influx, NULL);
 
         $curlManager = new CurlManager(new CurlClientFactory());
-        $curlManager->setInfluxSender($influx);
+        $curlManager->setMetricsSender($loader);
         $curlManager->send($requestDto, ['headers' => 123]);
     }
 

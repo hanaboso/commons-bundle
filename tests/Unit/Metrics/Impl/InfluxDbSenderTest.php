@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Metrics;
+namespace Tests\Unit\Metrics\Impl;
 
 use Exception;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
-use Hanaboso\CommonsBundle\Metrics\UDPSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\UDPSender;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class InfluxDbSenderTest
  *
- * @package Tests\Unit\Metrics
+ * @package Tests\Unit\Metrics\Impl
  */
 final class InfluxDbSenderTest extends TestCase
 {

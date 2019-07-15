@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\CurlManagerInterface;
@@ -45,9 +45,9 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender|null
+     * @var MetricsSenderLoader|null
      */
-    private $influxSender;
+    private $metricsSender;
 
     /**
      * @var array
@@ -63,7 +63,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     {
         $this->curlClientFactory = $curlClientFactory;
         $this->logger            = new NullLogger();
-        $this->influxSender      = NULL;
+        $this->metricsSender     = NULL;
     }
 
     /**
@@ -79,13 +79,13 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     }
 
     /**
-     * @param InfluxDbSender $influxSender
+     * @param MetricsSenderLoader $metricsSender
      *
      * @return CurlManager
      */
-    public function setInfluxSender(InfluxDbSender $influxSender): CurlManager
+    public function setMetricsSender(MetricsSenderLoader $metricsSender): CurlManager
     {
-        $this->influxSender = $influxSender;
+        $this->metricsSender = $metricsSender;
 
         return $this;
     }
@@ -198,13 +198,13 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      */
     protected function sendMetrics(RequestDto $dto): void
     {
-        if ($this->influxSender !== NULL) {
+        if ($this->metricsSender !== NULL) {
             $info  = $dto->getDebugInfo();
             $times = CurlMetricUtils::getTimes($this->startTimes);
 
             try {
                 CurlMetricUtils::sendCurlMetrics(
-                    $this->influxSender,
+                    $this->metricsSender->getSender(),
                     $times,
                     $info['node_id'][0] ?? NULL,
                     $info['correlation_id'][0] ?? NULL

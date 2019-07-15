@@ -15,6 +15,10 @@ parameters:
     influx.rabbit_table: rabbitmq
     influx.counter_table: processes
 
+    #MongoDb sender
+    mongodb.monolith_table: connector
+    mongodb.connector_table: monolith
+
     # FTP
     ftp.host: ''
     ftp.port: 21
