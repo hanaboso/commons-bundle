@@ -9,3 +9,6 @@ parameters:
 
     env(AWS_BUCKET): bucket
     aws_bucket: '%env(AWS_BUCKET)%'
+
+    env(METRICS_SERVICE): influx
+    metrics_service: '%env(METRICS_SERVICE)%'

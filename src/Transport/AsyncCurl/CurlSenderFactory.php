@@ -3,7 +3,7 @@
 namespace Hanaboso\CommonsBundle\Transport\AsyncCurl;
 
 use Clue\React\Buzz\Browser;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -25,17 +25,17 @@ class CurlSenderFactory implements LoggerAwareInterface
     private $logger;
 
     /**
-     * @var InfluxDbSender|null
+     * @var MetricsSenderLoader|null
      */
-    private $influxSender;
+    private $metricsLoader;
 
     /**
      * CurlSenderFactory constructor.
      */
     public function __construct()
     {
-        $this->logger       = new NullLogger();
-        $this->influxSender = NULL;
+        $this->logger        = new NullLogger();
+        $this->metricsLoader = NULL;
     }
 
     /**
@@ -51,13 +51,13 @@ class CurlSenderFactory implements LoggerAwareInterface
     }
 
     /**
-     * @param InfluxDbSender $influxSender
+     * @param MetricsSenderLoader $metricsLoader
      *
      * @return CurlSenderFactory
      */
-    public function setInfluxSender(InfluxDbSender $influxSender): CurlSenderFactory
+    public function setMetricsSender(MetricsSenderLoader $metricsLoader): CurlSenderFactory
     {
-        $this->influxSender = $influxSender;
+        $this->metricsLoader = $metricsLoader;
 
         return $this;
     }
@@ -84,8 +84,8 @@ class CurlSenderFactory implements LoggerAwareInterface
         $curlSender = new CurlSender($browser);
         $curlSender->setLogger($this->logger);
 
-        if ($this->influxSender) {
-            $curlSender->setInfluxSender($this->influxSender);
+        if ($this->metricsLoader) {
+            $curlSender->setMetricsSender($this->metricsLoader);
         }
 
         return $curlSender;

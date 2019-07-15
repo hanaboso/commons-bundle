@@ -6,7 +6,7 @@ use Exception;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\Exception\SystemMetricException;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
@@ -35,19 +35,19 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     private $logger;
 
     /**
-     * @var InfluxDbSender
+     * @var MetricsSenderLoader
      */
-    private $sender;
+    private $metricsSender;
 
     /**
      * SystemMetricsListener constructor.
      *
-     * @param InfluxDbSender $sender
+     * @param MetricsSenderLoader $metricsSender
      */
-    public function __construct(InfluxDbSender $sender)
+    public function __construct(MetricsSenderLoader $metricsSender)
     {
-        $this->sender = $sender;
-        $this->logger = new NullLogger();
+        $this->metricsSender = $metricsSender;
+        $this->logger        = new NullLogger();
     }
 
     /**
@@ -130,7 +130,7 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
         $headers = $request->headers;
         $times   = CurlMetricUtils::getTimes($request->attributes->get(self::METRICS_ATTRIBUTES_KEY));
 
-        $this->sender->send(
+        $this->metricsSender->getSender()->send(
             [
                 MetricsEnum::REQUEST_TOTAL_DURATION => $times[CurlMetricUtils::KEY_REQUEST_DURATION],
                 MetricsEnum::CPU_USER_TIME          => $times[CurlMetricUtils::KEY_USER_TIME],

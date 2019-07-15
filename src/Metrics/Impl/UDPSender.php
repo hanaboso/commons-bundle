@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Hanaboso\CommonsBundle\Metrics;
+namespace Hanaboso\CommonsBundle\Metrics\Impl;
 
 use Exception;
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
 /**
  * Class UDPSender
  *
- * @package Hanaboso\CommonsBundle\Metrics
+ * @package Hanaboso\CommonsBundle\Metrics\Impl
  */
 class UDPSender implements LoggerAwareInterface
 {

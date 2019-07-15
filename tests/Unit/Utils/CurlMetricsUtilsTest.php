@@ -7,7 +7,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
-use Hanaboso\CommonsBundle\Metrics\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
@@ -27,6 +28,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
      */
     public function testCurlMetrics(): void
     {
+        /** @var InfluxDbSender|MockObject $influx */
         $influx = self::createMock(InfluxDbSender::class);
         $influx
             ->expects(self::any())
@@ -34,11 +36,13 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
                 function (array $times, array $data): bool {
                     $data;
 
-                    self::assertGreaterThan(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
+                    self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
 
                     return TRUE;
                 }
             ));
+
+        $loader = new MetricsSenderLoader('influx', $influx, NULL);
 
         /** @var MockObject|Client $client */
         $client = self::createMock(Client::class);
@@ -50,6 +54,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 
         /** @var CurlManager $manager */
         $manager = new CurlManager($factory);
+        $manager->setMetricsSender($loader);
         $dto     = new RequestDto('GET', new Uri('http://google.com'));
         $manager->send($dto);
     }
