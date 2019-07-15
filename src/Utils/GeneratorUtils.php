@@ -2,8 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Utils;
 
-use Hanaboso\CommonsBundle\Document\Node;
-use Hanaboso\CommonsBundle\Document\Topology;
+use Hanaboso\CommonsBundle\Database\Document\Node;
+use Hanaboso\CommonsBundle\Database\Document\Topology;
 use Nette\Utils\Strings;
 
 /**

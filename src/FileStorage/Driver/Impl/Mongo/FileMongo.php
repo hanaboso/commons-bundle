@@ -4,7 +4,7 @@ namespace Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo;
 
 use Doctrine\MongoDB\GridFSFile;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Hanaboso\CommonsBundle\Traits\Document\IdTrait;
+use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
 
 /**
  * Class FileMongo

@@ -6,7 +6,7 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Hanaboso\CommonsBundle\DatabaseManager\DatabaseManagerLocator;
+use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto;

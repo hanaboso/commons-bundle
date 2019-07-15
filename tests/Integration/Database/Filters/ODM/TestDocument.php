@@ -3,8 +3,8 @@
 namespace Tests\Integration\Database\Filters\ODM;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Hanaboso\CommonsBundle\Traits\Document\DeletedTrait;
-use Hanaboso\CommonsBundle\Traits\Document\IdTrait;
+use Hanaboso\CommonsBundle\Database\Traits\Document\DeletedTrait;
+use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
 
 /**
  * Class TestDocument

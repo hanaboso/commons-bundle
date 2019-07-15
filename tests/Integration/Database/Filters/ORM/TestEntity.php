@@ -3,8 +3,8 @@
 namespace Tests\Integration\Database\Filters\ORM;
 
 use Doctrine\ORM\Mapping as ORM;
-use Hanaboso\CommonsBundle\Traits\Entity\DeletedTrait;
-use Hanaboso\CommonsBundle\Traits\Entity\IdTrait;
+use Hanaboso\CommonsBundle\Database\Traits\Entity\DeletedTrait;
+use Hanaboso\CommonsBundle\Database\Traits\Entity\IdTrait;
 
 /**
  * Class TestEntity

@@ -3,7 +3,7 @@
 namespace Tests\Integration\FileStorage;
 
 use Exception;
-use Hanaboso\CommonsBundle\DatabaseManager\DatabaseManagerLocator;
+use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
 use Hanaboso\CommonsBundle\FileStorage\Document\File;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverInterface;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;

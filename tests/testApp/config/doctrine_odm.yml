@@ -22,8 +22,8 @@ doctrine_mongodb:
                 CommonsDocuments:
                     type: annotation
                     is_bundle: false
-                    dir: "%src_dir%/src/Document"
-                    prefix: Hanaboso\CommonsBundle\Document
+                    dir: "%src_dir%/src/Database/Document"
+                    prefix: Hanaboso\CommonsBundle\Database\Document
                 FileDocument:
                     type: annotation
                     is_bundle: false
