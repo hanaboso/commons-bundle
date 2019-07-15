@@ -22,7 +22,7 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     public function testGetEmail(): void
     {
         $imap  = new ImapConnector();
-        $email = $imap->create($this->getDto())->getMail('287');
+        $email = $imap->create($this->getDto())->getMail(287);
 
         self::assertEquals('287', $email->id);
     }
@@ -34,7 +34,7 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     public function testMoveEmail(): void
     {
         $imap = new ImapConnector();
-        $imap->create($this->getDto())->moveMail('299', 'mailDestination');
+        $imap->create($this->getDto())->moveMail(299, 'mailDestination');
 
         $this->getDto()->setFolder('INBOX.mailDestination');
         $email = $imap->create($this->getDto())->listMails();

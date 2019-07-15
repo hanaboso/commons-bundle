@@ -57,7 +57,7 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
         /** @var FileStorageDriverInterface|MockObject $driver */
         $driver = self::createPartialMock(FileStorageDriverInterface::class, ['save', 'delete', 'get']);
         $driver->expects(self::any())->method('save')->willReturn(new FileInfoDto('fileUrl', '7'));
-        $driver->expects(self::any())->method('delete')->willReturn('');
+        $driver->expects(self::any())->method('delete');
         $driver->expects(self::any())->method('get')->willReturn('test_content');
 
         /** @var DatabaseManagerLocator $managerLocator */

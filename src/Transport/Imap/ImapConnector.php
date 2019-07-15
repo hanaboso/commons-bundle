@@ -66,28 +66,28 @@ class ImapConnector
     }
 
     /**
-     * @param string $mailId
+     * @param int $mailId
      *
      * @return IncomingMail
      */
-    public function getMail(string $mailId): IncomingMail
+    public function getMail(int $mailId): IncomingMail
     {
         return $this->mailbox->getMail($mailId);
     }
 
     /**
-     * @param string $mailId
+     * @param int $mailId
      */
-    public function deleteMail(string $mailId): void
+    public function deleteMail(int $mailId): void
     {
         $this->mailbox->deleteMail($mailId);
     }
 
     /**
-     * @param string $mailId
+     * @param int    $mailId
      * @param string $destination
      */
-    public function moveMail(string $mailId, string $destination): void
+    public function moveMail(int $mailId, string $destination): void
     {
         $this->mailbox->moveMail($mailId, $this->checkMailbox($destination));
     }
