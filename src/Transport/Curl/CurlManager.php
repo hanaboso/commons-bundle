@@ -2,10 +2,10 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl;
 
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
@@ -209,7 +209,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                     $info['node_id'][0] ?? NULL,
                     $info['correlation_id'][0] ?? NULL
                 );
-            } catch (DateTimeException $e) {
+            } catch (Exception $e) {
                 throw new CurlException($e->getMessage(), $e->getCode(), $e);
             }
         }

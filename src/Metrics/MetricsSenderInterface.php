@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Metrics;
 
+use Exception;
+
 /**
  * Interface MetricsSenderInterface
  *
@@ -15,6 +17,7 @@ interface MetricsSenderInterface
      * @param array $tags
      *
      * @return bool
+     * @throws Exception
      */
     public function send(array $fields, array $tags = []): bool;
 

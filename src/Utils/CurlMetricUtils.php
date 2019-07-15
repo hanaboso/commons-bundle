@@ -2,8 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Utils;
 
+use Exception;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use Hanaboso\CommonsBundle\Metrics\SystemMetrics;
 
@@ -47,7 +47,7 @@ class CurlMetricUtils
      * @param null|string            $nodeId
      * @param null|string            $correlationId
      *
-     * @throws DateTimeException
+     * @throws Exception
      */
     public static function sendCurlMetrics(
         MetricsSenderInterface $sender,

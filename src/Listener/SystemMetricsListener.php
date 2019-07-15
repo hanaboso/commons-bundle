@@ -4,7 +4,6 @@ namespace Hanaboso\CommonsBundle\Listener;
 
 use Exception;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\Exception\SystemMetricException;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
@@ -123,7 +122,7 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     /**
      * @param Request $request
      *
-     * @throws DateTimeException
+     * @throws Exception
      */
     private function sendMetrics(Request $request): void
     {

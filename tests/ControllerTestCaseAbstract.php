@@ -4,7 +4,7 @@ namespace Tests;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
 use stdClass;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -17,7 +17,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
 {
 
     /**
-     * @var Client
+     * @var KernelBrowser
      */
     protected $client;
 

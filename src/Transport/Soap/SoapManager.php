@@ -3,7 +3,6 @@
 namespace Hanaboso\CommonsBundle\Transport\Soap;
 
 use Exception;
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
@@ -231,7 +230,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                     $info['node_id'][0] ?? NULL,
                     $info['correlation_id'][0] ?? NULL
                 );
-            } catch (DateTimeException $e) {
+            } catch (Exception $e) {
                 throw new CurlException($e->getMessage(), $e->getCode(), $e);
             }
         }

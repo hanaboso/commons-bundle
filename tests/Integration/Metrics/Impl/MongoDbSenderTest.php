@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Metrics\Impl;
 
+use Doctrine\MongoDB\Connection;
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender;
 use Tests\DatabaseTestCaseAbstract;
@@ -21,7 +22,8 @@ final class MongoDbSenderTest extends DatabaseTestCaseAbstract
      */
     public function testSend(): void
     {
-        $conn = self::$container->get('doctrine_mongodb.odm.default_connection');
+        /** @var Connection $conn */
+        $conn   = self::$container->get('doctrine_mongodb.odm.default_connection');
         $sender = new MongoDbSender($conn, 'test');
         $conn->selectCollection('metrics', 'test')->remove([]);
 

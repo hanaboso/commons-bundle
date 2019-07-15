@@ -11,16 +11,6 @@ services:
       - APP_ENV=dev
       - DEV_UID=${DEV_UID}
       - DEV_GID=${DEV_GID}
-    depends_on:
-      - mongo
-      - redis
-      - mariadb
-      - influxdb
-    links:
-      - mongo
-      - redis
-      - mariadb
-      - influxdb
 
   mongo:
       image: mongo:latest
@@ -47,7 +37,7 @@ services:
       - redis:/data
 
   influxdb:
-    image: influxdb:1.2-alpine
+    image: influxdb:1.6-alpine
     ports:
     - ${DEV_IP}:8083:8083
     - ${DEV_IP}:8086:8086
