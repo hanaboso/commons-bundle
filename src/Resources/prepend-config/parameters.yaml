@@ -12,3 +12,7 @@ parameters:
 
     env(METRICS_SERVICE): influx
     metrics_service: '%env(METRICS_SERVICE)%'
+
+    #MongoDb sender
+    mongodb.monolith_table: connector
+    mongodb.connector_table: monolith
