@@ -8,7 +8,7 @@ namespace Hanaboso\CommonsBundle\Process;
  * @package Hanaboso\CommonsBundle\Process
  */
 
-use Exception;
+use Hanaboso\CommonsBundle\Exception\PipesFrameworkException;
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
 
 /**
@@ -101,7 +101,7 @@ final class ProcessDto
     /**
      * @param int $value
      *
-     * @throws Exception
+     * @throws PipesFrameworkException
      */
     public function setStopProcess(int $value = self::DO_NOT_CONTINUE): void
     {
@@ -120,10 +120,15 @@ final class ProcessDto
      * @param int|null $repeatHops
      * @param string   $queue
      *
-     * @throws Exception
+     * @throws PipesFrameworkException
      */
-    public function setRepeater(int $interval, int $maxHops, ?int $repeatHops = NULL,
-                                string $queue = ''): void
+    public function setRepeater(
+        int $interval,
+        int $maxHops,
+        ?int $repeatHops = NULL,
+        string $queue = ''
+    ): void
+
     {
         $pipesHeaders = new PipesHeaders();
 
@@ -131,14 +136,14 @@ final class ProcessDto
         $this->addHeader($keyRepeat, (string) self::REPEAT);
 
         if ($interval < 1) {
-            throw new Exception('Value invertval is obligatory and cant be NULL');
+            throw new PipesFrameworkException('Value inverval is obligatory and cant be NULL', 2);
         }
 
         $keyInterval = $pipesHeaders->createKey(PipesHeaders::REPEAT_INTERVAL);
         $this->addHeader($keyInterval, (string) $interval);
 
         if ($maxHops < 1) {
-            throw new Exception('Value maxHops is obligatory and cant be NULL');
+            throw new PipesFrameworkException('Value maxHops is obligatory and cant be NULL', 2);
         }
 
         $keyMaxHops = $pipesHeaders->createKey(PipesHeaders::REPEAT_MAX_HOPS);
@@ -159,14 +164,14 @@ final class ProcessDto
     /**
      * @param int $value
      *
-     * @throws Exception
+     * @throws PipesFrameworkException
      */
     private function validateStatus(int $value): void
     {
 
         if (!in_array($value, [self::DO_NOT_CONTINUE, self::SPLITTER_BATCH_END, self::STOP_AND_FAILED])) {
 
-            throw new Exception('Value does not match with the required one');
+            throw new PipesFrameworkException('Value does not match with the required one', 2);
         }
     }
 
