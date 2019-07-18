@@ -4,6 +4,7 @@ namespace Tests\Integration\Process;
 
 use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
+use Hanaboso\CommonsBundle\Utils\PipesHeaders;
 use Tests\DatabaseTestCaseAbstract;
 use Tests\PrivateTrait;
 
@@ -17,13 +18,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
 
     use PrivateTrait;
 
-    private const REPEAT             = 1001;
-    private const DO_NOT_CONTINUE    = 1003;
-    private const SPLITTER_BATCH_END = 1005;
-    private const STOP_AND_FAILED    = 1006;
-
-    private const PF_RESULT_CODE = 'pf-result-code';
-
     /**
      * @throws Exception
      */
@@ -33,13 +27,13 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $processDto = new ProcessDto();
         $headers    = [];
 
-        $processDto->setStopProcess(self::DO_NOT_CONTINUE);
+        $processDto->setStopProcess(ProcessDto::DO_NOT_CONTINUE);
         $headers[] = $processDto->getHeaders();
 
-        $processDto->setStopProcess(self::SPLITTER_BATCH_END);
+        $processDto->setStopProcess(ProcessDto::SPLITTER_BATCH_END);
         $headers[] = $processDto->getHeaders();
 
-        $processDto->setStopProcess(self::STOP_AND_FAILED);
+        $processDto->setStopProcess(ProcessDto::STOP_AND_FAILED);
         $headers[] = $processDto->getHeaders();
 
         self::assertEquals($this->getSetStopProcessHeaders(), $headers);
@@ -66,9 +60,9 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetStopProcessHeaders(): array
     {
         return [
-            [self::PF_RESULT_CODE => (string) SELF::DO_NOT_CONTINUE],
-            [self::PF_RESULT_CODE => (string) SELF::SPLITTER_BATCH_END],
-            [self::PF_RESULT_CODE => (string) SELF::STOP_AND_FAILED],
+            [$this->getPfResultCode() => (string) ProcessDto::DO_NOT_CONTINUE],
+            [$this->getPfResultCode() => (string) ProcessDto::SPLITTER_BATCH_END],
+            [$this->getPfResultCode() => (string) ProcessDto::STOP_AND_FAILED],
         ];
     }
 
@@ -78,12 +72,20 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetRepeaterHeaders(): array
     {
         return [
-            self::PF_RESULT_CODE => (string) SELF::REPEAT,
-            'pf-repeat-interval' => '10',
-            'pf-repeat-max-hops' => '20',
-            'pf-repeat-hops'     => '15',
-            'pf-repeat-queue'    => (string) 'queue',
+            $this->getPfResultCode() => (string) ProcessDto::REPEAT,
+            'pf-repeat-interval'     => '10',
+            'pf-repeat-max-hops'     => '20',
+            'pf-repeat-hops'         => '15',
+            'pf-repeat-queue'        => (string) 'queue',
         ];
+    }
+
+    /**
+     * @return string
+     */
+    private function getPfResultCode(): string
+    {
+        return PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
     }
 
 }

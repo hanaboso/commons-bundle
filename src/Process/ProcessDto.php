@@ -29,10 +29,10 @@ final class ProcessDto
      */
     private $headers = [];
 
-    private const REPEAT             = 1001;
-    private const DO_NOT_CONTINUE    = 1003;
-    private const SPLITTER_BATCH_END = 1005;
-    private const STOP_AND_FAILED    = 1006;
+    public const REPEAT             = 1001;
+    public const DO_NOT_CONTINUE    = 1003;
+    public const SPLITTER_BATCH_END = 1005;
+    public const STOP_AND_FAILED    = 1006;
 
     /**
      * @return string
@@ -107,7 +107,7 @@ final class ProcessDto
     {
 
         $this->validateStatus($value);
-        $key          = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
+        $key = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
 
         $this->addHeader($key, (string) $value);
 
@@ -129,20 +129,24 @@ final class ProcessDto
     ): void
 
     {
-        $keyRepeat =  PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
+        $keyRepeat = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
         $this->addHeader($keyRepeat, (string) self::REPEAT);
 
         if ($interval < 1) {
-            throw new PipesFrameworkException('Value inverval is obligatory and cant be NULL',
-                PipesFrameworkException::WRONG_VALUE);
+            throw new PipesFrameworkException(
+                'Value inverval is obligatory and cant be NULL',
+                PipesFrameworkException::WRONG_VALUE
+            );
         }
 
         $keyInterval = PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL);
         $this->addHeader($keyInterval, (string) $interval);
 
         if ($maxHops < 1) {
-            throw new PipesFrameworkException('Value maxHops is obligatory and cant be NULL',
-                PipesFrameworkException::WRONG_VALUE);
+            throw new PipesFrameworkException(
+                'Value maxHops is obligatory and cant be NULL',
+                PipesFrameworkException::WRONG_VALUE
+            );
         }
 
         $keyMaxHops = PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS);
@@ -167,11 +171,11 @@ final class ProcessDto
      */
     private function validateStatus(int $value): void
     {
-
         if (!in_array($value, [self::DO_NOT_CONTINUE, self::SPLITTER_BATCH_END, self::STOP_AND_FAILED])) {
-
-            throw new PipesFrameworkException('Value does not match with the required one',
-                PipesFrameworkException::WRONG_VALUE);
+            throw new PipesFrameworkException(
+                'Value does not match with the required one',
+                PipesFrameworkException::WRONG_VALUE
+            );
         }
     }
 
