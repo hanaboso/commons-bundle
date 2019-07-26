@@ -5,6 +5,7 @@ namespace Hanaboso\CommonsBundle\Metrics\Impl;
 use Doctrine\MongoDB\Connection;
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
+use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
 
 /**
  * Class MongoDbSender
@@ -45,6 +46,8 @@ final class MongoDbSender implements MetricsSenderInterface
      */
     public function send(array $fields, array $tags = []): bool
     {
+        $fields['created'] = DateTimeUtils::getUtcDateTime()->getTimestamp();
+
         $data = [
             'fields' => $fields,
             'tags'   => $tags,
