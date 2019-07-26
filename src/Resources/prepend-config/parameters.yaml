@@ -14,5 +14,8 @@ parameters:
     metrics_service: '%env(METRICS_SERVICE)%'
 
     #MongoDb sender
-    mongodb.monolith_table: connector
-    mongodb.connector_table: monolith
+    mongodb.monolith_table: monolith
+    mongodb.connector_table: connectors
+    mongodb.node_table: bridges
+    mongodb.rabbit_table: rabbitmq
+    mongodb.counter_table: processes
