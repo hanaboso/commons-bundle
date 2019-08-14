@@ -7,8 +7,8 @@ use Clue\React\Buzz\Message\ResponseException;
 use Exception;
 use GuzzleHttp\Psr7\Request;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
-use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
+use Hanaboso\CommonsBundle\Transport\Utils\MetricsTrait;
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
@@ -29,6 +29,8 @@ use function React\Promise\resolve;
 class CurlSender implements LoggerAwareInterface
 {
 
+    use MetricsTrait;
+
     /**
      * @var Browser
      */
@@ -39,15 +41,6 @@ class CurlSender implements LoggerAwareInterface
      */
     private $logger;
 
-    /**
-     * @var MetricsSenderLoader|null
-     */
-    private $metricsSender;
-
-    /**
-     * @var array
-     */
-    private $startTimes = [];
 
     /**
      * CurlSender constructor.
@@ -160,30 +153,6 @@ class CurlSender implements LoggerAwareInterface
         $this->logger->debug($message, $debugInfo);
 
         $response->getBody()->rewind();
-    }
-
-    /**
-     * @param RequestDto $dto
-     *
-     * @throws CurlException
-     */
-    protected function sendMetrics(RequestDto $dto): void
-    {
-        if ($this->metricsSender !== NULL) {
-            $info  = $dto->getDebugInfo();
-            $times = CurlMetricUtils::getTimes($this->startTimes);
-
-            try {
-                CurlMetricUtils::sendCurlMetrics(
-                    $this->metricsSender->getSender(),
-                    $times,
-                    $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL
-                );
-            } catch (Exception $e) {
-                throw new CurlException($e->getMessage(), $e->getCode(), $e);
-            }
-        }
     }
 
 }

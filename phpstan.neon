@@ -10,4 +10,4 @@ parameters:
 	ignoreErrors:
 		- '#PHPDoc tag @throws with type PhpImap\\Exception is not subtype of Throwable#'
 	symfony:
-		container_xml_path: %rootDir%/../../../var/cache/dev/testsTests_KernelDevDebugContainer.xml
+		container_xml_path: %rootDir%/../../../var/cache/test/testsTests_KernelTestDebugContainer.xml

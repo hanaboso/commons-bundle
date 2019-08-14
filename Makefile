@@ -1,4 +1,4 @@
-.PHONY: .env docker-up docker-up-force docker-down-clean composer-install composer-update
+.PHONY: .env test
 
 DC=docker-compose
 DE=docker-compose exec -T app
@@ -12,10 +12,6 @@ DEC=docker-compose exec -T app composer
 	fi;
 
 # Docker
-docker-up: .env
-	$(DC) pull
-	$(DC) up -d
-
 docker-up-force: .env
 	$(DC) pull
 	$(DC) up -d --force-recreate --remove-orphans
@@ -30,14 +26,12 @@ composer-install:
 composer-update:
 	$(DE) composer update --ignore-platform-reqs
 
-composer-require:
-	$(DEC) require ${package}
-
-composer-require-dev:
-	$(DEC) require --dev ${package}
+composer-outdated:
+	$(DE) composer outdated
 
 clear-cache:
 	$(DE) sudo rm -rf var/cache
+	$(DE) php bin/console cache:warmup --env=test
 
 database-create:
 	$(DE) php bin/console doctrine:database:drop --force || true
@@ -62,6 +56,6 @@ phpintegration: database-create
 phpcontroller:
 	$(DE) ./vendor/bin/phpunit -c phpunit.xml.dist --colors --stderr tests/Controller
 
-test: docker-up-force composer-install codesniffer phpstan clear-cache phpunit phpintegration phpcontroller
+test: docker-up-force composer-install fasttest
 
-fasttest: codesniffer phpstan clear-cache phpunit phpintegration phpcontroller
+fasttest: clear-cache codesniffer phpstan phpunit phpintegration phpcontroller

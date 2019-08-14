@@ -2,7 +2,6 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl;
 
-use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
@@ -10,6 +9,7 @@ use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\CurlManagerInterface;
+use Hanaboso\CommonsBundle\Transport\Utils\MetricsTrait;
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
@@ -25,6 +25,8 @@ use Throwable;
  */
 class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 {
+
+    use MetricsTrait;
 
     public const METHOD_GET     = 'GET';
     public const METHOD_POST    = 'POST';
@@ -43,16 +45,6 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      * @var LoggerInterface
      */
     private $logger;
-
-    /**
-     * @var MetricsSenderLoader|null
-     */
-    private $metricsSender;
-
-    /**
-     * @var array
-     */
-    private $startTimes = [];
 
     /**
      * CurlManager constructor.
@@ -189,30 +181,6 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     protected function prepareOptions(array $options): array
     {
         return array_merge(['http_errors' => FALSE], $options);
-    }
-
-    /**
-     * @param RequestDto $dto
-     *
-     * @throws CurlException
-     */
-    protected function sendMetrics(RequestDto $dto): void
-    {
-        if ($this->metricsSender !== NULL) {
-            $info  = $dto->getDebugInfo();
-            $times = CurlMetricUtils::getTimes($this->startTimes);
-
-            try {
-                CurlMetricUtils::sendCurlMetrics(
-                    $this->metricsSender->getSender(),
-                    $times,
-                    $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL
-                );
-            } catch (Exception $e) {
-                throw new CurlException($e->getMessage(), $e->getCode(), $e);
-            }
-        }
     }
 
 }
