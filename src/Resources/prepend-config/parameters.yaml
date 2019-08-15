@@ -16,6 +16,6 @@ parameters:
     #MongoDb sender
     mongodb.monolith_table: monolith
     mongodb.connector_table: connectors
-    mongodb.node_table: bridges
+    mongodb.node_table: pipes_node
     mongodb.rabbit_table: rabbitmq
     mongodb.counter_table: pipes_counter
