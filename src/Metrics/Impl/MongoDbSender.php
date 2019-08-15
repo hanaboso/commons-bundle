@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Metrics\Impl;
 
-use Doctrine\MongoDB\Connection;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
@@ -16,9 +16,9 @@ final class MongoDbSender implements MetricsSenderInterface
 {
 
     /**
-     * @var Connection
+     * @var DocumentManager
      */
-    private $conn;
+    private $dm;
 
     /**
      * @var string
@@ -28,12 +28,12 @@ final class MongoDbSender implements MetricsSenderInterface
     /**
      * MongoDbSender constructor.
      *
-     * @param Connection $conn
-     * @param string     $collection
+     * @param DocumentManager $dm
+     * @param string          $collection
      */
-    public function __construct(Connection $conn, string $collection)
+    public function __construct(DocumentManager $dm, string $collection)
     {
-        $this->conn       = $conn;
+        $this->dm         = $dm;
         $this->collection = $collection;
     }
 
@@ -53,8 +53,10 @@ final class MongoDbSender implements MetricsSenderInterface
             'tags'   => $tags,
         ];
 
+        $db = $this->dm->getConfiguration()->getDefaultDB();
+
         /** @var array $res */
-        $res = $this->conn->getMongoClient()->selectCollection('metrics', $this->collection)->insert($data);
+        $res = $this->dm->getConnection()->selectCollection($db, $this->collection)->insert($data);
 
         return ($res['err'] ?? NULL) === NULL;
     }

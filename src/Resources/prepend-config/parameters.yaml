@@ -18,4 +18,4 @@ parameters:
     mongodb.connector_table: connectors
     mongodb.node_table: bridges
     mongodb.rabbit_table: rabbitmq
-    mongodb.counter_table: processes
+    mongodb.counter_table: pipes_counter

@@ -5,6 +5,7 @@ namespace Hanaboso\CommonsBundle\Transport\Curl\Dto;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
+use Hanaboso\CommonsBundle\Utils\PipesHeaders;
 
 /**
  * Class RequestDto
@@ -44,10 +45,11 @@ class RequestDto
      *
      * @param string $method
      * @param Uri    $uri
+     * @param array  $headers
      *
      * @throws CurlException
      */
-    public function __construct(string $method, Uri $uri)
+    public function __construct(string $method, Uri $uri, array $headers = [])
     {
         if (!in_array($method, CurlManager::getMethods())) {
             throw new CurlException(
@@ -56,8 +58,10 @@ class RequestDto
             );
         }
 
-        $this->method = $method;
-        $this->uri    = $uri;
+        $this->method    = $method;
+        $this->uri       = $uri;
+        $this->headers   = $headers;
+        $this->debugInfo = PipesHeaders::debugInfo($headers);
     }
 
     /**

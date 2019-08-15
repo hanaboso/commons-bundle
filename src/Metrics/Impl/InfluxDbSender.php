@@ -63,8 +63,9 @@ class InfluxDbSender implements MetricsSenderInterface
         $nanoTimestamp = sprintf('%s%s', round(microtime(TRUE) * 1000), '000000');
 
         return sprintf(
-            '%s,%s %s %s',
+            '%s%s%s %s %s',
             $this->measurement,
+            empty($tags) ? ' ' : ',',
             $this->join($this->prepareTags($tags)),
             $this->join($this->prepareFields($fields)),
             $nanoTimestamp
