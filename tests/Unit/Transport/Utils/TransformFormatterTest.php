@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 10/24/17
- * Time: 10:43 AM
- */
-
 namespace Tests\Unit\Transport\Utils;
 
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;

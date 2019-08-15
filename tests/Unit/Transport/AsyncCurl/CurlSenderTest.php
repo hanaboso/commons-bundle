@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 10.10.17
- * Time: 13:52
- */
-
 namespace Tests\Unit\Transport\AsyncCurl;
 
 use Clue\React\Buzz\Browser;

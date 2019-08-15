@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 10/12/17
- * Time: 1:59 PM
- */
-
 namespace Tests\Unit\Utils;
 
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;

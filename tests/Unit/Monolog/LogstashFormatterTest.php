@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 13.9.17
- * Time: 9:35
- */
-
 namespace Tests\Unit\Monolog;
 
 use Exception;
@@ -116,7 +109,7 @@ final class LogstashFormatterTest extends TestCase
                 'class'   => 'Exception',
                 'message' => 'Default exception',
                 'code'    => 0,
-                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:100',
+                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:93',
                 'trace'   => '',
             ],
         ], $message);
@@ -151,7 +144,7 @@ final class LogstashFormatterTest extends TestCase
                 'class'   => 'Exception',
                 'message' => 'Default exception',
                 'code'    => 0,
-                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:135',
+                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:128',
                 'trace'   => '',
             ],
             'correlation_id' => '123',

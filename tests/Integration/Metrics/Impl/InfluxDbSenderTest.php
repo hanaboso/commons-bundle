@@ -1,12 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: venca
- * Date: 23.1.18
- * Time: 13:44
- */
-
 namespace Tests\Integration\Metrics\Impl;
 
 use Exception;
@@ -29,7 +22,7 @@ final class InfluxDbSenderTest extends TestCase
     public function testSend(): void
     {
         $sender = new InfluxDbSender(new UDPSender('influxdb'), 'test');
-        $sender->send(
+        $res    = $sender->send(
             [
                 MetricsEnum::REQUEST_TOTAL_DURATION => 123,
                 MetricsEnum::CPU_USER_TIME          => 0,
@@ -43,6 +36,7 @@ final class InfluxDbSenderTest extends TestCase
                 MetricsEnum::NODE_ID        => '#123',
             ]
         );
+        self::assertTrue($res);
     }
 
 }

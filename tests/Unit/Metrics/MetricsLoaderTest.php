@@ -43,6 +43,7 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
         }
 
         $loader->getSender();
+        self::assertTrue(TRUE);
     }
 
     /**

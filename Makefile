@@ -1,4 +1,4 @@
-.PHONY: .env test
+.PHONY: .env init-dev test
 
 DC=docker-compose
 DE=docker-compose exec -T app
@@ -19,7 +19,7 @@ docker-up-force: .env
 docker-down-clean: .env
 	$(DC) down -v
 
-#Composer
+# Composer
 composer-install:
 	$(DE) composer install --ignore-platform-reqs
 
@@ -29,6 +29,7 @@ composer-update:
 composer-outdated:
 	$(DE) composer outdated
 
+# Console
 clear-cache:
 	$(DE) sudo rm -rf var/cache
 	$(DE) php bin/console cache:warmup --env=test
@@ -39,7 +40,7 @@ database-create:
 	$(DE) php bin/console doctrine:schema:create
 
 # App dev
-init-dev: docker-up composer-install
+init-dev: docker-up-force composer-install
 
 codesniffer:
 	$(DE) ./vendor/bin/phpcs --standard=./ruleset.xml --colors -p src/ tests/
