@@ -8,9 +8,7 @@ use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle;
 use Exception;
-use FOS\RestBundle\FOSRestBundle;
 use Hanaboso\CommonsBundle\HbPFCommonsBundle;
-use JMS\SerializerBundle\JMSSerializerBundle;
 use Snc\RedisBundle\SncRedisBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -46,16 +44,13 @@ final class Kernel extends BaseKernel
             DoctrineFixturesBundle::class => ['all' => TRUE],
             MonologBundle::class          => ['all' => TRUE],
             DoctrineMongoDBBundle::class  => ['all' => TRUE],
-            JMSSerializerBundle::class    => ['all' => TRUE],
-            FOSRestBundle::class          => ['all' => TRUE],
             SncRedisBundle::class         => ['all' => TRUE],
             HbPFCommonsBundle::class      => ['all' => TRUE],
 
         ];
         foreach ($contents as $class => $envs) {
-            if (isset($envs['all'])) {
-                yield new $class();
-            }
+            $envs;
+            yield new $class();
         }
     }
 
