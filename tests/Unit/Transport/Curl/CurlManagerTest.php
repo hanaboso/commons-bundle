@@ -60,6 +60,7 @@ final class CurlManagerTest extends TestCase
         self::assertEquals('OK', $result->getReasonPhrase());
         self::assertEquals(['header_key' => ['header_value']], $result->getHeaders());
         self::assertEquals($body, $result->getBody());
+        self::assertEquals(['abc' => 'def'], $result->getJsonBody());
     }
 
     /**
