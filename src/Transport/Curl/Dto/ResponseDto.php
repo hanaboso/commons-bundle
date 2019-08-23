@@ -78,6 +78,14 @@ class ResponseDto
     /**
      * @return array
      */
+    public function getJsonBody(): array
+    {
+        return json_decode($this->body, TRUE, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @return array
+     */
     public function getHeaders(): array
     {
         return $this->headers;
