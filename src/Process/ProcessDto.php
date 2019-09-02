@@ -99,18 +99,20 @@ final class ProcessDto
     }
 
     /**
-     * @param int $value
+     * @param int         $value
+     * @param string|null $message
      *
      * @throws PipesFrameworkException
      */
-    public function setStopProcess(int $value = self::DO_NOT_CONTINUE): void
+    public function setStopProcess(int $value = self::DO_NOT_CONTINUE, ?string $message = NULL): void
     {
-
         $this->validateStatus($value);
         $key = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
 
+        if ($message) {
+            $this->addHeader(PipesHeaders::createKey(PipesHeaders::RESULT_MESSAGE), $message);
+        }
         $this->addHeader($key, (string) $value);
-
     }
 
     /**
