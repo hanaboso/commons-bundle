@@ -31,6 +31,8 @@ class PipesHeaders
     public const REPEAT_HOPS         = 'repeat-hops';
     public const CONTENT_TYPE        = 'content-type';
     public const PF_STOP             = 'stop';
+    public const APPLICATION         = 'application';
+    public const USER                = 'user';
 
     // --- MicroTimestamp because Bunny
     public const TIMESTAMP = 'published-timestamp';
