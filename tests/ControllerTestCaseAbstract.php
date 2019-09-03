@@ -6,6 +6,7 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -75,10 +76,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
         $this->client->request('GET', $url);
         $response = $this->client->getResponse();
 
-        return (object) [
-            'status'  => $response->getStatusCode(),
-            'content' => json_decode($response->getContent()),
-        ];
+        return $this->formatResponse($response);
     }
 
     /**
@@ -93,10 +91,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
         $this->client->request('POST', $url, $parameters, [], [], $content ? (string) json_encode($content) : '');
         $response = $this->client->getResponse();
 
-        return (object) [
-            'status'  => $response->getStatusCode(),
-            'content' => json_decode($response->getContent()),
-        ];
+        return $this->formatResponse($response);
     }
 
     /**
@@ -111,10 +106,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
         $this->client->request('PUT', $url, $parameters, [], [], $content ? (string) json_encode($content) : '');
         $response = $this->client->getResponse();
 
-        return (object) [
-            'status'  => $response->getStatusCode(),
-            'content' => json_decode($response->getContent()),
-        ];
+        return $this->formatResponse($response);
     }
 
     /**
@@ -127,9 +119,19 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
         $this->client->request('DELETE', $url);
         $response = $this->client->getResponse();
 
+        return $this->formatResponse($response);
+    }
+
+    /**
+     * @param Response $response
+     *
+     * @return stdClass
+     */
+    protected function formatResponse(Response $response): stdClass
+    {
         return (object) [
             'status'  => $response->getStatusCode(),
-            'content' => json_decode($response->getContent()),
+            'content' => json_decode((string) $response->getContent()),
         ];
     }
 
