@@ -35,13 +35,19 @@ trait ControllerTrait
     /**
      * @param Throwable $e
      * @param int       $code
+     * @param string    $status
      * @param array     $headers
      *
      * @return Response
      */
-    protected function getErrorResponse(Throwable $e, int $code = 500, array $headers = []): Response
+    protected function getErrorResponse(
+        Throwable $e,
+        int $code = 500,
+        string $status = ControllerUtils::INTERNAL_SERVER_ERROR,
+        array $headers = []
+    ): Response
     {
-        $msg = ControllerUtils::createExceptionData($e);
+        $msg = ControllerUtils::createExceptionData($e, $status);
 
         return new Response($msg, $code, $headers);
     }
