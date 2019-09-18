@@ -13,15 +13,24 @@ use Throwable;
 class ControllerUtils
 {
 
+    public const INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR';
+    public const BAD_CREDENTIALS       = 'BAD_CREDENTIALS';
+    public const UNAUTHORIZED          = 'UNAUTHORIZED';
+    public const NOT_LOGGED            = 'NOT_LOGGED';
+    public const INVALID_REQUEST       = 'INVALID_REQUEST';
+    public const SERVICE_UNAVAILABLE   = 'SERVICE_UNAVAILABLE';
+    public const EMPTY                 = 'EMPTY';
+
     /**
      * @param Throwable $exception
+     * @param string    $status
      *
      * @return string|array
      */
-    public static function createExceptionData(Throwable $exception)
+    public static function createExceptionData(Throwable $exception, string $status = self::INTERNAL_SERVER_ERROR)
     {
         $output = [
-            'status'     => 'ERROR',
+            'status'     => $status,
             'error_code' => 2001,
             'type'       => get_class($exception),
             'message'    => $exception->getMessage(),
