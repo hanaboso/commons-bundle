@@ -20,6 +20,10 @@ class ControllerUtils
     public const INVALID_REQUEST       = 'INVALID_REQUEST';
     public const SERVICE_UNAVAILABLE   = 'SERVICE_UNAVAILABLE';
     public const EMPTY                 = 'EMPTY';
+    public const NOT_FOUND             = 'NOT_FOUND';
+    public const INVALID_OPERATION     = 'INVALID_OPERATION';
+    public const ENTITY_ALREADY_EXISTS = 'ENTITY_ALREADY_EXISTS';
+    public const NOT_ALLOWED           = 'NOT_ALLOWED';
 
     /**
      * @param Throwable $exception
