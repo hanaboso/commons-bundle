@@ -63,7 +63,9 @@ trait ControllerTrait
     {
         $msg = ControllerUtils::createExceptionData($e, $status);
         if ($this->logger) {
-            $this->logger->error($msg);
+            $this->logger->error($msg, [
+                'exception' => $e,
+            ]);
         }
 
         return new Response($msg, $code, $headers);
