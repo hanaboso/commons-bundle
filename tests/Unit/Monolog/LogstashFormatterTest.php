@@ -41,7 +41,7 @@ final class LogstashFormatterTest extends TestCase
             'channel'    => 'test',
         ]);
 
-        $message = $this->correctMessage(json_decode($message, TRUE));
+        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
         self::assertEquals([
             'timestamp' => 1505381163375,
@@ -68,7 +68,7 @@ final class LogstashFormatterTest extends TestCase
             'channel'    => 'test',
         ]);
 
-        $message = $this->correctMessage(json_decode($message, TRUE));
+        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
         self::assertEquals([
             'timestamp'      => 1505381163375,
@@ -96,7 +96,7 @@ final class LogstashFormatterTest extends TestCase
             'channel'    => 'test',
         ]);
 
-        $message = $this->correctMessage(json_decode($message, TRUE));
+        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
         self::assertEquals([
             'timestamp'  => 1505381163375,
@@ -131,7 +131,7 @@ final class LogstashFormatterTest extends TestCase
             'channel'    => 'test',
         ]);
 
-        $message = $this->correctMessage(json_decode($message, TRUE));
+        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
         self::assertEquals([
             'timestamp'      => 1505381163375,
@@ -184,7 +184,7 @@ final class LogstashFormatterTest extends TestCase
             'channel'    => 'test',
         ]);
 
-        $message = $this->correctMessage(json_decode($message, TRUE));
+        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
         self::assertEquals([
             'timestamp'     => 1505381163375,

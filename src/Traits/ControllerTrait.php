@@ -38,9 +38,9 @@ trait ControllerTrait
     protected function getResponse($data, int $code = 200, array $headers = []): Response
     {
         if (!is_string($data)) {
-            $data = json_encode($data);
+            $data = json_encode($data, JSON_THROW_ON_ERROR);
         } else if (!json_decode($data)) {
-            $data = json_encode($data);
+            $data = json_encode($data, JSON_THROW_ON_ERROR);
         }
 
         return new Response($data, $code, $headers);
@@ -61,14 +61,14 @@ trait ControllerTrait
         array $headers = []
     ): Response
     {
-        $msg = ControllerUtils::createExceptionData($e, $status);
+        $msg     = ControllerUtils::createExceptionData($e, $status);
+        $headers = ControllerUtils::createHeaders($headers, $e);
+
         if ($this->logger) {
-            $this->logger->error($msg, [
-                'exception' => $e,
-            ]);
+            $this->logger->error($msg, ['exception' => $e]);
         }
 
-        return new Response($msg, $code, $headers);
+        return $this->getResponse($msg, $code, $headers);
     }
 
 }

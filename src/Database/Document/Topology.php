@@ -237,7 +237,7 @@ class Topology
      */
     public function getBpmn(): array
     {
-        return $this->bpmn ? json_decode($this->bpmn, TRUE) : [];
+        return $this->bpmn ? json_decode($this->bpmn, TRUE, 512, JSON_THROW_ON_ERROR) : [];
     }
 
     /**
@@ -247,7 +247,7 @@ class Topology
      */
     public function setBpmn(array $bpmn): Topology
     {
-        $this->bpmn = (string) json_encode($bpmn);
+        $this->bpmn = (string) json_encode($bpmn, JSON_THROW_ON_ERROR);
 
         return $this;
     }

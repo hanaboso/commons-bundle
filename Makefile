@@ -31,13 +31,14 @@ composer-outdated:
 
 # Console
 clear-cache:
-	$(DE) sudo rm -rf var/cache
+	$(DE) sudo rm -rf var/log
+	$(DE) php bin/console cache:clear --env=test
 	$(DE) php bin/console cache:warmup --env=test
 
 database-create:
-	$(DE) php bin/console doctrine:database:drop --force || true
-	$(DE) php bin/console doctrine:database:create
-	$(DE) php bin/console doctrine:schema:create
+	$(DE) php bin/console doctrine:database:drop --force --env=test || true
+	$(DE) php bin/console doctrine:database:create --env=test
+	$(DE) php bin/console doctrine:schema:create --env=test
 
 # App dev
 init-dev: docker-up-force composer-install

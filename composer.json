@@ -28,7 +28,7 @@
     "doctrine/mongodb-odm-bundle": "^3.5",
     "doctrine/orm": "^2.6",
     "guzzlehttp/guzzle": "^6.3",
-    "mongodb/mongodb": "^1.4",
+    "mongodb/mongodb": "^1.5",
     "php-imap/php-imap": "^3.0",
     "phpseclib/phpseclib": "^2.0",
     "predis/predis": "^1.1",

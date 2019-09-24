@@ -26,21 +26,21 @@ class ControllerUtils
     public const NOT_ALLOWED           = 'NOT_ALLOWED';
 
     /**
-     * @param Throwable $exception
+     * @param Throwable $e
      * @param string    $status
      *
-     * @return string|array
+     * @return string
      */
-    public static function createExceptionData(Throwable $exception, string $status = self::INTERNAL_SERVER_ERROR)
+    public static function createExceptionData(Throwable $e, string $status = self::INTERNAL_SERVER_ERROR): string
     {
         $output = [
             'status'     => $status,
-            'error_code' => 2001,
-            'type'       => get_class($exception),
-            'message'    => $exception->getMessage(),
+            'error_code' => $e->getCode(),
+            'type'       => get_class($e),
+            'message'    => $e->getMessage(),
         ];
 
-        return (string) json_encode($output);
+        return (string) json_encode($output, JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -56,9 +56,9 @@ class ControllerUtils
         $detail  = '';
 
         if ($e) {
-            $code    = 2001;
+            $code    = $e->getCode();
             $message = $e->getMessage();
-            $detail  = json_encode($e->getTraceAsString());
+            $detail  = json_encode($e->getTraceAsString(), JSON_THROW_ON_ERROR);
         }
 
         $array = [

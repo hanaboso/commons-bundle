@@ -83,16 +83,19 @@ final class SystemConfigDto
      */
     public function toString(): string
     {
-        return (string) json_encode([
-            self::SDK      => [self::HOST => $this->getSdkHost()],
-            self::BRIDGE   => [self::HOST => $this->getBridgeHost()],
-            self::RABBIT   => [self::PREFETCH => $this->getPrefetch()],
-            self::REPEATER => [
-                self::ENABLED  => $this->isRepeaterEnabled(),
-                self::HOPS     => $this->getRepeaterHops(),
-                self::INTERVAL => $this->getRepeaterInterval(),
+        return (string) json_encode(
+            [
+                self::SDK      => [self::HOST => $this->getSdkHost()],
+                self::BRIDGE   => [self::HOST => $this->getBridgeHost()],
+                self::RABBIT   => [self::PREFETCH => $this->getPrefetch()],
+                self::REPEATER => [
+                    self::ENABLED  => $this->isRepeaterEnabled(),
+                    self::HOPS     => $this->getRepeaterHops(),
+                    self::INTERVAL => $this->getRepeaterInterval(),
+                ],
             ],
-        ]);
+            JSON_THROW_ON_ERROR
+        );
     }
 
     /**

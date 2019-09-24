@@ -88,7 +88,14 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
      */
     protected function sendPost(string $url, array $parameters, ?array $content = NULL): stdClass
     {
-        $this->client->request('POST', $url, $parameters, [], [], $content ? (string) json_encode($content) : '');
+        $this->client->request(
+            'POST',
+            $url,
+            $parameters,
+            [],
+            [],
+            $content ? (string) json_encode($content, JSON_THROW_ON_ERROR) : ''
+        );
         $response = $this->client->getResponse();
 
         return $this->formatResponse($response);
@@ -103,7 +110,14 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
      */
     protected function sendPut(string $url, array $parameters, ?array $content = NULL): stdClass
     {
-        $this->client->request('PUT', $url, $parameters, [], [], $content ? (string) json_encode($content) : '');
+        $this->client->request(
+            'PUT',
+            $url,
+            $parameters,
+            [],
+            [],
+            $content ? (string) json_encode($content, JSON_THROW_ON_ERROR) : ''
+        );
         $response = $this->client->getResponse();
 
         return $this->formatResponse($response);
@@ -131,7 +145,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     {
         return (object) [
             'status'  => $response->getStatusCode(),
-            'content' => json_decode((string) $response->getContent()),
+            'content' => json_decode((string) $response->getContent(), FALSE, 512, JSON_THROW_ON_ERROR),
         ];
     }
 
