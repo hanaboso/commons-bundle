@@ -69,14 +69,14 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     *
+     * @covers NodeRepository::getNodeByTopology
+     * @throws Exception
      */
     public function testGetNodeByTopology(): void
     {
         /** @var NodeRepository $repo */
         $repo   = $this->dm->getRepository(Node::class);
         $result = $repo->getNodeByTopology('name1', 'abc123');
-
         self::assertEmpty($result);
 
         $node1 = new Node();
@@ -89,11 +89,11 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
         $this->dm->flush();
 
         $result = $repo->getNodeByTopology('name1', 'abc123');
-
         self::assertNotEmpty($result);
     }
 
     /**
+     * @covers NodeRepository::getStartingNode
      * @throws Exception
      */
     public function testGetStartingPoint(): void
@@ -119,6 +119,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @covers NodeRepository::getStartingNode
      * @throws Exception
      */
     public function testGetStartingPointNotFound(): void
@@ -143,6 +144,81 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
         self::expectException(LogicException::class);
         self::expectExceptionMessage(sprintf('Starting Node not found for topology [%s]', $topology->getId()));
         $repo->getStartingNode($topology);
+    }
+
+    /**
+     * @covers NodeRepository::getTopologyType
+     * @throws Exception
+     */
+    public function testGetTopologyType(): void
+    {
+        /** @var NodeRepository $repo */
+        $repo = $this->dm->getRepository(Node::class);
+
+        $topology = new Topology();
+        $this->dm->persist($topology);
+        $this->dm->flush($topology);
+
+        $node = new Node();
+        $node
+            ->setEnabled(TRUE)
+            ->setTopology($topology->getId())
+            ->setType(TypeEnum::CRON)
+            ->setHandler(HandlerEnum::EVENT);
+        $this->dm->persist($node);
+        $this->dm->flush($node);
+        $this->dm->clear();
+
+        $type = $repo->getTopologyType($topology);
+        self::assertEquals(TypeEnum::CRON, $type);
+
+        $topology = new Topology();
+        $this->dm->persist($topology);
+        $this->dm->flush($topology);
+
+        $node = new Node();
+        $node
+            ->setEnabled(TRUE)
+            ->setTopology($topology->getId())
+            ->setType(TypeEnum::CONNECTOR)
+            ->setHandler(HandlerEnum::EVENT);
+        $this->dm->persist($node);
+        $this->dm->flush($node);
+        $this->dm->clear();
+
+        $type = $repo->getTopologyType($topology);
+        self::assertEquals(TypeEnum::WEBHOOK, $type);
+    }
+
+    /**
+     * @covers NodeRepository::getNodesByTopology
+     * @throws Exception
+     */
+    public function testGetNodesByTopology(): void
+    {
+        /** @var NodeRepository $repo */
+        $repo = $this->dm->getRepository(Node::class);
+
+        $topology = new Topology();
+        $this->dm->persist($topology);
+        $this->dm->flush($topology);
+
+        $node = new Node();
+        $node
+            ->setEnabled(TRUE)
+            ->setTopology($topology->getId())
+            ->setType(TypeEnum::MAPPER)
+            ->setHandler(HandlerEnum::EVENT);
+        $this->dm->persist($node);
+        $this->dm->flush($node);
+        $this->dm->clear();
+
+        /** @var Node[] $nodes */
+        $nodes = $repo->getNodesByTopology($topology->getId());
+        self::assertCount(1, $nodes);
+        /** @var Node $first */
+        $first = reset($nodes);
+        self::assertEquals($node->getId(), $first->getId());
     }
 
 }

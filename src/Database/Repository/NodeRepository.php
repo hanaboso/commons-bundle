@@ -2,7 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Database\Repository;
 
-use Doctrine\ODM\MongoDB\DocumentRepository;
+use Doctrine\ODM\MongoDB\MongoDBException;
+use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
 use Hanaboso\CommonsBundle\Database\Document\Node;
 use Hanaboso\CommonsBundle\Database\Document\Topology;
 use Hanaboso\CommonsBundle\Database\Reduction\NodeReduction;
@@ -78,18 +79,18 @@ class NodeRepository extends DocumentRepository
      * @param Topology $topology
      *
      * @return string
+     * @throws MongoDBException
      */
     public function getTopologyType(Topology $topology): string
     {
+        /** @var int $hasCron */
         $hasCron = $this->createQueryBuilder()
-            ->field('topology')
-            ->equals($topology->getId())
-            ->field('type')
-            ->equals(TypeEnum::CRON)
-            ->getQuery()
-            ->count();
+            ->count()
+            ->field('topology')->equals($topology->getId())
+            ->field('type')->equals(TypeEnum::CRON)
+            ->getQuery()->execute();
 
-        return $hasCron ? TypeEnum::CRON : TypeEnum::WEBHOOK;
+        return $hasCron === 1 ? TypeEnum::CRON : TypeEnum::WEBHOOK;
     }
 
     /**

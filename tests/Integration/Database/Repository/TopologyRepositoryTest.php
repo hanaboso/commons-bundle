@@ -24,10 +24,8 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
     public function testGetTotalCount(): void
     {
         /** @var TopologyRepository $repo */
-        $repo = $this->dm->getRepository(Topology::class);
-
+        $repo   = $this->dm->getRepository(Topology::class);
         $result = $repo->getTotalCount();
-
         self::assertEquals(0, $result);
 
         $topology = new Topology();
@@ -37,7 +35,6 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
         $this->dm->flush();
 
         $result = $repo->getTotalCount();
-
         self::assertEquals(1, $result);
     }
 
@@ -47,8 +44,7 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
     public function testGetRunnableTopologies(): void
     {
         /** @var TopologyRepository $repo */
-        $repo = $this->dm->getRepository(Topology::class);
-
+        $repo   = $this->dm->getRepository(Topology::class);
         $result = $repo->getRunnableTopologies('name');
 
         self::assertCount(0, $result);
@@ -63,9 +59,7 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
         }
 
         $this->dm->flush();
-
         $result = $repo->getRunnableTopologies('name');
-
         self::assertCount(2, $result);
 
     }
@@ -78,7 +72,6 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
         /** @var TopologyRepository $repo */
         $repo   = $this->dm->getRepository(Topology::class);
         $result = $repo->getTopologies();
-
         self::assertCount(0, $result);
 
         for ($i = 0; $i < 2; $i++) {
@@ -91,11 +84,8 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
         }
 
         $this->dm->flush();
-
         $result = $repo->getTopologies();
-
         self::assertCount(2, $result);
-
     }
 
     /**
