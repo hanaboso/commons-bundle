@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests;
+namespace CommonsBundleTests;
 
 use Aws\Symfony\AwsBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
@@ -22,7 +22,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 /**
  * Class Kernel
  *
- * @package Tests
+ * @package CommonsBundleTests
  */
 final class Kernel extends BaseKernel
 {

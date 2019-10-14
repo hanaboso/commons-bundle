@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Metrics\Impl;
+namespace CommonsBundleTests\Integration\Metrics\Impl;
 
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\Impl\UDPSender;
@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class UDPSenderTest
  *
- * @package Tests\Integration\Metrics\Impl
+ * @package CommonsBundleTests\Integration\Metrics\Impl
  */
 final class UDPSenderTest extends TestCase
 {

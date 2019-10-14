@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Utils;
+namespace CommonsBundleTests\Unit\Utils;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
@@ -13,12 +14,11 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use PHPUnit\Framework\MockObject\MockObject;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class CurlMetricsUtilsTest
  *
- * @package Tests\Unit\Utils
+ * @package CommonsBundleTests\Unit\Utils
  */
 final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 {
@@ -55,7 +55,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         /** @var CurlManager $manager */
         $manager = new CurlManager($factory);
         $manager->setMetricsSender($loader);
-        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+        $dto = new RequestDto('GET', new Uri('http://google.com'));
         $manager->send($dto);
     }
 

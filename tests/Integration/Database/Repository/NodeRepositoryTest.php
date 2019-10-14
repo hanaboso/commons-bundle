@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Database\Repository;
+namespace CommonsBundleTests\Integration\Database\Repository;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Document\Node;
 use Hanaboso\CommonsBundle\Database\Document\Topology;
@@ -10,12 +11,11 @@ use Hanaboso\CommonsBundle\Database\Repository\NodeRepository;
 use Hanaboso\CommonsBundle\Enum\HandlerEnum;
 use Hanaboso\CommonsBundle\Enum\TypeEnum;
 use LogicException;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class NodeRepositoryTest
  *
- * @package Tests\Integration\Database\Repository
+ * @package CommonsBundleTests\Integration\Database\Repository
  */
 final class NodeRepositoryTest extends DatabaseTestCaseAbstract
 {

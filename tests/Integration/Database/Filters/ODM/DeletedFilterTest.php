@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Database\Filters\ODM;
+namespace CommonsBundleTests\Integration\Database\Filters\ODM;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class DeletedFilterTest
  *
- * @package Tests\Integration\Database\Filters\ODM
+ * @package CommonsBundleTests\Integration\Database\Filters\ODM
  */
 final class DeletedFilterTest extends DatabaseTestCaseAbstract
 {

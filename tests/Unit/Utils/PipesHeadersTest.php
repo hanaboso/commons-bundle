@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Utils;
+namespace CommonsBundleTests\Unit\Utils;
 
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class PipesHeadersTest
  *
- * @package Tests\Unit\Utils
+ * @package CommonsBundleTests\Unit\Utils
  */
 final class PipesHeadersTest extends TestCase
 {

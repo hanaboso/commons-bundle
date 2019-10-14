@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\AsyncCurl;
+namespace CommonsBundleTests\Unit\Transport\AsyncCurl;
 
 use Clue\React\Buzz\Browser;
 use Clue\React\Buzz\Message\ResponseException;
@@ -20,7 +20,7 @@ use function React\Promise\resolve;
 /**
  * Class CurlSenderTest
  *
- * @package Tests\Unit\Transport\AsyncCurl
+ * @package CommonsBundleTests\Unit\Transport\AsyncCurl
  */
 final class CurlSenderTest extends TestCase
 {

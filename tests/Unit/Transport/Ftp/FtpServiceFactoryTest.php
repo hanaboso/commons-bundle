@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\Ftp;
+namespace CommonsBundleTests\Unit\Transport\Ftp;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class FtpServiceFactoryTest
  *
- * @package Tests\Unit\Transport\Ftp
+ * @package CommonsBundleTests\Unit\Transport\Ftp
  */
 final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 {

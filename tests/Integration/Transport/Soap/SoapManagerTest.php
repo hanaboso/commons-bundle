@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Transport\Soap;
+namespace CommonsBundleTests\Integration\Transport\Soap;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapManager;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class SoapManagerTest
  *
- * @package Tests\Integration\Transport\Soap
+ * @package CommonsBundleTests\Integration\Transport\Soap
  */
 final class SoapManagerTest extends KernelTestCaseAbstract
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\Soap;
+namespace CommonsBundleTests\Unit\Transport\Soap;
 
 use Exception;
 use GuzzleHttp\Psr7\Uri;
@@ -18,7 +18,7 @@ use SoapClient;
 /**
  * Class SoapManagerTest
  *
- * @package Tests\Unit\Transport\Soap
+ * @package CommonsBundleTests\Unit\Transport\Soap
  */
 final class SoapManagerTest extends TestCase
 {

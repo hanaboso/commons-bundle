@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\FileStorage\Impl\Mongo;
+namespace CommonsBundleTests\Integration\FileStorage\Impl\Mongo;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class MongoFileDriverTest
  *
- * @package Tests\Integration\FileStorage\Impl\Mongo
+ * @package CommonsBundleTests\Integration\FileStorage\Impl\Mongo
  */
 final class MongoFileDriverTest extends DatabaseTestCaseAbstract
 {

@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Crypt\Impl;
+namespace CommonsBundleTests\Unit\Crypt\Impl;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
 use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
 use stdClass;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class WindwalkerCryptTest
  *
- * @package Tests\Unit\Crypt\Impl
+ * @package CommonsBundleTests\Unit\Crypt\Impl
  */
 final class WindwalkerCryptTest extends KernelTestCaseAbstract
 {
@@ -26,7 +26,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     {
         $arr   = [];
         $arr[] = 'Some random text';
-        $arr[] = 'docker://dkr.hanaboso.net/pipes/pipes/php-dev:dev/php /opt/project/pf-bundles/vendor/phpunit/phpunit/phpunit --configuration /opt/project/pf-bundles/phpunit.xml.dist Tests\Unit\Commons\Crypt\CryptServiceProviderTest /opt/project/pf-bundles/tests/Unit/Commons/Crypt/CryptServiceProviderTest.php --teamcity';
+        $arr[] = 'docker://dkr.hanaboso.net/pipes/pipes/php-dev:dev/php /opt/project/pf-bundles/vendor/phpunit/phpunit/phpunit --configuration /opt/project/pf-bundles/phpunit.xml.dist CommonsBundleTests\Unit\Commons\Crypt\CryptServiceProviderTest /opt/project/pf-bundles/tests/Unit/Commons/Crypt/CryptServiceProviderTest.php --teamcity';
         $arr[] = ['1', '2', 3, ['abc']];
 
         $stdClass        = new stdClass();

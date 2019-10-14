@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Controller\Listener;
+namespace CommonsBundleTests\Controller\Listener;
 
+use CommonsBundleTests\ControllerTestCaseAbstract;
 use Hanaboso\CommonsBundle\Listener\SystemMetricsListener;
 use Hanaboso\CommonsBundle\Metrics\SystemMetrics;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
 use Symfony\Component\HttpFoundation\Request;
-use Tests\ControllerTestCaseAbstract;
 
 /**
  * Class SystemMetricsListenerTest
  *
- * @package Tests\Controller\Listener
+ * @package CommonsBundleTests\Controller\Listener
  */
 final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 {

@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Database\Document\Dto;
+namespace CommonsBundleTests\Unit\Database\Document\Dto;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Document\Dto\SystemConfigDto;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class SystemConfDtoTest
  *
- * @package Tests\Unit\Database\Document\Dto
+ * @package CommonsBundleTests\Unit\Database\Document\Dto
  */
 final class SystemConfDtoTest extends KernelTestCaseAbstract
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests;
+namespace CommonsBundleTests;
 
 use Exception;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\DatabaseTestTrait;
@@ -8,7 +8,7 @@ use Hanaboso\PhpCheckUtils\PhpUnit\Traits\DatabaseTestTrait;
 /**
  * Class DatabaseTestCaseAbstract
  *
- * @package Tests
+ * @package CommonsBundleTests
  */
 abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
 {

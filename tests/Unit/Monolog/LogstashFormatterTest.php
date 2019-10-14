@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Monolog;
+namespace CommonsBundleTests\Unit\Monolog;
 
 use Exception;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatter;
@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class LogstashFormatterTest
  *
- * @package Tests\Unit\Monolog
+ * @package CommonsBundleTests\Unit\Monolog
  */
 final class LogstashFormatterTest extends TestCase
 {

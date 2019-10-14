@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Session\Handler;
+namespace CommonsBundleTests\Unit\Session\Handler;
 
 use Exception;
 use Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler;
@@ -11,7 +11,7 @@ use SessionHandlerInterface;
 /**
  * Class CachedSessionHandlerTest
  *
- * @package Tests\Unit\Session\Handler
+ * @package CommonsBundleTests\Unit\Session\Handler
  */
 final class CachedSessionHandlerTest extends TestCase
 {

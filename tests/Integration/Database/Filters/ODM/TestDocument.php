@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Database\Filters\ODM;
+namespace CommonsBundleTests\Integration\Database\Filters\ODM;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Hanaboso\CommonsBundle\Database\Traits\Document\DeletedTrait;
@@ -9,7 +9,7 @@ use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
 /**
  * Class TestDocument
  *
- * @package Tests\Integration\Database\Filters\ODM
+ * @package CommonsBundleTests\Integration\Database\Filters\ODM
  *
  * @ODM\Document()
  */

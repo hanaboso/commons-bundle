@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Live\Model\Imap;
+namespace CommonsBundleTests\Live\Model\Imap;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConnector;
-use Tests\DatabaseTestCaseAbstract;
 use Throwable;
 
 /**
  * Class ImapConnectorTest
  *
- * @package Tests\Live\Model\Imap
+ * @package CommonsBundleTests\Live\Model\Imap
  */
 final class ImapConnectorTest extends DatabaseTestCaseAbstract
 {

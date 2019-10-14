@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Metrics;
+namespace CommonsBundleTests\Unit\Metrics;
 
 use Hanaboso\CommonsBundle\Metrics\SystemMetrics;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class SystemMetricsTest
  *
- * @package Tests\Unit\Metrics
+ * @package CommonsBundleTests\Unit\Metrics
  */
 final class SystemMetricsTest extends TestCase
 {

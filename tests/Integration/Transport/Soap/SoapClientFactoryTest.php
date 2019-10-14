@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Transport\Soap;
+namespace CommonsBundleTests\Integration\Transport\Soap;
 
 use Exception;
 use GuzzleHttp\Psr7\Uri;
@@ -14,7 +14,7 @@ use SoapClient;
 /**
  * Class SoapClientFactoryTest
  *
- * @package Tests\Integration\Transport\Soap
+ * @package CommonsBundleTests\Integration\Transport\Soap
  */
 final class SoapClientFactoryTest extends TestCase
 {

@@ -43,7 +43,7 @@ doctrine_mongodb:
                     type: annotation
                     dir: '%kernel.root_dir%/../tests/Integration/Database/Filters/ODM'
                     is_bundle: false
-                    prefix: Tests\Integration\Database\Filters\ODM
+                    prefix: CommonsBundleTests\Integration\Database\Filters\ODM
             filters:
                 deleted:
                     class: Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter

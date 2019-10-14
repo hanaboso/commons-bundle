@@ -22,7 +22,7 @@ doctrine:
                 type: annotation
                 dir: '%kernel.root_dir%/../tests/Integration/Database/Filters/ORM'
                 is_bundle: false
-                prefix: Tests\Integration\Database\Filters\ORM
+                prefix: CommonsBundleTests\Integration\Database\Filters\ORM
         filters:
             deleted:
                 class: Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter

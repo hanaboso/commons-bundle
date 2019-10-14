@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests;
+namespace CommonsBundleTests;
 
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\ControllerTestTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 /**
  * Class ControllerTestCaseAbstract
  *
- * @package Tests
+ * @package CommonsBundleTests
  */
 abstract class ControllerTestCaseAbstract extends WebTestCase
 {

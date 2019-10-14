@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Metrics;
+namespace CommonsBundleTests\Unit\Metrics;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class MetricsLoaderTest
  *
- * @package Tests\Unit\Metrics
+ * @package CommonsBundleTests\Unit\Metrics
  */
 final class MetricsLoaderTest extends KernelTestCaseAbstract
 {

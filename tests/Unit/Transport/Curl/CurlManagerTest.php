@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\Curl;
+namespace CommonsBundleTests\Unit\Transport\Curl;
 
 use Exception;
 use GuzzleHttp\Client;
@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class CurlManagerTest
  *
- * @package Tests\Unit\Transport\Curl
+ * @package CommonsBundleTests\Unit\Transport\Curl
  */
 final class CurlManagerTest extends TestCase
 {

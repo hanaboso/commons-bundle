@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Metrics\Impl;
+namespace CommonsBundleTests\Integration\Metrics\Impl;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class MongoDbSenderTetst
  *
- * @package Tests\Integration\Metrics\Impl
+ * @package CommonsBundleTests\Integration\Metrics\Impl
  */
 final class MongoDbSenderTest extends DatabaseTestCaseAbstract
 {

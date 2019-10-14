@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\Curl;
+namespace CommonsBundleTests\Unit\Transport\Curl;
 
 use GuzzleHttp\Client;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class CurlClientFactoryTest
  *
- * @package Tests\Unit\Transport\Curl
+ * @package CommonsBundleTests\Unit\Transport\Curl
  */
 final class CurlClientFactoryTest extends TestCase
 {

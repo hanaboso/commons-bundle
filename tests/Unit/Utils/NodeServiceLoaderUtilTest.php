@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Utils;
+namespace CommonsBundleTests\Unit\Utils;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Utils\NodeServiceLoaderUtil;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class NodeServiceLoaderUtilTest
  *
- * @package Tests\Unit\Utils
+ * @package CommonsBundleTests\Unit\Utils
  */
 final class NodeServiceLoaderUtilTest extends KernelTestCaseAbstract
 {

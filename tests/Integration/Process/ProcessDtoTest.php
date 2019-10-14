@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Process;
+namespace CommonsBundleTests\Integration\Process;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class ProcessDtoTest
  *
- * @package Tests\Integration\Process
+ * @package CommonsBundleTests\Integration\Process
  */
 final class ProcessDtoTest extends DatabaseTestCaseAbstract
 {

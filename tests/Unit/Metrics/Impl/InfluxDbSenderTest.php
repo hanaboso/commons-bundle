@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Metrics\Impl;
+namespace CommonsBundleTests\Unit\Metrics\Impl;
 
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class InfluxDbSenderTest
  *
- * @package Tests\Unit\Metrics\Impl
+ * @package CommonsBundleTests\Unit\Metrics\Impl
  */
 final class InfluxDbSenderTest extends TestCase
 {

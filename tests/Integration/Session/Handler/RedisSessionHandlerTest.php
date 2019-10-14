@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Session\Handler;
+namespace CommonsBundleTests\Integration\Session\Handler;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class RedisSessionHandlerTest
  *
- * @package Tests\Integration\Session\Handler
+ * @package CommonsBundleTests\Integration\Session\Handler
  */
 final class RedisSessionHandlerTest extends KernelTestCaseAbstract
 {

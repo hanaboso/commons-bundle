@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Database\Repository;
+namespace CommonsBundleTests\Integration\Database\Repository;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Document\Category;
 use Hanaboso\CommonsBundle\Database\Repository\CategoryRepository;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class CategoryRepositoryTest
  *
- * @package Tests\Integration\Database\Repository
+ * @package CommonsBundleTests\Integration\Database\Repository
  */
 final class CategoryRepositoryTest extends DatabaseTestCaseAbstract
 {

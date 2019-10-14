@@ -10,4 +10,4 @@ parameters:
 	ignoreErrors:
 		- '#Call to an undefined method React\\Promise\\PromiseInterface\:\:done\(\)#'
 	symfony:
-		container_xml_path: %rootDir%/../../../var/cache/test/testsTests_KernelTestDebugContainer.xml
+		container_xml_path: %rootDir%/../../../var/cache/test/testsCommonsBundleTests_KernelTestDebugContainer.xml

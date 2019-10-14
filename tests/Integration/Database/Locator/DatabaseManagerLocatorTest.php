@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Database\Locator;
+namespace CommonsBundleTests\Integration\Database\Locator;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use PDO;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class DatabaseManagerLocatorTest
  *
- * @package Tests\Integration\Database\Locator
+ * @package CommonsBundleTests\Integration\Database\Locator
  */
 final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
 {

@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\FileStorage;
+namespace CommonsBundleTests\Integration\FileStorage;
 
+use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
 use Hanaboso\CommonsBundle\FileStorage\Document\File;
@@ -11,12 +12,11 @@ use Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
 use Hanaboso\CommonsBundle\FileStorage\FileStorage;
 use PHPUnit\Framework\MockObject\MockObject;
-use Tests\DatabaseTestCaseAbstract;
 
 /**
  * Class FileStorageTest
  *
- * @package Tests\Integration\FileStorage
+ * @package CommonsBundleTests\Integration\FileStorage
  */
 final class FileStorageTest extends DatabaseTestCaseAbstract
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Monolog;
+namespace CommonsBundleTests\Unit\Monolog;
 
 use Hanaboso\CommonsBundle\Exception\CronException;
 use Hanaboso\CommonsBundle\Monolog\MonologFormatter;
@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class MonologFormatterTest
  *
- * @package Tests\Unit\Monolog
+ * @package CommonsBundleTests\Unit\Monolog
  */
 final class MonologFormatterTest extends TestCase
 {

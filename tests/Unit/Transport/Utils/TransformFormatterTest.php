@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\Utils;
+namespace CommonsBundleTests\Unit\Transport\Utils;
 
 use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class TransformFormatterTest
  *
- * @package Tests\Unit\Transport\Utils
+ * @package CommonsBundleTests\Unit\Transport\Utils
  */
 final class TransformFormatterTest extends TestCase
 {

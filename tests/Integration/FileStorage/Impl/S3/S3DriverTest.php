@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\FileStorage\Impl\S3;
+namespace CommonsBundleTests\Integration\FileStorage\Impl\S3;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class S3DriverTest
  *
- * @package Tests\Integration\FileStorage\Impl\S3
+ * @package CommonsBundleTests\Integration\FileStorage\Impl\S3
  */
 final class S3DriverTest extends KernelTestCaseAbstract
 {

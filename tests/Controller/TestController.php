@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Controller;
+namespace CommonsBundleTests\Controller;
 
 use Hanaboso\CommonsBundle\Traits\ControllerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class TestController
  *
- * @package Tests\Controller
+ * @package CommonsBundleTests\Controller
  */
 class TestController extends AbstractController
 {

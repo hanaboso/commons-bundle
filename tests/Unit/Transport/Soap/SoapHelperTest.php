@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\Soap;
+namespace CommonsBundleTests\Unit\Transport\Soap;
 
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto as RequestDtoNonWsdl;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 /**
  * Class SoapHelperTest
  *
- * @package Tests\Unit\Transport\Soap
+ * @package CommonsBundleTests\Unit\Transport\Soap
  */
 final class SoapHelperTest extends TestCase
 {

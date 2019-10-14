@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Transport\Curl;
+namespace CommonsBundleTests\Integration\Transport\Curl;
 
+use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
@@ -11,12 +12,11 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use PHPUnit\Framework\MockObject\MockObject;
-use Tests\KernelTestCaseAbstract;
 
 /**
  * Class CurlManagerTest
  *
- * @package Tests\Integration\Transport\Curl
+ * @package CommonsBundleTests\Integration\Transport\Curl
  */
 final class CurlManagerTest extends KernelTestCaseAbstract
 {

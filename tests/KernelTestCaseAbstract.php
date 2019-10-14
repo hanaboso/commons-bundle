@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests;
+namespace CommonsBundleTests;
 
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 /**
  * Class KernelTestCaseAbstract
  *
- * @package Tests
+ * @package CommonsBundleTests
  */
 abstract class KernelTestCaseAbstract extends KernelTestCase
 {

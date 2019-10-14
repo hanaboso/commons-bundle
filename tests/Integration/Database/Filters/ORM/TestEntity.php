@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Integration\Database\Filters\ORM;
+namespace CommonsBundleTests\Integration\Database\Filters\ORM;
 
 use Doctrine\ORM\Mapping as ORM;
 use Hanaboso\CommonsBundle\Database\Traits\Entity\DeletedTrait;
@@ -9,7 +9,7 @@ use Hanaboso\CommonsBundle\Database\Traits\Entity\IdTrait;
 /**
  * Class TestEntity
  *
- * @package Tests\Integration\Database\Filters\ORM
+ * @package CommonsBundleTests\Integration\Database\Filters\ORM
  *
  * @ORM\Entity()
  */

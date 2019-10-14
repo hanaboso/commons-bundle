@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Unit\Transport\Ftp;
+namespace CommonsBundleTests\Unit\Transport\Ftp;
 
 use Exception;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
@@ -13,7 +13,7 @@ use SplFileInfo;
 /**
  * Class FtpServiceTest
  *
- * @package Tests\Unit\Transport\Ftp
+ * @package CommonsBundleTests\Unit\Transport\Ftp
  */
 final class FtpServiceTest extends TestCase
 {
