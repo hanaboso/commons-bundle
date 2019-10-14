@@ -22,12 +22,12 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
         $testDocument1 = new TestDocument();
         $testDocument1->setName('example1');
         $testDocument1->setDeleted(FALSE);
-        $this->persistAndFlush($testDocument1);
+        $this->pfd($testDocument1);
 
         $testDocument2 = new TestDocument();
         $testDocument2->setName('example2');
         $testDocument2->setDeleted(TRUE);
-        $this->persistAndFlush($testDocument2);
+        $this->pfd($testDocument2);
 
         $repository = $this->dm->getRepository(TestDocument::class);
 
@@ -43,7 +43,7 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
         $testDocument = new TestDocument();
         $testDocument->setName('example');
         $testDocument->setDeleted(TRUE);
-        $this->persistAndFlush($testDocument);
+        $this->pfd($testDocument);
 
         $repository = $this->dm->getRepository(TestDocument::class);
         $this->dm->getFilterCollection()->disable(DeletedFilter::NAME);

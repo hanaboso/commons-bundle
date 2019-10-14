@@ -6,7 +6,6 @@ use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
 use Tests\DatabaseTestCaseAbstract;
-use Tests\PrivateTrait;
 
 /**
  * Class ProcessDtoTest
@@ -15,8 +14,6 @@ use Tests\PrivateTrait;
  */
 final class ProcessDtoTest extends DatabaseTestCaseAbstract
 {
-
-    use PrivateTrait;
 
     /**
      * @throws Exception

@@ -8,6 +8,6 @@ includes:
 parameters:
 	excludes_analyse:
 	ignoreErrors:
-		- '#PHPDoc tag @throws with type PhpImap\\Exception is not subtype of Throwable#'
+		- '#Call to an undefined method React\\Promise\\PromiseInterface\:\:done\(\)#'
 	symfony:
 		container_xml_path: %rootDir%/../../../var/cache/test/testsTests_KernelTestDebugContainer.xml

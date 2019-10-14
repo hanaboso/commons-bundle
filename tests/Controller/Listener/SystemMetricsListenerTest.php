@@ -22,7 +22,7 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
      */
     public function testListenerWithoutPipesHeader(): void
     {
-        $this->client->request('GET', '/test/route', [], [], []);
+        $this->sendRequest('GET', '/test/route');
 
         /** @var Request $request */
         $request = $this->client->getRequest();
@@ -40,7 +40,7 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
             sprintf('HTTP_%s', PipesHeaders::createKey(PipesHeaders::CORRELATION_ID)) => 'correlationId',
             sprintf('HTTP_%s', PipesHeaders::createKey(PipesHeaders::NODE_ID))        => 'nodeId',
         ];
-        $this->client->request('GET', '/test/route', [], [], $headers);
+        $this->sendRequest('GET', '/test/route', [], $headers);
 
         /** @var Request $request */
         $request = $this->client->getRequest();

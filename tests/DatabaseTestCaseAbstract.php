@@ -2,10 +2,8 @@
 
 namespace Tests;
 
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Exception;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\DatabaseTestTrait;
 
 /**
  * Class DatabaseTestCaseAbstract
@@ -15,58 +13,19 @@ use Symfony\Component\HttpFoundation\Session\Session;
 abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
 {
 
-    /**
-     * @var DocumentManager
-     */
-    protected $dm;
+    use DatabaseTestTrait;
 
     /**
-     * @var Session
-     */
-    protected $session;
-
-    /**
-     * DatabaseTestCaseAbstract constructor.
-     *
-     * @param null   $name
-     * @param array  $data
-     * @param string $dataName
-     */
-    public function __construct($name = NULL, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->session = new Session();
-    }
-
-    /**
-     *
+     * @throws Exception
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->dm->getConnection()->dropDatabase('pipes');
-        $this->session->invalidate();
-        $this->session->clear();
-    }
-
-    /**
-     * @param mixed $obj
-     * @param bool  $isEm
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    protected function persistAndFlush($obj, bool $isEm = FALSE): void
-    {
-        if ($isEm) {
-            $this->em->persist($obj);
-            $this->em->flush($obj);
-        } else {
-            $this->dm->persist($obj);
-            $this->dm->flush($obj);
-        }
+        $this->dm = self::$container->get('doctrine_mongodb.odm.default_document_manager');
+        $this->em = self::$container->get('doctrine.orm.default_entity_manager');
+        $this->clearMongo();
+        $this->clearMysql();
     }
 
 }

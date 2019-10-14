@@ -1,15 +1,13 @@
-.PHONY: .env init-dev test
+.PHONY: init-dev test
 
 DC=docker-compose
 DE=docker-compose exec -T app
 DEC=docker-compose exec -T app composer
 
 .env:
-	@if ! [ -f .env ]; then \
-		sed -e "s/{DEV_UID}/$(shell id -u)/g" \
-			-e "s/{DEV_GID}/$(shell id -u)/g" \
-			.env.dist >> .env; \
-	fi;
+	sed -e "s/{DEV_UID}/$(shell id -u)/g" \
+		-e "s/{DEV_GID}/$(shell id -u)/g" \
+		.env.dist >> .env; \
 
 # Docker
 docker-up-force: .env
@@ -50,13 +48,13 @@ phpstan:
 	$(DE) ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 7 src/ tests/
 
 phpunit:
-	$(DE) ./vendor/bin/phpunit -c phpunit.xml.dist --colors --stderr tests/Unit
+	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Unit
 
 phpintegration: database-create
-	$(DE) ./vendor/bin/phpunit -c phpunit.xml.dist --colors --stderr tests/Integration
+	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Integration
 
 phpcontroller:
-	$(DE) ./vendor/bin/phpunit -c phpunit.xml.dist --colors --stderr tests/Controller
+	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Controller
 
 test: docker-up-force composer-install fasttest
 

@@ -22,12 +22,12 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
         $testEntity1 = new TestEntity();
         $testEntity1->setName('example1');
         $testEntity1->setDeleted(FALSE);
-        $this->persistAndFlush($testEntity1, TRUE);
+        $this->pfe($testEntity1);
 
         $testEntity2 = new TestEntity();
         $testEntity2->setName('example2');
         $testEntity2->setDeleted(TRUE);
-        $this->persistAndFlush($testEntity2, TRUE);
+        $this->pfe($testEntity2);
 
         $repository = $this->em->getRepository(TestEntity::class);
 
@@ -43,7 +43,7 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
         $testEntity = new TestEntity();
         $testEntity->setName('example');
         $testEntity->setDeleted(TRUE);
-        $this->persistAndFlush($testEntity, TRUE);
+        $this->pfe($testEntity);
         $repository = $this->em->getRepository(TestEntity::class);
 
         $this->em->getFilters()->disable(DeletedFilter::NAME);

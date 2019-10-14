@@ -9,6 +9,7 @@ services:
             - ${HOME}/.composer:/srv/.composer
         environment:
             - APP_ENV=dev
+            - KERNEL_CLASS=Tests\Kernel
             - DEV_UID=${DEV_UID}
             - DEV_GID=${DEV_GID}
 

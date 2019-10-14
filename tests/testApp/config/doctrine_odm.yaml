@@ -39,7 +39,7 @@ doctrine_mongodb:
                     is_bundle: false
                     dir: "%src_dir%/src/FileStorage/Driver/Impl/Mongo"
                     prefix: Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
-                TestEntity:
+                TestDocument:
                     type: annotation
                     dir: '%kernel.root_dir%/../tests/Integration/Database/Filters/ODM'
                     is_bundle: false
