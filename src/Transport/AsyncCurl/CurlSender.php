@@ -41,7 +41,6 @@ class CurlSender implements LoggerAwareInterface
      */
     private $logger;
 
-
     /**
      * CurlSender constructor.
      *
