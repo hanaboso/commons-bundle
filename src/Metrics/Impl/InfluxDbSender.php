@@ -104,9 +104,9 @@ class InfluxDbSender implements MetricsSenderInterface
         foreach ($tags as &$tag) {
             if ($tag === '') {
                 $tag = '""';
-            } elseif (is_bool($tag)) {
+            } else if (is_bool($tag)) {
                 $tag = ($tag ? 'true' : 'false');
-            } elseif (is_null($tag)) {
+            } else if (is_null($tag)) {
                 $tag = 'null';
             }
         }
@@ -126,11 +126,11 @@ class InfluxDbSender implements MetricsSenderInterface
         foreach ($fields as &$field) {
             if (is_integer($field)) {
                 $field = sprintf('%d', $field);
-            } elseif (is_string($field)) {
+            } else if (is_string($field)) {
                 $field = $this->escapeFieldValue($field);
-            } elseif (is_bool($field)) {
+            } else if (is_bool($field)) {
                 $field = ($field ? 'true' : 'false');
-            } elseif (is_null($field)) {
+            } else if (is_null($field)) {
                 $field = $this->escapeFieldValue('null');
             }
         }

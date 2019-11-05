@@ -92,13 +92,16 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         try {
             $client = $this->soapClientFactory->create($request, $this->composeOptions($request, $options));
 
-            $this->logger->debug(sprintf('Request: Type: %s, Uri: %s, Headers: %s, User: %s, Password: %s',
-                $request->getType(),
-                $request->getUri(),
-                $this->getHeadersAsString($request->getHeader()->getParams()),
-                $request->getUser(),
-                $request->getPassword()
-            ));
+            $this->logger->debug(
+                sprintf(
+                    'Request: Type: %s, Uri: %s, Headers: %s, User: %s, Password: %s',
+                    $request->getType(),
+                    $request->getUri(),
+                    $this->getHeadersAsString($request->getHeader()->getParams()),
+                    $request->getUser(),
+                    $request->getPassword()
+                )
+            );
 
             $this->startTimes = CurlMetricUtils::getCurrentMetrics();
             $soapCallResponse = $client->__soapCall(
@@ -149,12 +152,15 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         if ($response->getResponseHeaderDto()) {
             /** @var ResponseHeaderDto $headers */
             $headers = $response->getResponseHeaderDto();
-            $this->logger->debug(sprintf('Response: Status Code: %s, Reason Phrase: %s, Headers: %s, Body: %s',
-                $headers->getHttpStatusCode(),
-                $headers->getHttpReason(),
-                $response->getLastResponseHeaders(),
-                $response->getSoapCallResponse()
-            ));
+            $this->logger->debug(
+                sprintf(
+                    'Response: Status Code: %s, Reason Phrase: %s, Headers: %s, Body: %s',
+                    $headers->getHttpStatusCode(),
+                    $headers->getHttpReason(),
+                    $response->getLastResponseHeaders(),
+                    $response->getSoapCallResponse()
+                )
+            );
         } else {
             $this->logger->debug(sprintf('Response: Body: %s', $response->getSoapCallResponse()));
         }
@@ -186,13 +192,15 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         }
 
         //Disable certificate verification
-        $options['stream_context'] = stream_context_create([
-            'ssl' => [
-                'verify_peer'       => FALSE,
-                'verify_peer_name'  => FALSE,
-                'allow_self_signed' => TRUE,
-            ],
-        ]);
+        $options['stream_context'] = stream_context_create(
+            [
+                'ssl' => [
+                    'verify_peer'       => FALSE,
+                    'verify_peer_name'  => FALSE,
+                    'allow_self_signed' => TRUE,
+                ],
+            ]
+        );
 
         return $options;
     }

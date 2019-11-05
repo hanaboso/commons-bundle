@@ -45,9 +45,11 @@ final class CurlSenderTest extends TestCase
 
         $curl
             ->send($request)
-            ->then(function (ResponseInterface $response): void {
-                self::assertSame(201, $response->getStatusCode());
-            })
+            ->then(
+                function (ResponseInterface $response): void {
+                    self::assertSame(201, $response->getStatusCode());
+                }
+            )
             ->done();
     }
 
@@ -66,9 +68,12 @@ final class CurlSenderTest extends TestCase
 
         $curl
             ->send($request)
-            ->then(NULL, function ($e): void {
-                self::assertInstanceOf(ResponseException::class, $e);
-            })
+            ->then(
+                NULL,
+                function ($e): void {
+                    self::assertInstanceOf(ResponseException::class, $e);
+                }
+            )
             ->done();
     }
 

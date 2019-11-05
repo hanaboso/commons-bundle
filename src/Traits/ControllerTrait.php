@@ -39,8 +39,10 @@ trait ControllerTrait
     {
         if (!is_string($data)) {
             $data = json_encode($data, JSON_THROW_ON_ERROR);
-        } else if (!json_decode($data)) {
-            $data = json_encode($data, JSON_THROW_ON_ERROR);
+        } else {
+            if (!json_decode($data)) {
+                $data = json_encode($data, JSON_THROW_ON_ERROR);
+            }
         }
 
         return new Response($data, $code, $headers);

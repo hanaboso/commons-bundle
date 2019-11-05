@@ -38,7 +38,8 @@ class FileStorageDriverLocator
     function __construct(
         FileStorageDriverInterface $persistent,
         FileStorageDriverInterface $temporary,
-        FileStorageDriverInterface $public)
+        FileStorageDriverInterface $public
+    )
     {
         $this->persistent = $persistent;
         $this->temporary  = $temporary;

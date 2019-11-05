@@ -121,7 +121,7 @@ class SoapHelper
 
         if (is_scalar($data)) {
             return new SoapVar($data, XSD_STRING, '', '', $nodeName);
-        } elseif (is_array($data)) {
+        } else if (is_array($data)) {
             $params = [];
             foreach ($data as $subName => $subArg) {
                 $params[] = self::composeDataForSoapParam($subName, $subArg);

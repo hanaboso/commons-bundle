@@ -110,12 +110,14 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
         $request = new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
 
         try {
-            $this->logger->debug(TransportFormatter::requestToString(
-                $dto->getMethod(),
-                (string) $dto->getUri(),
-                $dto->getHeaders(),
-                $dto->getBody()
-            ));
+            $this->logger->debug(
+                TransportFormatter::requestToString(
+                    $dto->getMethod(),
+                    (string) $dto->getUri(),
+                    $dto->getHeaders(),
+                    $dto->getBody()
+                )
+            );
 
             $client = $this->curlClientFactory->create();
 
@@ -130,12 +132,14 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $psrResponse->getHeaders()
             );
 
-            $this->logger->debug(TransportFormatter::responseToString(
-                $psrResponse->getStatusCode(),
-                $psrResponse->getReasonPhrase(),
-                $psrResponse->getHeaders(),
-                $psrResponse->getBody()->getContents()
-            ));
+            $this->logger->debug(
+                TransportFormatter::responseToString(
+                    $psrResponse->getStatusCode(),
+                    $psrResponse->getReasonPhrase(),
+                    $psrResponse->getHeaders(),
+                    $psrResponse->getBody()->getContents()
+                )
+            );
 
             unset($psrResponse);
         } catch (RequestException $exception) {

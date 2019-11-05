@@ -51,8 +51,10 @@ class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
         $manager = NULL;
         if ($this->type === 'ODM') {
             $manager = $this->getDm();
-        } else if ($this->type === 'ORM') {
-            $manager = $this->getEm();
+        } else {
+            if ($this->type === 'ORM') {
+                $manager = $this->getEm();
+            }
         }
 
         if (!$manager) {

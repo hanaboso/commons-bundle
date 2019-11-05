@@ -34,23 +34,28 @@ final class LogstashFormatterTest extends TestCase
      */
     public function testFormat(): void
     {
-        $message = $this->logstashFormatter->format([
-            'message'    => 'Test message',
-            'context'    => [],
-            'level_name' => 'INFO',
-            'channel'    => 'test',
-        ]);
+        $message = $this->logstashFormatter->format(
+            [
+                'message'    => 'Test message',
+                'context'    => [],
+                'level_name' => 'INFO',
+                'channel'    => 'test',
+            ]
+        );
 
         $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
-        self::assertEquals([
-            'timestamp' => 1505381163375,
-            'hostname'  => 'localhost',
-            'type'      => 'test-service',
-            'message'   => 'Test message',
-            'channel'   => 'test',
-            'severity'  => 'INFO',
-        ], $message);
+        self::assertEquals(
+            [
+                'timestamp' => 1505381163375,
+                'hostname'  => 'localhost',
+                'type'      => 'test-service',
+                'message'   => 'Test message',
+                'channel'   => 'test',
+                'severity'  => 'INFO',
+            ],
+            $message
+        );
     }
 
     /**
@@ -58,28 +63,33 @@ final class LogstashFormatterTest extends TestCase
      */
     public function testFormatPipes(): void
     {
-        $message = $this->logstashFormatter->format([
-            'message'    => 'Test message',
-            'context'    => [
-                'correlation_id' => '123',
-                'node_id'        => '456',
-            ],
-            'level_name' => 'INFO',
-            'channel'    => 'test',
-        ]);
+        $message = $this->logstashFormatter->format(
+            [
+                'message'    => 'Test message',
+                'context'    => [
+                    'correlation_id' => '123',
+                    'node_id'        => '456',
+                ],
+                'level_name' => 'INFO',
+                'channel'    => 'test',
+            ]
+        );
 
         $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
-        self::assertEquals([
-            'timestamp'      => 1505381163375,
-            'hostname'       => 'localhost',
-            'type'           => 'test-service',
-            'message'        => 'Test message',
-            'channel'        => 'test',
-            'severity'       => 'INFO',
-            'correlation_id' => '123',
-            'node_id'        => '456',
-        ], $message);
+        self::assertEquals(
+            [
+                'timestamp'      => 1505381163375,
+                'hostname'       => 'localhost',
+                'type'           => 'test-service',
+                'message'        => 'Test message',
+                'channel'        => 'test',
+                'severity'       => 'INFO',
+                'correlation_id' => '123',
+                'node_id'        => '456',
+            ],
+            $message
+        );
     }
 
     /**
@@ -87,32 +97,37 @@ final class LogstashFormatterTest extends TestCase
      */
     public function testFormatException(): void
     {
-        $message = $this->logstashFormatter->format([
-            'message'    => 'Test message',
-            'context'    => [
-                'exception' => new Exception('Default exception'),
-            ],
-            'level_name' => 'INFO',
-            'channel'    => 'test',
-        ]);
+        $message = $this->logstashFormatter->format(
+            [
+                'message'    => 'Test message',
+                'context'    => [
+                    'exception' => new Exception('Default exception'),
+                ],
+                'level_name' => 'INFO',
+                'channel'    => 'test',
+            ]
+        );
 
         $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
-        self::assertEquals([
-            'timestamp'  => 1505381163375,
-            'hostname'   => 'localhost',
-            'type'       => 'test-service',
-            'message'    => 'Test message',
-            'channel'    => 'test',
-            'severity'   => 'INFO',
-            'stacktrace' => [
-                'class'   => 'Exception',
-                'message' => 'Default exception',
-                'code'    => 0,
-                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:93',
-                'trace'   => '',
+        self::assertEquals(
+            [
+                'timestamp'  => 1505381163375,
+                'hostname'   => 'localhost',
+                'type'       => 'test-service',
+                'message'    => 'Test message',
+                'channel'    => 'test',
+                'severity'   => 'INFO',
+                'stacktrace' => [
+                    'class'   => 'Exception',
+                    'message' => 'Default exception',
+                    'code'    => 0,
+                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:104',
+                    'trace'   => '',
+                ],
             ],
-        ], $message);
+            $message
+        );
     }
 
     /**
@@ -120,36 +135,41 @@ final class LogstashFormatterTest extends TestCase
      */
     public function testFormatExceptionPipes(): void
     {
-        $message = $this->logstashFormatter->format([
-            'message'    => 'Test message',
-            'context'    => [
-                'correlation_id' => '123',
-                'node_id'        => '456',
-                'exception'      => new Exception('Default exception'),
-            ],
-            'level_name' => 'INFO',
-            'channel'    => 'test',
-        ]);
+        $message = $this->logstashFormatter->format(
+            [
+                'message'    => 'Test message',
+                'context'    => [
+                    'correlation_id' => '123',
+                    'node_id'        => '456',
+                    'exception'      => new Exception('Default exception'),
+                ],
+                'level_name' => 'INFO',
+                'channel'    => 'test',
+            ]
+        );
 
         $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
-        self::assertEquals([
-            'timestamp'      => 1505381163375,
-            'hostname'       => 'localhost',
-            'type'           => 'test-service',
-            'message'        => 'Test message',
-            'channel'        => 'test',
-            'severity'       => 'INFO',
-            'stacktrace'     => [
-                'class'   => 'Exception',
-                'message' => 'Default exception',
-                'code'    => 0,
-                'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:128',
-                'trace'   => '',
+        self::assertEquals(
+            [
+                'timestamp'      => 1505381163375,
+                'hostname'       => 'localhost',
+                'type'           => 'test-service',
+                'message'        => 'Test message',
+                'channel'        => 'test',
+                'severity'       => 'INFO',
+                'stacktrace'     => [
+                    'class'   => 'Exception',
+                    'message' => 'Default exception',
+                    'code'    => 0,
+                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:144',
+                    'trace'   => '',
+                ],
+                'correlation_id' => '123',
+                'node_id'        => '456',
             ],
-            'correlation_id' => '123',
-            'node_id'        => '456',
-        ], $message);
+            $message
+        );
     }
 
     /**
@@ -174,27 +194,32 @@ final class LogstashFormatterTest extends TestCase
      */
     public function testContext(): void
     {
-        $message = $this->logstashFormatter->format([
-            'message'    => 'Test message',
-            'context'    => [
-                'type'          => 'starting_point',
-                'topology_name' => 'topology_1',
-            ],
-            'level_name' => 'INFO',
-            'channel'    => 'test',
-        ]);
+        $message = $this->logstashFormatter->format(
+            [
+                'message'    => 'Test message',
+                'context'    => [
+                    'type'          => 'starting_point',
+                    'topology_name' => 'topology_1',
+                ],
+                'level_name' => 'INFO',
+                'channel'    => 'test',
+            ]
+        );
 
         $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
 
-        self::assertEquals([
-            'timestamp'     => 1505381163375,
-            'hostname'      => 'localhost',
-            'type'          => 'starting_point',
-            'message'       => 'Test message',
-            'channel'       => 'test',
-            'severity'      => 'INFO',
-            'topology_name' => 'topology_1',
-        ], $message);
+        self::assertEquals(
+            [
+                'timestamp'     => 1505381163375,
+                'hostname'      => 'localhost',
+                'type'          => 'starting_point',
+                'message'       => 'Test message',
+                'channel'       => 'test',
+                'severity'      => 'INFO',
+                'topology_name' => 'topology_1',
+            ],
+            $message
+        );
     }
 
 }

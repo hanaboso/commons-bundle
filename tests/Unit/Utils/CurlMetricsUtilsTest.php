@@ -32,15 +32,17 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $influx = self::createMock(InfluxDbSender::class);
         $influx
             ->expects(self::any())
-            ->method('send')->will($this->returnCallback(
-                function (array $times, array $data): bool {
-                    $data;
+            ->method('send')->will(
+                $this->returnCallback(
+                    function (array $times, array $data): bool {
+                        $data;
 
-                    self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
+                        self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
 
-                    return TRUE;
-                }
-            ));
+                        return TRUE;
+                    }
+                )
+            );
 
         $loader = new MetricsSenderLoader('influx', $influx, NULL);
 

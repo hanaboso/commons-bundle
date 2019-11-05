@@ -37,7 +37,8 @@ class ImapConnector
         $this->mailbox = new Mailbox(
             sprintf('{%s:993%s}%s', $dto->getHost(), $dto->getPath(), $dto->getFolder()),
             $dto->getUser(),
-            $dto->getPassword());
+            $dto->getPassword()
+        );
 
         return $this;
     }
@@ -89,7 +90,7 @@ class ImapConnector
      */
     public function moveMail(int $mailId, string $destination): void
     {
-        $this->mailbox->moveMail($mailId, $this->checkMailbox($destination));
+        $this->mailbox->moveMail((string) $mailId, $this->checkMailbox($destination));
     }
 
     /**

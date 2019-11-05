@@ -26,9 +26,14 @@ final class PipesHeadersTest extends TestCase
      */
     public function testClear(): void
     {
-        self::assertSame(['content-type' => 'application/json', 'pf-token' => '456'], PipesHeaders::clear([
-            'content-type' => 'application/json', 'pfp-node-id' => '123', 'pf-token' => '456',
-        ]));
+        self::assertSame(
+            ['content-type' => 'application/json', 'pf-token' => '456'],
+            PipesHeaders::clear(
+                [
+                    'content-type' => 'application/json', 'pfp-node-id' => '123', 'pf-token' => '456',
+                ]
+            )
+        );
     }
 
     /**
@@ -36,9 +41,15 @@ final class PipesHeadersTest extends TestCase
      */
     public function testGet(): void
     {
-        self::assertSame('456', PipesHeaders::get('token', [
-            'content-type' => 'application/json', 'pfp-node-id' => '123', 'pf-token' => '456',
-        ]));
+        self::assertSame(
+            '456',
+            PipesHeaders::get(
+                'token',
+                [
+                    'content-type' => 'application/json', 'pfp-node-id' => '123', 'pf-token' => '456',
+                ]
+            )
+        );
     }
 
     /**
@@ -46,15 +57,20 @@ final class PipesHeadersTest extends TestCase
      */
     public function testDebugInfo(): void
     {
-        self::assertSame([
-            'node_id'        => '123',
-            'correlation_id' => '456',
-        ], PipesHeaders::debugInfo([
-            'content-type'      => 'application/json',
-            'pf-node-id'        => '123',
-            'pf-token'          => '456',
-            'pf-correlation-id' => '456',
-        ]));
+        self::assertSame(
+            [
+                'node_id'        => '123',
+                'correlation_id' => '456',
+            ],
+            PipesHeaders::debugInfo(
+                [
+                    'content-type'      => 'application/json',
+                    'pf-node-id'        => '123',
+                    'pf-token'          => '456',
+                    'pf-correlation-id' => '456',
+                ]
+            )
+        );
     }
 
 }

@@ -56,8 +56,12 @@ class TransportFormatter
      *
      * @return string
      */
-    public static function responseToString(int $statusCode, string $reasonPhrase, array $headers = [],
-                                            string $body = ''): string
+    public static function responseToString(
+        int $statusCode,
+        string $reasonPhrase,
+        array $headers = [],
+        string $body = ''
+    ): string
     {
         return sprintf(
             'Response: Status Code: %s, Reason Phrase: %s, Headers: %s, Body: "%s"',
