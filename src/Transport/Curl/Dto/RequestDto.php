@@ -3,6 +3,7 @@
 namespace Hanaboso\CommonsBundle\Transport\Curl\Dto;
 
 use GuzzleHttp\Psr7\Uri;
+use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Utils\PipesHeaders;
@@ -160,13 +161,13 @@ class RequestDto
     }
 
     /**
-     * @param array $debugInfo
+     * @param ProcessDto $dto
      *
      * @return RequestDto
      */
-    public function setDebugInfo(array $debugInfo): RequestDto
+    public function setDebugInfo(ProcessDto $dto): RequestDto
     {
-        $this->debugInfo = $debugInfo;
+        $this->debugInfo = PipesHeaders::debugInfo($dto->getHeaders());
 
         return $this;
     }
@@ -182,9 +183,8 @@ class RequestDto
     public static function from(RequestDto $dto, ?Uri $uri = NULL, ?string $method = NULL): RequestDto
     {
         $self = new self($method ?? $dto->getMethod(), $uri ?? new Uri((string) $dto->getUri(TRUE)));
-        $self
-            ->setHeaders($dto->getHeaders())
-            ->setDebugInfo($dto->getDebugInfo());
+        $self->setHeaders($dto->getHeaders());
+        $self->debugInfo = $dto->getDebugInfo();
 
         return $self;
     }

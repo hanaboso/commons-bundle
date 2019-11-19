@@ -4,6 +4,7 @@ namespace CommonsBundleTests\Unit\Monolog;
 
 use Exception;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatter;
+use Hanaboso\CommonsBundle\Utils\Json;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,7 +44,7 @@ final class LogstashFormatterTest extends TestCase
             ]
         );
 
-        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
+        $message = $this->correctMessage(Json::decode($message));
 
         self::assertEquals(
             [
@@ -75,7 +76,7 @@ final class LogstashFormatterTest extends TestCase
             ]
         );
 
-        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
+        $message = $this->correctMessage(Json::decode($message));
 
         self::assertEquals(
             [
@@ -108,7 +109,7 @@ final class LogstashFormatterTest extends TestCase
             ]
         );
 
-        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
+        $message = $this->correctMessage(Json::decode($message));
 
         self::assertEquals(
             [
@@ -122,7 +123,7 @@ final class LogstashFormatterTest extends TestCase
                     'class'   => 'Exception',
                     'message' => 'Default exception',
                     'code'    => 0,
-                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:104',
+                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:105',
                     'trace'   => '',
                 ],
             ],
@@ -148,7 +149,7 @@ final class LogstashFormatterTest extends TestCase
             ]
         );
 
-        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
+        $message = $this->correctMessage(Json::decode($message));
 
         self::assertEquals(
             [
@@ -162,7 +163,7 @@ final class LogstashFormatterTest extends TestCase
                     'class'   => 'Exception',
                     'message' => 'Default exception',
                     'code'    => 0,
-                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:144',
+                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:145',
                     'trace'   => '',
                 ],
                 'correlation_id' => '123',
@@ -206,7 +207,7 @@ final class LogstashFormatterTest extends TestCase
             ]
         );
 
-        $message = $this->correctMessage(json_decode($message, TRUE, 512, JSON_THROW_ON_ERROR));
+        $message = $this->correctMessage(Json::decode($message));
 
         self::assertEquals(
             [
