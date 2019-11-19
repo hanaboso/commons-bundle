@@ -9,6 +9,7 @@ use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
 use Hanaboso\CommonsBundle\Enum\StatusEnum;
 use Hanaboso\CommonsBundle\Enum\TopologyStatusEnum;
 use Hanaboso\CommonsBundle\Exception\EnumException;
+use Hanaboso\CommonsBundle\Utils\Json;
 
 /**
  * Class Topology
@@ -237,7 +238,7 @@ class Topology
      */
     public function getBpmn(): array
     {
-        return $this->bpmn ? json_decode($this->bpmn, TRUE, 512, JSON_THROW_ON_ERROR) : [];
+        return $this->bpmn ? Json::decode($this->bpmn) : [];
     }
 
     /**
@@ -247,7 +248,7 @@ class Topology
      */
     public function setBpmn(array $bpmn): Topology
     {
-        $this->bpmn = (string) json_encode($bpmn, JSON_THROW_ON_ERROR);
+        $this->bpmn = Json::encode($bpmn);
 
         return $this;
     }

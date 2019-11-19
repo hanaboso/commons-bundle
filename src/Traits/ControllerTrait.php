@@ -3,6 +3,7 @@
 namespace Hanaboso\CommonsBundle\Traits;
 
 use Hanaboso\CommonsBundle\Utils\ControllerUtils;
+use Hanaboso\CommonsBundle\Utils\Json;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
@@ -38,10 +39,10 @@ trait ControllerTrait
     protected function getResponse($data, int $code = 200, array $headers = []): Response
     {
         if (!is_string($data)) {
-            $data = json_encode($data, JSON_THROW_ON_ERROR);
+            $data = Json::encode($data);
         } else {
             if (!json_decode($data)) {
-                $data = json_encode($data, JSON_THROW_ON_ERROR);
+                $data = Json::encode($data);
             }
         }
 

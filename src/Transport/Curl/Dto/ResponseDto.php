@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl\Dto;
 
+use Hanaboso\CommonsBundle\Utils\Json;
+
 /**
  * Class ResponseDto
  *
@@ -80,7 +82,7 @@ class ResponseDto
      */
     public function getJsonBody(): array
     {
-        return json_decode($this->body, TRUE, 512, JSON_THROW_ON_ERROR);
+        return Json::decode($this->body);
     }
 
     /**

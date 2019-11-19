@@ -40,7 +40,7 @@ class ControllerUtils
             'message'    => $e->getMessage(),
         ];
 
-        return (string) json_encode($output, JSON_THROW_ON_ERROR);
+        return Json::encode($output);
     }
 
     /**
@@ -58,7 +58,7 @@ class ControllerUtils
         if ($e) {
             $code    = $e->getCode();
             $message = $e->getMessage();
-            $detail  = json_encode($e->getTraceAsString(), JSON_THROW_ON_ERROR);
+            $detail  = Json::encode($e->getTraceAsString());
         }
 
         $array = [

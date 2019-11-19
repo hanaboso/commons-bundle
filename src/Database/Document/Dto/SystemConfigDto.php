@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Database\Document\Dto;
 
+use Hanaboso\CommonsBundle\Utils\Json;
+
 /**
  * Class SystemConfigDto
  *
@@ -83,7 +85,7 @@ final class SystemConfigDto
      */
     public function toString(): string
     {
-        return (string) json_encode(
+        return Json::encode(
             [
                 self::SDK      => [self::HOST => $this->getSdkHost()],
                 self::BRIDGE   => [self::HOST => $this->getBridgeHost()],
@@ -93,8 +95,7 @@ final class SystemConfigDto
                     self::HOPS     => $this->getRepeaterHops(),
                     self::INTERVAL => $this->getRepeaterInterval(),
                 ],
-            ],
-            JSON_THROW_ON_ERROR
+            ]
         );
     }
 
@@ -105,7 +106,7 @@ final class SystemConfigDto
      */
     public static function fromString(string $param): SystemConfigDto
     {
-        $result = json_decode($param, TRUE, 512, JSON_THROW_ON_ERROR);
+        $result = Json::decode($param);
 
         return new SystemConfigDto(
             $result[self::SDK][self::HOST],
