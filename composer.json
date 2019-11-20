@@ -23,7 +23,7 @@
     "alcaeus/mongo-php-adapter": "^1.1",
     "aws/aws-sdk-php-symfony": "^2.0",
     "clue/buzz-react": "^2.6",
-    "doctrine/doctrine-bundle": "^1.11",
+    "doctrine/doctrine-bundle": "^2.0",
     "doctrine/doctrine-fixtures-bundle": "^3.3",
     "doctrine/mongodb-odm-bundle": "^3.6",
     "doctrine/orm": "^2.7",

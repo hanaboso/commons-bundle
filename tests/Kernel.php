@@ -4,7 +4,6 @@ namespace CommonsBundleTests;
 
 use Aws\Symfony\AwsBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle;
 use Exception;
@@ -39,7 +38,6 @@ final class Kernel extends BaseKernel
         $contents = [
             AwsBundle::class              => ['all' => TRUE],
             FrameworkBundle::class        => ['all' => TRUE],
-            DoctrineCacheBundle::class    => ['all' => TRUE],
             DoctrineBundle::class         => ['all' => TRUE],
             DoctrineFixturesBundle::class => ['all' => TRUE],
             MonologBundle::class          => ['all' => TRUE],
