@@ -11,7 +11,7 @@ final class Json
 {
 
     /**
-     * @param array|string $data
+     * @param mixed $data
      *
      * @return string
      */
