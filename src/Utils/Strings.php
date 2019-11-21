@@ -12,6 +12,21 @@ use Transliterator;
 final class Strings
 {
 
+    public const TRIM_CHARACTERS = " \t\n\r\0\x0B\u{A0}";
+
+    /**
+     * @param string $s
+     * @param string $chars
+     *
+     * @return string
+     */
+    public static function trim(string $s, string $chars = self::TRIM_CHARACTERS): string
+    {
+        $chars = preg_quote($chars, '#');
+
+        return preg_replace(sprintf('#^[%s]+|[%s]+$#Du', $chars, $chars), '', $s) ?: '';
+    }
+
     /**
      * @param string $string
      * @param bool   $firstLower
