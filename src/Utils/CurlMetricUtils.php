@@ -12,7 +12,7 @@ use Hanaboso\CommonsBundle\Metrics\SystemMetrics;
  *
  * @package Hanaboso\CommonsBundle\Utils
  */
-class CurlMetricUtils
+final class CurlMetricUtils
 {
 
     public const KEY_TIMESTAMP        = 'timestamp';

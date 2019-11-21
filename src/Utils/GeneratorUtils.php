@@ -4,14 +4,13 @@ namespace Hanaboso\CommonsBundle\Utils;
 
 use Hanaboso\CommonsBundle\Database\Document\Node;
 use Hanaboso\CommonsBundle\Database\Document\Topology;
-use Nette\Utils\Strings;
 
 /**
  * Class GeneratorUtils
  *
  * @package Hanaboso\CommonsBundle\Utils
  */
-class GeneratorUtils
+final class GeneratorUtils
 {
 
     /**

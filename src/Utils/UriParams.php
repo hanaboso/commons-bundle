@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\Utils;
  *
  * @package Hanaboso\CommonsBundle\Utils
  */
-class UriParams
+final class UriParams
 {
 
     /**

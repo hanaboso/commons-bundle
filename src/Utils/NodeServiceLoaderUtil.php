@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
  *
  * @package Hanaboso\CommonsBundle\Utils
  */
-class NodeServiceLoaderUtil
+final class NodeServiceLoaderUtil
 {
 
     /**

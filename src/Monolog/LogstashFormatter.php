@@ -105,11 +105,13 @@ class LogstashFormatter extends NormalizerFormatter
 
     /**
      * @param Exception|Throwable $e
+     * @param int                 $depth
      *
      * @return array
      */
-    protected function normalizeException($e): array
+    protected function normalizeException(Throwable $e, int $depth = 0): array
     {
+        $depth;
         if (!$e instanceof Throwable) {
             throw new InvalidArgumentException(
                 sprintf('Exception/Throwable expected, got %s / %s', gettype($e), get_class($e))
