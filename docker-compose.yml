@@ -5,7 +5,7 @@ services:
         user: ${DEV_UID}:${DEV_GID}
         volumes:
             - ./:/var/www
-            - ${SSH_AUTH_SOCK}:/tmp/bound-ssh-agent
+            - ${SSH_AUTH_SOCK}:${SSH_AUTH}
             - ${HOME}/dev/.composer:${HOME}/dev/.composer
         environment:
             - APP_ENV=dev
