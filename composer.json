@@ -23,7 +23,7 @@
         "ext-soap": "*",
         "ext-sockets": "*",
         "alcaeus/mongo-php-adapter": "^1.1",
-        "aws/aws-sdk-php-symfony": "^2.0",
+        "aws/aws-sdk-php-symfony": "^2.1",
         "clue/buzz-react": "^2.6",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-fixtures-bundle": "^3.3",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a3dc7f0382257b22950912aba599e39",
+    "content-hash": "69925c738a0e3dab33066cfbb5ec2953",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -74,16 +74,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.122.0",
+            "version": "3.123.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "43b4af8179c91d220f6e4bbe1e57588ed5ad4f27"
+                "reference": "3bf671629a3b2a5a5694f8dfee15686e586b33b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/43b4af8179c91d220f6e4bbe1e57588ed5ad4f27",
-                "reference": "43b4af8179c91d220f6e4bbe1e57588ed5ad4f27",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3bf671629a3b2a5a5694f8dfee15686e586b33b6",
+                "reference": "3bf671629a3b2a5a5694f8dfee15686e586b33b6",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-11-25T19:13:38+00:00"
+            "time": "2019-11-26T19:08:40+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -5448,16 +5448,16 @@
         },
         {
             "name": "hanaboso/php-check-utils",
-            "version": "1.0.45",
+            "version": "1.0.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hanaboso/php-check-utils.git",
-                "reference": "f054f6d154879f9c812891ea332746153a675c8c"
+                "reference": "fb949da43e2b3cb567561516ec4df091c0021738"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/f054f6d154879f9c812891ea332746153a675c8c",
-                "reference": "f054f6d154879f9c812891ea332746153a675c8c",
+                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/fb949da43e2b3cb567561516ec4df091c0021738",
+                "reference": "fb949da43e2b3cb567561516ec4df091c0021738",
                 "shasum": ""
             },
             "require": {
@@ -5498,7 +5498,7 @@
                 }
             ],
             "description": "Utils for php development - CodeSniffer, PhpStan, PhpStorm",
-            "time": "2019-11-21T15:04:36+00:00"
+            "time": "2019-11-26T15:41:53+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
