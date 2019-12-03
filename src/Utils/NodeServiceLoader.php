@@ -6,11 +6,11 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class NodeServiceLoaderUtil
+ * Class NodeServiceLoader
  *
  * @package Hanaboso\CommonsBundle\Utils
  */
-final class NodeServiceLoaderUtil
+final class NodeServiceLoader
 {
 
     /**
@@ -26,10 +26,10 @@ final class NodeServiceLoaderUtil
         $res    = [];
 
         foreach ($dirs as $dir) {
-            $finder->name(['*.yaml', '*.yml'])->in($dir);
+            $finder->name(['*.yaml'])->in($dir);
 
             foreach ($finder as $file) {
-                $list = Yaml::parse((string) $file->getContents());
+                $list = Yaml::parse((string) $file->getContents(), Yaml::PARSE_CUSTOM_TAGS);
 
                 foreach (array_keys($list['services'] ?? []) as $key) {
                     if (strrpos((string) $key, $nodeType) !== 0) {

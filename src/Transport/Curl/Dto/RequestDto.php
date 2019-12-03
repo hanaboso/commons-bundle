@@ -19,27 +19,27 @@ class RequestDto
     /**
      * @var string
      */
-    private $method;
+    private string $method;
 
     /**
      * @var Uri
      */
-    private $uri;
+    private Uri $uri;
 
     /**
      * @var array
      */
-    private $headers = [];
+    private array $headers;
 
     /**
      * @var string
      */
-    private $body = '';
+    private string $body;
 
     /**
      * @var array
      */
-    private $debugInfo = [];
+    private array $debugInfo;
 
     /**
      * RequestDto constructor.
@@ -63,6 +63,7 @@ class RequestDto
         $this->uri       = $uri;
         $this->headers   = $headers;
         $this->debugInfo = PipesHeaders::debugInfo($headers);
+        $this->body      = '';
     }
 
     /**

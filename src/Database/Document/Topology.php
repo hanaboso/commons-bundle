@@ -34,14 +34,14 @@ class Topology
      *
      * @MongoDB\Field(type="string")
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var int
      *
      * @MongoDB\Field(type="int", options={"default":"1"})
      */
-    protected $version;
+    protected $version = 1;
 
     /**
      * @var string
@@ -91,7 +91,7 @@ class Topology
      * @MongoDB\Field(type="string")
      * @Index()
      */
-    protected $category;
+    protected $category = NULL;
 
     /**
      * @var string
@@ -105,10 +105,16 @@ class Topology
      */
     public function __construct()
     {
-        $this->visibility = TopologyStatusEnum::DRAFT;
-        $this->status     = StatusEnum::NEW;
-        $this->version    = 1;
-        $this->name       = '';
+        $this->bpmn        = '';
+        $this->category    = NULL;
+        $this->contentHash = '';
+        $this->descr       = '';
+        $this->enabled     = TRUE;
+        $this->name        = '';
+        $this->rawBpmn     = '';
+        $this->status      = StatusEnum::NEW;
+        $this->version     = 1;
+        $this->visibility  = TopologyStatusEnum::DRAFT;
     }
 
     /**

@@ -24,22 +24,22 @@ class FtpServiceFactory implements LoggerAwareInterface
     /**
      * @var FtpAdapter
      */
-    private $ftpAdapter;
+    private FtpAdapter $ftpAdapter;
 
     /**
      * @var SftpAdapter
      */
-    private $sftpAdapter;
+    private SftpAdapter $sftpAdapter;
 
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * FtpServiceFactory constructor.

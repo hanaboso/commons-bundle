@@ -39,12 +39,12 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     /**
      * @var CurlClientFactory
      */
-    private $curlClientFactory;
+    private CurlClientFactory $curlClientFactory;
 
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * CurlManager constructor.

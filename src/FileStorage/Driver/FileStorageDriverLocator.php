@@ -16,17 +16,17 @@ class FileStorageDriverLocator
     /**
      * @var FileStorageDriverInterface
      */
-    private $persistent;
+    private FileStorageDriverInterface $persistent;
 
     /**
      * @var FileStorageDriverInterface
      */
-    private $temporary;
+    private FileStorageDriverInterface $temporary;
 
     /**
      * @var FileStorageDriverInterface
      */
-    private $public;
+    private FileStorageDriverInterface $public;
 
     /**
      * FileStorageDriverLocator constructor.

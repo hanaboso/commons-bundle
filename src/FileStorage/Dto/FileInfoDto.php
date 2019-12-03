@@ -13,12 +13,12 @@ class FileInfoDto
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var string
      */
-    private $size;
+    private string $size;
 
     /**
      * FileInfoDto constructor.

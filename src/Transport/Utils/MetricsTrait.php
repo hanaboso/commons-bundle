@@ -19,12 +19,12 @@ trait MetricsTrait
     /**
      * @var MetricsSenderLoader|null
      */
-    private $metricsSender;
+    private ?MetricsSenderLoader $metricsSender;
 
     /**
      * @var array
      */
-    private $startTimes = [];
+    private array $startTimes;
 
     /**
      * @param RequestDto $dto

@@ -27,22 +27,22 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     /**
      * @var SoapClientFactory
      */
-    private $soapClientFactory;
+    private SoapClientFactory $soapClientFactory;
 
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @var MetricsSenderLoader|null
      */
-    private $metricsSender;
+    private ?MetricsSenderLoader $metricsSender;
 
     /**
      * @var array
      */
-    private $startTimes = [];
+    private array $startTimes;
 
     /**
      * SoapManager constructor.
@@ -54,6 +54,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         $this->soapClientFactory = $soapClientFactory;
         $this->logger            = new NullLogger();
         $this->metricsSender     = NULL;
+        $this->startTimes        = [];
     }
 
     /**

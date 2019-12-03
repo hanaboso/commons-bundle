@@ -27,27 +27,27 @@ class UDPSender implements LoggerAwareInterface
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @var string
      */
-    private $ip = '';
+    private string $ip;
 
     /**
      * @var string
      */
-    private $collectorHost;
+    private string $collectorHost;
 
     /**
      * @var int
      */
-    private $collectorPort;
+    private int $collectorPort;
 
     /**
      * @var int
      */
-    private $lastIPRefresh;
+    private int $lastIPRefresh;
 
     /**
      * @var resource|null
@@ -65,6 +65,8 @@ class UDPSender implements LoggerAwareInterface
         $this->collectorHost = $collectorHost;
         $this->collectorPort = $collectorPort;
         $this->logger        = new NullLogger();
+        $this->ip            = '';
+        $this->lastIPRefresh = 0;
 
         if (apcu_exists(sprintf('%s%s', self::APCU_IP, $collectorHost)) &&
             apcu_exists(sprintf('%s%s', self::APCU_REFRESH, $collectorHost))

@@ -20,12 +20,12 @@ class ResponseDto
     /**
      * @var null|string
      */
-    private $lastResponseHeaders;
+    private ?string $lastResponseHeaders;
 
     /**
      * @var ResponseHeaderDto
      */
-    private $responseHeaderDto;
+    private ResponseHeaderDto $responseHeaderDto;
 
     /**
      * ResponseDto constructor.

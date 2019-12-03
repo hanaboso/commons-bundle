@@ -2,16 +2,18 @@
 
 namespace Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo;
 
-use Doctrine\MongoDB\GridFSFile;
+use DateTimeInterface;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
+use Hanaboso\CommonsBundle\Exception\DateTimeException;
+use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
 
 /**
  * Class FileMongo
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
  *
- * @ODM\Document()
+ * @ODM\File(bucketName="files")
  */
 class FileMongo
 {
@@ -19,37 +21,43 @@ class FileMongo
     use IdTrait;
 
     /**
-     * @var GridFSFile
-     *
-     * @ODM\File
-     */
-    private $content;
-
-    /**
      * @var string
      *
-     * @ODM\Field(type="string")
+     * @ODM\File\Filename()
      */
-    private $filename;
+    protected string $filename;
 
     /**
-     * @return GridFSFile
-     */
-    public function getContent(): GridFSFile
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param GridFSFile $file
+     * @var DateTimeInterface
      *
-     * @return FileMongo
+     * @ODM\File\UploadDate()
      */
-    public function setContent($file): FileMongo
-    {
-        $this->content = $file;
+    protected DateTimeInterface $uploadDate;
 
-        return $this;
+    /**
+     * @var int
+     *
+     * @ODM\File\Length()
+     */
+    protected int $length;
+
+    /**
+     * @var int
+     *
+     * @ODM\File\ChunkSize()
+     */
+    protected int $chunkSize;
+
+    /**
+     * FileMongo constructor.
+     *
+     * @throws DateTimeException
+     */
+    public function __construct()
+    {
+        $this->uploadDate = DateTimeUtils::getUtcDateTime();
+        $this->chunkSize  = 1024 * 1024;
+        $this->length     = 0;
     }
 
     /**
@@ -68,6 +76,66 @@ class FileMongo
     public function setFilename(string $filename): FileMongo
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTimeInterface
+     */
+    public function getUploadDate(): DateTimeInterface
+    {
+        return $this->uploadDate;
+    }
+
+    /**
+     * @param DateTimeInterface $uploadDate
+     *
+     * @return FileMongo
+     */
+    public function setUploadDate(DateTimeInterface $uploadDate): FileMongo
+    {
+        $this->uploadDate = $uploadDate;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLength(): int
+    {
+        return $this->length;
+    }
+
+    /**
+     * @param int $length
+     *
+     * @return FileMongo
+     */
+    public function setLength(int $length): FileMongo
+    {
+        $this->length = $length;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getChunkSize(): int
+    {
+        return $this->chunkSize;
+    }
+
+    /**
+     * @param int $chunkSize
+     *
+     * @return FileMongo
+     */
+    public function setChunkSize(int $chunkSize): FileMongo
+    {
+        $this->chunkSize = $chunkSize;
 
         return $this;
     }

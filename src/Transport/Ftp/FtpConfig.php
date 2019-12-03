@@ -13,32 +13,32 @@ class FtpConfig
     /**
      * @var string
      */
-    private $host;
+    private string $host;
 
     /**
      * @var bool
      */
-    private $ssl;
+    private bool $ssl;
 
     /**
      * @var int
      */
-    private $port;
+    private int $port;
 
     /**
      * @var int
      */
-    private $timeout;
+    private int $timeout;
 
     /**
      * @var string
      */
-    private $username;
+    private string $username;
 
     /**
      * @var string
      */
-    private $password;
+    private string $password;
 
     /**
      * FtpConfig constructor.

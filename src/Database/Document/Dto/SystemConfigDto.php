@@ -26,32 +26,32 @@ final class SystemConfigDto
     /**
      * @var string
      */
-    private $sdkHost;
+    private string $sdkHost;
 
     /**
      * @var string
      */
-    private $bridgeHost;
+    private string $bridgeHost;
 
     /**
      * @var int
      */
-    private $prefetch;
+    private int $prefetch;
 
     /**
      * @var bool
      */
-    private $repeaterEnabled;
+    private bool $repeaterEnabled;
 
     /**
      * @var int
      */
-    private $repeaterHops;
+    private int $repeaterHops;
 
     /**
      * @var int
      */
-    private $repeaterInterval;
+    private int $repeaterInterval;
 
     /**
      * SystemConfigDto constructor.

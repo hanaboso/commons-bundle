@@ -13,7 +13,7 @@ trait UrlBuilderTrait
     /**
      * @var string
      */
-    protected $host;
+    protected string $host;
 
     /**
      * @param string $part

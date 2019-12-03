@@ -53,12 +53,10 @@ final class MongoDbSender implements MetricsSenderInterface
             'tags'   => $tags,
         ];
 
-        $db = $this->dm->getConfiguration()->getDefaultDB();
+        $db  = $this->dm->getConfiguration()->getDefaultDB();
+        $res = $this->dm->getClient()->selectCollection((string) $db, $this->collection)->insertOne([$data]);
 
-        /** @var array $res */
-        $res = $this->dm->getConnection()->selectCollection($db, $this->collection)->insert($data);
-
-        return ($res['err'] ?? NULL) === NULL;
+        return $res->isAcknowledged();
     }
 
 }

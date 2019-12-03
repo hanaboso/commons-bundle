@@ -15,12 +15,21 @@ class HashPathGenerator implements PathGeneratorInterface
     /**
      * @var int
      */
-    private $levels = 2;
+    private int $levels;
 
     /**
      * @var int
      */
-    private $segment = 2;
+    private int $segment;
+
+    /**
+     * HashPathGenerator constructor.
+     */
+    public function __construct()
+    {
+        $this->levels  = 2;
+        $this->segment = 2;
+    }
 
     /**
      * @param string|null $filename

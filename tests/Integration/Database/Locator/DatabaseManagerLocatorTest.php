@@ -23,7 +23,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
     {
         /** @var DocumentManager $documentManager */
         $documentManager = self::$container->get('doctrine_mongodb.odm.default_document_manager');
-        self::assertTrue(is_array($documentManager->getConnection()->listDatabases()));
+        self::assertNotEmpty($documentManager->getClient()->listDatabases());
     }
 
     /**

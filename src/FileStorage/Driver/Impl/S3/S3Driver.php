@@ -26,12 +26,12 @@ class S3Driver extends FileStorageDriverAbstract
     /**
      * @var S3Client
      */
-    private $client;
+    private S3Client $client;
 
     /**
      * @var string
      */
-    private $bucket;
+    private string $bucket;
 
     /**
      * S3Driver constructor.

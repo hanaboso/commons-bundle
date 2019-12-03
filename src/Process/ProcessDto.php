@@ -22,17 +22,26 @@ final class ProcessDto
     /**
      * @var string
      */
-    private $data = '{}';
+    private string $data;
 
     /**
      * @var array
      */
-    private $headers = [];
+    private array $headers;
 
     public const REPEAT             = 1001;
     public const DO_NOT_CONTINUE    = 1003;
     public const SPLITTER_BATCH_END = 1005;
     public const STOP_AND_FAILED    = 1006;
+
+    /**
+     * ProcessDto constructor.
+     */
+    public function __construct()
+    {
+        $this->data    = '{}';
+        $this->headers = [];
+    }
 
     /**
      * @return string

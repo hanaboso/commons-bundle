@@ -18,7 +18,7 @@ class UdpHandler extends AbstractProcessingHandler
     /**
      * @var UDPSender
      */
-    private $UDPSender;
+    private UDPSender $UDPSender;
 
     /**
      * UdpHandler constructor.

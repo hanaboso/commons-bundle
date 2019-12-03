@@ -13,27 +13,27 @@ class ImapConfigDto
     /**
      * @var string
      */
-    private $user;
+    private string $user;
 
     /**
      * @var string
      */
-    private $password;
+    private string $password;
 
     /**
      * @var string
      */
-    private $host;
+    private string $host;
 
     /**
      * @var string
      */
-    private $path = '/imap/ssl/novalidate-cert';
+    private string $path;
 
     /**
      * @var string
      */
-    private $folder = 'INBOX';
+    private string $folder;
 
     /**
      * ImapConfigDto constructor.
@@ -47,6 +47,8 @@ class ImapConfigDto
         $this->user     = $user;
         $this->password = $password;
         $this->host     = $host;
+        $this->folder   = 'INBOX';
+        $this->path     = '/imap/ssl/novalidate-cert';
     }
 
     /**

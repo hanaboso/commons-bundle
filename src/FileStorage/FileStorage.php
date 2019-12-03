@@ -3,6 +3,7 @@
 namespace Hanaboso\CommonsBundle\FileStorage;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\MongoDBException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -24,7 +25,7 @@ class FileStorage
     /**
      * @var FileStorageDriverLocator
      */
-    private $locator;
+    private FileStorageDriverLocator $locator;
 
     /**
      * @var EntityManager|DocumentManager
@@ -34,7 +35,7 @@ class FileStorage
     /**
      * @var string
      */
-    private $fileNamespace;
+    private string $fileNamespace;
 
     /**
      * FileStorage constructor.
@@ -57,6 +58,7 @@ class FileStorage
      * @throws FileStorageException
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws MongoDBException
      */
     public function saveFileFromContent(FileContentDto $content): FileInterface
     {
@@ -73,7 +75,7 @@ class FileStorage
             ->setStorageType($content->getStorageType());
 
         $this->dm->persist($file);
-        $this->dm->flush($file);
+        $this->dm->flush();
 
         return $file;
     }
@@ -97,6 +99,7 @@ class FileStorage
      * @throws FileStorageException
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws MongoDBException
      */
     public function deleteFile(FileInterface $file): void
     {
@@ -104,7 +107,7 @@ class FileStorage
         $driver->delete($file->getFileUrl());
 
         $this->dm->remove($file);
-        $this->dm->flush($file);
+        $this->dm->flush();
     }
 
     /**

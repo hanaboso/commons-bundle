@@ -19,7 +19,7 @@ class LogstashFormatter extends NormalizerFormatter
     /**
      * @var string
      */
-    protected $serviceType = '';
+    protected string $serviceType;
 
     /**
      * LogstashFormatter constructor.

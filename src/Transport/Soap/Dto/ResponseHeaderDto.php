@@ -15,22 +15,22 @@ class ResponseHeaderDto
     /**
      * @var HeaderBag|null
      */
-    private $httpHeaders;
+    private ?HeaderBag $httpHeaders;
 
     /**
      * @var null|string
      */
-    private $httpVersion;
+    private ?string $httpVersion;
 
     /**
      * @var int|null
      */
-    private $httpStatusCode;
+    private ?int $httpStatusCode;
 
     /**
      * @var null|string
      */
-    private $httpReason;
+    private ?string $httpReason;
 
     /**
      * ResponseHeaderDto constructor.

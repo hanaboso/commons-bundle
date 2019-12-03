@@ -103,7 +103,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
 
         $topology = new Topology();
         $this->dm->persist($topology);
-        $this->dm->flush($topology);
+        $this->dm->flush();
 
         $node = new Node();
         $node
@@ -112,7 +112,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
             ->setType(TypeEnum::SIGNAL)
             ->setHandler(HandlerEnum::EVENT);
         $this->dm->persist($node);
-        $this->dm->flush($node);
+        $this->dm->flush();
         $this->dm->clear();
 
         self::assertEquals($node->getId(), $repo->getStartingNode($topology)->getId());
@@ -129,7 +129,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
 
         $topology = new Topology();
         $this->dm->persist($topology);
-        $this->dm->flush($topology);
+        $this->dm->flush();
 
         $node = new Node();
         $node
@@ -138,7 +138,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
             ->setType(TypeEnum::MAPPER)
             ->setHandler(HandlerEnum::EVENT);
         $this->dm->persist($node);
-        $this->dm->flush($node);
+        $this->dm->flush();
         $this->dm->clear();
 
         self::expectException(LogicException::class);
@@ -157,7 +157,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
 
         $topology = new Topology();
         $this->dm->persist($topology);
-        $this->dm->flush($topology);
+        $this->dm->flush();
 
         $node = new Node();
         $node
@@ -166,7 +166,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
             ->setType(TypeEnum::CRON)
             ->setHandler(HandlerEnum::EVENT);
         $this->dm->persist($node);
-        $this->dm->flush($node);
+        $this->dm->flush();
         $this->dm->clear();
 
         $type = $repo->getTopologyType($topology);
@@ -174,7 +174,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
 
         $topology = new Topology();
         $this->dm->persist($topology);
-        $this->dm->flush($topology);
+        $this->dm->flush();
 
         $node = new Node();
         $node
@@ -183,7 +183,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
             ->setType(TypeEnum::CONNECTOR)
             ->setHandler(HandlerEnum::EVENT);
         $this->dm->persist($node);
-        $this->dm->flush($node);
+        $this->dm->flush();
         $this->dm->clear();
 
         $type = $repo->getTopologyType($topology);
@@ -201,7 +201,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
 
         $topology = new Topology();
         $this->dm->persist($topology);
-        $this->dm->flush($topology);
+        $this->dm->flush();
 
         $node = new Node();
         $node
@@ -210,7 +210,7 @@ final class NodeRepositoryTest extends DatabaseTestCaseAbstract
             ->setType(TypeEnum::MAPPER)
             ->setHandler(HandlerEnum::EVENT);
         $this->dm->persist($node);
-        $this->dm->flush($node);
+        $this->dm->flush();
         $this->dm->clear();
 
         /** @var Node[] $nodes */

@@ -18,17 +18,17 @@ final class MetricsSenderLoader
     /**
      * @var MetricsSenderInterface|null
      */
-    private $influxSender;
+    private ?MetricsSenderInterface $influxSender;
 
     /**
      * @var MetricsSenderInterface|null
      */
-    private $mongoSender;
+    private ?MetricsSenderInterface $mongoSender;
 
     /**
      * @var string
      */
-    private $metricsService;
+    private string $metricsService;
 
     /**
      * MetricsSenderLoader constructor.

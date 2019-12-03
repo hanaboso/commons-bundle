@@ -16,12 +16,12 @@ final class RedisSessionHandler implements SessionHandlerInterface
     /**
      * @var Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * @var int
      */
-    private $lifeTime;
+    private int $lifeTime;
 
     /**
      * RedisSessionHandler constructor.

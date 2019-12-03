@@ -2,6 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Database\Repository;
 
+use Doctrine\ODM\MongoDB\Iterator\Iterator;
 use Doctrine\ODM\MongoDB\MongoDBException;
 use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
 use Hanaboso\CommonsBundle\Database\Document\Category;
@@ -24,6 +25,7 @@ class TopologyRepository extends DocumentRepository
      */
     public function getRunnableTopologies(string $name): array
     {
+        /** @var Iterator $result */
         $result = $this->createQueryBuilder()
             ->field('name')->equals($name)
             ->field('enabled')->equals(TRUE)
@@ -31,7 +33,7 @@ class TopologyRepository extends DocumentRepository
             ->field('visibility')->equals(TopologyStatusEnum::PUBLIC)
             ->getQuery()->execute();
 
-        return $result->toArray(FALSE);
+        return $result->toArray();
     }
 
     /**
@@ -40,7 +42,16 @@ class TopologyRepository extends DocumentRepository
      */
     public function getTotalCount(): int
     {
-        return $this->createQueryBuilder()->field('deleted')->equals(FALSE)->count()->getQuery()->execute();
+        $result = $this->createQueryBuilder()
+            ->field('deleted')->equals(FALSE)
+            ->count()
+            ->getQuery()->execute();
+
+        if (is_scalar($result)) {
+            return $result;
+        }
+
+        return 0;
     }
 
     /**
@@ -72,11 +83,17 @@ class TopologyRepository extends DocumentRepository
      */
     public function getTopologiesCountByName(string $topologyName): int
     {
-        return $this->createQueryBuilder()
+        $result = $this->createQueryBuilder()
             ->field('name')->equals($topologyName)
             ->field('deleted')->equals(FALSE)
             ->count()
             ->getQuery()->execute();
+
+        if (is_scalar($result)) {
+            return $result;
+        }
+
+        return 0;
     }
 
     /**
@@ -85,13 +102,14 @@ class TopologyRepository extends DocumentRepository
      */
     public function getTopologies(): array
     {
+        /** @var Iterator $result */
         $result = $this->createQueryBuilder()
             ->field('visibility')->equals(TopologyStatusEnum::PUBLIC)
             ->field('deleted')->equals(FALSE)
             ->sort('version', 1)
             ->getQuery()->execute();
         /** @var Topology[] $results */
-        $results = $result->toArray(FALSE);
+        $results = $result->toArray();
 
         $res = [];
         foreach ($results as $result) {
@@ -108,6 +126,7 @@ class TopologyRepository extends DocumentRepository
      */
     public function getPublicEnabledTopologies(): array
     {
+        /** @var Iterator $result */
         $result = $this->createQueryBuilder()
             ->field('visibility')->equals(TopologyStatusEnum::PUBLIC)
             ->field('enabled')->equals(TRUE)
@@ -115,7 +134,7 @@ class TopologyRepository extends DocumentRepository
             ->getQuery()
             ->execute();
 
-        return $result->toArray(TRUE);
+        return $result->toArray();
     }
 
     /**

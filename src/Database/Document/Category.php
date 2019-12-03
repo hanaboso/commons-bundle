@@ -28,7 +28,7 @@ class Category
      *
      * @MongoDB\Field(type="string")
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var string|null
@@ -36,7 +36,16 @@ class Category
      * @MongoDB\Field(type="string")
      * @Index()
      */
-    protected $parent;
+    protected ?string $parent;
+
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->name   = '';
+        $this->parent = NULL;
+    }
 
     /**
      * @return string

@@ -17,7 +17,7 @@ class SftpAdapter implements FtpAdapterInterface
     /**
      * @var SFTP|null
      */
-    protected $sftp;
+    protected ?SFTP $sftp;
 
     /**
      * @param FtpConfig $ftpConfig

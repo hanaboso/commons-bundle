@@ -15,22 +15,22 @@ class ResponseDto
     /**
      * @var int
      */
-    private $statusCode;
+    private int $statusCode;
 
     /**
      * @var string
      */
-    private $reasonPhrase;
+    private string $reasonPhrase;
 
     /**
      * @var string
      */
-    private $body;
+    private string $body;
 
     /**
      * @var array
      */
-    private $headers;
+    private array $headers;
 
     /**
      * ResponseDto constructor.

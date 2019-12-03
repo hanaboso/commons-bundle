@@ -23,7 +23,7 @@ final class CurlException extends PipesFrameworkExceptionAbstract
     /**
      * @var ResponseInterface|null
      */
-    private $response;
+    private ?ResponseInterface $response;
 
     /**
      * CurlException constructor.

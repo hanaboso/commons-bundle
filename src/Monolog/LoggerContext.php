@@ -17,32 +17,32 @@ final class LoggerContext
     /**
      * @var Throwable
      */
-    private $exception;
+    private Throwable $exception;
 
     /**
      * @var string
      */
-    private $correlationId = '';
+    private string $correlationId;
 
     /**
      * @var string
      */
-    private $nodeId = '';
+    private string $nodeId;
 
     /**
      * @var string
      */
-    private $nodeName = '';
+    private string $nodeName;
 
     /**
      * @var string
      */
-    private $topologyId = '';
+    private string $topologyId;
 
     /**
      * @var string
      */
-    private $topologyName = '';
+    private string $topologyName;
 
     /**
      * @param Throwable $exception
@@ -51,7 +51,12 @@ final class LoggerContext
      */
     public function setException(Throwable $exception): LoggerContext
     {
-        $this->exception = $exception;
+        $this->exception     = $exception;
+        $this->correlationId = '';
+        $this->nodeId        = '';
+        $this->nodeName      = '';
+        $this->topologyId    = '';
+        $this->topologyName  = '';
 
         return $this;
     }

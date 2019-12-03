@@ -24,7 +24,7 @@ class ImapConnector
     /**
      * @var Mailbox
      */
-    private $mailbox;
+    private Mailbox $mailbox;
 
     /**
      * @param ImapConfigDto $dto

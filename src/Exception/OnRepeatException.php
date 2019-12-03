@@ -17,19 +17,19 @@ class OnRepeatException extends Exception
     /**
      * @var ProcessDto
      */
-    private $processDto;
+    private ProcessDto $processDto;
 
     /**
      * interval in ms
      *
      * @var int
      */
-    private $interval = 60000;
+    private int $interval;
 
     /**
      * @var int
      */
-    private $maxHops = 3;
+    private int $maxHops;
 
     /**
      * OnRepeatException constructor.
@@ -44,6 +44,8 @@ class OnRepeatException extends Exception
         parent::__construct($message, $code, $previous);
 
         $this->processDto = $processDto;
+        $this->interval   = 60000;
+        $this->maxHops    = 3;
     }
 
     /**

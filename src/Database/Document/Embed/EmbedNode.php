@@ -17,15 +17,17 @@ class EmbedNode
 
     /**
      * @var string
+     *
      * @MongoDB\Field(type="string")
      */
-    protected $id;
+    protected string $id;
 
     /**
      * @var string
+     *
      * @MongoDB\Field(type="string")
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @param string $id

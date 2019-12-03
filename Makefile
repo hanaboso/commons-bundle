@@ -23,7 +23,7 @@ composer-install:
 	$(DE) composer install --ignore-platform-reqs
 
 composer-update:
-	$(DE) composer update --ignore-platform-reqs
+	$(DE) composer update
 
 composer-outdated:
 	$(DE) composer outdated

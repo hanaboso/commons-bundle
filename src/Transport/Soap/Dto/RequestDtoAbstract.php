@@ -16,37 +16,37 @@ abstract class RequestDtoAbstract
     /**
      * @var int
      */
-    protected $version;
+    protected int $version;
 
     /**
      * @var string|null
      */
-    protected $user;
+    protected ?string $user;
 
     /**
      * @var string|null
      */
-    protected $password;
+    protected ?string $password;
 
     /**
      * @var string
      */
-    private $function;
+    private string $function;
 
     /**
      * @var array
      */
-    private $arguments;
+    private array $arguments;
 
     /**
      * @var RequestHeaderDto
      */
-    private $header;
+    private RequestHeaderDto $header;
 
     /**
      * @var Uri
      */
-    private $uri;
+    private Uri $uri;
 
     /**
      * RequestDtoAbstract constructor.
@@ -61,6 +61,8 @@ abstract class RequestDtoAbstract
         $this->function  = $function;
         $this->arguments = $arguments;
         $this->uri       = $uri;
+        $this->user      = NULL;
+        $this->password  = NULL;
 
         // TODO may need to add second parameter to RequestHeaderDto
         $this->header = new RequestHeaderDto($namespace);

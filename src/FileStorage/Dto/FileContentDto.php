@@ -18,22 +18,22 @@ class FileContentDto
     /**
      * @var string
      */
-    private $type;
+    private string $type;
 
     /**
      * @var string
      */
-    private $content;
+    private string $content;
 
     /**
      * @var string|null
      */
-    private $filename;
+    private ?string $filename;
 
     /**
      * @var string
      */
-    private $format;
+    private string $format;
 
     /**
      * FileContentDto constructor.

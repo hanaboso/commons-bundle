@@ -34,12 +34,12 @@ class CurlSender implements LoggerAwareInterface
     /**
      * @var Browser
      */
-    private $browser;
+    private Browser $browser;
 
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * CurlSender constructor.

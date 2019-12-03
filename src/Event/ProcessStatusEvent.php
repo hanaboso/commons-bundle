@@ -17,12 +17,12 @@ class ProcessStatusEvent extends Event
     /**
      * @var string
      */
-    private $processId;
+    private string $processId;
 
     /**
      * @var bool
      */
-    private $status;
+    private bool $status;
 
     /**
      * ProcessStatusEvent constructor.

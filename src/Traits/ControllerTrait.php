@@ -19,7 +19,7 @@ trait ControllerTrait
     /**
      * @var LoggerInterface|null
      */
-    protected $logger;
+    protected ?LoggerInterface $logger;
 
     /**
      * @param LoggerInterface $logger

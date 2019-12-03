@@ -17,17 +17,17 @@ class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
     /**
      * @var DocumentManager|null
      */
-    private $documentManager;
+    private ?DocumentManager $documentManager;
 
     /**
      * @var EntityManager|null
      */
-    private $entityManager;
+    private ?EntityManager $entityManager;
 
     /**
      * @var string
      */
-    private $type;
+    private string $type;
 
     /**
      * DatabaseManagerLocator constructor.

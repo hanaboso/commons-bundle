@@ -22,12 +22,12 @@ class CachedSessionHandler implements SessionHandlerInterface
     /**
      * @var SessionHandlerInterface
      */
-    private $handler;
+    private SessionHandlerInterface $handler;
 
     /**
      * @var int
      */
-    private $timeout;
+    private int $timeout;
 
     /**
      * CachedSessionHandler constructor.

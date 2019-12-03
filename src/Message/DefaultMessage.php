@@ -14,16 +14,17 @@ class DefaultMessage implements MessageInterface
 
     /**
      * @Serializer\Type("array")
+     *
      * @var array
      */
-    protected $settings;
+    protected array $settings;
 
     /**
      * @Serializer\Type("string")
      *
      * @var string
      */
-    protected $data;
+    protected string $data;
 
     /**
      * DefaultMessage constructor.

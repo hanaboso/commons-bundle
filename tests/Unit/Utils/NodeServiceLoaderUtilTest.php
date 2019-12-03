@@ -3,7 +3,7 @@
 namespace CommonsBundleTests\Unit\Utils;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
-use Hanaboso\CommonsBundle\Utils\NodeServiceLoaderUtil;
+use Hanaboso\CommonsBundle\Utils\NodeServiceLoader;
 
 /**
  * Class NodeServiceLoaderUtilTest
@@ -23,7 +23,7 @@ final class NodeServiceLoaderUtilTest extends KernelTestCaseAbstract
         $dirs     = [
             sprintf('%s/testApp/config/', $path),
         ];
-        $services = NodeServiceLoaderUtil::getServices($dirs, 'hbpf.connector');
+        $services = NodeServiceLoader::getServices($dirs, 'hbpf.connector');
 
         self::assertNotEmpty($services);
         self::assertTrue(in_array('null', $services));

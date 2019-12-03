@@ -36,7 +36,7 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     /**
      * @var MetricsSenderLoader
      */
-    private $metricsSender;
+    private MetricsSenderLoader $metricsSender;
 
     /**
      * SystemMetricsListener constructor.

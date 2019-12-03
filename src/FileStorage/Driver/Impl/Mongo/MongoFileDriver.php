@@ -2,10 +2,11 @@
 
 namespace Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo;
 
-use Doctrine\MongoDB\GridFSFile;
+use Doctrine\ODM\MongoDB\Repository\GridFSRepository;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverAbstract;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
+use Throwable;
 
 /**
  * Class MongoFileDriver
@@ -20,23 +21,30 @@ class MongoFileDriver extends FileStorageDriverAbstract
      * @param null|string $filename
      *
      * @return FileInfoDto
+     * @throws FileStorageException
      */
     public function save(string $content, ?string $filename = NULL): FileInfoDto
     {
         $filename = $this->generatePath($filename);
+        /** @var resource $tmpFile */
+        $tmpFile = tmpfile();
+        fwrite($tmpFile, $content);
+        fseek($tmpFile, 0);
 
-        $gridFile = new GridFSFile();
-        $gridFile->setBytes($content);
+        /** @var GridFSRepository $repository */
+        $repository = $this->dm->getRepository(FileMongo::class);
+        /** @var FileMongo $file */
+        $file = $repository->uploadFromStream($filename, $tmpFile);
+        try {
+            $this->dm->persist($file);
+            $this->dm->flush();
+        } catch (Throwable $t) {
+            throw new FileStorageException($t->getMessage(), $t->getCode(), $t);
+        } finally {
+            fclose($tmpFile);
+        }
 
-        $file = new FileMongo();
-        $file
-            ->setContent($gridFile)
-            ->setFilename($filename);
-
-        $this->dm->persist($file);
-        $this->dm->flush($file);
-
-        return new FileInfoDto($file->getId(), (string) ($file->getContent()->getSize()));
+        return new FileInfoDto($file->getId(), (string) $file->getLength());
     }
 
     /**
@@ -49,8 +57,12 @@ class MongoFileDriver extends FileStorageDriverAbstract
         /** @var FileMongo $file */
         $file = $this->getDocument($fileId);
 
-        $this->dm->remove($file);
-        $this->dm->flush();
+        try {
+            $this->dm->remove($file);
+            $this->dm->flush();
+        } catch (Throwable $t) {
+            throw new FileStorageException($t->getMessage(), $t->getCode(), $t);
+        }
     }
 
     /**
@@ -63,7 +75,19 @@ class MongoFileDriver extends FileStorageDriverAbstract
     {
         $file = $this->getDocument($fileId);
 
-        return $file->getContent()->getBytes() ?? '';
+        /** @var GridFSRepository $repository */
+        $repository = $this->dm->getRepository(FileMongo::class);
+        $stream     = $repository->openDownloadStream($file->getId());
+        $contents   = '';
+        try {
+            $contents = stream_get_contents($stream) ?: '';
+        } catch (Throwable $t) {
+            throw new FileStorageException($t->getMessage(), $t->getCode(), $t);
+        } finally {
+            fclose($stream);
+        }
+
+        return $contents;
     }
 
     /**

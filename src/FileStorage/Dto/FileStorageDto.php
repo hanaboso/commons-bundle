@@ -15,12 +15,12 @@ class FileStorageDto
     /**
      * @var string
      */
-    private $content;
+    private string $content;
 
     /**
      * @var FileInterface
      */
-    private $file;
+    private FileInterface $file;
 
     /**
      * FileStorageDto constructor.

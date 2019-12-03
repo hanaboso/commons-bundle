@@ -20,7 +20,7 @@ trait UpdatedTrait
      *
      * @ORM\Column(type="datetime")
      */
-    protected $updated;
+    protected DateTime $updated;
 
     /**
      * @return DateTime

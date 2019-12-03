@@ -21,7 +21,7 @@ class SoapClientFactory implements LoggerAwareInterface
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * SoapClientFactory constructor.

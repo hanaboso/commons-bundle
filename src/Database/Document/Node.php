@@ -32,14 +32,14 @@ class Node
      *
      * @MongoDB\Field(type="string")
      */
-    protected $schemaId;
+    protected $schemaId = '';
 
     /**
      * @var string
      *
      * @MongoDB\Field(type="string")
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var string
@@ -47,7 +47,7 @@ class Node
      * @MongoDB\Field(type="string")
      * @Index()
      */
-    protected $topology;
+    protected $topology = '';
 
     /**
      * @var array|PersistentCollection
@@ -61,14 +61,14 @@ class Node
      *
      * @MongoDB\Field(type="string")
      */
-    protected $type;
+    protected $type = TypeEnum::CUSTOM;
 
     /**
      * @var string
      *
      * @MongoDB\Field(type="string")
      */
-    protected $handler;
+    protected $handler = HandlerEnum::EVENT;
 
     /**
      * @var bool
@@ -82,21 +82,36 @@ class Node
      *
      * @MongoDB\Field(type="string")
      */
-    protected $cron;
+    protected $cron = NULL;
 
     /**
      * @var string|null
      *
      * @MongoDB\Field(type="string")
      */
-    protected $cronParams;
+    protected $cronParams = NULL;
 
     /**
      * @var string|null
      *
      * @MongoDB\Field(type="string")
      */
-    protected $systemConfigs;
+    protected $systemConfigs = NULL;
+
+    /**
+     * Node constructor.
+     */
+    public function __construct()
+    {
+        $this->cron          = NULL;
+        $this->cronParams    = NULL;
+        $this->enabled       = TRUE;
+        $this->handler       = HandlerEnum::EVENT;
+        $this->name          = '';
+        $this->schemaId      = '';
+        $this->systemConfigs = NULL;
+        $this->type          = TypeEnum::CUSTOM;
+    }
 
     /**
      * @return string

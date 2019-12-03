@@ -11,13 +11,6 @@ final class Base64
 {
 
     /**
-     * Base64 constructor.
-     */
-    private function __construct()
-    {
-    }
-
-    /**
      * @param string $inputStr
      *
      * @return string

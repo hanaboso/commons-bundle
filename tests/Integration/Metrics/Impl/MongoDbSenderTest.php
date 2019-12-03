@@ -8,7 +8,7 @@ use Exception;
 use Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender;
 
 /**
- * Class MongoDbSenderTetst
+ * Class MongoDbSenderTest
  *
  * @package CommonsBundleTests\Integration\Metrics\Impl
  */
@@ -25,12 +25,12 @@ final class MongoDbSenderTest extends DatabaseTestCaseAbstract
         /** @var DocumentManager $dm */
         $dm     = self::$container->get('doctrine_mongodb.odm.metrics_document_manager');
         $sender = new MongoDbSender($dm, 'test');
-        $this->dm->getConnection()->selectCollection('metrics', 'test')->remove([]);
+        $this->dm->getClient()->dropDatabase('metrics');
 
         self::assertTrue($sender->send(['asd' => '123'], ['a' => 'c']));
         self::assertTrue($sender->send(['asd' => 'qwe'], ['a' => 'b']));
 
-        $res = (array) $this->dm->getConnection()->selectCollection('metrics', 'test')->count([]);
+        $res = (array) $this->dm->getClient()->selectCollection('metrics', 'test')->count([]);
         self::assertEquals([2], $res);
     }
 

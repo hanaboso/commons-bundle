@@ -20,7 +20,7 @@ trait UpdatedTrait
      *
      * @ODM\Field(type="date")
      */
-    protected $updated;
+    protected DateTime $updated;
 
     /**
      * @return DateTime

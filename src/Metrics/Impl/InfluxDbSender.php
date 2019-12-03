@@ -17,12 +17,12 @@ class InfluxDbSender implements MetricsSenderInterface
     /**
      * @var UDPSender
      */
-    private $sender;
+    private UDPSender $sender;
 
     /**
      * @var string
      */
-    private $measurement;
+    private string $measurement;
 
     /**
      * InfluxDbSender constructor.

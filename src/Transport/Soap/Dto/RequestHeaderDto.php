@@ -13,12 +13,12 @@ class RequestHeaderDto
     /**
      * @var string
      */
-    private $namespace;
+    private string $namespace;
 
     /**
      * @var array
      */
-    private $params;
+    private array $params;
 
     /**
      * RequestHeaderDto constructor.

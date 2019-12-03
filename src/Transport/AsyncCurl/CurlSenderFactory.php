@@ -22,12 +22,12 @@ class CurlSenderFactory implements LoggerAwareInterface
     /**
      * @var LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @var MetricsSenderLoader|null
      */
-    private $metricsLoader;
+    private ?MetricsSenderLoader $metricsLoader;
 
     /**
      * CurlSenderFactory constructor.
