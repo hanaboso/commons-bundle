@@ -44,10 +44,10 @@ class ControllerUtils
     }
 
     /**
-     * @param array          $headers
+     * @param mixed[]        $headers
      * @param Throwable|null $e
      *
-     * @return array
+     * @return mixed[]
      */
     public static function createHeaders(array $headers = [], ?Throwable $e = NULL): array
     {
@@ -71,8 +71,8 @@ class ControllerUtils
     }
 
     /**
-     * @param array $parameters
-     * @param array $data
+     * @param mixed[] $parameters
+     * @param mixed[] $data
      *
      * @throws PipesFrameworkException
      */

@@ -11,11 +11,11 @@ final class UriParams
 {
 
     /**
-     * @param null $orderBy
+     * @param string|null $orderBy
      *
-     * @return array
+     * @return mixed[]
      */
-    public static function parseOrderBy($orderBy = NULL): array
+    public static function parseOrderBy(?string $orderBy = NULL): array
     {
         $convertTable = [
             '-' => 'DESC',

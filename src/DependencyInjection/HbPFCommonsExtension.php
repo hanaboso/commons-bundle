@@ -31,7 +31,7 @@ class HbPFCommonsExtension extends Extension implements PrependExtensionInterfac
     }
 
     /**
-     * @param array            $configs
+     * @param mixed[]          $configs
      * @param ContainerBuilder $container
      *
      * @throws Exception

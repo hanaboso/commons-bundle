@@ -14,7 +14,7 @@ interface FileStorageDriverInterface
 
     /**
      * @param string      $content
-     * @param null|string $filename
+     * @param string|null $filename
      *
      * @return FileInfoDto
      */

@@ -11,7 +11,7 @@ class TransportFormatter
 {
 
     /**
-     * @param array $headers
+     * @param mixed[] $headers
      *
      * @return string
      */
@@ -30,10 +30,10 @@ class TransportFormatter
     }
 
     /**
-     * @param string $method
-     * @param string $url
-     * @param array  $headers
-     * @param string $body
+     * @param string  $method
+     * @param string  $url
+     * @param mixed[] $headers
+     * @param string  $body
      *
      * @return string
      */
@@ -49,10 +49,10 @@ class TransportFormatter
     }
 
     /**
-     * @param int    $statusCode
-     * @param string $reasonPhrase
-     * @param array  $headers
-     * @param string $body
+     * @param int     $statusCode
+     * @param string  $reasonPhrase
+     * @param mixed[] $headers
+     * @param string  $body
      *
      * @return string
      */

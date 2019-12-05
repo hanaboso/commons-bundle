@@ -13,7 +13,7 @@ class CurlClientFactory
 {
 
     /**
-     * @param array $config
+     * @param mixed[] $config
      *
      * @return Client
      */

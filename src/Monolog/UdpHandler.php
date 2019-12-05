@@ -37,7 +37,7 @@ class UdpHandler extends AbstractProcessingHandler
     /**
      * Writes the record down to the log of the implementing handler
      *
-     * @param array $record
+     * @param mixed[] $record
      *
      * @return void
      * @throws DateTimeException

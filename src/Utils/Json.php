@@ -23,7 +23,7 @@ final class Json
     /**
      * @param string $data
      *
-     * @return array
+     * @return mixed[]
      */
     public static function decode(string $data): array
     {

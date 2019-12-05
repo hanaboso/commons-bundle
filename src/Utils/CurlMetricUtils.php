@@ -22,9 +22,9 @@ final class CurlMetricUtils
     public const KEY_KERNEL_TIME      = 'kernel_time';
 
     /**
-     * @param array $startMetrics
+     * @param mixed[] $startMetrics
      *
-     * @return array
+     * @return mixed[]
      */
     public static function getTimes(array $startMetrics): array
     {
@@ -43,9 +43,9 @@ final class CurlMetricUtils
 
     /**
      * @param MetricsSenderInterface $sender
-     * @param array                  $timeData
-     * @param null|string            $nodeId
-     * @param null|string            $correlationId
+     * @param mixed[]                $timeData
+     * @param string|null            $nodeId
+     * @param string|null            $correlationId
      *
      * @throws Exception
      */
@@ -75,7 +75,7 @@ final class CurlMetricUtils
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public static function getCurrentMetrics(): array
     {

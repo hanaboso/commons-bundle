@@ -47,7 +47,7 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @return array
+     * @return mixed[]
      *
      * @throws Exception
      */

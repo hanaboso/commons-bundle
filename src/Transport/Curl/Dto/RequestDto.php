@@ -27,7 +27,7 @@ class RequestDto
     private Uri $uri;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $headers;
 
@@ -37,16 +37,16 @@ class RequestDto
     private string $body;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $debugInfo;
 
     /**
      * RequestDto constructor.
      *
-     * @param string $method
-     * @param Uri    $uri
-     * @param array  $headers
+     * @param string  $method
+     * @param Uri     $uri
+     * @param mixed[] $headers
      *
      * @throws CurlException
      */
@@ -134,7 +134,7 @@ class RequestDto
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getHeaders(): array
     {
@@ -142,7 +142,7 @@ class RequestDto
     }
 
     /**
-     * @param array $headers
+     * @param mixed[] $headers
      *
      * @return $this
      */
@@ -154,7 +154,7 @@ class RequestDto
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getDebugInfo(): array
     {
@@ -176,7 +176,7 @@ class RequestDto
     /**
      * @param RequestDto  $dto
      * @param Uri|null    $uri
-     * @param null|string $method
+     * @param string|null $method
      *
      * @return RequestDto
      * @throws CurlException

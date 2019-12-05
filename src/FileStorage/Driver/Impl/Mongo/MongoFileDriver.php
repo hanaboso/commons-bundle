@@ -18,7 +18,7 @@ class MongoFileDriver extends FileStorageDriverAbstract
 
     /**
      * @param string      $content
-     * @param null|string $filename
+     * @param string|null $filename
      *
      * @return FileInfoDto
      * @throws FileStorageException

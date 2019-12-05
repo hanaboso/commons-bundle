@@ -72,7 +72,10 @@ class S3Driver extends FileStorageDriverAbstract
 
             $this->client->putObject($args);
 
-            $innerFile = new FileInfoDto($args[self::KEY_FIELD], (string) strlen($content));
+            /** @var string $key */
+            $key = $args[self::KEY_FIELD];
+
+            $innerFile = new FileInfoDto($key, (string) strlen($content));
         } catch (S3Exception $e) {
             throw new FileStorageException(
                 sprintf("Cannot write file '%s': %s", $path, $e->getMessage()),
@@ -116,7 +119,7 @@ class S3Driver extends FileStorageDriverAbstract
     /**
      * @param string $path
      *
-     * @return array
+     * @return mixed[]
      */
     private function getBasicArgs(string $path): array
     {

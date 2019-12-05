@@ -37,7 +37,7 @@ class OnRepeatException extends Exception
      * @param ProcessDto     $processDto
      * @param string         $message
      * @param int            $code
-     * @param Throwable|NULL $previous
+     * @param Throwable|null $previous
      */
     public function __construct(ProcessDto $processDto, $message = '', $code = 0, ?Throwable $previous = NULL)
     {

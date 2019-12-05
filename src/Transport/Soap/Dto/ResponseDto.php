@@ -18,7 +18,7 @@ class ResponseDto
     private $soapCallResponse;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private ?string $lastResponseHeaders;
 
@@ -30,9 +30,9 @@ class ResponseDto
     /**
      * ResponseDto constructor.
      *
-     * @param mixed       $soapCallResponse
-     * @param null|string $lastResponseHeaders
-     * @param array|null  $outputHeaders
+     * @param mixed        $soapCallResponse
+     * @param string|null  $lastResponseHeaders
+     * @param mixed[]|null $outputHeaders
      */
     public function __construct($soapCallResponse, ?string $lastResponseHeaders, ?array $outputHeaders)
     {
@@ -58,7 +58,7 @@ class ResponseDto
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getLastResponseHeaders(): ?string
     {

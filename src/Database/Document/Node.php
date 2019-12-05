@@ -2,9 +2,10 @@
 
 namespace Hanaboso\CommonsBundle\Database\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\ODM\MongoDB\Mapping\Annotations\Index;
-use Doctrine\ODM\MongoDB\PersistentCollection;
 use Hanaboso\CommonsBundle\Database\Document\Dto\SystemConfigDto;
 use Hanaboso\CommonsBundle\Database\Document\Embed\EmbedNode;
 use Hanaboso\CommonsBundle\Database\Traits\Document\DeletedTrait;
@@ -50,11 +51,11 @@ class Node
     protected $topology = '';
 
     /**
-     * @var array|PersistentCollection
+     * @var mixed[]|Collection<string, EmbedNode>
      *
      * @MongoDB\EmbedMany(targetDocument="Hanaboso\CommonsBundle\Database\Document\Embed\EmbedNode")
      */
-    protected $next = [];
+    protected $next;
 
     /**
      * @var string
@@ -103,6 +104,7 @@ class Node
      */
     public function __construct()
     {
+        $this->next          = new ArrayCollection();
         $this->cron          = NULL;
         $this->cronParams    = NULL;
         $this->enabled       = TRUE;
@@ -296,7 +298,7 @@ class Node
     }
 
     /**
-     * @param null|string $cron
+     * @param string|null $cron
      *
      * @return Node
      */
@@ -308,7 +310,7 @@ class Node
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getCronParams(): ?string
     {
@@ -316,7 +318,7 @@ class Node
     }
 
     /**
-     * @param null|string $cronParams
+     * @param string|null $cronParams
      *
      * @return Node
      */

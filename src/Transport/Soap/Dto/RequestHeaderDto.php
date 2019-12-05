@@ -16,15 +16,15 @@ class RequestHeaderDto
     private string $namespace;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $params;
 
     /**
      * RequestHeaderDto constructor.
      *
-     * @param string $namespace
-     * @param array  $params
+     * @param string  $namespace
+     * @param mixed[] $params
      */
     public function __construct(string $namespace, array $params = [])
     {
@@ -42,7 +42,7 @@ class RequestHeaderDto
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getParams(): array
     {

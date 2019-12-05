@@ -22,7 +22,7 @@ trait MetricsTrait
     private ?MetricsSenderLoader $metricsSender;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $startTimes;
 

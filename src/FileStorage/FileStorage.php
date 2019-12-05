@@ -3,6 +3,8 @@
 namespace Hanaboso\CommonsBundle\FileStorage;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\LockException;
+use Doctrine\ODM\MongoDB\Mapping\MappingException;
 use Doctrine\ODM\MongoDB\MongoDBException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
@@ -33,12 +35,16 @@ class FileStorage
     private $dm;
 
     /**
+     * @phpstan-var class-string<\Hanaboso\CommonsBundle\FileStorage\Document\File>
+     *
      * @var string
      */
     private string $fileNamespace;
 
     /**
      * FileStorage constructor.
+     *
+     * @phpstan-param class-string<\Hanaboso\CommonsBundle\FileStorage\Document\File> $fileNamespace
      *
      * @param FileStorageDriverLocator $locator
      * @param DatabaseManagerLocator   $dm
@@ -115,6 +121,8 @@ class FileStorage
      *
      * @return FileInterface
      * @throws FileStorageException
+     * @throws LockException
+     * @throws MappingException
      */
     public function getFileDocument(string $fileId): FileInterface
     {

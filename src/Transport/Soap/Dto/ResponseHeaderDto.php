@@ -13,12 +13,12 @@ class ResponseHeaderDto
 {
 
     /**
-     * @var HeaderBag|null
+     * @var HeaderBag<mixed>|null
      */
     private ?HeaderBag $httpHeaders;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private ?string $httpVersion;
 
@@ -28,17 +28,17 @@ class ResponseHeaderDto
     private ?int $httpStatusCode;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private ?string $httpReason;
 
     /**
      * ResponseHeaderDto constructor.
      *
-     * @param HeaderBag   $httpHeaders
-     * @param string|NULL $httpVersion
-     * @param int         $httpStatusCode
-     * @param string|NULL $httpReason
+     * @param HeaderBag<mixed> $httpHeaders
+     * @param string|null      $httpVersion
+     * @param int              $httpStatusCode
+     * @param string|null      $httpReason
      */
     public function __construct(
         ?HeaderBag $httpHeaders,
@@ -55,7 +55,7 @@ class ResponseHeaderDto
     }
 
     /**
-     * @return HeaderBag|null ?HeaderBag
+     * @return HeaderBag<mixed>|null ?HeaderBag
      */
     public function getHttpHeaders(): ?HeaderBag
     {
@@ -63,7 +63,7 @@ class ResponseHeaderDto
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getHttpVersion(): ?string
     {
@@ -79,7 +79,7 @@ class ResponseHeaderDto
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getHttpReason(): ?string
     {

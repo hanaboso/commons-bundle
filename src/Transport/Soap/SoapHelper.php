@@ -21,14 +21,14 @@ class SoapHelper
     /**
      * @param RequestDtoAbstract $request
      *
-     * @return SoapHeader[]|null
+     * @return SoapHeader[]
      */
-    public static function composeRequestHeaders(RequestDtoAbstract $request): ?array
+    public static function composeRequestHeaders(RequestDtoAbstract $request): array
     {
         $requestHeader = $request->getHeader();
 
         if (empty($requestHeader->getParams())) {
-            return NULL;
+            return [];
         }
 
         $headers = [];
@@ -42,7 +42,7 @@ class SoapHelper
     /**
      * @param RequestDtoAbstract $request
      *
-     * @return null|array
+     * @return mixed[]|null
      */
     public static function composeArguments(RequestDtoAbstract $request): ?array
     {
@@ -54,9 +54,9 @@ class SoapHelper
     }
 
     /**
-     * @param null|string $headers
+     * @param string|null $headers
      *
-     * @return array
+     * @return mixed[]
      */
     public static function parseResponseHeaders(?string $headers = NULL): array
     {
@@ -88,7 +88,7 @@ class SoapHelper
     /**
      * @param RequestDtoAbstract $request
      *
-     * @return array|null
+     * @return mixed[]|null
      */
     private static function composeArgumentsForNonWsdl(RequestDtoAbstract $request): ?array
     {

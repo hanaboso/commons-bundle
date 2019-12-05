@@ -50,9 +50,9 @@ class PipesHeaders
     }
 
     /**
-     * @param array $headers
+     * @param mixed[] $headers
      *
-     * @return array
+     * @return mixed[]
      */
     public static function clear(array $headers): array
     {
@@ -66,8 +66,8 @@ class PipesHeaders
     }
 
     /**
-     * @param string $key
-     * @param array  $headers
+     * @param string  $key
+     * @param mixed[] $headers
      *
      * @return string|null
      */
@@ -83,9 +83,9 @@ class PipesHeaders
     }
 
     /**
-     * @param array $headers
+     * @param mixed[] $headers
      *
-     * @return array
+     * @return mixed[]
      */
     public static function debugInfo(array $headers): array
     {

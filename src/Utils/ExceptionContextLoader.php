@@ -15,7 +15,7 @@ class ExceptionContextLoader
     /**
      * @param Throwable $e
      *
-     * @return array
+     * @return mixed[]
      */
     public static function getContextForLogger(?Throwable $e = NULL): array
     {

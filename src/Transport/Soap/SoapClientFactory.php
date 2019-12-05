@@ -45,7 +45,7 @@ class SoapClientFactory implements LoggerAwareInterface
 
     /**
      * @param RequestDtoAbstract $request
-     * @param array              $options
+     * @param mixed[]            $options
      *
      * @return SoapClient
      * @throws SoapException

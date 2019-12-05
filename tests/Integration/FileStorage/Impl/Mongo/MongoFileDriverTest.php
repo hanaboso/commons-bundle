@@ -31,7 +31,7 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
         $res = $driver->save('test_content', 'test_name');
         $this->dm->clear();
 
-        /** @var FileMongo $file */
+        /** @var FileMongo $fileContent */
         $fileContent = $driver->get($res->getUrl());
         self::assertEquals('test_content', $fileContent);
 

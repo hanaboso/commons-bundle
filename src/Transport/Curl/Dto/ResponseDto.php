@@ -28,17 +28,17 @@ class ResponseDto
     private string $body;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $headers;
 
     /**
      * ResponseDto constructor.
      *
-     * @param int    $statusCode
-     * @param string $reasonPhrase
-     * @param string $body
-     * @param array  $headers
+     * @param int     $statusCode
+     * @param string  $reasonPhrase
+     * @param string  $body
+     * @param mixed[] $headers
      */
     public function __construct(
         int $statusCode,
@@ -78,7 +78,7 @@ class ResponseDto
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getJsonBody(): array
     {
@@ -86,7 +86,7 @@ class ResponseDto
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getHeaders(): array
     {

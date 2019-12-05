@@ -83,7 +83,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public static function getMethods(): array
     {
@@ -100,7 +100,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 
     /**
      * @param RequestDto $dto
-     * @param array      $options
+     * @param mixed[]    $options
      *
      * @return ResponseDto
      * @throws CurlException
@@ -178,9 +178,9 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     }
 
     /**
-     * @param array $options
+     * @param mixed[] $options
      *
-     * @return array
+     * @return mixed[]
      */
     protected function prepareOptions(array $options): array
     {

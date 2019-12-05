@@ -13,8 +13,8 @@ interface MetricsSenderInterface
 {
 
     /**
-     * @param array $fields
-     * @param array $tags
+     * @param mixed[] $fields
+     * @param mixed[] $tags
      *
      * @return bool
      * @throws Exception

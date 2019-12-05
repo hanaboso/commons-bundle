@@ -44,7 +44,7 @@ class ImapConnector
     }
 
     /**
-     * @return array
+     * @return mixed[]
      * @throws DateTimeException
      */
     public function listMails(): array

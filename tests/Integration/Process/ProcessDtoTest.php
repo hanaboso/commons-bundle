@@ -52,7 +52,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     private function getSetStopProcessHeaders(): array
     {
@@ -64,7 +64,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     private function getSetRepeaterHeaders(): array
     {

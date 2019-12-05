@@ -10,6 +10,8 @@ use Hanaboso\CommonsBundle\Database\Document\Category;
  * Class CategoryRepository
  *
  * @package Hanaboso\CommonsBundle\Database\Repository
+ *
+ * @phpstan-extends DocumentRepository<Category>
  */
 class CategoryRepository extends DocumentRepository
 {

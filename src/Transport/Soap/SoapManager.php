@@ -40,7 +40,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     private ?MetricsSenderLoader $metricsSender;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $startTimes;
 
@@ -83,7 +83,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
 
     /**
      * @param RequestDtoAbstract $request
-     * @param array              $options
+     * @param mixed[]            $options
      *
      * @return ResponseDto
      * @throws SoapException
@@ -136,7 +136,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     /**
      * @param mixed              $soapCallResponse
      * @param string             $lastResponseHeaders
-     * @param array              $outputHeaders
+     * @param mixed[]            $outputHeaders
      * @param RequestDtoAbstract $request
      *
      * @return ResponseDto
@@ -148,6 +148,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         RequestDtoAbstract $request
     ): ResponseDto
     {
+        $request;
         $response = new ResponseDto($soapCallResponse, $lastResponseHeaders, $outputHeaders);
 
         if ($response->getResponseHeaderDto()) {
@@ -166,16 +167,14 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
             $this->logger->debug(sprintf('Response: Body: %s', $response->getSoapCallResponse()));
         }
 
-        count([$request]);
-
         return $response;
     }
 
     /**
      * @param RequestDtoAbstract $request
-     * @param array              $options
+     * @param mixed[]            $options
      *
-     * @return array
+     * @return mixed[]
      */
     private function composeOptions(RequestDtoAbstract $request, array $options): array
     {
@@ -207,7 +206,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     }
 
     /**
-     * @param array $headers
+     * @param mixed[] $headers
      *
      * @return string
      */

@@ -25,7 +25,7 @@ final class ProcessDto
     private string $data;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $headers;
 
@@ -64,7 +64,7 @@ final class ProcessDto
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getHeaders(): array
     {
@@ -72,7 +72,7 @@ final class ProcessDto
     }
 
     /**
-     * @param array $headers
+     * @param mixed[] $headers
      *
      * @return ProcessDto
      */
@@ -98,9 +98,9 @@ final class ProcessDto
 
     /**
      * @param string     $key
-     * @param null|mixed $default
+     * @param mixed|null $default
      *
-     * @return null|mixed
+     * @return mixed|null
      */
     public function getHeader(string $key, $default = NULL)
     {

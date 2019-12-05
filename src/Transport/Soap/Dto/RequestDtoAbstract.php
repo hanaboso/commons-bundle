@@ -34,7 +34,7 @@ abstract class RequestDtoAbstract
     private string $function;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private array $arguments;
 
@@ -51,10 +51,10 @@ abstract class RequestDtoAbstract
     /**
      * RequestDtoAbstract constructor.
      *
-     * @param string $function
-     * @param array  $arguments
-     * @param string $namespace
-     * @param Uri    $uri
+     * @param string  $function
+     * @param mixed[] $arguments
+     * @param string  $namespace
+     * @param Uri     $uri
      */
     public function __construct(string $function, array $arguments, string $namespace, Uri $uri)
     {
@@ -97,7 +97,7 @@ abstract class RequestDtoAbstract
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getUser(): ?string
     {
@@ -119,7 +119,7 @@ abstract class RequestDtoAbstract
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getPassword(): ?string
     {
@@ -135,7 +135,7 @@ abstract class RequestDtoAbstract
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getArguments(): array
     {

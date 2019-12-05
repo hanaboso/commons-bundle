@@ -16,7 +16,7 @@ interface CurlManagerInterface
 
     /**
      * @param RequestDto $dto
-     * @param array      $options
+     * @param mixed[]    $options
      *
      * @return ResponseDto
      * @throws CurlException

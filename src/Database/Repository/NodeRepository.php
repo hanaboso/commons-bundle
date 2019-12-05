@@ -15,6 +15,8 @@ use LogicException;
  * Class NodeRepository
  *
  * @package Hanaboso\CommonsBundle\Database\Repository
+ *
+ * @phpstan-extends DocumentRepository<Node>
  */
 class NodeRepository extends DocumentRepository
 {
@@ -22,7 +24,7 @@ class NodeRepository extends DocumentRepository
     /**
      * @param string $topologyId
      *
-     * @return array
+     * @return Node[]
      */
     public function getEventNodesByTopology(string $topologyId): array
     {
@@ -96,7 +98,7 @@ class NodeRepository extends DocumentRepository
     /**
      * @param string $topologyId
      *
-     * @return array
+     * @return Node[]
      */
     public function getNodesByTopology(string $topologyId): array
     {

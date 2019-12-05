@@ -240,7 +240,7 @@ class Topology
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getBpmn(): array
     {
@@ -248,7 +248,7 @@ class Topology
     }
 
     /**
-     * @param array $bpmn
+     * @param mixed[] $bpmn
      *
      * @return Topology
      */

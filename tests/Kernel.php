@@ -15,6 +15,7 @@ use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
@@ -31,7 +32,7 @@ final class Kernel extends BaseKernel
     public const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
     /**
-     * @return iterable
+     * @return BundleInterface[]
      */
     public function registerBundles(): iterable
     {

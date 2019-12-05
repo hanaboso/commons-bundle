@@ -14,7 +14,7 @@ final class RedisSessionHandler implements SessionHandlerInterface
 {
 
     /**
-     * @var Client
+     * @var Client<mixed>
      */
     private Client $client;
 
@@ -26,8 +26,8 @@ final class RedisSessionHandler implements SessionHandlerInterface
     /**
      * RedisSessionHandler constructor.
      *
-     * @param Client $client
-     * @param int    $lifeTime
+     * @param Client<mixed> $client
+     * @param int           $lifeTime
      */
     public function __construct(Client $client, $lifeTime = 86400)
     {

@@ -174,9 +174,9 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @param array $message
+     * @param mixed[] $message
      *
-     * @return array
+     * @return mixed[]
      */
     private function correctMessage(array $message): array
     {

@@ -18,7 +18,7 @@ class DeletedFilter extends BsonFilter
     /**
      * @param ClassMetadata $targetDocument
      *
-     * @return array
+     * @return mixed[]
      */
     public function addFilterCriteria(ClassMetadata $targetDocument): array
     {

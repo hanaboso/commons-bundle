@@ -37,8 +37,8 @@ class InfluxDbSender implements MetricsSenderInterface
     }
 
     /**
-     * @param array $fields
-     * @param array $tags
+     * @param mixed[] $fields
+     * @param mixed[] $tags
      *
      * @return bool
      * @throws DateTimeException
@@ -49,8 +49,8 @@ class InfluxDbSender implements MetricsSenderInterface
     }
 
     /**
-     * @param array $fields
-     * @param array $tags
+     * @param mixed[] $fields
+     * @param mixed[] $tags
      *
      * @return string
      */
@@ -73,7 +73,7 @@ class InfluxDbSender implements MetricsSenderInterface
     }
 
     /**
-     * @param array $items
+     * @param mixed[] $items
      *
      * @return string
      */
@@ -95,9 +95,9 @@ class InfluxDbSender implements MetricsSenderInterface
     }
 
     /**
-     * @param array $tags
+     * @param mixed[] $tags
      *
-     * @return array
+     * @return mixed[]
      */
     private function prepareTags(array $tags): array
     {
@@ -117,9 +117,9 @@ class InfluxDbSender implements MetricsSenderInterface
     /**
      * Change values by InfluxDB protocol
      *
-     * @param array $fields
+     * @param mixed[] $fields
      *
-     * @return array
+     * @return mixed[]
      */
     private function prepareFields(array $fields): array
     {

@@ -98,7 +98,7 @@ class FtpAdapter implements FtpAdapterInterface
     /**
      * @param string $dir
      *
-     * @return array
+     * @return mixed[]
      * @throws FtpException
      */
     public function listDir(string $dir): array

@@ -35,7 +35,7 @@ interface FtpServiceInterface
     /**
      * @param string $dir
      *
-     * @return array
+     * @return mixed[]
      */
     public function downloadFiles(string $dir): array;
 

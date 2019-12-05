@@ -129,7 +129,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
     /**
      * @param string $dir
      *
-     * @return array
+     * @return mixed[]
      * @throws FtpException
      */
     public function downloadFiles(string $dir): array

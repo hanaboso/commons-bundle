@@ -30,8 +30,8 @@ final class CurlException extends PipesFrameworkExceptionAbstract
      *
      * @param string                 $message
      * @param int                    $code
-     * @param Throwable|NULL         $previous
-     * @param ResponseInterface|NULL $response
+     * @param Throwable|null         $previous
+     * @param ResponseInterface|null $response
      */
     public function __construct(
         $message = '',
@@ -46,7 +46,7 @@ final class CurlException extends PipesFrameworkExceptionAbstract
     }
 
     /**
-     * @return ResponseInterface|NULL
+     * @return ResponseInterface|null
      */
     public function getResponse(): ?ResponseInterface
     {

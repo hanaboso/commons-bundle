@@ -123,7 +123,7 @@ class CurlSender implements LoggerAwareInterface
 
     /**
      * @param RequestInterface $request
-     * @param array            $debugInfo
+     * @param mixed[]          $debugInfo
      */
     private function logRequest(RequestInterface $request, array $debugInfo = []): void
     {
@@ -139,7 +139,7 @@ class CurlSender implements LoggerAwareInterface
 
     /**
      * @param ResponseInterface $response
-     * @param array             $debugInfo
+     * @param mixed[]           $debugInfo
      */
     private function logResponse(ResponseInterface $response, array $debugInfo = []): void
     {

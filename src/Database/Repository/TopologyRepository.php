@@ -13,6 +13,8 @@ use Hanaboso\CommonsBundle\Enum\TopologyStatusEnum;
  * Class TopologyRepository
  *
  * @package Hanaboso\CommonsBundle\Database\Repository
+ *
+ * @phpstan-extends DocumentRepository<Topology>
  */
 class TopologyRepository extends DocumentRepository
 {
@@ -25,7 +27,7 @@ class TopologyRepository extends DocumentRepository
      */
     public function getRunnableTopologies(string $name): array
     {
-        /** @var Iterator $result */
+        /** @var Iterator<Topology> $result */
         $result = $this->createQueryBuilder()
             ->field('name')->equals($name)
             ->field('enabled')->equals(TRUE)
@@ -102,7 +104,7 @@ class TopologyRepository extends DocumentRepository
      */
     public function getTopologies(): array
     {
-        /** @var Iterator $result */
+        /** @var Iterator<Topology> $result */
         $result = $this->createQueryBuilder()
             ->field('visibility')->equals(TopologyStatusEnum::PUBLIC)
             ->field('deleted')->equals(FALSE)
@@ -126,7 +128,7 @@ class TopologyRepository extends DocumentRepository
      */
     public function getPublicEnabledTopologies(): array
     {
-        /** @var Iterator $result */
+        /** @var Iterator<Topology> $result */
         $result = $this->createQueryBuilder()
             ->field('visibility')->equals(TopologyStatusEnum::PUBLIC)
             ->field('enabled')->equals(TRUE)

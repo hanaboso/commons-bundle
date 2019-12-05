@@ -45,7 +45,7 @@ class SystemMetrics
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public static function getCpuTimes(): array
     {

@@ -14,11 +14,11 @@ final class NodeServiceLoader
 {
 
     /**
-     * @param array  $dirs
-     * @param string $nodeType
-     * @param array  $exclude
+     * @param mixed[] $dirs
+     * @param string  $nodeType
+     * @param mixed[] $exclude
      *
-     * @return array
+     * @return mixed[]
      */
     public static function getServices(array $dirs, string $nodeType, array $exclude = []): array
     {

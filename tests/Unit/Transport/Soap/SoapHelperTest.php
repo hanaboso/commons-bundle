@@ -27,7 +27,7 @@ final class SoapHelperTest extends TestCase
         $request = new RequestDtoNonWsdl('functionName', ['arguments'], 'namespace', new Uri(''));
         $result  = SoapHelper::composeRequestHeaders($request);
 
-        self::assertNull($result);
+        self::assertEmpty($result);
     }
 
     /**
@@ -85,7 +85,7 @@ Content-Length: nnnn';
         self::assertEquals(200, $result['statusCode']);
         self::assertEquals('OK', $result['reason']);
 
-        /** @var HeaderBag $headerBag */
+        /** @var HeaderBag<mixed> $headerBag */
         $headerBag = $result['headers'];
         self::assertInstanceOf(HeaderBag::class, $headerBag);
 

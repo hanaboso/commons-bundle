@@ -28,7 +28,7 @@ final class StringsTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function toCamelCaseDataProvider(): array
     {

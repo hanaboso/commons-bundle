@@ -15,7 +15,7 @@ class DefaultMessage implements MessageInterface
     /**
      * @Serializer\Type("array")
      *
-     * @var array
+     * @var mixed[]
      */
     protected array $settings;
 
@@ -29,8 +29,8 @@ class DefaultMessage implements MessageInterface
     /**
      * DefaultMessage constructor.
      *
-     * @param string $data
-     * @param array  $settings
+     * @param string  $data
+     * @param mixed[] $settings
      */
     public function __construct(string $data = '', array $settings = [])
     {
@@ -39,7 +39,7 @@ class DefaultMessage implements MessageInterface
     }
 
     /**
-     * @param array $settings
+     * @param mixed[] $settings
      */
     public function setSettings(array $settings): void
     {

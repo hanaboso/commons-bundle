@@ -30,9 +30,9 @@ trait ControllerTrait
     }
 
     /**
-     * @param mixed $data
-     * @param int   $code
-     * @param array $headers
+     * @param mixed   $data
+     * @param int     $code
+     * @param mixed[] $headers
      *
      * @return Response
      */
@@ -53,7 +53,7 @@ trait ControllerTrait
      * @param Throwable $e
      * @param int       $code
      * @param string    $status
-     * @param array     $headers
+     * @param mixed[]   $headers
      *
      * @return Response
      */

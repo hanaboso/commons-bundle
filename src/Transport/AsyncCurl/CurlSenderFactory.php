@@ -64,7 +64,7 @@ class CurlSenderFactory implements LoggerAwareInterface
 
     /**
      * @param LoopInterface $loop
-     * @param array         $secret
+     * @param mixed[]       $secret
      *
      * @return CurlSender
      */

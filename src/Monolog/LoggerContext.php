@@ -80,7 +80,7 @@ final class LoggerContext
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function toArray(): array
     {

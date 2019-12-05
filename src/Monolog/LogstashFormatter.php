@@ -35,7 +35,7 @@ class LogstashFormatter extends NormalizerFormatter
     }
 
     /**
-     * @param array $record
+     * @param mixed[] $record
      *
      * @return string
      */
@@ -107,7 +107,7 @@ class LogstashFormatter extends NormalizerFormatter
      * @param Exception|Throwable $e
      * @param int                 $depth
      *
-     * @return array
+     * @return mixed[]
      */
     protected function normalizeException(Throwable $e, int $depth = 0): array
     {
