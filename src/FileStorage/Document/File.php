@@ -28,42 +28,42 @@ class File implements FileInterface
      *
      * @ODM\Field(type="string")
      */
-    private string $filename;
+    private $filename;
 
     /**
      * @var string
      *
      * @ODM\Field(type="string", nullable=false)
      */
-    private string $fileFormat;
+    private $fileFormat;
 
     /**
      * @var string
      *
      * @ODM\Field(type="string", nullable=false)
      */
-    private string $mimeType;
+    private $mimeType;
 
     /**
      * @var string
      *
      * @ODM\Field(type="string")
      */
-    private string $fileUrl;
+    private $fileUrl;
 
     /**
      * @var string
      *
      * @ODM\Field(type="string")
      */
-    private string $size;
+    private $size;
 
     /**
      * @var string
      *
      * @ODM\Field(type="string")
      */
-    private string $storageType;
+    private $storageType;
 
     /**
      * @return string
