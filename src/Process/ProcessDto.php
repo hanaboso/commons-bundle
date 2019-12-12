@@ -29,6 +29,7 @@ final class ProcessDto
      */
     private array $headers;
 
+    public const OK                 = 0;
     public const REPEAT             = 1001;
     public const DO_NOT_CONTINUE    = 1003;
     public const SPLITTER_BATCH_END = 1005;
@@ -108,57 +109,69 @@ final class ProcessDto
     }
 
     /**
-     * @param int         $value
      * @param string|null $message
      *
-     * @throws PipesFrameworkException
+     * @return ProcessDto
      */
-    public function setStopProcess(int $value = self::DO_NOT_CONTINUE, ?string $message = NULL): void
+    public function setSuccessProcess(?string $message = NULL): ProcessDto
     {
-        $this->validateStatus($value);
-        $key = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
+        $this->setStatusHeader(self::OK, $message);
 
-        if ($message) {
-            $this->addHeader(PipesHeaders::createKey(PipesHeaders::RESULT_MESSAGE), $message);
-        }
-        $this->addHeader($key, (string) $value);
+        return $this;
     }
 
     /**
-     * @param int      $interval
-     * @param int      $maxHops
-     * @param int|null $repeatHops
-     * @param string   $queue
+     * @param int         $value
+     * @param string|null $message
      *
+     * @return ProcessDto
+     * @throws PipesFrameworkException
+     */
+    public function setStopProcess(int $value = self::DO_NOT_CONTINUE, ?string $message = NULL): ProcessDto
+    {
+        $this->validateStatus($value);
+        $this->setStatusHeader($value, $message);
+
+        return $this;
+    }
+
+    /**
+     * @param int         $interval
+     * @param int         $maxHops
+     * @param int|null    $repeatHops
+     * @param string      $queue
+     * @param string|null $message
+     *
+     * @return ProcessDto
      * @throws PipesFrameworkException
      */
     public function setRepeater(
         int $interval,
         int $maxHops,
         ?int $repeatHops = NULL,
-        string $queue = ''
-    ): void
-
+        string $queue = '',
+        ?string $message = NULL
+    ): ProcessDto
     {
-        $keyRepeat = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
-        $this->addHeader($keyRepeat, (string) self::REPEAT);
-
         if ($interval < 1) {
             throw new PipesFrameworkException(
                 'Value inverval is obligatory and cant be NULL',
                 PipesFrameworkException::WRONG_VALUE
             );
         }
-
-        $keyInterval = PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL);
-        $this->addHeader($keyInterval, (string) $interval);
-
         if ($maxHops < 1) {
             throw new PipesFrameworkException(
                 'Value maxHops is obligatory and cant be NULL',
                 PipesFrameworkException::WRONG_VALUE
             );
         }
+
+        $this->setStatusHeader(self::REPEAT, $message);
+        $keyRepeat = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
+        $this->addHeader($keyRepeat, (string) self::REPEAT);
+
+        $keyInterval = PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL);
+        $this->addHeader($keyInterval, (string) $interval);
 
         $keyMaxHops = PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS);
         $this->addHeader($keyMaxHops, (string) $maxHops);
@@ -173,6 +186,25 @@ final class ProcessDto
             $this->addHeader($keyQueue, $queue);
         }
 
+        return $this;
+    }
+
+    /**
+     * ------------------------------------- HELPERS -----------------------------------------------
+     */
+
+    /**
+     * @param int         $value
+     * @param string|null $message
+     */
+    private function setStatusHeader(int $value, ?string $message): void
+    {
+        $key = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
+
+        if ($message) {
+            $this->addHeader(PipesHeaders::createKey(PipesHeaders::RESULT_MESSAGE), $message);
+        }
+        $this->addHeader($key, (string) $value);
     }
 
     /**
