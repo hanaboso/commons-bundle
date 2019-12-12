@@ -20,7 +20,7 @@ docker-down-clean: .env
 
 # Composer
 composer-install:
-	$(DE) composer install --ignore-platform-reqs
+	$(DE) composer install
 
 composer-update:
 	$(DE) composer update

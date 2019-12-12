@@ -47,6 +47,11 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     private LoggerInterface $logger;
 
     /**
+     * @var int
+     */
+    private int $timeout;
+
+    /**
      * CurlManager constructor.
      *
      * @param CurlClientFactory $curlClientFactory
@@ -56,6 +61,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
         $this->curlClientFactory = $curlClientFactory;
         $this->logger            = new NullLogger();
         $this->metricsSender     = NULL;
+        $this->timeout           = 30;
     }
 
     /**
@@ -78,6 +84,18 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     public function setMetricsSender(MetricsSenderLoader $metricsSender): CurlManager
     {
         $this->metricsSender = $metricsSender;
+
+        return $this;
+    }
+
+    /**
+     * @param int $timeout
+     *
+     * @return CurlManager
+     */
+    public function setTimeout(int $timeout): CurlManager
+    {
+        $this->timeout = $timeout;
 
         return $this;
     }
@@ -119,7 +137,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 )
             );
 
-            $client = $this->curlClientFactory->create();
+            $client = $this->curlClientFactory->create(['timeout' => $this->timeout]);
 
             $this->startTimes = CurlMetricUtils::getCurrentMetrics();
             $psrResponse      = $client->send($request, $this->prepareOptions($options));
