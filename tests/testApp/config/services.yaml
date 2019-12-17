@@ -1,7 +1,6 @@
 services:
-    CommonsBundleTests\Controller\:
-        resource: '../../Controller'
-        tags: ['controller.service_arguments']
+    CommonsBundleTests\Controller\TestController:
+        class: CommonsBundleTests\Controller\TestController
 
     hbpf.connector.null:
         class: CommonsBundleTests\testApp\NullConnectorForLoaderTest

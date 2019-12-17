@@ -1,13 +1,4 @@
 framework:
-    test: ~
-#    secret: "%secret%"
-#    csrf_protection:
-#        enabled: false
-#    default_locale: "%locale%"
-#    trusted_hosts: ~
-#    fragments: ~
-#    http_method_override: true
-#    session:
-#        storage_id: session.storage.mock_file
-#    router:
-#        strict_requirements: ~
+    test: true
+    session:
+        storage_id: session.storage.mock_file

@@ -20,7 +20,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
     /**
      * @var S3Driver
      */
-    private $driver;
+    private S3Driver $driver;
 
     /**
      *

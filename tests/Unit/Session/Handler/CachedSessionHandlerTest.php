@@ -19,7 +19,7 @@ final class CachedSessionHandlerTest extends TestCase
     /**
      * @var CachedSessionHandler
      */
-    private $csh;
+    private CachedSessionHandler $csh;
 
     /**
      * @throws Exception

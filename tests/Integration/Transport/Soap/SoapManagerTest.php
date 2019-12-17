@@ -20,7 +20,7 @@ final class SoapManagerTest extends KernelTestCaseAbstract
     /**
      * @var SoapManager
      */
-    private $soap;
+    private SoapManager $soap;
 
     /**
      *

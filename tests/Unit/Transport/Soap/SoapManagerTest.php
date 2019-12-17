@@ -33,6 +33,7 @@ final class SoapManagerTest extends TestCase
         $soapCallResponse    = 'abc';
         $lastResponseHeaders = 'def';
 
+        /** @var MockObject|SoapClient $client */
         $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
         $client->expects(self::any())->method('__soapCall')->willReturn($soapCallResponse);
         $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn($lastResponseHeaders);
@@ -45,10 +46,8 @@ final class SoapManagerTest extends TestCase
         $request->setVersion(SOAP_1_2);
 
         /** @var InfluxDbSender $influx */
-        $influx = self::createMock(InfluxDbSender::class);
-
-        $loader = new MetricsSenderLoader('influx', $influx, NULL);
-
+        $influx      = self::createMock(InfluxDbSender::class);
+        $loader      = new MetricsSenderLoader('influx', $influx, NULL);
         $soapManager = new SoapManager($soapClientFactory);
         $soapManager->setMetricsSender($loader);
         $result = $soapManager->send($request);

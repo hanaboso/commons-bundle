@@ -18,7 +18,7 @@ final class LogstashFormatterTest extends TestCase
     /**
      * @var LogstashFormatter
      */
-    private $logstashFormatter;
+    private LogstashFormatter $logstashFormatter;
 
     /**
      *

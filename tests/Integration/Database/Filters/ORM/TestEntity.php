@@ -24,7 +24,15 @@ class TestEntity
      *
      * @ORM\Column(type="string")
      */
-    protected $name;
+    protected string $name;
+
+    /**
+     * TestEntity constructor.
+     */
+    public function __construct()
+    {
+        $this->name = '';
+    }
 
     /**
      * @param string $name

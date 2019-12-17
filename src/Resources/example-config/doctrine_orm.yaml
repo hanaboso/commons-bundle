@@ -6,8 +6,8 @@ doctrine:
         connections:
             default:
                 driver:   pdo_mysql
-                host:     'mariadb'
-                dbname:   'pipes'
+                host:     "%env(string:MARIADB_DSN)%"
+                dbname:   "%env(string:MARIADB_DB)%"
                 user:     'root'
                 password: 'root'
     orm:
@@ -23,4 +23,4 @@ doctrine:
                 class: Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter
                 enabled: true
         proxy_dir: "%kernel.cache_dir%/doctrine/orm/Proxies"
-        proxy_namespace: Proxies
+        proxy_namespace: OrmProxies

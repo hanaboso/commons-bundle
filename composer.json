@@ -1,5 +1,6 @@
 {
     "name": "hanaboso/commons-bundle",
+    "version": "1.3.5",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
@@ -27,7 +28,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "doctrine/mongodb-odm-bundle": "^4.1",
         "doctrine/orm": "^2.7",
-        "guzzlehttp/guzzle": "^6.4",
+        "guzzlehttp/guzzle": "^6.5",
         "jms/serializer-bundle": "^3.5",
         "mongodb/mongodb": "^1.5",
         "php-imap/php-imap": "^3.0",
@@ -37,9 +38,9 @@
         "windwalker/crypt": "^3.5"
     },
     "require-dev": {
-        "hanaboso/php-check-utils": "^1.0",
+        "hanaboso/php-check-utils": "^1.1",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/yaml": "^4.4",
-        "symfony/mailer": "^4.4"
+        "symfony/yaml": "^5.0",
+        "symfony/mailer": "^5.0"
     }
 }

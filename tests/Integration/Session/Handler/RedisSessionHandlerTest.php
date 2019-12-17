@@ -17,7 +17,7 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
     /**
      * @var RedisSessionHandler
      */
-    private $handler;
+    private RedisSessionHandler $handler;
 
     /**
      * Prepares handler for testing
@@ -27,7 +27,7 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
         parent::setUp();
 
         /** @var RedisSessionHandler $sessionHandler */
-        $sessionHandler = self::$container->get('hbpf.commons.session_handler');
+        $sessionHandler = self::$container->get('hbpf.commons.redis_session_handler');
         $this->handler  = $sessionHandler;
     }
 

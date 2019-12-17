@@ -24,7 +24,15 @@ class TestDocument
      *
      * @ODM\Field(type="string")
      */
-    protected $name;
+    protected string $name;
+
+    /**
+     * TestDocument constructor.
+     */
+    public function __construct()
+    {
+        $this->name = '';
+    }
 
     /**
      * @param string $name
