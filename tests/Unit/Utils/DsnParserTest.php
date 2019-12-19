@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package CommonsBundleTests\Unit\Utils
  */
-class DsnParserTest extends TestCase
+final class DsnParserTest extends TestCase
 {
 
     /**
@@ -40,7 +40,7 @@ class DsnParserTest extends TestCase
         $result = DsnParser::rabbitParser('amqp://guest:heslo@dev.company:1000/sss.qa');
         self::assertEquals(
             [
-                'username' => 'guest',
+                'user'     => 'guest',
                 'password' => 'heslo',
                 'host'     => 'dev.company',
                 'port'     => 1000,
@@ -52,10 +52,9 @@ class DsnParserTest extends TestCase
         $result = DsnParser::rabbitParser('amqp://guest:heslo@dev.company/sss.qa');
         self::assertEquals(
             [
-                'username' => 'guest',
+                'user'     => 'guest',
                 'password' => 'heslo',
                 'host'     => 'dev.company',
-                'port'     => '',
                 'vhost'    => 'sss.qa',
             ],
             $result
@@ -64,11 +63,9 @@ class DsnParserTest extends TestCase
         $result = DsnParser::rabbitParser('amqp://guest:heslo@dev.company');
         self::assertEquals(
             [
-                'username' => 'guest',
+                'user'     => 'guest',
                 'password' => 'heslo',
                 'host'     => 'dev.company',
-                'port'     => '',
-                'vhost'    => '',
             ],
             $result
         );
@@ -76,15 +73,11 @@ class DsnParserTest extends TestCase
         $result = DsnParser::rabbitParser('amqp://guest:heslo@dev.company?heartbeat=10&connection_timeout=10000');
         self::assertEquals(
             [
-                'username'    => 'guest',
-                'password'    => 'heslo',
-                'host'        => 'dev.company',
-                'port'        => '',
-                'vhost'       => '',
-                'queryParams' => [
-                    'heartbeat'          => 10,
-                    'connection_timeout' => 10000,
-                ],
+                'user'               => 'guest',
+                'password'           => 'heslo',
+                'host'               => 'dev.company',
+                'heartbeat'          => 10,
+                'connection_timeout' => 10000,
             ],
             $result
         );
@@ -92,13 +85,9 @@ class DsnParserTest extends TestCase
         $result = DsnParser::rabbitParser('amqp://dev.company?heartbeat=10&connection_timeout=10000');
         self::assertEquals(
             [
-                'host'        => 'dev.company',
-                'port'        => '',
-                'vhost'       => '',
-                'queryParams' => [
-                    'heartbeat'          => 10,
-                    'connection_timeout' => 10000,
-                ],
+                'host'               => 'dev.company',
+                'heartbeat'          => 10,
+                'connection_timeout' => 10000,
             ],
             $result
         );
