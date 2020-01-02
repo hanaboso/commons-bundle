@@ -46,15 +46,21 @@ class DsnParser
             }
 
             $result = [
-                'username' => $parsedUrl[1],
+                'user'     => $parsedUrl[1],
                 'password' => $parsedUrl[2],
                 'host'     => $parsedUrl[3],
-                'port'     => $parsedUrl[7] ?? $parsedUrl[5] ?? '',
-                'vhost'    => $parsedUrl[6] ?? $parsedUrl[4] ?? '',
             ];
 
             if (!empty($queryArr)) {
-                $result['queryParams'] = $queryArr;
+                $result = array_merge($result, $queryArr);
+            }
+
+            if ((isset($parsedUrl[7]) && !empty($parsedUrl[7])) || (isset($parsedUrl[5]) && !empty($parsedUrl[5]))) {
+                $result['port'] = isset($parsedUrl[7]) && !empty($parsedUrl[7]) ? $parsedUrl[7] : $parsedUrl[5];
+            }
+
+            if ((isset($parsedUrl[6]) && !empty($parsedUrl[6])) || (isset($parsedUrl[4]) && !empty($parsedUrl[4]))) {
+                $result['vhost'] = isset($parsedUrl[6]) && !empty($parsedUrl[6]) ? $parsedUrl[6] : $parsedUrl[4];
             }
 
             return $result;
@@ -70,13 +76,19 @@ class DsnParser
             }
 
             $result = [
-                'host'  => $parsedUrl[1],
-                'port'  => $parsedUrl[5] ?? $parsedUrl[3] ?? '',
-                'vhost' => $parsedUrl[2] ?? $parsedUrl[4] ?? '',
+                'host' => $parsedUrl[1],
             ];
 
             if (!empty($queryArr)) {
-                $result['queryParams'] = $queryArr;
+                $result = array_merge($result, $queryArr);
+            }
+
+            if ((isset($parsedUrl[5]) && !empty($parsedUrl[5])) || (isset($parsedUrl[3]) && !empty($parsedUrl[3]))) {
+                $result['port'] = isset($parsedUrl[5]) && !empty($parsedUrl[5]) ? $parsedUrl[5] : $parsedUrl[2];
+            }
+
+            if ((isset($parsedUrl[2]) && !empty($parsedUrl[2])) || (isset($parsedUrl[4]) && !empty($parsedUrl[4]))) {
+                $result['vhost'] = isset($parsedUrl[2]) && !empty($parsedUrl[2]) ? $parsedUrl[2] : $parsedUrl[4];
             }
 
             return $result;
@@ -95,7 +107,7 @@ class DsnParser
         if (!empty($queryParam)) {
             foreach ($queryParam as $item) {
                 $query               = explode('=', $item);
-                $queryArr[$query[0]] = $query[1];
+                $queryArr[$query[0]] = (int) $query[1];
             }
         }
 
