@@ -16,7 +16,7 @@ final class MongoDbSenderTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers MongoDbSender::send
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender::send
      *
      * @throws Exception
      */

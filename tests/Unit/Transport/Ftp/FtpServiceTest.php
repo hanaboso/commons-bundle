@@ -19,7 +19,8 @@ final class FtpServiceTest extends TestCase
 {
 
     /**
-     * @covers FtpService::uploadFile()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::uploadFile()
+     *
      * @throws Exception
      */
     public function testUploadFile(): void
@@ -43,7 +44,8 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers FtpService::downloadFile()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFile()
+     *
      * @throws Exception
      */
     public function testDownloadFile(): void
@@ -66,7 +68,8 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers FtpService::downloadFiles()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFiles()
+     *
      * @throws Exception
      */
     public function testDownloadFiles(): void

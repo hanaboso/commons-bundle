@@ -37,8 +37,9 @@ class SystemMetrics
             $cpuTimes  = self::getCpuTimes();
             $totalTime = $cpuTimes[self::CPU_TIME_USER] + $cpuTimes[self::CPU_TIME_KERNEL];
             $seconds   = $upTime - ($cpuTimes[self::CPU_START_TIME] / self::HERTZ);
+            $f         = $totalTime / self::HERTZ / $seconds;
 
-            return 100 * (($totalTime / self::HERTZ) / $seconds);
+            return 100 * $f;
         } catch (Exception $e) {
             return 0;
         }
@@ -80,7 +81,7 @@ class SystemMetrics
      */
     public static function getCurrentTimestamp(): int
     {
-        return (int) round(microtime(TRUE) * 1000, 0);
+        return (int) round(microtime(TRUE) * 1_000, 0);
     }
 
 }

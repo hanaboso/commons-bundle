@@ -51,7 +51,7 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 
         self::assertArrayHasKey(CurlMetricUtils::KEY_TIMESTAMP, $metrics);
         $timestamp = $metrics[CurlMetricUtils::KEY_TIMESTAMP];
-        self::assertGreaterThan(SystemMetrics::getCurrentTimestamp() - 5000, $timestamp);
+        self::assertGreaterThan(SystemMetrics::getCurrentTimestamp() - 5_000, $timestamp);
         self::assertArrayHasKey(CurlMetricUtils::KEY_CPU, $metrics);
         $cpu = $metrics[CurlMetricUtils::KEY_CPU];
         self::assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_TIME_USER]);

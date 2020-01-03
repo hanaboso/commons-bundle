@@ -37,9 +37,7 @@ final class Strings
     {
         $camelCase = preg_replace_callback(
             '#(\.\w|_\w)#',
-            function ($matches) {
-                return ucfirst(mb_substr($matches[0], 1, NULL, 'UTF-8'));
-            },
+            fn($matches) => ucfirst(mb_substr($matches[0], 1, NULL, 'UTF-8')),
             $string
         ) ?: '';
 

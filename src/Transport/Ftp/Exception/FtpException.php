@@ -12,7 +12,7 @@ use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
 class FtpException extends PipesFrameworkExceptionAbstract
 {
 
-    protected const OFFSET = 2500;
+    protected const OFFSET = 2_500;
 
     public const CONNECTION_FAILED          = self::OFFSET + 1;
     public const CONNECTION_CLOSE_FAILED    = self::OFFSET + 2;

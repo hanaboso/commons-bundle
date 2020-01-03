@@ -14,7 +14,7 @@ final class SystemMetricsTest extends TestCase
 {
 
     /**
-     * @covers SystemMetrics::getCurrentTimestamp()
+     * @covers \Hanaboso\CommonsBundle\Metrics\SystemMetrics::getCurrentTimestamp()
      */
     public function testGetCurrentTimestamp(): void
     {
@@ -26,7 +26,7 @@ final class SystemMetricsTest extends TestCase
     }
 
     /**
-     * @covers SystemMetrics::getCpuTimes()
+     * @covers \Hanaboso\CommonsBundle\Metrics\SystemMetrics::getCpuTimes()
      */
     public function testGetCpuTimes(): void
     {

@@ -60,7 +60,7 @@ class InfluxDbSender implements MetricsSenderInterface
             throw new InvalidArgumentException('The fields must not be empty.');
         }
 
-        $nanoTimestamp = sprintf('%s%s', round(microtime(TRUE) * 1000), '000000');
+        $nanoTimestamp = sprintf('%s%s', round(microtime(TRUE) * 1_000), '000000');
 
         return sprintf(
             '%s%s%s %s %s',

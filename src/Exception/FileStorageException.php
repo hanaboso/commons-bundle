@@ -10,7 +10,7 @@ namespace Hanaboso\CommonsBundle\Exception;
 final class FileStorageException extends PipesFrameworkExceptionAbstract
 {
 
-    protected const OFFSET = 1500;
+    protected const OFFSET = 1_500;
 
     public const FILE_NOT_FOUND       = self::OFFSET + 1;
     public const INVALID_STORAGE_TYPE = self::OFFSET + 2;

@@ -18,7 +18,8 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers TopologyRepository::getTotalCount()
+     * @covers \Hanaboso\CommonsBundle\Database\Repository\TopologyRepository::getTotalCount()
+     *
      * @throws Exception
      */
     public function testGetTotalCount(): void
@@ -89,7 +90,8 @@ final class TopologyRepositoryTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers TopologyRepository::getTopologiesByCategory()
+     * @covers \Hanaboso\CommonsBundle\Database\Repository\TopologyRepository::getTopologiesByCategory()
+     *
      * @throws Exception
      */
     public function testGetTopologiesByCategory(): void

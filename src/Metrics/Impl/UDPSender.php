@@ -60,7 +60,7 @@ class UDPSender implements LoggerAwareInterface
      * @param string $collectorHost
      * @param int    $collectorPort
      */
-    public function __construct(string $collectorHost, int $collectorPort = 8089)
+    public function __construct(string $collectorHost, int $collectorPort = 8_089)
     {
         $this->collectorHost = $collectorHost;
         $this->collectorPort = $collectorPort;

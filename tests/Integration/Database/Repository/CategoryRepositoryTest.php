@@ -16,7 +16,8 @@ final class CategoryRepositoryTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers CategoryRepository::childrenLevelUp()
+     * @covers \Hanaboso\CommonsBundle\Database\Repository\CategoryRepository::childrenLevelUp()
+     *
      * @throws Exception
      */
     public function testChildrenLevelUp(): void

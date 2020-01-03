@@ -20,7 +20,7 @@ final class SoapHelperTest extends TestCase
 {
 
     /**
-     * @covers SoapHelper::composeRequestHeaders()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeRequestHeaders()
      */
     public function testComposeRequestHeaders(): void
     {
@@ -31,7 +31,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers SoapHelper::composeArguments()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments()
      */
     public function testComposeArgumentsWsdl(): void
     {
@@ -42,7 +42,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers SoapHelper::composeArguments()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments()
      */
     public function testComposeArgumentsNonWsdl(): void
     {
@@ -55,7 +55,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers SoapHelper::composeArguments()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments()
      */
     public function testComposeArgumentsNonWsdlNull(): void
     {
@@ -66,7 +66,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers SoapHelper::parseResponseHeaders()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders()
      */
     public function testParseResponseHeaders(): void
     {
@@ -97,7 +97,7 @@ Content-Length: nnnn';
     }
 
     /**
-     * @covers SoapHelper::parseResponseHeaders()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders()
      */
     public function testParseResponseHeadersEmpty(): void
     {

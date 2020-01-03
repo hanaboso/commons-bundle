@@ -30,10 +30,10 @@ final class ProcessDto
     private array $headers;
 
     public const OK                 = 0;
-    public const REPEAT             = 1001;
-    public const DO_NOT_CONTINUE    = 1003;
-    public const SPLITTER_BATCH_END = 1005;
-    public const STOP_AND_FAILED    = 1006;
+    public const REPEAT             = 1_001;
+    public const DO_NOT_CONTINUE    = 1_003;
+    public const SPLITTER_BATCH_END = 1_005;
+    public const STOP_AND_FAILED    = 1_006;
 
     /**
      * ProcessDto constructor.

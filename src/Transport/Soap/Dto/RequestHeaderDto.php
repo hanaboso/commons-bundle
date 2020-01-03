@@ -38,7 +38,6 @@ class RequestHeaderDto
     public function getNamespace(): string
     {
         return $this->namespace;
-
     }
 
     /**

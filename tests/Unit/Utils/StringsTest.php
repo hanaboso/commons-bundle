@@ -14,7 +14,6 @@ final class StringsTest extends TestCase
 {
 
     /**
-     * @covers       StringUtil::toCamelCase()
      * @dataProvider toCamelCaseDataProvider
      *
      * @param string $string
@@ -52,7 +51,7 @@ final class StringsTest extends TestCase
     }
 
     /**
-     * @covers StringUtil::getShortClassName()
+     *
      */
     public function testGetShortClassName(): void
     {

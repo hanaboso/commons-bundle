@@ -18,7 +18,7 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers       MetricsSenderLoader::getSender
+     * @covers       \Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader::getSender
      *
      * @dataProvider metricsDataProvider
      *

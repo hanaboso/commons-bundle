@@ -7,10 +7,8 @@ includes:
 
 parameters:
     excludes_analyse:
-        - src/Traits/ControllerTrait.php
-        - src/Transport/Utils/MetricsTrait.php
+        - tests/Live/*
     ignoreErrors:
-        - '#Call to an undefined method React\\Promise\\PromiseInterface\:\:done\(\)#'
     symfony:
         container_xml_path: %rootDir%/../../../var/cache/test/testsCommonsBundleTests_KernelTestDebugContainer.xml
 

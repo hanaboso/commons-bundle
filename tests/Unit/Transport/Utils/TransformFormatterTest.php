@@ -14,7 +14,7 @@ final class TransformFormatterTest extends TestCase
 {
 
     /**
-     * @covers TransportFormatter::headersToString()
+     * @covers \Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter::headersToString()
      */
     public function testHeadersToString(): void
     {
@@ -29,7 +29,7 @@ final class TransformFormatterTest extends TestCase
     }
 
     /**
-     * @covers TransportFormatter::requestToString()
+     * @covers \Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter::requestToString()
      */
     public function testRequestToString(): void
     {
@@ -45,7 +45,7 @@ final class TransformFormatterTest extends TestCase
     }
 
     /**
-     * @covers TransportFormatter::responseToString()
+     * @covers \Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter::responseToString()
      */
     public function testResponseToString(): void
     {

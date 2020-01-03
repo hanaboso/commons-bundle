@@ -17,9 +17,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers CryptService::encrypt()
-     * @covers CryptService::decrypt()
-     *
      * @throws Exception
      */
     public function testEncryptAndDecrypt(): void
@@ -44,9 +41,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers CryptService::encrypt()
-     * @covers CryptService::decrypt()
-     *
      * @throws Exception
      */
     public function testEncryptAndDecryptFail(): void
@@ -61,9 +55,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers CryptService::encrypt()
-     * @covers CryptService::decrypt()
-     *
      * @throws Exception
      */
     public function testEncryptAndDecrypt2(): void

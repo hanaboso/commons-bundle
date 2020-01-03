@@ -26,7 +26,8 @@ final class CurlSenderTest extends TestCase
 {
 
     /**
-     * @covers CurlSender::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\AsyncCurl\CurlSender::send()
+     *
      * @throws Exception
      */
     public function testSend(): void
@@ -54,7 +55,8 @@ final class CurlSenderTest extends TestCase
     }
 
     /**
-     * @covers CurlSender::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\AsyncCurl\CurlSender::send()
+     *
      * @throws Exception
      */
     public function testSendException(): void

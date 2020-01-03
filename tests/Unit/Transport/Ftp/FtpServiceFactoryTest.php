@@ -18,7 +18,8 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers FtpServiceFactory::getFtpService().
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
+     *
      * @throws Exception
      */
     public function testGetServiceFtp(): void
@@ -31,7 +32,8 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers FtpServiceFactory::getFtpService()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
+     *
      * @throws Exception
      */
     public function testGetServiceSftp(): void
@@ -44,7 +46,8 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers FtpServiceFactory::getFtpService()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
+     *
      * @throws FtpException
      */
     public function testGetServiceUnknown(): void

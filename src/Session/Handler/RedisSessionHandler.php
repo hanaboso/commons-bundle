@@ -29,7 +29,7 @@ final class RedisSessionHandler implements SessionHandlerInterface
      * @param Client<mixed> $client
      * @param int           $lifeTime
      */
-    public function __construct(Client $client, $lifeTime = 86400)
+    public function __construct(Client $client, $lifeTime = 86_400)
     {
         $this->client   = $client;
         $this->lifeTime = $lifeTime;

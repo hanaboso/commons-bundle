@@ -28,7 +28,7 @@ final class CurlManagerTest extends TestCase
 {
 
     /**
-     * @covers CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
      *
      * @throws Exception
      */
@@ -67,7 +67,8 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
+     *
      * @throws Exception
      */
     public function testSendFail(): void
@@ -85,7 +86,8 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
+     *
      * @throws Exception
      */
     public function testSendFailMethod(): void
@@ -96,7 +98,8 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
+     *
      * @throws Exception
      */
     public function testSendFailBody(): void
@@ -108,7 +111,8 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers RequestDto::from()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::from()
+     *
      * @throws Exception
      */
     public function testFrom(): void

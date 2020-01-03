@@ -17,10 +17,11 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers MongoFileDriver::save()
-     * @covers MongoFileDriver::get()
-     * @covers MongoFileDriver::delete()
-     * @covers MongoFileDriver::generatePath()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::get()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::delete()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::generatePath()
+     *
      * @throws Exception
      */
     public function testFileStorage(): void

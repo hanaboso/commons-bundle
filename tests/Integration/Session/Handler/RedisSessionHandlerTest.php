@@ -25,14 +25,13 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
     public function setUp(): void
     {
         parent::setUp();
-
-        /** @var RedisSessionHandler $sessionHandler */
         $sessionHandler = self::$container->get('hbpf.commons.redis_session_handler');
         $this->handler  = $sessionHandler;
     }
 
     /**
-     * @covers RedisSessionHandler::open()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler::open()
+     *
      * @throws Exception
      */
     public function testOpen(): void
@@ -42,7 +41,8 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers RedisSessionHandler::close()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler::close()
+     *
      * @throws Exception
      */
     public function testClose(): void
@@ -51,7 +51,8 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers RedisSessionHandler::gc()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler::gc()
+     *
      * @throws Exception
      */
     public function testGc(): void
@@ -61,9 +62,10 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers RedisSessionHandler::read()
-     * @covers RedisSessionHandler::write()
-     * @covers RedisSessionHandler::destroy()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler::read()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler::write()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler::destroy()
+     *
      * @throws Exception
      */
     public function testReadWriteDestroy(): void

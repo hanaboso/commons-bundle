@@ -85,9 +85,11 @@ class FtpServiceFactory implements LoggerAwareInterface
         switch ($type) {
             case self::ADAPTER_FTP:
                 $service = new FtpService($this->ftpAdapter, $this->prepareConfig(self::ADAPTER_FTP));
+
                 break;
             case self::ADAPTER_SFTP:
                 $service = new FtpService($this->sftpAdapter, $this->prepareConfig(self::ADAPTER_SFTP));
+
                 break;
             default:
                 throw new FtpException(

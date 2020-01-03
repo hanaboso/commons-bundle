@@ -10,7 +10,7 @@ namespace Hanaboso\CommonsBundle\Exception;
 final class NodeException extends PipesFrameworkExceptionAbstract
 {
 
-    protected const OFFSET = 2300;
+    protected const OFFSET = 2_300;
 
     public const INVALID_TYPE                        = self::OFFSET + 1;
     public const INVALID_HANDLER                     = self::OFFSET + 2;

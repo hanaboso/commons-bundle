@@ -23,7 +23,7 @@ final class DsnParserTest extends TestCase
             [
                 'scheme' => 'http',
                 'host'   => 'dev.company',
-                'port'   => 1000,
+                'port'   => 1_000,
                 'user'   => 'guest',
                 'pass'   => 'heslo',
                 'path'   => '/sss.qa',
@@ -43,7 +43,7 @@ final class DsnParserTest extends TestCase
                 'user'     => 'guest',
                 'password' => 'heslo',
                 'host'     => 'dev.company',
-                'port'     => 1000,
+                'port'     => 1_000,
                 'vhost'    => 'sss.qa',
             ],
             $result
@@ -77,7 +77,7 @@ final class DsnParserTest extends TestCase
                 'password'           => 'heslo',
                 'host'               => 'dev.company',
                 'heartbeat'          => 10,
-                'connection_timeout' => 10000,
+                'connection_timeout' => 10_000,
             ],
             $result
         );
@@ -87,7 +87,7 @@ final class DsnParserTest extends TestCase
             [
                 'host'               => 'dev.company',
                 'heartbeat'          => 10,
-                'connection_timeout' => 10000,
+                'connection_timeout' => 10_000,
             ],
             $result
         );

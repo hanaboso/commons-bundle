@@ -44,7 +44,7 @@ class OnRepeatException extends Exception
         parent::__construct($message, $code, $previous);
 
         $this->processDto = $processDto;
-        $this->interval   = 60000;
+        $this->interval   = 60_000;
         $this->maxHops    = 3;
     }
 

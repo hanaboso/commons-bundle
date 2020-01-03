@@ -39,6 +39,7 @@ final class NodeServiceLoader
                     $shortened = str_replace(sprintf('%s.', $nodeType), '', (string) $key);
                     if (in_array($shortened, $exclude)) {
                         unset($exclude[$shortened]);
+
                         continue;
                     }
                     if (in_array($shortened, $res)) {
@@ -52,7 +53,6 @@ final class NodeServiceLoader
         sort($res);
 
         return $res;
-
     }
 
 }

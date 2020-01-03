@@ -28,7 +28,8 @@ final class SoapClientFactoryTest extends TestCase
     }
 
     /**
-     * @covers SoapClientFactory::create()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create()
+     *
      * @throws Exception
      */
     public function testCreateSoapClientWsdlFail(): void
@@ -44,7 +45,8 @@ final class SoapClientFactoryTest extends TestCase
     }
 
     /**
-     * @covers SoapClientFactory::create()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create()
+     *
      * @throws Exception
      */
     public function testCreateSoapClientNonWsdl(): void

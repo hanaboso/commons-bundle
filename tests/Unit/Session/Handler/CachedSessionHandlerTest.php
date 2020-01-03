@@ -58,9 +58,10 @@ final class CachedSessionHandlerTest extends TestCase
     }
 
     /**
-     * @covers CachedSessionHandler::read()
-     * @covers CachedSessionHandler::write()
-     * @covers CachedSessionHandler::destroy()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::read()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::write()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::destroy()
+     *
      * @throws Exception
      */
     public function testReadWriteDestroy(): void
@@ -76,7 +77,8 @@ final class CachedSessionHandlerTest extends TestCase
     }
 
     /**
-     * @covers CachedSessionHandler::read()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::read()
+     *
      * @throws Exception
      */
     public function testCacheTimeout(): void

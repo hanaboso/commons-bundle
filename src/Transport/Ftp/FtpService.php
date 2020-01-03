@@ -90,6 +90,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->logger->debug(sprintf('File %s successfully uploaded.', $remoteFile));
         } catch (FtpException $e) {
             $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+
             throw $e;
         } finally {
             unlink($filename);
@@ -118,6 +119,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->logger->debug(sprintf('File %s successfully downloaded to %s.', $remoteFile, $localFile));
         } catch (FtpException $e) {
             $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+
             throw $e;
         } finally {
             $this->disconnect();
@@ -150,6 +152,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->logger->debug('Downloading files finished successfully.');
         } catch (FtpException $e) {
             $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+
             throw $e;
         } finally {
             $this->disconnect();
@@ -169,6 +172,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->adapter->connect($this->ftpConfig);
         } catch (FtpException $e) {
             $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+
             throw $e;
         }
     }
@@ -182,6 +186,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->adapter->disconnect();
         } catch (FtpException $e) {
             $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+
             throw $e;
         }
     }
@@ -195,6 +200,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->adapter->login($this->ftpConfig);
         } catch (FtpException $e) {
             $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+
             throw $e;
         }
     }

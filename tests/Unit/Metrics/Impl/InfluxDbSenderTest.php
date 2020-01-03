@@ -18,7 +18,8 @@ final class InfluxDbSenderTest extends TestCase
 {
 
     /**
-     * @covers InfluxDbSender::send()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::send()
+     *
      * @throws Exception
      */
     public function testSend(): void
@@ -37,11 +38,12 @@ final class InfluxDbSenderTest extends TestCase
     }
 
     /**
-     * @covers InfluxDbSender::createMessage()
-     * @covers InfluxDbSender::join()
-     * @covers InfluxDbSender::prepareTags()
-     * @covers InfluxDbSender::prepareFields()
-     * @covers InfluxDbSender::escapeFieldValue()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::createMessage()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::join()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::prepareTags()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::prepareFields()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::escapeFieldValue()
+     *
      * @throws Exception
      */
     public function testCreateMessage(): void
@@ -64,7 +66,8 @@ final class InfluxDbSenderTest extends TestCase
     }
 
     /**
-     * @covers InfluxDbSender::createMessage()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::createMessage()
+     *
      * @throws Exception
      */
     public function testCreateMessageException(): void

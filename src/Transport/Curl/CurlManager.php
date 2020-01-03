@@ -185,6 +185,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 sprintf('CurlManager::send() failed: %s', $exception->getMessage()),
                 ExceptionContextLoader::getContextForLogger($exception)
             );
+
             throw new CurlException(
                 sprintf('CurlManager::send() failed: %s', $exception->getMessage()),
                 CurlException::REQUEST_FAILED,

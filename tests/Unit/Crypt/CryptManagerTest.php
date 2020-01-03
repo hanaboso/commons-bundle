@@ -16,8 +16,8 @@ final class CryptManagerTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers CryptManager::encrypt()
-     * @covers CryptManager::decrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::encrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
      *
      * @throws Exception
      */

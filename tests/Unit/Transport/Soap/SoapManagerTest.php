@@ -24,7 +24,7 @@ final class SoapManagerTest extends TestCase
 {
 
     /**
-     * @covers SoapManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send()
      *
      * @throws Exception
      */

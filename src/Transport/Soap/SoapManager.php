@@ -120,15 +120,16 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                 $outputHeaders,
                 $request
             );
-
         } catch (SoapException $e) {
             $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+
             throw $e;
         } catch (Exception $e) {
             $this->logger->error(
                 sprintf('Unknown exception: %s', $e->getMessage()),
                 ExceptionContextLoader::getContextForLogger($e)
             );
+
             throw new SoapException('Unknown exception.', SoapException::UNKNOWN_EXCEPTION, $e);
         }
     }

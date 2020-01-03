@@ -31,7 +31,7 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
      */
     public function testFormat(): void
     {
@@ -48,7 +48,7 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp' => 1505381163375,
+                'timestamp' => 1_505_381_163_375,
                 'hostname'  => 'localhost',
                 'type'      => 'test-service',
                 'message'   => 'Test message',
@@ -60,7 +60,7 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
      */
     public function testFormatPipes(): void
     {
@@ -80,7 +80,7 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp'      => 1505381163375,
+                'timestamp'      => 1_505_381_163_375,
                 'hostname'       => 'localhost',
                 'type'           => 'test-service',
                 'message'        => 'Test message',
@@ -94,7 +94,7 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
      */
     public function testFormatException(): void
     {
@@ -113,7 +113,7 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp'  => 1505381163375,
+                'timestamp'  => 1_505_381_163_375,
                 'hostname'   => 'localhost',
                 'type'       => 'test-service',
                 'message'    => 'Test message',
@@ -132,7 +132,7 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
      */
     public function testFormatExceptionPipes(): void
     {
@@ -153,7 +153,7 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp'      => 1505381163375,
+                'timestamp'      => 1_505_381_163_375,
                 'hostname'       => 'localhost',
                 'type'           => 'test-service',
                 'message'        => 'Test message',
@@ -180,7 +180,7 @@ final class LogstashFormatterTest extends TestCase
      */
     private function correctMessage(array $message): array
     {
-        $message['timestamp'] = 1505381163375;
+        $message['timestamp'] = 1_505_381_163_375;
         $message['hostname']  = 'localhost';
 
         if (isset($message['stacktrace']['trace'])) {
@@ -191,7 +191,7 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
      */
     public function testContext(): void
     {
@@ -211,7 +211,7 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp'     => 1505381163375,
+                'timestamp'     => 1_505_381_163_375,
                 'hostname'      => 'localhost',
                 'type'          => 'starting_point',
                 'message'       => 'Test message',

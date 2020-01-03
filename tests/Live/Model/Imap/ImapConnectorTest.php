@@ -3,7 +3,6 @@
 namespace CommonsBundleTests\Live\Model\Imap;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConnector;
 use Throwable;
@@ -21,6 +20,7 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
      */
     public function testGetEmail(): void
     {
+        self::markTestSkipped('Live tests');
         $imap  = new ImapConnector();
         $email = $imap->create($this->getDto())->getMail(287);
 
@@ -28,11 +28,11 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @throws DateTimeException
      * @throws Throwable
      */
     public function testMoveEmail(): void
     {
+        self::markTestSkipped('Live tests');
         $imap = new ImapConnector();
         $imap->create($this->getDto())->moveMail(299, 'mailDestination');
 
@@ -43,11 +43,11 @@ final class ImapConnectorTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @throws DateTimeException
      * @throws Throwable
      */
     public function testGetAllEmails(): void
     {
+        self::markTestSkipped('Live tests');
         $imap    = new ImapConnector();
         $mailBox = $imap->create($this->getDto())->listMails();
 

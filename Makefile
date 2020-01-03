@@ -2,6 +2,7 @@
 
 DC=docker-compose
 DE=docker-compose exec -T app
+DM=docker-compose exec -T mariadb
 DEC=docker-compose exec -T app composer
 
 .env:
@@ -38,6 +39,11 @@ database-create:
 	$(DE) php tests/testApp/bin/console doctrine:database:drop --force --env=test || true
 	$(DE) php tests/testApp/bin/console doctrine:database:create --env=test
 	$(DE) php tests/testApp/bin/console doctrine:schema:create --env=test
+	for i in 1 2 3 4 5 6 7 8; do \
+			$(DM) /bin/bash -c "mysql -uroot -proot <<< 'DROP DATABASE IF EXISTS commons$$i;'" ; \
+			$(DM) /bin/bash -c "mysql -uroot -proot <<< 'CREATE DATABASE commons$$i CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'" ; \
+			$(DM) /bin/bash -c "mysqldump -uroot -proot commons | mysql -uroot -proot commons$$i" ; \
+	done
 
 # App dev
 init-dev: docker-up-force composer-install
@@ -49,14 +55,20 @@ phpstan:
 	$(DE) ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 8 src/ tests/
 
 phpunit:
-	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Unit
+	$(DE) ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 tests/Unit
 
 phpintegration: database-create
-	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Integration
+	$(DE) ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 tests/Integration
 
 phpcontroller:
 	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Controller
 
+phpcoverage:
+	$(DE) php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-html var/coverage --whitelist src tests
+
+phpcoverage-ci:
+	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh 40
+
 test: docker-up-force composer-install fasttest
 
-fasttest: clear-cache codesniffer phpstan phpunit phpintegration phpcontroller
+fasttest: clear-cache codesniffer phpstan phpunit phpintegration phpcontroller phpcoverage-ci

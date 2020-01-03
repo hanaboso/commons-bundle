@@ -56,7 +56,7 @@ class FileMongo
     public function __construct()
     {
         $this->uploadDate = DateTimeUtils::getUtcDateTime();
-        $this->chunkSize  = 1024 * 1024;
+        $this->chunkSize  = 1_024 * 1_024;
         $this->length     = 0;
     }
 

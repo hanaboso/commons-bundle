@@ -14,7 +14,7 @@ final class PipesHeadersTest extends TestCase
 {
 
     /**
-     * @covers PipesHeaders::createKey()
+     * @covers \Hanaboso\CommonsBundle\Utils\PipesHeaders::createKey()
      */
     public function testCreateKey(): void
     {
@@ -22,7 +22,7 @@ final class PipesHeadersTest extends TestCase
     }
 
     /**
-     * @covers PipesHeaders::clear()
+     * @covers \Hanaboso\CommonsBundle\Utils\PipesHeaders::clear()
      */
     public function testClear(): void
     {
@@ -37,7 +37,7 @@ final class PipesHeadersTest extends TestCase
     }
 
     /**
-     * @covers PipesHeaders::get()
+     * @covers \Hanaboso\CommonsBundle\Utils\PipesHeaders::get()
      */
     public function testGet(): void
     {
@@ -53,7 +53,7 @@ final class PipesHeadersTest extends TestCase
     }
 
     /**
-     * @covers PipesHeaders::debugInfo()
+     * @covers \Hanaboso\CommonsBundle\Utils\PipesHeaders::debugInfo()
      */
     public function testDebugInfo(): void
     {

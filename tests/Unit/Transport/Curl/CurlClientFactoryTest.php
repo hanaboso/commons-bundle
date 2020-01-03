@@ -15,7 +15,7 @@ final class CurlClientFactoryTest extends TestCase
 {
 
     /**
-     * @covers CurlClientFactory::create()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory::create()
      */
     public function testCreate(): void
     {

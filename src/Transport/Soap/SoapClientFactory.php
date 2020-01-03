@@ -3,7 +3,6 @@
 namespace Hanaboso\CommonsBundle\Transport\Soap;
 
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
-use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -55,14 +54,13 @@ class SoapClientFactory implements LoggerAwareInterface
         try {
             $wsdl = NULL;
             if ($request->getType() == SoapManagerInterface::MODE_WSDL) {
-                /** @var RequestDto $request */
                 $wsdl = strval($request->getUri());
             }
 
             return new SoapClient($wsdl, $options);
-
         } catch (Throwable $e) {
             $this->logger->error(sprintf('Invalid WSDL: %s', $e->getMessage()));
+
             throw new SoapException('Invalid WSDL.', SoapException::INVALID_WSDL, $e);
         }
     }
