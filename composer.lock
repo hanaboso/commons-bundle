@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1f5590313219d842a81c99262ee100d",
+    "content-hash": "a8cf0bd497aab09fdcf0971ac699933b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -572,16 +572,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.10.0",
+            "version": "v2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "0c9a646775ef549eb0a213a4f9bd4381d9b4d934"
+                "reference": "c2b8e6e82732a64ecde1cddf9e1e06cb8556e3d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0c9a646775ef549eb0a213a4f9bd4381d9b4d934",
-                "reference": "0c9a646775ef549eb0a213a4f9bd4381d9b4d934",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/c2b8e6e82732a64ecde1cddf9e1e06cb8556e3d8",
+                "reference": "c2b8e6e82732a64ecde1cddf9e1e06cb8556e3d8",
                 "shasum": ""
             },
             "require": {
@@ -660,7 +660,7 @@
                 "sqlserver",
                 "sqlsrv"
             ],
-            "time": "2019-11-03T16:50:43+00:00"
+            "time": "2020-01-04T12:56:21+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -5964,6 +5964,45 @@
             ],
             "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
+        },
+        {
+            "name": "zohocrm/php-sdk",
+            "version": "2.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zoho/zcrm-php-sdk.git",
+                "reference": "c663ebf9719dfa930d491a0214ca24e6a6c08724"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zoho/zcrm-php-sdk/zipball/c663ebf9719dfa930d491a0214ca24e6a6c08724",
+                "reference": "c663ebf9719dfa930d491a0214ca24e6a6c08724",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=5.7"
+            },
+            "type": "sdk",
+            "autoload": {
+                "psr-4": {
+                    "zcrmsdk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Zoho CRM API Team",
+                    "email": "support@zohocrm.com",
+                    "homepage": "https://www.zoho.com/crm/help/customer-support.html",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Zoho CRM API SDK for PHP",
+            "homepage": "https://github.com/zoho/zcrm-php-sdk",
+            "time": "2019-12-02T12:37:00+00:00"
         }
     ],
     "packages-dev": [
@@ -6210,21 +6249,21 @@
         },
         {
             "name": "contributte/di",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/di.git",
-                "reference": "89dfa32b0181e67342f0323449f61ff5e8f957fa"
+                "reference": "9ec21373c037838a61bac5a1b1833b84b9d1e7d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/di/zipball/89dfa32b0181e67342f0323449f61ff5e8f957fa",
-                "reference": "89dfa32b0181e67342f0323449f61ff5e8f957fa",
+                "url": "https://api.github.com/repos/contributte/di/zipball/9ec21373c037838a61bac5a1b1833b84b9d1e7d3",
+                "reference": "9ec21373c037838a61bac5a1b1833b84b9d1e7d3",
                 "shasum": ""
             },
             "require": {
-                "nette/di": "~3.0.0",
-                "nette/utils": "~3.0.1",
+                "nette/di": "~3.0.2",
+                "nette/utils": "~3.0.3|~3.1.0",
                 "php": "^7.2"
             },
             "conflict": {
@@ -6232,7 +6271,7 @@
             },
             "require-dev": {
                 "nette/bootstrap": "~3.0.0",
-                "nette/robot-loader": "~3.0.4|~3.1.0|~3.2.0",
+                "nette/robot-loader": "~3.0.4|~3.1.0|~3.2.1",
                 "ninjify/nunjuck": "^0.3.0",
                 "ninjify/qa": "^0.10.0",
                 "phpstan/extension-installer": "^1.0",
@@ -6273,7 +6312,7 @@
                 "inject",
                 "nette"
             ],
-            "time": "2019-12-04T00:04:58+00:00"
+            "time": "2020-01-05T18:11:45+00:00"
         },
         {
             "name": "contributte/phpdoc",
@@ -6851,20 +6890,20 @@
         },
         {
             "name": "nette/finder",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/finder.git",
-                "reference": "14164e1ddd69e9c5f627ff82a10874b3f5bba5fe"
+                "reference": "4ad2c298eb8c687dd0e74ae84206a4186eeaed50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/finder/zipball/14164e1ddd69e9c5f627ff82a10874b3f5bba5fe",
-                "reference": "14164e1ddd69e9c5f627ff82a10874b3f5bba5fe",
+                "url": "https://api.github.com/repos/nette/finder/zipball/4ad2c298eb8c687dd0e74ae84206a4186eeaed50",
+                "reference": "4ad2c298eb8c687dd0e74ae84206a4186eeaed50",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.4 || ~3.0.0",
+                "nette/utils": "^2.4 || ^3.0",
                 "php": ">=7.1"
             },
             "conflict": {
@@ -6872,6 +6911,7 @@
             },
             "require-dev": {
                 "nette/tester": "^2.0",
+                "phpstan/phpstan": "^0.12",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
@@ -6909,7 +6949,7 @@
                 "iterator",
                 "nette"
             ],
-            "time": "2019-07-11T18:02:17+00:00"
+            "time": "2020-01-03T20:35:40+00:00"
         },
         {
             "name": "nette/neon",
@@ -6975,24 +7015,25 @@
         },
         {
             "name": "nette/php-generator",
-            "version": "v3.3.1",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "4240fd7adf499138c07b814ef9b9a6df9f6d7187"
+                "reference": "facde285ba959366e7eee09c7f198f2d9ef176ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/4240fd7adf499138c07b814ef9b9a6df9f6d7187",
-                "reference": "4240fd7adf499138c07b814ef9b9a6df9f6d7187",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/facde285ba959366e7eee09c7f198f2d9ef176ca",
+                "reference": "facde285ba959366e7eee09c7f198f2d9ef176ca",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.4.2 || ~3.0.0",
+                "nette/utils": "^2.4.2 || ^3.0",
                 "php": ">=7.1"
             },
             "require-dev": {
                 "nette/tester": "^2.0",
+                "phpstan/phpstan": "^0.12",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
@@ -7022,7 +7063,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.3 features.",
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.4 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "code",
@@ -7030,7 +7071,7 @@
                 "php",
                 "scaffolding"
             ],
-            "time": "2019-11-22T11:12:11+00:00"
+            "time": "2020-01-03T19:49:13+00:00"
         },
         {
             "name": "nette/reflection",
@@ -7218,16 +7259,16 @@
         },
         {
             "name": "nette/utils",
-            "version": "v3.0.3",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "f1b5ce0fae07f13e066e64f9a8f59e53b8f4982e"
+                "reference": "d6cd63d77dd9a85c3a2fae707e1255e44c2bc182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/f1b5ce0fae07f13e066e64f9a8f59e53b8f4982e",
-                "reference": "f1b5ce0fae07f13e066e64f9a8f59e53b8f4982e",
+                "url": "https://api.github.com/repos/nette/utils/zipball/d6cd63d77dd9a85c3a2fae707e1255e44c2bc182",
+                "reference": "d6cd63d77dd9a85c3a2fae707e1255e44c2bc182",
                 "shasum": ""
             },
             "require": {
@@ -7250,7 +7291,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -7292,59 +7333,7 @@
                 "utility",
                 "validation"
             ],
-            "time": "2019-12-27T03:47:50+00:00"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "9a9981c347c5c49d6dfe5cf826bb882b824080dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/9a9981c347c5c49d6dfe5cf826bb882b824080dc",
-                "reference": "9a9981c347c5c49d6dfe5cf826bb882b824080dc",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "0.0.5",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "time": "2019-11-08T13:50:10+00:00"
+            "time": "2020-01-03T18:13:31+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -7880,20 +7869,19 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.3",
+            "version": "0.12.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "c15a6ea55da71d8133399306f560cfe4d30301b7"
+                "reference": "100a25ba8561223f6bf5a5ff4204f951c0ec007c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c15a6ea55da71d8133399306f560cfe4d30301b7",
-                "reference": "c15a6ea55da71d8133399306f560cfe4d30301b7",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/100a25ba8561223f6bf5a5ff4204f951c0ec007c",
+                "reference": "100a25ba8561223f6bf5a5ff4204f951c0ec007c",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "^4.3.0",
                 "php": "^7.1"
             },
             "bin": [
@@ -7916,25 +7904,25 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-12-14T13:41:17+00:00"
+            "time": "2020-01-06T06:38:17+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.12.7",
+            "version": "0.12.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "c9eed44d72b6f48d2dad2bf45d6b9f42a773f196"
+                "reference": "116392a861fb6b4741606448d8d6b07c09fee1ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/c9eed44d72b6f48d2dad2bf45d6b9f42a773f196",
-                "reference": "c9eed44d72b6f48d2dad2bf45d6b9f42a773f196",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/116392a861fb6b4741606448d8d6b07c09fee1ee",
+                "reference": "116392a861fb6b4741606448d8d6b07c09fee1ee",
                 "shasum": ""
             },
             "require": {
                 "php": "~7.1",
-                "phpstan/phpstan": "^0.12.3"
+                "phpstan/phpstan": "^0.12.4"
             },
             "conflict": {
                 "doctrine/collections": "<1.0",
@@ -7980,7 +7968,7 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2020-01-01T17:31:42+00:00"
+            "time": "2020-01-05T20:56:24+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",

@@ -35,7 +35,8 @@
         "phpseclib/phpseclib": "^2.0",
         "predis/predis": "^1.1",
         "snc/redis-bundle": "^3.2",
-        "windwalker/crypt": "^3.5"
+        "windwalker/crypt": "^3.5",
+        "zohocrm/php-sdk": "^2.0"
     },
     "require-dev": {
         "hanaboso/php-check-utils": "^1.1",
