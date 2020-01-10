@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class FileFormatEnum
  *
@@ -21,7 +23,7 @@ final class FileFormatEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::XML  => 'XML',
         self::JSON => 'JSON',
         self::CSV  => 'CSV',

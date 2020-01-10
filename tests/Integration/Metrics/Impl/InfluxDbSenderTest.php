@@ -5,7 +5,7 @@ namespace CommonsBundleTests\Integration\Metrics\Impl;
 use Exception;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
-use Hanaboso\CommonsBundle\Metrics\Impl\UDPSender;
+use Hanaboso\CommonsBundle\Transport\Udp\UDPSender;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,7 +21,7 @@ final class InfluxDbSenderTest extends TestCase
      */
     public function testSend(): void
     {
-        $sender = new InfluxDbSender(new UDPSender('influxdb'), 'test');
+        $sender = new InfluxDbSender(new UDPSender(), 'influxdb:8086', 'test');
         $res    = $sender->send(
             [
                 MetricsEnum::REQUEST_TOTAL_DURATION => 123,

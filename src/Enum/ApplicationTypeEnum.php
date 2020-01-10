@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class ApplicationTypeEnum
  *
@@ -16,7 +18,7 @@ final class ApplicationTypeEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::CRON    => self::CRON,
         self::WEBHOOK => self::WEBHOOK,
     ];

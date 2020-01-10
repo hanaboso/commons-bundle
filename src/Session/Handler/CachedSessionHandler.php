@@ -2,8 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Session\Handler;
 
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
-use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
+use Hanaboso\Utils\Date\DateTimeUtils;
+use Hanaboso\Utils\Exception\DateTimeException;
 use SessionHandlerInterface;
 
 /**

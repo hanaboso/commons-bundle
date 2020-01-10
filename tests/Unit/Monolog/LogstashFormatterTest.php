@@ -4,7 +4,7 @@ namespace CommonsBundleTests\Unit\Monolog;
 
 use Exception;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatter;
-use Hanaboso\CommonsBundle\Utils\Json;
+use Hanaboso\Utils\String\Json;
 use PHPUnit\Framework\TestCase;
 
 /**

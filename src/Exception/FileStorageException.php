@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Exception;
 
+use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
+
 /**
  * Class FileStorageException
  *

@@ -4,7 +4,7 @@ namespace CommonsBundleTests\Unit\Metrics\Impl;
 
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
-use Hanaboso\CommonsBundle\Metrics\Impl\UDPSender;
+use Hanaboso\CommonsBundle\Transport\Udp\UDPSender;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ final class InfluxDbSenderTest extends TestCase
         $sender = self::createPartialMock(UDPSender::class, ['send']);
         $sender->expects(self::any())->method('send')->willReturn(TRUE);
 
-        $service = new InfluxDbSender($sender, 'test_measurement');
+        $service = new InfluxDbSender($sender, 'host:5100', 'test_measurement');
 
         $fields = ['foo' => 'bar', 'baz' => 10, 'bool' => TRUE, 'nil' => NULL];
         $tags   = ['environment' => 'test'];
@@ -52,7 +52,7 @@ final class InfluxDbSenderTest extends TestCase
         $sender = self::createPartialMock(UDPSender::class, ['send']);
         $sender->expects(self::any())->method('send')->willReturn(TRUE);
 
-        $service = new InfluxDbSender($sender, 'test_measurement');
+        $service = new InfluxDbSender($sender, 'host:5100', 'test_measurement');
 
         $fields = ['foo' => 'bar"s', 'baz' => 10, 'a' => 0, 'bool' => TRUE, 'nil' => NULL];
         $tags   = ['environment' => 'test', 'host' => 'localhost'];
@@ -78,7 +78,7 @@ final class InfluxDbSenderTest extends TestCase
 
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('The fields must not be empty.');
-        $service = new InfluxDbSender($sender, 'php_worker');
+        $service = new InfluxDbSender($sender, 'host:5100', 'php_worker');
         $service->createMessage([]);
     }
 

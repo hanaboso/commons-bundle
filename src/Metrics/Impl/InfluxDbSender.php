@@ -2,8 +2,9 @@
 
 namespace Hanaboso\CommonsBundle\Metrics\Impl;
 
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
+use Hanaboso\CommonsBundle\Transport\Udp\UDPSender;
+use Hanaboso\Utils\Exception\DateTimeException;
 use InvalidArgumentException;
 
 /**
@@ -25,15 +26,22 @@ class InfluxDbSender implements MetricsSenderInterface
     private string $measurement;
 
     /**
+     * @var string
+     */
+    private string $host;
+
+    /**
      * InfluxDbSender constructor.
      *
      * @param UDPSender $sender
+     * @param string    $host
      * @param string    $measurement
      */
-    public function __construct(UDPSender $sender, string $measurement)
+    public function __construct(UDPSender $sender, string $host, string $measurement)
     {
         $this->sender      = $sender;
         $this->measurement = $measurement;
+        $this->host        = $host;
     }
 
     /**
@@ -45,7 +53,7 @@ class InfluxDbSender implements MetricsSenderInterface
      */
     public function send(array $fields, array $tags = []): bool
     {
-        return $this->sender->send($this->createMessage($fields, $tags));
+        return $this->sender->send($this->host, $this->createMessage($fields, $tags));
     }
 
     /**

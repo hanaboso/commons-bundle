@@ -4,7 +4,7 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp;
 
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapterInterface;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
-use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
+use Hanaboso\Utils\String\LoggerFormater;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -89,7 +89,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->adapter->uploadFile($remoteFile, $filename);
             $this->logger->debug(sprintf('File %s successfully uploaded.', $remoteFile));
         } catch (FtpException $e) {
-            $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+            $this->logger->error($e->getMessage(), LoggerFormater::getContextForLogger($e));
 
             throw $e;
         } finally {
@@ -118,7 +118,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
             $this->adapter->downloadFile($remoteFile, $localFile);
             $this->logger->debug(sprintf('File %s successfully downloaded to %s.', $remoteFile, $localFile));
         } catch (FtpException $e) {
-            $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+            $this->logger->error($e->getMessage(), LoggerFormater::getContextForLogger($e));
 
             throw $e;
         } finally {
@@ -151,7 +151,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
 
             $this->logger->debug('Downloading files finished successfully.');
         } catch (FtpException $e) {
-            $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+            $this->logger->error($e->getMessage(), LoggerFormater::getContextForLogger($e));
 
             throw $e;
         } finally {
@@ -171,7 +171,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
         try {
             $this->adapter->connect($this->ftpConfig);
         } catch (FtpException $e) {
-            $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+            $this->logger->error($e->getMessage(), LoggerFormater::getContextForLogger($e));
 
             throw $e;
         }
@@ -185,7 +185,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
         try {
             $this->adapter->disconnect();
         } catch (FtpException $e) {
-            $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+            $this->logger->error($e->getMessage(), LoggerFormater::getContextForLogger($e));
 
             throw $e;
         }
@@ -199,7 +199,7 @@ class FtpService implements FtpServiceInterface, LoggerAwareInterface
         try {
             $this->adapter->login($this->ftpConfig);
         } catch (FtpException $e) {
-            $this->logger->error($e->getMessage(), ExceptionContextLoader::getContextForLogger($e));
+            $this->logger->error($e->getMessage(), LoggerFormater::getContextForLogger($e));
 
             throw $e;
         }

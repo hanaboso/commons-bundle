@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class NotificationEventEnum
  *
@@ -17,7 +19,7 @@ final class NotificationEventEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::ACCESS_EXPIRATION   => 'Access Expiration',
         self::DATA_ERROR          => 'Data Error',
         self::SERVICE_UNAVAILABLE => 'Service Unavailable',

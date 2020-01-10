@@ -5,7 +5,7 @@ namespace Hanaboso\CommonsBundle\Metrics\Impl;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
-use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
+use Hanaboso\Utils\Date\DateTimeUtils;
 
 /**
  * Class MongoDbSender

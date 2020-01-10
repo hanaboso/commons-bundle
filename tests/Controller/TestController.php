@@ -2,7 +2,7 @@
 
 namespace CommonsBundleTests\Controller;
 
-use Hanaboso\CommonsBundle\Traits\ControllerTrait;
+use Hanaboso\Utils\Traits\ControllerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

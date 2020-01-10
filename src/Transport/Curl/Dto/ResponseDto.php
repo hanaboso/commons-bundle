@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl\Dto;
 
-use Hanaboso\CommonsBundle\Utils\Json;
+use Hanaboso\Utils\String\Json;
 
 /**
  * Class ResponseDto

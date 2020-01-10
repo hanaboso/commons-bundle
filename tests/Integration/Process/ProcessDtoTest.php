@@ -5,7 +5,7 @@ namespace CommonsBundleTests\Integration\Process;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
-use Hanaboso\CommonsBundle\Utils\PipesHeaders;
+use Hanaboso\Utils\System\PipesHeaders;
 
 /**
  * Class ProcessDtoTest

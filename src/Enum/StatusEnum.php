@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class StatusEnum
  *
@@ -18,7 +20,7 @@ final class StatusEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::NEW      => 'New',
         self::STARTING => 'Starting',
         self::RUNNING  => 'Running',

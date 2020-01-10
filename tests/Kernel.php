@@ -4,11 +4,9 @@ namespace CommonsBundleTests;
 
 use Aws\Symfony\AwsBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle;
 use Exception;
 use Hanaboso\CommonsBundle\HbPFCommonsBundle;
-use Snc\RedisBundle\SncRedisBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\MonologBundle\MonologBundle;
@@ -40,10 +38,8 @@ final class Kernel extends BaseKernel
             AwsBundle::class              => ['all' => TRUE],
             FrameworkBundle::class        => ['all' => TRUE],
             DoctrineBundle::class         => ['all' => TRUE],
-            DoctrineFixturesBundle::class => ['all' => TRUE],
             MonologBundle::class          => ['all' => TRUE],
             DoctrineMongoDBBundle::class  => ['all' => TRUE],
-            SncRedisBundle::class         => ['all' => TRUE],
             HbPFCommonsBundle::class      => ['all' => TRUE],
 
         ];

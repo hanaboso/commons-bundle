@@ -3,7 +3,7 @@
 namespace Hanaboso\CommonsBundle\Monolog;
 
 use Hanaboso\CommonsBundle\Process\ProcessDto;
-use Hanaboso\CommonsBundle\Utils\PipesHeaders;
+use Hanaboso\Utils\System\PipesHeaders;
 use Throwable;
 
 /**

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Hanaboso\CommonsBundle\Metrics\Impl;
+namespace Hanaboso\CommonsBundle\Transport\Udp;
 
 use Exception;
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
 use Hanaboso\CommonsBundle\Metrics\Exception\SystemMetricException;
-use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
-use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
+use Hanaboso\Utils\Date\DateTimeUtils;
+use Hanaboso\Utils\Exception\DateTimeException;
+use Hanaboso\Utils\String\LoggerFormater;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
 /**
  * Class UDPSender
  *
- * @package Hanaboso\CommonsBundle\Metrics\Impl
+ * @package Hanaboso\CommonsBundle\Transport\Udp
  */
 class UDPSender implements LoggerAwareInterface
 {
@@ -35,16 +35,6 @@ class UDPSender implements LoggerAwareInterface
     private string $ip;
 
     /**
-     * @var string
-     */
-    private string $collectorHost;
-
-    /**
-     * @var int
-     */
-    private int $collectorPort;
-
-    /**
      * @var int
      */
     private int $lastIPRefresh;
@@ -56,24 +46,12 @@ class UDPSender implements LoggerAwareInterface
 
     /**
      * UDPSender constructor.
-     *
-     * @param string $collectorHost
-     * @param int    $collectorPort
      */
-    public function __construct(string $collectorHost, int $collectorPort = 8_089)
+    public function __construct()
     {
-        $this->collectorHost = $collectorHost;
-        $this->collectorPort = $collectorPort;
         $this->logger        = new NullLogger();
         $this->ip            = '';
         $this->lastIPRefresh = 0;
-
-        if (apcu_exists(sprintf('%s%s', self::APCU_IP, $collectorHost)) &&
-            apcu_exists(sprintf('%s%s', self::APCU_REFRESH, $collectorHost))
-        ) {
-            $this->ip            = apcu_fetch(sprintf('%s%s', self::APCU_IP, $collectorHost));
-            $this->lastIPRefresh = apcu_fetch(sprintf('%s%s', self::APCU_REFRESH, $collectorHost));
-        }
 
         // limit the ip addr hostname resolution
         putenv('RES_OPTIONS=retrans:1 retry:1 timeout:1 attempts:1');
@@ -94,26 +72,28 @@ class UDPSender implements LoggerAwareInterface
     }
 
     /**
+     * @param string $host
      * @param string $message
      *
      * @return bool
      * @throws DateTimeException
      */
-    public function send(string $message): bool
+    public function send(string $host, string $message): bool
     {
-        $ip = $this->refreshIp();
+        $parsed = parse_url($host) ?: [];
+        $ip     = $this->refreshIp($parsed['host'] ?? '');
         /** @var resource $socket */
         $socket = $this->getSocket();
 
         try {
             if ($ip === '') {
                 throw new SystemMetricException(
-                    sprintf('Could not sent udp packet. IP address for "%s" not resolved', $this->collectorHost)
+                    sprintf('Could not sent udp packet. IP address for "%s" not resolved', $parsed['host'] ?? '')
                 );
             }
 
             /** @var int|false $sent */
-            $sent = @socket_sendto($socket, $message, strlen($message), 0, $ip, $this->collectorPort);
+            $sent = @socket_sendto($socket, $message, strlen($message), 0, $ip, intval($parsed['port'] ?? 80));
 
             if ($sent === FALSE) {
                 throw new SystemMetricException(
@@ -125,7 +105,7 @@ class UDPSender implements LoggerAwareInterface
         } catch (Exception $e) {
             $this->logger->error(
                 sprintf('Udp sender err: %s', $e->getMessage()),
-                ExceptionContextLoader::getContextForLogger($e)
+                LoggerFormater::getContextForLogger($e)
             );
 
             return FALSE;
@@ -160,24 +140,26 @@ class UDPSender implements LoggerAwareInterface
      * Returns the ip addr for the hostname
      * Does the periodical checks
      *
+     * @param string $host
+     *
      * @return string
      * @throws DateTimeException
      */
-    public function refreshIp(): string
+    public function refreshIp(string $host): string
     {
         // we want to refresh it only in predefined time periods
         if (DateTimeUtils::getUtcDateTime()->getTimestamp() <= $this->lastIPRefresh + self::REFRESH_INTERVAL) {
             return $this->ip;
         }
 
-        $this->ip            = $this->getIp($this->collectorHost);
+        $this->ip            = $this->getIp($host);
         $this->lastIPRefresh = DateTimeUtils::getUtcDateTime()->getTimestamp();
 
-        apcu_delete(sprintf('%s%s', self::APCU_IP, $this->collectorHost));
-        apcu_delete(sprintf('%s%s', self::APCU_REFRESH, $this->collectorHost));
+        apcu_delete(sprintf('%s%s', self::APCU_IP, $host));
+        apcu_delete(sprintf('%s%s', self::APCU_REFRESH, $host));
 
-        apcu_store(sprintf('%s%s', self::APCU_IP, $this->collectorHost), $this->ip);
-        apcu_store(sprintf('%s%s', self::APCU_REFRESH, $this->collectorHost), $this->lastIPRefresh);
+        apcu_store(sprintf('%s%s', self::APCU_IP, $host), $this->ip);
+        apcu_store(sprintf('%s%s', self::APCU_REFRESH, $host), $this->lastIPRefresh);
 
         return $this->ip;
     }

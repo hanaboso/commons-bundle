@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\FileStorage\Dto;
 
-use Hanaboso\CommonsBundle\FileStorage\Entity\FileInterface;
+use Hanaboso\CommonsBundle\FileStorage\FileInterface;
 
 /**
  * Class FileStorageDto

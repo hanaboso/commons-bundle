@@ -26,10 +26,10 @@ final class WindwalkerCrypt implements CryptInterface
      * @return string
      * @throws CryptException
      */
-    public static function encrypt($data): string
+    public function encrypt($data): string
     {
         try {
-            $crypt = self::getCrypt();
+            $crypt = $this->getCrypt();
 
             return sprintf('%s%s', self::PREFIX, $crypt->encrypt(serialize($data)));
         } catch (Throwable $t) {
@@ -43,14 +43,14 @@ final class WindwalkerCrypt implements CryptInterface
      * @return mixed
      * @throws CryptException
      */
-    public static function decrypt(string $hash)
+    public function decrypt(string $hash)
     {
         if (strpos($hash, self::PREFIX) !== 0) {
             throw new CryptException('Unknown prefix in hash.', CryptException::UNKNOWN_PREFIX);
         }
 
         try {
-            $crypt = self::getCrypt();
+            $crypt = $this->getCrypt();
 
             $hiddenString = $crypt->decrypt(substr($hash, strlen(self::PREFIX)));
         } catch (Throwable $t) {
@@ -67,7 +67,7 @@ final class WindwalkerCrypt implements CryptInterface
     /**
      * @return Crypt
      */
-    private static function getCrypt(): Crypt
+    private function getCrypt(): Crypt
     {
         return new Crypt(new SodiumCipher(self::SECRET_KEY));
     }

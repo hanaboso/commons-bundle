@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class DatabaseFilterEnum
  *
@@ -14,7 +16,7 @@ final class DatabaseFilterEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::DELETED => 'deleted',
     ];
 

@@ -2,14 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Process;
 
-/**
- * Class ProcessDto
- *
- * @package Hanaboso\CommonsBundle\Process
- */
-
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkException;
-use Hanaboso\CommonsBundle\Utils\PipesHeaders;
+use Hanaboso\Utils\Exception\PipesFrameworkException;
+use Hanaboso\Utils\System\PipesHeaders;
 
 /**
  * Class ProcessDto

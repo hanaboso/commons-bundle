@@ -5,28 +5,9 @@ services:
     hbpf.transport.curl_client_factory:
         class: Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory
 
-    hbpf.transport.curl_manager:
-        class: Hanaboso\CommonsBundle\Transport\Curl\CurlManager
-        arguments:
-            - '@hbpf.transport.curl_client_factory'
-        calls:
-            - ['setLogger', ['@monolog.logger.commons']]
-
     hbpf.transport.soap_client_factory:
         class: Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory
         arguments:
-        calls:
-            - ['setLogger', ['@monolog.logger.commons']]
-
-    hbpf.transport.soap_manager:
-        class: Hanaboso\CommonsBundle\Transport\Soap\SoapManager
-        arguments:
-            - '@hbpf.transport.soap_client_factory'
-        calls:
-            - ['setLogger', ['@monolog.logger.commons']]
-
-    hbpf.transport.async_curl_factory:
-        class: Hanaboso\CommonsBundle\Transport\AsyncCurl\CurlSenderFactory
         calls:
             - ['setLogger', ['@monolog.logger.commons']]
 

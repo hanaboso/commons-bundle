@@ -12,7 +12,6 @@ use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileStorageDto;
-use Hanaboso\CommonsBundle\FileStorage\Entity\FileInterface;
 
 /**
  * Class FileStorage

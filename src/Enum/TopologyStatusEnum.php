@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class TopologyStatusEnum
  *
@@ -16,7 +18,7 @@ final class TopologyStatusEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::DRAFT  => 'draft',
         self::PUBLIC => 'public',
     ];

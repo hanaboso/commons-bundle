@@ -18,7 +18,7 @@ interface CryptInterface
      * @return string
      * @throws CryptException
      */
-    public static function encrypt($data): string;
+    public function encrypt($data): string;
 
     /**
      * @param string $data
@@ -26,6 +26,6 @@ interface CryptInterface
      * @return mixed
      * @throws CryptException
      */
-    public static function decrypt(string $data);
+    public function decrypt(string $data);
 
 }

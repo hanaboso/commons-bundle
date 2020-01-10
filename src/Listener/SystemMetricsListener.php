@@ -7,8 +7,8 @@ use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\Exception\SystemMetricException;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
-use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
-use Hanaboso\CommonsBundle\Utils\PipesHeaders;
+use Hanaboso\Utils\String\LoggerFormater;
+use Hanaboso\Utils\System\PipesHeaders;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -78,7 +78,7 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
         } catch (Exception $e) {
             $this->logger->error(
                 'Metrics listener onKernelController exception',
-                ExceptionContextLoader::getContextForLogger($e)
+                LoggerFormater::getContextForLogger($e)
             );
         }
     }
@@ -100,7 +100,7 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
         } catch (Exception $e) {
             $this->logger->error(
                 'Metrics listener onKernelTerminate exception',
-                ExceptionContextLoader::getContextForLogger($e)
+                LoggerFormater::getContextForLogger($e)
             );
         }
     }

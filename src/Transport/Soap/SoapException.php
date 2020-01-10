@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Soap;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
+use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 
 /**
  * Class SoapException

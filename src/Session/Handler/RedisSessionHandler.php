@@ -3,6 +3,7 @@
 namespace Hanaboso\CommonsBundle\Session\Handler;
 
 use Predis\Client;
+use Predis\Connection\Parameters;
 use SessionHandlerInterface;
 
 /**
@@ -26,12 +27,12 @@ final class RedisSessionHandler implements SessionHandlerInterface
     /**
      * RedisSessionHandler constructor.
      *
-     * @param Client<mixed> $client
-     * @param int           $lifeTime
+     * @param string $redisDsn
+     * @param int    $lifeTime
      */
-    public function __construct(Client $client, $lifeTime = 86_400)
+    public function __construct(string $redisDsn, $lifeTime = 86_400)
     {
-        $this->client   = $client;
+        $this->client   = new Client(Parameters::create($redisDsn));
         $this->lifeTime = $lifeTime;
     }
 

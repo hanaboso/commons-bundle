@@ -4,8 +4,8 @@ namespace Hanaboso\CommonsBundle\Database\Traits\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
-use Hanaboso\CommonsBundle\Utils\DateTimeUtils;
+use Hanaboso\Utils\Date\DateTimeUtils;
+use Hanaboso\Utils\Exception\DateTimeException;
 
 /**
  * Trait UpdatedTrait

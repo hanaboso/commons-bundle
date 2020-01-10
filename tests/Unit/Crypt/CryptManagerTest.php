@@ -5,6 +5,7 @@ namespace CommonsBundleTests\Unit\Crypt;
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Crypt\CryptManager;
+use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
 use stdClass;
 
 /**
@@ -18,6 +19,7 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::encrypt()
      * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation()
      *
      * @throws Exception
      */
@@ -39,6 +41,32 @@ final class CryptManagerTest extends KernelTestCaseAbstract
             $decrypted = CryptManager::decrypt($encrypted);
             self::assertEquals($item, $decrypted);
         }
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation()
+     *
+     * @throws Exception
+     */
+    public function testDecryptUnsupportedImpl(): void
+    {
+        self::expectException(CryptException::class);
+        self::expectExceptionCode(CryptException::UNKNOWN_PREFIX);
+        CryptManager::encrypt('hash', '00_');
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation()
+     *
+     * @throws Exception
+     */
+    public function testDecryptBadImpl(): void
+    {
+        self::expectException(CryptException::class);
+        self::expectExceptionCode(CryptException::UNKNOWN_PREFIX);
+        CryptManager::encrypt('hash', 'bad00_');
     }
 
 }

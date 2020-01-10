@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class StorageTypeEnum
  *
@@ -17,7 +19,7 @@ final class StorageTypeEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::PERSISTENT => 'Persistent',
         self::TEMPORARY  => 'Temporary',
         self::PUBLIC     => 'Public',

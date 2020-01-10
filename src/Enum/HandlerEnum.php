@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class HandlerEnum
  *
@@ -16,7 +18,7 @@ final class HandlerEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::ACTION => 'action',
         self::EVENT  => 'event',
     ];

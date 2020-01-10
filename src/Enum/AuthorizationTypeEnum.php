@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class AuthorizationTypeEnum
  *
@@ -17,7 +19,7 @@ final class AuthorizationTypeEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::BASIC  => self::BASIC,
         self::OAUTH  => self::OAUTH,
         self::OAUTH2 => self::OAUTH2,

@@ -17,6 +17,10 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
 {
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt()
+     *
      * @throws Exception
      */
     public function testEncryptAndDecrypt(): void
@@ -31,42 +35,53 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
         $stdClass->false = FALSE;
         $stdClass->arr   = ['foo'];
         $arr[]           = $stdClass;
+        $crypt           = new WindwalkerCrypt();
 
         foreach ($arr as $item) {
-            $encrypted = WindwalkerCrypt::encrypt($item);
-            $decrypted = WindwalkerCrypt::decrypt($encrypted);
+            $encrypted = $crypt->encrypt($item);
+            $decrypted = $crypt->decrypt($encrypted);
 
             self::assertEquals($item, $decrypted);
         }
     }
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt()
+     *
      * @throws Exception
      */
     public function testEncryptAndDecryptFail(): void
     {
         $str       = 'Some random text';
-        $encrypted = WindwalkerCrypt::encrypt($str);
+        $crypt     = new WindwalkerCrypt();
+        $encrypted = $crypt->encrypt($str);
 
         self::expectException(CryptException::class);
         self::expectExceptionCode(CryptException::UNKNOWN_PREFIX);
 
-        WindwalkerCrypt::decrypt(sprintf('abc%s', $encrypted));
+        $crypt->decrypt(sprintf('abc%s', $encrypted));
     }
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt()
+     *
      * @throws Exception
      */
     public function testEncryptAndDecrypt2(): void
     {
+        $crypt        = new WindwalkerCrypt();
         $str          = 'asdf12342~!@#$%^&*()_+{}|:"<>?[]\;,./';
-        $encryptedStr = WindwalkerCrypt::encrypt($str);
+        $encryptedStr = $crypt->encrypt($str);
 
         $arr          = ['key' => 'val', 'str' => $encryptedStr];
-        $encryptedArr = WindwalkerCrypt::encrypt($arr);
+        $encryptedArr = $crypt->encrypt($arr);
 
-        $decryptedArr = WindwalkerCrypt::decrypt($encryptedArr);
-        $decryptedStr = WindwalkerCrypt::decrypt($decryptedArr['str']);
+        $decryptedArr = $crypt->decrypt($encryptedArr);
+        $decryptedStr = $crypt->decrypt($decryptedArr['str']);
 
         self::assertEquals($str, $decryptedStr);
         self::assertEquals($arr, $decryptedArr);

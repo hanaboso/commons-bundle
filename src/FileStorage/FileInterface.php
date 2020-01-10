@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Hanaboso\CommonsBundle\FileStorage\Entity;
+namespace Hanaboso\CommonsBundle\FileStorage;
 
 /**
  * Interface FileInterface
  *
- * @package Hanaboso\CommonsBundle\FileStorage\Entity
+ * @package Hanaboso\CommonsBundle\FileStorage
  */
 interface FileInterface
 {

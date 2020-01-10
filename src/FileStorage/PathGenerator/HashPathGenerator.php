@@ -3,6 +3,7 @@
 namespace Hanaboso\CommonsBundle\FileStorage\PathGenerator;
 
 use Exception;
+use Hanaboso\Utils\String\SafePathGenerator;
 
 /**
  * Class HashPathGenerator
@@ -15,12 +16,12 @@ class HashPathGenerator implements PathGeneratorInterface
     /**
      * @var int
      */
-    private int $levels;
+    protected int $levels;
 
     /**
      * @var int
      */
-    private int $segment;
+    protected int $segment;
 
     /**
      * HashPathGenerator constructor.
@@ -41,12 +42,7 @@ class HashPathGenerator implements PathGeneratorInterface
     {
         $res = '';
         if (!$filename) {
-            $filename = base_convert(bin2hex(random_bytes(16)), 16, 36);
-
-            $chunks = (array) str_split($filename, $this->segment);
-            for ($i = 0; $i < $this->levels; $i++) {
-                $res .= sprintf('%s%s', array_shift($chunks), DIRECTORY_SEPARATOR);
-            }
+            $res = SafePathGenerator::generate($this->levels, $this->segment);
         }
 
         return sprintf('%s%s', $res, $filename);

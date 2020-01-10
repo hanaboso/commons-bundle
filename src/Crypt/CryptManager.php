@@ -26,7 +26,7 @@ class CryptManager
      */
     public static function encrypt($data, string $prefix = WindwalkerCrypt::PREFIX): string
     {
-        return self::getImplementation($prefix)::encrypt($data);
+        return self::getImplementation($prefix)->encrypt($data);
     }
 
     /**
@@ -41,7 +41,7 @@ class CryptManager
     {
         $prefix = substr($data, 0, self::PREFIX_LENGTH);
 
-        return self::getImplementation($prefix)::decrypt($data);
+        return self::getImplementation($prefix)->decrypt($data);
     }
 
     /**

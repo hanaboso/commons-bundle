@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Crypt\Exceptions;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
+use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 
 /**
  * Class CryptException

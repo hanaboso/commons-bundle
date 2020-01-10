@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Hanaboso\CommonsBundle\Transport\Utils;
+namespace Hanaboso\CommonsBundle\Traits;
 
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
@@ -11,7 +11,7 @@ use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 /**
  * Trait MetricsTrait
  *
- * @package Hanaboso\CommonsBundle\Transport\Utils
+ * @package Hanaboso\CommonsBundle\Traits
  */
 trait MetricsTrait
 {

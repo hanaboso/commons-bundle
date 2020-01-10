@@ -2,8 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Monolog;
 
-use Hanaboso\CommonsBundle\Exception\DateTimeException;
-use Hanaboso\CommonsBundle\Metrics\Impl\UDPSender;
+use Hanaboso\CommonsBundle\Transport\Udp\UDPSender;
+use Hanaboso\Utils\Exception\DateTimeException;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 
@@ -21,17 +21,24 @@ class UdpHandler extends AbstractProcessingHandler
     private UDPSender $UDPSender;
 
     /**
+     * @var string
+     */
+    private string $host;
+
+    /**
      * UdpHandler constructor.
      *
      * @param UDPSender $UDPSender
+     * @param string    $host
      * @param int       $level
      * @param bool      $bubble
      */
-    public function __construct(UDPSender $UDPSender, $level = Logger::DEBUG, $bubble = TRUE)
+    public function __construct(UDPSender $UDPSender, string $host, $level = Logger::DEBUG, $bubble = TRUE)
     {
         parent::__construct($level, $bubble);
 
         $this->UDPSender = $UDPSender;
+        $this->host      = $host;
     }
 
     /**
@@ -44,7 +51,7 @@ class UdpHandler extends AbstractProcessingHandler
      */
     protected function write(array $record): void
     {
-        $this->UDPSender->send($record['formatted']);
+        $this->UDPSender->send($this->host, $record['formatted']);
     }
 
 }

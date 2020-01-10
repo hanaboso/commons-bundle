@@ -6,10 +6,10 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
 use Hanaboso\CommonsBundle\Enum\FileFormatEnum;
 use Hanaboso\CommonsBundle\Enum\StorageTypeEnum;
-use Hanaboso\CommonsBundle\Exception\EnumException;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
-use Hanaboso\CommonsBundle\FileStorage\Entity\FileInterface;
+use Hanaboso\CommonsBundle\FileStorage\FileInterface;
 use Hanaboso\CommonsBundle\FileStorage\FileTypes;
+use Hanaboso\Utils\Exception\EnumException;
 
 /**
  * Class File

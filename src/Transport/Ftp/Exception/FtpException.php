@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Ftp\Exception;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
+use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 
 /**
  * Class FtpException

@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl;
 
-use Hanaboso\CommonsBundle\Exception\PipesFrameworkExceptionAbstract;
+use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 

@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class MetricsEnum
  *
@@ -26,7 +28,7 @@ final class MetricsEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         // tags
         self::HOST                        => self::HOST,
         self::URI                         => self::URI,

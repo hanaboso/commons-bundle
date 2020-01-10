@@ -2,17 +2,19 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Curl;
 
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Request;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
+use Hanaboso\CommonsBundle\Traits\MetricsTrait;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\CurlManagerInterface;
-use Hanaboso\CommonsBundle\Transport\Utils\MetricsTrait;
-use Hanaboso\CommonsBundle\Transport\Utils\TransportFormatter;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
-use Hanaboso\CommonsBundle\Utils\ExceptionContextLoader;
+use Hanaboso\Utils\String\LoggerFormater;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -125,22 +127,12 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      */
     public function send(RequestDto $dto, array $options = []): ResponseDto
     {
-        $request = new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
-
         try {
-            $this->logger->debug(
-                TransportFormatter::requestToString(
-                    $dto->getMethod(),
-                    (string) $dto->getUri(),
-                    $dto->getHeaders(),
-                    $dto->getBody()
-                )
-            );
-
+            $this->logBeforeSend($dto);
             $client = $this->curlClientFactory->create(['timeout' => $this->timeout]);
 
             $this->startTimes = CurlMetricUtils::getCurrentMetrics();
-            $psrResponse      = $client->send($request, $this->prepareOptions($options));
+            $psrResponse      = $client->send($this->createRequest($dto), $this->prepareOptions($options));
             $this->sendMetrics($dto);
 
             $response = new ResponseDto(
@@ -150,16 +142,10 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $psrResponse->getHeaders()
             );
 
-            $this->logger->debug(
-                TransportFormatter::responseToString(
-                    $psrResponse->getStatusCode(),
-                    $psrResponse->getReasonPhrase(),
-                    $psrResponse->getHeaders(),
-                    $psrResponse->getBody()->getContents()
-                )
-            );
-
+            $this->logAfterSend($psrResponse, $dto);
             unset($psrResponse);
+
+            return $response;
         } catch (RequestException $exception) {
             $this->sendMetrics($dto);
             $response = $exception->getResponse();
@@ -168,32 +154,72 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $message = $response->getBody()->getContents();
                 $response->getBody()->rewind();
             }
-            $this->logger->error(
-                sprintf('CurlManager::send() failed: %s', $message),
-                ExceptionContextLoader::getContextForLogger($exception)
-            );
-
-            throw new CurlException(
-                sprintf('CurlManager::send() failed: %s', $message),
-                CurlException::REQUEST_FAILED,
-                $exception->getPrevious(),
-                $response
-            );
+            $this->logAfterError($exception, $dto, $message);
+            $this->throwCurlError($exception, $message, $response);
         } catch (Throwable | GuzzleException $exception) {
             $this->sendMetrics($dto);
-            $this->logger->error(
-                sprintf('CurlManager::send() failed: %s', $exception->getMessage()),
-                ExceptionContextLoader::getContextForLogger($exception)
-            );
-
-            throw new CurlException(
-                sprintf('CurlManager::send() failed: %s', $exception->getMessage()),
-                CurlException::REQUEST_FAILED,
-                $exception->getPrevious()
-            );
+            $this->logAfterError($exception, $dto);
+            $this->throwCurlError($exception);
         }
 
-        return $response;
+        return new ResponseDto(500, '', '', []);
+    }
+
+    /**
+     * @param RequestDto $dto
+     * @param mixed[]    $options
+     *
+     * @return PromiseInterface
+     */
+    public function sendAsync(RequestDto $dto, array $options = []): PromiseInterface
+    {
+        $this->logBeforeSend($dto);
+        $client           = $this->curlClientFactory->create(['timeout' => $this->timeout]);
+        $this->startTimes = CurlMetricUtils::getCurrentMetrics();
+
+        return $client
+            ->sendAsync($this->createRequest($dto), $this->prepareOptions($options))
+            ->then(
+                function (ResponseInterface $response) use ($dto): ResponseInterface {
+                    $this->logger->debug(
+                        LoggerFormater::responseToString(
+                            $response->getStatusCode(),
+                            $response->getReasonPhrase(),
+                            $response->getHeaders(),
+                            $response->getBody()->getContents()
+                        )
+                    );
+                    $this->sendMetrics($dto);
+
+                    return $response;
+                },
+                function (Exception $e) use ($dto): void {
+                    $this->sendMetrics($dto);
+                    if ($e instanceof RequestException) {
+                        $response = $e->getResponse();
+                        $message  = $e->getMessage();
+                        if ($response) {
+                            $message = $response->getBody()->getContents();
+                            $response->getBody()->rewind();
+                        }
+                        $this->logAfterError($e, $dto, $message);
+                    } else {
+                        $this->logAfterError($e, $dto);
+                    }
+
+                    throw $e;
+                }
+            );
+    }
+
+    /**
+     * @param RequestDto $dto
+     *
+     * @return Request
+     */
+    private function createRequest(RequestDto $dto): Request
+    {
+        return new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
     }
 
     /**
@@ -204,6 +230,69 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     protected function prepareOptions(array $options): array
     {
         return array_merge(['http_errors' => FALSE], $options);
+    }
+
+    /**
+     * @param RequestDto $dto
+     */
+    protected function logBeforeSend(RequestDto $dto): void
+    {
+        $this->logger->debug(
+            LoggerFormater::requestToString(
+                $dto->getMethod(),
+                (string) $dto->getUri(),
+                $dto->getHeaders(),
+                $dto->getBody()
+            ),
+            $dto->getDebugInfo()
+        );
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @param RequestDto        $dto
+     */
+    protected function logAfterSend(ResponseInterface $response, RequestDto $dto): void
+    {
+        $this->logger->debug(
+            LoggerFormater::responseToString(
+                $response->getStatusCode(),
+                $response->getReasonPhrase(),
+                $response->getHeaders(),
+                $response->getBody()->getContents()
+            ),
+            $dto->getDebugInfo()
+        );
+    }
+
+    /**
+     * @param Throwable   $t
+     * @param RequestDto  $dto
+     * @param string|null $message
+     */
+    protected function logAfterError(Throwable $t, RequestDto $dto, ?string $message = NULL): void
+    {
+        $this->logger->error(
+            sprintf('CurlManager::send() failed: %s', $message ?? $t->getMessage()),
+            LoggerFormater::getContextForLogger($t, $dto->getDebugInfo())
+        );
+    }
+
+    /**
+     * @param Throwable              $t
+     * @param string|null            $message
+     * @param ResponseInterface|null $response
+     *
+     * @throws CurlException
+     */
+    protected function throwCurlError(Throwable $t, ?string $message = NULL, ?ResponseInterface $response = NULL): void
+    {
+        throw new CurlException(
+            sprintf('CurlManager::send() failed: %s', $message ?? $t->getMessage()),
+            CurlException::REQUEST_FAILED,
+            $t->getPrevious(),
+            $response
+        );
     }
 
 }

@@ -4,9 +4,9 @@ namespace CommonsBundleTests\Controller\Listener;
 
 use CommonsBundleTests\ControllerTestCaseAbstract;
 use Hanaboso\CommonsBundle\Listener\SystemMetricsListener;
-use Hanaboso\CommonsBundle\Metrics\SystemMetrics;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
-use Hanaboso\CommonsBundle\Utils\PipesHeaders;
+use Hanaboso\Utils\System\PipesHeaders;
+use Hanaboso\Utils\System\SystemUsage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -51,12 +51,12 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 
         self::assertArrayHasKey(CurlMetricUtils::KEY_TIMESTAMP, $metrics);
         $timestamp = $metrics[CurlMetricUtils::KEY_TIMESTAMP];
-        self::assertGreaterThan(SystemMetrics::getCurrentTimestamp() - 5_000, $timestamp);
+        self::assertGreaterThan(SystemUsage::getCurrentTimestamp() - 5_000, $timestamp);
         self::assertArrayHasKey(CurlMetricUtils::KEY_CPU, $metrics);
         $cpu = $metrics[CurlMetricUtils::KEY_CPU];
-        self::assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_TIME_USER]);
-        self::assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_TIME_KERNEL]);
-        self::assertGreaterThanOrEqual(0, $cpu[SystemMetrics::CPU_START_TIME]);
+        self::assertGreaterThanOrEqual(0, $cpu[SystemUsage::CPU_TIME_USER]);
+        self::assertGreaterThanOrEqual(0, $cpu[SystemUsage::CPU_TIME_KERNEL]);
+        self::assertGreaterThanOrEqual(0, $cpu[SystemUsage::CPU_START_TIME]);
     }
 
 }

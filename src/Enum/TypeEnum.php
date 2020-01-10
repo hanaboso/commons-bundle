@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
+use Hanaboso\Utils\Enum\EnumAbstract;
+
 /**
  * Class TypeEnum
  *
@@ -33,7 +35,7 @@ final class TypeEnum extends EnumAbstract
     /**
      * @var string[]
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::API             => self::API,
         self::BATCH           => self::BATCH,
         self::BATCH_CONNECTOR => self::BATCH_CONNECTOR,
