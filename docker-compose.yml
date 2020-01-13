@@ -18,7 +18,10 @@ services:
             - MONGODB_DB=commons
             - MARIADB_DSN=mariadb
             - MARIADB_DB=commons
+            - MARIADB_USER=root
+            - MARIADB_PASS=root
             - METRICS_SERVICE=influx
+            - INFLUXDB_HOST=influxdb
 
     mongo:
         image: mongo:latest
@@ -43,9 +46,6 @@ services:
         volumes:
             - influxdb:/var/lib/influxdb
             - ./tests/testApp/influx/influxdb.conf:/etc/influxdb/influxdb.conf
-
-    fakes3:
-        image: olalond3/fakes3
 
 volumes:
     mongo: {}

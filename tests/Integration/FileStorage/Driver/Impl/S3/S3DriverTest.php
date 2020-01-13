@@ -2,12 +2,16 @@
 
 namespace CommonsBundleTests\Integration\FileStorage\Driver\Impl\S3;
 
+use Aws\Command;
+use Aws\Result;
+use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
+use Psr\Http\Message\StreamInterface;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -30,9 +34,9 @@ final class S3DriverTest extends KernelTestCaseAbstract
     ];
 
     /**
-     * @var S3Driver
+     * @var string
      */
-    private S3Driver $driver;
+    private string $path = '';
 
     /**
      *
@@ -41,9 +45,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
     {
         parent::setUp();
 
-        /** @var S3Driver $containerDriver */
-        $containerDriver = self::$container->get('hbpf.file_storage.driver.s3');
-        $this->driver    = $containerDriver;
+        $this->path = sprintf('%s/data/Attachment.jpeg', __DIR__);
     }
 
     /**
@@ -51,19 +53,43 @@ final class S3DriverTest extends KernelTestCaseAbstract
      */
     public function testDriver(): void
     {
-        $path         = sprintf('%s/data/Attachment.jpeg', __DIR__);
-        $uploadedFile = new UploadedFile($path, '');
+        $stream = self::createMock(StreamInterface::class);
+        $stream->method('getContents')->willReturn(file_get_contents($this->path));
 
-        $file = $this->driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
+        $ret = self::createMock(Result::class);
+        $ret->method('get')->willReturn($stream);
+
+        $client = self::getMockBuilder(S3Client::class);
+        $client = $client
+            ->disableOriginalConstructor()
+            ->addMethods(['deleteObject', 'putObject', 'getObject'])
+            ->getMock();
+        $client->method('deleteObject');
+        $client->expects(self::at(1))->method('getObject')->willReturn($ret);
+        $client
+            ->expects(self::at(3))
+            ->method('getObject')
+            ->willThrowException(new S3Exception('', new Command('a')));
+        $client->method('putObject');
+
+        $driver = new S3Driver(
+            self::$container->get('doctrine_mongodb.odm.default_document_manager'),
+            self::$container->get('hbpf.path_generator.hash'),
+            $client,
+            self::$container->getParameter('aws_bucket')
+        );
+
+        $uploadedFile = new UploadedFile($this->path, '');
+        $file         = $driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
 
         self::assertInstanceOf(FileInfoDto::class, $file);
-        self::assertEquals(file_get_contents($path), $this->driver->get($file->getUrl()));
+        self::assertEquals(file_get_contents($this->path), $driver->get($file->getUrl()));
         self::assertIsString($file->getSize());
 
         self::expectException(FileStorageException::class);
         self::expectExceptionCode(FileStorageException::FILE_NOT_FOUND);
-        $this->driver->delete($file->getUrl());
-        $this->driver->get($file->getUrl());
+        $driver->delete($file->getUrl());
+        $driver->get($file->getUrl());
     }
 
     /**
@@ -74,13 +100,24 @@ final class S3DriverTest extends KernelTestCaseAbstract
      */
     public function testDriverErr(): void
     {
-        $path         = sprintf('%s/data/Attachment.jpeg', __DIR__);
-        $uploadedFile = new UploadedFile($path, '');
+        $client = self::getMockBuilder(S3Client::class);
+        $client = $client
+            ->disableOriginalConstructor()
+            ->addMethods(['putObject'])
+            ->getMock();
+        $client->method('putObject');
+        $driver = new S3Driver(
+            self::$container->get('doctrine_mongodb.odm.default_document_manager'),
+            self::$container->get('hbpf.path_generator.hash'),
+            $client,
+            self::$container->getParameter('aws_bucket')
+        );
 
-        $this->setProperty($this->driver, 'client', new S3Client(self::FAKE_AWS_CONNECTION_ARGS));
+        $uploadedFile = new UploadedFile($this->path, '');
+        $this->setProperty($driver, 'client', new S3Client(self::FAKE_AWS_CONNECTION_ARGS));
 
         self::expectException(FileStorageException::class);
-        $this->driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
+        $driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
     }
 
 }

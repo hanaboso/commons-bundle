@@ -21,10 +21,10 @@ docker-down-clean: .env
 
 # Composer
 composer-install:
-	$(DE) composer install
+	$(DE) composer install --no-suggest
 
 composer-update:
-	$(DE) composer update
+	$(DE) composer update --no-suggest
 
 composer-outdated:
 	$(DE) composer outdated
@@ -67,7 +67,7 @@ phpcoverage:
 	$(DE) php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-html var/coverage --whitelist src tests
 
 phpcoverage-ci:
-	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh 40
+	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh 100 || true
 
 test: docker-up-force composer-install fasttest
 

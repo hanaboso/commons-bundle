@@ -3,11 +3,10 @@
 namespace CommonsBundleTests\Unit\Transport\Udp;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Transport\Udp\UDPSender;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
-use Hanaboso\Utils\Exception\DateTimeException;
 use phpmock\phpunit\PHPMock;
-use ReflectionException;
 
 /**
  * Class UdpSenderTest
@@ -23,7 +22,7 @@ final class UdpSenderTest extends KernelTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Udp\UDPSender::getSocket
      *
-     * @throws ReflectionException
+     * @throws Exception
      */
     public function testGetSocket(): void
     {
@@ -35,9 +34,12 @@ final class UdpSenderTest extends KernelTestCaseAbstract
             ->expects(self::any())
             ->willReturn(5);
 
+        $this->getFunctionMock('Hanaboso\CommonsBundle\Transport\Udp', 'socket_sendto')
+            ->expects(self::any())
+            ->willReturn(FALSE);
+
         $sender = new UDPSender();
         $this->setProperty($sender, 'socket', '1');
-
         $this->invokeMethod($sender, 'getSocket');
 
         self::assertTrue(TRUE);
@@ -46,11 +48,15 @@ final class UdpSenderTest extends KernelTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Udp\UDPSender::send
      *
-     * @throws DateTimeException
+     * @throws Exception
      */
     public function testSendErr(): void
     {
         $message = 'abc,name=def,host=ghi key1=val1,key2=val2 1465839830100400200';
+
+        $this->getFunctionMock('Hanaboso\CommonsBundle\Transport\Udp', 'socket_last_error')
+            ->expects(self::any())
+            ->willReturn(5);
 
         $this->getFunctionMock('Hanaboso\CommonsBundle\Transport\Udp', 'socket_sendto')
             ->expects(self::any())

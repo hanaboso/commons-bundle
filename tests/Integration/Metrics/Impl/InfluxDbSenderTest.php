@@ -21,7 +21,7 @@ final class InfluxDbSenderTest extends TestCase
      */
     public function testSend(): void
     {
-        $sender = new InfluxDbSender(new UDPSender(), 'influxdb:8086', 'test');
+        $sender = new InfluxDbSender(new UDPSender(), sprintf('%s:8086', getenv('INFLUXDB_HOST')), 'test');
         $res    = $sender->send(
             [
                 MetricsEnum::REQUEST_TOTAL_DURATION => 123,

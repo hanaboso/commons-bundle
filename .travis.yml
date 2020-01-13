@@ -1,0 +1,69 @@
+language: php
+
+services:
+    - mariadb
+    - mongodb
+    - redis-server
+addons:
+    mariadb: '10.3'
+
+before_install:
+    - echo 'apc.enable_cli = 1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - phpenv config-rm xdebug.ini || return 0
+    - pecl install pcov
+    - echo "extension=mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "extension=apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - mysql -uroot -e 'CREATE USER IF NOT EXISTS travis@localhost; GRANT ALL ON *.* TO travis@localhost;'
+    - mysql -utravis -e 'CREATE DATABASE IF NOT EXISTS commons1;'
+    - mysql -utravis -e 'CREATE DATABASE IF NOT EXISTS commons2;'
+    - mysql -utravis -e 'CREATE DATABASE IF NOT EXISTS commons3;'
+    - mysql -utravis -e 'CREATE DATABASE IF NOT EXISTS commons4;'
+    - wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.7_amd64.deb
+    - sudo dpkg -i influxdb_1.7.7_amd64.deb
+    - travis_retry sudo service influxdb restart
+    - export REDIS_DSN=redis://localhost/10
+    - export MONGODB_DSN=mongodb://localhost
+    - export MONGODB_DB=commons
+    - export MARIADB_DSN=localhost
+    - export MARIADB_DB=commons
+    - export MARIADB_USER=root
+    - export MARIADB_PASS=
+    - export METRICS_SERVICE=influx
+    - export INFLUXDB_HOST=localhost
+    - export KERNEL_CLASS="CommonsBundleTests\\Kernel"
+
+install:
+    - travis_retry composer install --no-progress --prefer-dist
+    - tests/testApp/bin/console cache:warmup --env=test
+    - tests/testApp/bin/console doctrine:database:create --env=test
+    - tests/testApp/bin/console doctrine:schema:create --env=test
+    - mysqldump -utravis commons | mysql -utravis commons1
+    - mysqldump -utravis commons | mysql -utravis commons2
+    - mysqldump -utravis commons | mysql -utravis commons3
+    - mysqldump -utravis commons | mysql -utravis commons4
+
+script:
+    - ./vendor/bin/phpcs --standard=./ruleset.xml --colors -p src/ tests/
+    - ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 8 src/ tests/
+    - ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 tests/Unit
+    - ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 tests/Integration
+    - ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Controller
+    - ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-clover var/coverage.xml --whitelist src tests
+    - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
+    - php coveralls.phar --verbose --config .coveralls.yml
+
+php:
+    - 7.4
+
+branches:
+    only:
+        - master
+
+sudo: true
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+notifications:
+    email: false

@@ -2,8 +2,8 @@
 
 namespace CommonsBundleTests\Unit\Monolog;
 
-use _HumbugBoxa750b42bd25b\Nette\Neon\Exception;
 use CommonsBundleTests\KernelTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Monolog\LoggerContext;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\Utils\System\PipesHeaders;
@@ -45,16 +45,17 @@ final class LoggerContextTest extends KernelTestCaseAbstract
     public function testSetHeaders(): void
     {
         $this->logger
-            ->setHeaders((new ProcessDto())
-                ->setHeaders(
-                    [
-                        PipesHeaders::CORRELATION_ID => '1',
-                        PipesHeaders::NODE_ID        => '2',
-                        PipesHeaders::NODE_NAME      => 'name',
-                        PipesHeaders::TOPOLOGY_ID    => '1',
-                        PipesHeaders::TOPOLOGY_NAME  => 'name',
-                    ]
-                )
+            ->setHeaders(
+                (new ProcessDto())
+                    ->setHeaders(
+                        [
+                            PipesHeaders::CORRELATION_ID => '1',
+                            PipesHeaders::NODE_ID        => '2',
+                            PipesHeaders::NODE_NAME      => 'name',
+                            PipesHeaders::TOPOLOGY_ID    => '1',
+                            PipesHeaders::TOPOLOGY_NAME  => 'name',
+                        ]
+                    )
             )
             ->setException(new Exception());
         self::assertEquals(6, count($this->logger->toArray()));
