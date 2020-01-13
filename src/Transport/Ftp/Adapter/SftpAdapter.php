@@ -21,19 +21,10 @@ class SftpAdapter implements FtpAdapterInterface
 
     /**
      * @param FtpConfig $ftpConfig
-     *
-     * @throws FtpException
      */
     public function connect(FtpConfig $ftpConfig): void
     {
         $this->sftp = new SFTP($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
-
-        if (!$this->sftp instanceof SFTP) {
-            throw new FtpException(
-                sprintf('Sftp connection to host %s failed.', $ftpConfig->getHost()),
-                FtpException::CONNECTION_FAILED
-            );
-        }
     }
 
     /**

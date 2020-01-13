@@ -11,8 +11,10 @@ use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
+use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
+use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -59,6 +61,42 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $manager->setMetricsSender($loader);
         $dto = new RequestDto('GET', new Uri('http://google.com'));
         $manager->send($dto);
+    }
+
+    /**
+     * @throws CurlException
+     */
+    public function testSendMetricsErr(): void
+    {
+        $sh = self::createMock(MetricsSenderLoader::class);
+        $sh->expects(self::any())->method('getSender')->willThrowException(new Exception());
+
+        /** @var MockObject|CurlClientFactory $factory */
+        $factory = self::createMock(CurlClientFactory::class);
+
+        /** @var CurlManager $manager */
+        $manager = new CurlManager($factory);
+        $manager->setMetricsSender($sh);
+        $dto = new RequestDto('GET', new Uri('http://google.com'));
+
+        self::expectException(Exception::class);
+        $manager->send($dto);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Utils\CurlMetricUtils::sendCurlMetrics
+     *
+     * @throws Exception
+     */
+    public function testSendCurlMetrics(): void
+    {
+        /** @var InfluxDbSender|MockObject $influx */
+        $influx = $this->createPartialMock(InfluxDbSender::class, ['send']);
+        $influx->expects(self::any())->method('send')->willReturn(TRUE);
+
+        CurlMetricUtils::sendCurlMetrics($influx, ['request_duration' => 2], '1', '2');
+
+        self::assertTrue(TRUE);
     }
 
 }

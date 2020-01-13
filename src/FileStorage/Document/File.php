@@ -102,7 +102,9 @@ class File implements FileInterface
      */
     public function setFileFormat(string $fileFormat): FileInterface
     {
-        if (!FileFormatEnum::isValid($fileFormat)) {
+        try {
+            FileFormatEnum::isValid($fileFormat);
+        } catch (EnumException $exception) {
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $fileFormat),
                 FileStorageException::INVALID_FILE_FORMAT
@@ -180,12 +182,15 @@ class File implements FileInterface
      */
     public function setStorageType(string $storageType): FileInterface
     {
-        if (!StorageTypeEnum::isValid($storageType)) {
+        try {
+            StorageTypeEnum::isValid($storageType);
+        } catch (EnumException $exception) {
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $storageType),
                 FileStorageException::INVALID_STORAGE_TYPE
             );
         }
+
         $this->storageType = $storageType;
 
         return $this;

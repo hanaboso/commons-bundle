@@ -5,6 +5,7 @@ namespace CommonsBundleTests\Integration\FileStorage;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
+use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Document\File;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverInterface;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
@@ -22,9 +23,11 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
 {
 
     /**
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto
      * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::saveFileFromContent()
      * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::getFileStorage()
      * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::deleteFile()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage
      *
      * @throws Exception
      */
@@ -45,6 +48,23 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
         $storage->deleteFile($file);
         $file = $this->dm->getRepository(File::class)->find($file->getId());
         self::assertNull($file);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::getFileDocument
+     *
+     * @throws FileStorageException
+     * @throws Exception
+     */
+    public function testGetFileDocument(): void
+    {
+        $storage = $this->mockStorageService();
+        $file = new File();
+        $this->pfd($file);
+
+        self::assertInstanceOf(File::class, $storage->getFileDocument($file->getId()));
+        self::expectException(FileStorageException::class);
+        $storage->getFileDocument('1');
     }
 
     /**

@@ -78,6 +78,7 @@ final class UDPSenderTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Udp\UDPSender::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Udp\UDPSender::getSocket()
      *
      * @throws Exception
      */

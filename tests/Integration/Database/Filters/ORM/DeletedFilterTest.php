@@ -15,6 +15,8 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
 {
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter::addFilterConstraint
+     *
      * @throws Exception;
      */
     public function testAddFilterConstraint(): void
@@ -36,6 +38,8 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter
+     *
      * @throws Exception
      */
     public function testDisableFilter(): void
@@ -49,6 +53,24 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
         $this->em->getFilters()->disable(DeletedFilter::NAME);
 
         self::assertObjectHasAttribute('name', (object) $repository->findOneBy(['name' => 'example']));
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter::addFilterConstraint
+     * @throws Exception
+     */
+    public function testAddDeletedFilterConstraint(): void
+    {
+        $testEntity = new TestEntityNoDeletedProp();
+        $testEntity->setName('example');
+        $this->pfe($testEntity);
+
+        $filter = $this->em
+            ->getFilters()
+            ->getFilter(DeletedFilter::NAME)
+            ->addFilterConstraint($this->em->getClassMetadata(TestEntityNoDeletedProp::class), 'test_entity_no_deleted_prop');
+
+        self::assertEquals('', $filter);
     }
 
 }

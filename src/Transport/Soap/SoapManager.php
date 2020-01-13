@@ -164,8 +164,6 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                     $response->getSoapCallResponse()
                 )
             );
-        } else {
-            $this->logger->debug(sprintf('Response: Body: %s', $response->getSoapCallResponse()));
         }
 
         return $response;

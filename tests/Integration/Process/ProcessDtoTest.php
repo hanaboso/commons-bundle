@@ -5,6 +5,7 @@ namespace CommonsBundleTests\Integration\Process;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
+use Hanaboso\Utils\Exception\PipesFrameworkException;
 use Hanaboso\Utils\System\PipesHeaders;
 
 /**
@@ -38,17 +39,82 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @throws Exception
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setData
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getData
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
+     *
+     * @throws PipesFrameworkException
      */
     public function testSetRepeator(): void
     {
-
-        $processDto = new ProcessDto();
-
-        $processDto->setRepeater(10, 20, 15, 'queue');
+        $processDto = (new ProcessDto())
+            ->setRepeater(10, 20, 15, 'queue')
+            ->setData('data');
 
         self::assertEquals($this->getSetRepeaterHeaders(), $processDto->getHeaders());
+        self::assertEquals('data', $processDto->getData());
 
+        $processDto->setHeaders(
+            [
+                'pf-repeat-interval' => '5',
+                'pf-repeat-max-hops' => '10',
+            ]
+        );
+        self::assertEquals(
+            [
+                'pf-repeat-interval' => '5',
+                'pf-repeat-max-hops' => '10',
+            ],
+            $processDto->getHeaders());
+
+        self::assertEquals(5, $processDto->getHeader('pf-repeat-interval'));
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setSuccessProcess
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setStatusHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::validateStatus
+     *
+     * @throws PipesFrameworkException
+     */
+    public function testProcess(): void
+    {
+        $processDto = (new ProcessDto())->setSuccessProcess('it is ok');
+
+        self::assertEquals(
+            [
+                'pf-result-message' => 'it is ok',
+                'pf-result-code'    => '0',
+            ],
+            $processDto->getHeaders());
+
+        self::expectException(PipesFrameworkException::class);
+        $processDto->setStopProcess(5_555);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
+     *
+     * @throws PipesFrameworkException
+     */
+    public function testSetRepeaterIntervalErr(): void
+    {
+        self::expectException(PipesFrameworkException::class);
+        (new ProcessDto())->setRepeater(-1, 1);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
+     *
+     * @throws PipesFrameworkException
+     */
+    public function testSetRepeaterHopsErr(): void
+    {
+        self::expectException(PipesFrameworkException::class);
+        (new ProcessDto())->setRepeater(1, -1);
     }
 
     /**

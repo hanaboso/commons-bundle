@@ -6,9 +6,11 @@ use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto as RequestDtoNonWsdl;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto as RequestDtoWsdl;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapHelper;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use SoapParam;
 use SoapVar;
+use stdClass;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 /**
@@ -26,8 +28,39 @@ final class SoapHelperTest extends TestCase
     {
         $request = new RequestDtoNonWsdl('functionName', ['arguments'], 'namespace', new Uri(''));
         $result  = SoapHelper::composeRequestHeaders($request);
-
         self::assertEmpty($result);
+
+        $request = new RequestDtoNonWsdl('functionName', ['arguments'], 'namespace', new Uri(''), ['el1', 'el2']);
+        $result  = SoapHelper::composeRequestHeaders($request);
+
+        self::assertIsArray($result);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArgumentsForNonWsdl
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeDataForSoapParam
+     */
+    public function testComposeArguments(): void
+    {
+        $request = new RequestDtoNonWsdl('functionName', [], 'namespace', new Uri(''));
+        $result  = SoapHelper::composeArguments($request);
+
+        self::assertNull($result);
+
+        $request = new RequestDtoNonWsdl('functionName', ['arguments'], 'namespace', new Uri(''));
+        $result  = SoapHelper::composeArguments($request);
+
+        self::assertIsArray($result);
+
+        $request = new RequestDtoNonWsdl('functionName', ['arg1' => ['el1' => '1']], 'namespace', new Uri(''));
+        $result  = SoapHelper::composeArguments($request);
+
+        self::assertIsArray($result);
+
+        $request = new RequestDtoNonWsdl('functionName', ['arg1' => ['el1' => new StdClass()]], 'namespace', new Uri(''));
+        self::expectException(InvalidArgumentException::class);
+        SoapHelper::composeArguments($request);
     }
 
     /**

@@ -4,6 +4,12 @@ namespace CommonsBundleTests\Unit\Transport\Curl;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Promise\FulfilledPromise;
+use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Promise\RejectedPromise;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
@@ -18,6 +24,7 @@ use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class CurlManagerTest
@@ -29,6 +36,7 @@ final class CurlManagerTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::setTimeout()
      *
      * @throws Exception
      */
@@ -56,6 +64,7 @@ final class CurlManagerTest extends TestCase
 
         $curlManager = new CurlManager($curlClientFactory);
         $curlManager->setMetricsSender($loader);
+        $curlManager->setTimeout(5);
         $result = $curlManager->send($requestDto);
 
         self::assertInstanceOf(ResponseDto::class, $result);
@@ -133,6 +142,123 @@ final class CurlManagerTest extends TestCase
         self::assertEquals('www.google.com', $res->getUriString());
         self::assertEquals(CurlManager::METHOD_POST, $res->getMethod());
         self::assertEquals(['node_id' => '123', 'correlation_id' => 'aaa222'], $res->getDebugInfo());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlException::getResponse
+     */
+    public function testCurlException(): void
+    {
+        $exception = new CurlException('Ups, something went wrong', 400, NULL, new Response());
+
+        self::assertInstanceOf(ResponseInterface::class, $exception->getResponse());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
+     *
+     * @throws CurlException
+     */
+    public function testSendErr(): void
+    {
+        /** @var MockObject|CurlClientFactory $factory */
+        $factory = self::createMock(CurlClientFactory::class);
+        $factory->expects(self::any())->method('create')
+            ->willThrowException(
+                new RequestException(
+                    'Ups, something went wrong',
+                    new Request('method', ''),
+                    new Response()
+                )
+            );
+
+        /** @var CurlManager $manager */
+        $manager = new CurlManager($factory);
+        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+
+        self::expectException(CurlException::class);
+        $manager->send($dto);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::sendAsync
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::logResponse
+     *
+     * @throws CurlException
+     */
+    public function testSendAsync(): void
+    {
+        $promise = new FulfilledPromise(new Response(202, ['Accept-Language' => 'en', 'Accept' => 'text/html']));
+
+        /** @var MockObject|Client $client */
+        $client = self::createMock(Client::class);
+        $client->method('sendAsync')->willReturn($promise);
+
+        /** @var MockObject|CurlClientFactory $factory */
+        $factory = self::createMock(CurlClientFactory::class);
+        $factory->method('create')->willReturn($client);
+
+        $manager = new CurlManager($factory);
+        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+
+        /** @var Response $response */
+        $response = $manager->sendAsync($dto)->wait();
+        self::assertEquals(202, $response->getStatusCode());
+        self::assertArrayHasKey('Accept-Language', $response->getHeaders());
+        self::assertArrayHasKey('Accept', $response->getHeaders());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::sendAsync
+     * @throws CurlException
+     */
+    public function testSendAsyncException(): void
+    {
+        /** @var Promise $promise */
+        $promise = new RejectedPromise(
+            new ServerException('Ups, something with server went wrong.', new Request('message', 'uri'), new Response())
+        );
+
+        /** @var MockObject|Client $client */
+        $client = self::createMock(Client::class);
+        $client->method('sendAsync')->willReturn($promise);
+
+        /** @var MockObject|CurlClientFactory $factory */
+        $factory = self::createMock(CurlClientFactory::class);
+        $factory->method('create')->willReturn($client);
+
+        $manager = new CurlManager($factory);
+        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+
+        self::expectException(RequestException::class);
+        $manager->sendAsync($dto)->wait();
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::sendAsync
+     *
+     * @throws CurlException
+     */
+    public function testSendAsyncReject(): void
+    {
+        /** @var Promise $promise */
+        $promise = new RejectedPromise(
+            new Exception('Ups, something went wrong.')
+        );
+
+        /** @var MockObject|Client $client */
+        $client = self::createMock(Client::class);
+        $client->method('sendAsync')->willReturn($promise);
+
+        /** @var MockObject|CurlClientFactory $factory */
+        $factory = self::createMock(CurlClientFactory::class);
+        $factory->method('create')->willReturn($client);
+
+        $manager = new CurlManager($factory);
+        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+
+        self::expectException(Exception::class);
+        $manager->sendAsync($dto)->wait();
     }
 
 }

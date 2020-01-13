@@ -82,4 +82,31 @@ final class InfluxDbSenderTest extends TestCase
         $service->createMessage([]);
     }
 
+    /**
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::createMessage()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::join()
+     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender::prepareTags()
+     *
+     * @throws Exception
+     */
+    public function testCreateMessageEmptyTags(): void
+    {
+        $sender = self::createPartialMock(UDPSender::class, ['send']);
+        $sender->expects(self::any())->method('send')->willReturn(TRUE);
+
+        $service = new InfluxDbSender($sender, 'host:5100', 'php_worker');
+        $message = $service->createMessage(['foo' => 'bar']);
+
+        self::assertEquals(41, strlen($message));
+
+        $message = $service->createMessage(['foo' => 'bar'], [TRUE]);
+        self::assertEquals(47, strlen($message));
+
+        $message = $service->createMessage(['foo' => 'bar'], [NULL]);
+        self::assertEquals(47, strlen($message));
+
+        $message = $service->createMessage(['foo' => 'bar'], ['']);
+        self::assertEquals(45, strlen($message));
+    }
+
 }

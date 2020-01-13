@@ -29,6 +29,9 @@ final class NodeServiceLoaderUtilTest extends KernelTestCaseAbstract
         self::assertTrue(in_array('null', $services));
         self::assertFalse(in_array('_defaults', $services));
         self::assertFalse(in_array('requestbin', $services));
+
+        $services = NodeServiceLoader::getServices($dirs, 'hbpf.connector', ['null']);
+        self::assertEquals(['null1', 'null2'], $services);
     }
 
 }

@@ -155,14 +155,14 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $response->getBody()->rewind();
             }
             $this->logAfterError($exception, $dto, $message);
-            $this->throwCurlError($exception, $message, $response);
+
+            throw $this->throwCurlError($exception, $message, $response);
         } catch (Throwable | GuzzleException $exception) {
             $this->sendMetrics($dto);
             $this->logAfterError($exception, $dto);
-            $this->throwCurlError($exception);
-        }
 
-        return new ResponseDto(500, '', '', []);
+            throw  $this->throwCurlError($exception);
+        }
     }
 
     /**
@@ -181,14 +181,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
             ->sendAsync($this->createRequest($dto), $this->prepareOptions($options))
             ->then(
                 function (ResponseInterface $response) use ($dto): ResponseInterface {
-                    $this->logger->debug(
-                        LoggerFormater::responseToString(
-                            $response->getStatusCode(),
-                            $response->getReasonPhrase(),
-                            $response->getHeaders(),
-                            $response->getBody()->getContents()
-                        )
-                    );
+                    $this->logResponse($response);
                     $this->sendMetrics($dto);
 
                     return $response;
@@ -254,15 +247,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      */
     protected function logAfterSend(ResponseInterface $response, RequestDto $dto): void
     {
-        $this->logger->debug(
-            LoggerFormater::responseToString(
-                $response->getStatusCode(),
-                $response->getReasonPhrase(),
-                $response->getHeaders(),
-                $response->getBody()->getContents()
-            ),
-            $dto->getDebugInfo()
-        );
+        $this->logResponse($response, $dto->getDebugInfo());
     }
 
     /**
@@ -283,15 +268,33 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      * @param string|null            $message
      * @param ResponseInterface|null $response
      *
-     * @throws CurlException
+     * @return CurlException
      */
-    protected function throwCurlError(Throwable $t, ?string $message = NULL, ?ResponseInterface $response = NULL): void
+    protected function throwCurlError(Throwable $t, ?string $message = NULL,
+                                      ?ResponseInterface $response = NULL): CurlException
     {
-        throw new CurlException(
+        return new CurlException(
             sprintf('CurlManager::send() failed: %s', $message ?? $t->getMessage()),
             CurlException::REQUEST_FAILED,
             $t->getPrevious(),
             $response
+        );
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @param mixed[]           $context
+     */
+    private function logResponse(ResponseInterface $response, array $context = []): void
+    {
+        $this->logger->debug(
+            LoggerFormater::responseToString(
+                $response->getStatusCode(),
+                $response->getReasonPhrase(),
+                $response->getHeaders(),
+                $response->getBody()->getContents()
+            ),
+            $context
         );
     }
 

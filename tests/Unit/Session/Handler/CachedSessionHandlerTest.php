@@ -31,6 +31,9 @@ final class CachedSessionHandlerTest extends TestCase
         $sh->expects(self::any())->method('destroy')->willReturn(TRUE);
         $sh->expects(self::any())->method('write')->willReturn(TRUE);
         $sh->expects(self::any())->method('read')->willReturn('default');
+        $sh->expects(self::any())->method('close')->willReturn(TRUE);
+        $sh->expects(self::any())->method('gc')->willReturn(TRUE);
+        $sh->expects(self::any())->method('open')->willReturn(TRUE);
 
         $this->csh = new CachedSessionHandler($sh);
     }
@@ -60,6 +63,7 @@ final class CachedSessionHandlerTest extends TestCase
     /**
      * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::read()
      * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::write()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::updateCache()
      * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::destroy()
      *
      * @throws Exception
@@ -78,6 +82,11 @@ final class CachedSessionHandlerTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::read()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::close()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::gc()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::open()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::updateCache()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\CachedSessionHandler::setTimeout()
      *
      * @throws Exception
      */
@@ -93,6 +102,10 @@ final class CachedSessionHandlerTest extends TestCase
 
         sleep(1);
         self::assertEquals('default', $this->csh->read('foo'));
+
+        self::assertTrue($this->csh->gc(100));
+        self::assertTrue($this->csh->open('/path/', 'fo'));
+        self::assertTrue($this->csh->close());
     }
 
 }

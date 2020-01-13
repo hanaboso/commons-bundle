@@ -87,4 +87,31 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
         self::assertEquals($arr, $decryptedArr);
     }
 
+    /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
+     *
+     * @throws CryptException
+     */
+    public function testEncryptErr(): void
+    {
+        $crypt = new WindwalkerCrypt();
+        self::expectException(CryptException::class);
+        $func = function (): void {
+            echo 'hello!';
+        };
+        $crypt->encrypt($func);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
+     *
+     * @throws CryptException
+     */
+    public function testDecryptErr(): void
+    {
+        $crypt = new WindwalkerCrypt();
+        self::expectException(CryptException::class);
+        $crypt->decrypt('01_some_hash');
+    }
+
 }

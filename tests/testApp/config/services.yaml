@@ -4,3 +4,9 @@ services:
 
     hbpf.connector.null:
         class: CommonsBundleTests\testApp\NullConnectorForLoaderTest
+
+    hbpf.connector.null1:
+        class: CommonsBundleTests\testApp\NullConnectorForLoaderTest
+
+    hbpf.connector.null2:
+        class: CommonsBundleTests\testApp\NullConnectorForLoaderTest

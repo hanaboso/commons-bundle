@@ -23,6 +23,11 @@ doctrine:
                 dir: '%kernel.root_dir%/../tests/Integration/Database/Filters/ORM'
                 is_bundle: false
                 prefix: CommonsBundleTests\Integration\Database\Filters\ORM
+            TestEntityTrait:
+                type: annotation
+                dir: '%kernel.root_dir%/../tests/Integration/Database/Traits/Entity'
+                is_bundle: false
+                prefix: CommonsBundleTests\Integration\Database\Traits\Entity
         filters:
             deleted:
                 class: Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter

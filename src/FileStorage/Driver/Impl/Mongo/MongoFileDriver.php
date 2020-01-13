@@ -78,11 +78,8 @@ class MongoFileDriver extends FileStorageDriverAbstract
         /** @var GridFSRepository $repository */
         $repository = $this->dm->getRepository(FileMongo::class);
         $stream     = $repository->openDownloadStream($file->getId());
-        $contents   = '';
         try {
             $contents = stream_get_contents($stream) ?: '';
-        } catch (Throwable $t) {
-            throw new FileStorageException($t->getMessage(), $t->getCode(), $t);
         } finally {
             fclose($stream);
         }

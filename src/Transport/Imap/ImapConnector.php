@@ -53,7 +53,7 @@ class ImapConnector
         $mails   = [];
 
         foreach ($mailIds as $mailId) {
-            $mail = $this->mailbox->getMail($mailId);
+            $mail = $this->getMail($mailId);
 
             $mails[] = [
                 self::ID           => (string) $mail->id,
@@ -102,7 +102,7 @@ class ImapConnector
     {
         $mailboxes = $this->mailbox->getMailboxes(sprintf('*%s*', $name));
 
-        if (!$mailboxes) {
+        if (empty($mailboxes)) {
             $this->mailbox->createMailbox($name);
 
             return $this->mailbox->getMailboxes(sprintf('*%s*', $name))[0]['shortpath'];

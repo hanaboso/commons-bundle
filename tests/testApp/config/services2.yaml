@@ -1,0 +1,3 @@
+services:
+    hbpf.connector.null:
+        class: CommonsBundleTests\testApp\NullConnectorForLoaderTest

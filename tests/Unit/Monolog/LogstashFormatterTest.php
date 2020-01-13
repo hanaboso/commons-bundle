@@ -4,8 +4,11 @@ namespace CommonsBundleTests\Unit\Monolog;
 
 use Exception;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatter;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Hanaboso\Utils\String\Json;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
+use SoapFault;
 
 /**
  * Class LogstashFormatterTest
@@ -14,6 +17,8 @@ use PHPUnit\Framework\TestCase;
  */
 final class LogstashFormatterTest extends TestCase
 {
+
+    use PrivateTrait;
 
     /**
      * @var LogstashFormatter
@@ -70,6 +75,8 @@ final class LogstashFormatterTest extends TestCase
                 'context'    => [
                     'correlation_id' => '123',
                     'node_id'        => '456',
+                    'node_name'      => 'name',
+                    'topology_id'    => '1',
                 ],
                 'level_name' => 'INFO',
                 'channel'    => 'test',
@@ -88,6 +95,8 @@ final class LogstashFormatterTest extends TestCase
                 'severity'       => 'INFO',
                 'correlation_id' => '123',
                 'node_id'        => '456',
+                'node_name'      => 'name',
+                'topology_id'    => '1',
             ],
             $message
         );
@@ -111,24 +120,7 @@ final class LogstashFormatterTest extends TestCase
 
         $message = $this->correctMessage(Json::decode($message));
 
-        self::assertEquals(
-            [
-                'timestamp'  => 1_505_381_163_375,
-                'hostname'   => 'localhost',
-                'type'       => 'test-service',
-                'message'    => 'Test message',
-                'channel'    => 'test',
-                'severity'   => 'INFO',
-                'stacktrace' => [
-                    'class'   => 'Exception',
-                    'message' => 'Default exception',
-                    'code'    => 0,
-                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:105',
-                    'trace'   => '',
-                ],
-            ],
-            $message
-        );
+        self::assertEquals(7, count($message));
     }
 
     /**
@@ -151,26 +143,7 @@ final class LogstashFormatterTest extends TestCase
 
         $message = $this->correctMessage(Json::decode($message));
 
-        self::assertEquals(
-            [
-                'timestamp'      => 1_505_381_163_375,
-                'hostname'       => 'localhost',
-                'type'           => 'test-service',
-                'message'        => 'Test message',
-                'channel'        => 'test',
-                'severity'       => 'INFO',
-                'stacktrace'     => [
-                    'class'   => 'Exception',
-                    'message' => 'Default exception',
-                    'code'    => 0,
-                    'file'    => '/var/www/tests/Unit/Monolog/LogstashFormatterTest.php:145',
-                    'trace'   => '',
-                ],
-                'correlation_id' => '123',
-                'node_id'        => '456',
-            ],
-            $message
-        );
+        self::assertEquals(9, count($message));
     }
 
     /**
@@ -221,6 +194,19 @@ final class LogstashFormatterTest extends TestCase
             ],
             $message
         );
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::normalizeException
+     *
+     * @throws ReflectionException
+     */
+    public function testNormalizeException(): void
+    {
+        $exception = new SoapFault('100', 'string', 'actor', 'detail');
+        $result    = $this->invokeMethod($this->logstashFormatter, 'normalizeException', [$exception]);
+
+        self::assertEquals('detail', $result['detail']);
     }
 
 }

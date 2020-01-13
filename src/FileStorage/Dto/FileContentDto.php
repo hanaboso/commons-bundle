@@ -87,14 +87,15 @@ class FileContentDto
      */
     public function setStorageType(string $type): FileContentDto
     {
-        if (StorageTypeEnum::isValid($type)) {
-            $this->type = $type;
-        } else {
+        try {
+            StorageTypeEnum::isValid($type);
+        } catch (EnumException $exception) {
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE
             );
         }
+        $this->type = $type;
 
         return $this;
     }
@@ -131,12 +132,13 @@ class FileContentDto
      * @param string $format
      *
      * @return FileContentDto
-     * @throws EnumException
      * @throws FileStorageException
      */
     public function setFormat(string $format): FileContentDto
     {
-        if (!FileFormatEnum::isValid($format)) {
+        try {
+            FileFormatEnum::isValid($format);
+        } catch (EnumException $exception) {
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $format),
                 FileStorageException::INVALID_FILE_FORMAT

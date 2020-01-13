@@ -3,7 +3,6 @@
 namespace Hanaboso\CommonsBundle\Monolog;
 
 use Exception;
-use InvalidArgumentException;
 use Monolog\Formatter\NormalizerFormatter;
 use SoapFault;
 use Throwable;
@@ -112,11 +111,6 @@ class LogstashFormatter extends NormalizerFormatter
     protected function normalizeException(Throwable $e, int $depth = 0): array
     {
         $depth;
-        if (!$e instanceof Throwable) {
-            throw new InvalidArgumentException(
-                sprintf('Exception/Throwable expected, got %s / %s', gettype($e), get_class($e))
-            );
-        }
 
         $data = [
             'class'   => get_class($e),

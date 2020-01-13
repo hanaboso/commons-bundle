@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory;
+use Monolog\Logger;
 
 /**
  * Class FtpServiceFactoryTest
@@ -18,15 +19,28 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 {
 
     /**
+     * @var FtpServiceFactory
+     */
+    private $factory;
+
+    /**
+     *
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->factory = self::$container->get('hbpf.ftp.service.factory');
+    }
+
+    /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory
      *
      * @throws Exception
      */
     public function testGetServiceFtp(): void
     {
-        /** @var FtpServiceFactory $factory */
-        $factory = self::$container->get('hbpf.ftp.service.factory');
-        $service = $factory->getFtpService(FtpServiceFactory::ADAPTER_FTP);
+        $service = $this->factory->getFtpService(FtpServiceFactory::ADAPTER_FTP);
 
         self::assertInstanceOf(FtpAdapter::class, $service->getAdapter());
     }
@@ -38,9 +52,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
      */
     public function testGetServiceSftp(): void
     {
-        /** @var FtpServiceFactory $factory */
-        $factory = self::$container->get('hbpf.ftp.service.factory');
-        $service = $factory->getFtpService(FtpServiceFactory::ADAPTER_SFTP);
+        $service = $this->factory->getFtpService(FtpServiceFactory::ADAPTER_SFTP);
 
         self::assertInstanceOf(SftpAdapter::class, $service->getAdapter());
     }
@@ -52,13 +64,19 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
      */
     public function testGetServiceUnknown(): void
     {
-        /** @var FtpServiceFactory $factory */
-        $factory = self::$container->get('hbpf.ftp.service.factory');
-
         self::expectException(FtpException::class);
         self::expectExceptionCode(FtpException::UNKNOWN_ADAPTER_TYPE);
 
-        $factory->getFtpService('abc');
+        $this->factory->getFtpService('abc');
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::setLogger
+     */
+    public function testSetLogger(): void
+    {
+        $this->factory->setLogger(new Logger('logger'));
+        self::assertTrue(TRUE);
     }
 
 }

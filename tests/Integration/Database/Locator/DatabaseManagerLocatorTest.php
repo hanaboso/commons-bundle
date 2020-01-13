@@ -6,6 +6,8 @@ use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
 use Exception;
+use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
+use LogicException;
 use PDO;
 
 /**
@@ -37,6 +39,27 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
         $query = $entityManager->getConnection()->query('SHOW DATABASES;');
         $query->execute();
         self::assertTrue(is_array($query->fetchAll(PDO::FETCH_OBJ)));
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::get
+     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::getEm
+     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::getDm
+     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator
+     */
+    public function testGet(): void
+    {
+        $entityManager   = self::$container->get('doctrine.orm.default_entity_manager');
+        $documentManager = self::$container->get('doctrine_mongodb.odm.default_document_manager');
+
+        $manager = new DatabaseManagerLocator($documentManager, NULL, 'ODM');
+        self::assertInstanceOf(DocumentManager::class, $manager->get());
+
+        $manager = new DatabaseManagerLocator(NULL, $entityManager, 'ORM');
+        self::assertInstanceOf(EntityManager::class, $manager->get());
+
+        self::expectException(LogicException::class);
+        (new DatabaseManagerLocator(NULL, NULL, ''))->get();
     }
 
 }

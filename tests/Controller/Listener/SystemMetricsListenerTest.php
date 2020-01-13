@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\Utils\System\PipesHeaders;
 use Hanaboso\Utils\System\SystemUsage;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Class SystemMetricsListenerTest
@@ -16,6 +17,20 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 {
+
+    /**
+     * @var SystemMetricsListener
+     */
+    private $listener;
+
+    /**
+     *
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->listener = self::$container->get('hbpf.system_metrics_listener');
+    }
 
     /**
      *
@@ -57,6 +72,20 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
         self::assertGreaterThanOrEqual(0, $cpu[SystemUsage::CPU_TIME_USER]);
         self::assertGreaterThanOrEqual(0, $cpu[SystemUsage::CPU_TIME_KERNEL]);
         self::assertGreaterThanOrEqual(0, $cpu[SystemUsage::CPU_START_TIME]);
+    }
+
+    /**
+     *
+     */
+    public function testGetSubscribedEvents(): void
+    {
+        self::assertEquals(
+            [
+                KernelEvents::TERMINATE  => 'onKernelTerminate',
+                KernelEvents::CONTROLLER => 'onKernelController',
+            ],
+            $this->listener->getSubscribedEvents()
+        );
     }
 
 }

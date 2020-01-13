@@ -55,8 +55,9 @@ abstract class RequestDtoAbstract
      * @param mixed[] $arguments
      * @param string  $namespace
      * @param Uri     $uri
+     * @param mixed[] $params
      */
-    public function __construct(string $function, array $arguments, string $namespace, Uri $uri)
+    public function __construct(string $function, array $arguments, string $namespace, Uri $uri, array $params = [])
     {
         $this->function  = $function;
         $this->arguments = $arguments;
@@ -64,8 +65,7 @@ abstract class RequestDtoAbstract
         $this->user      = NULL;
         $this->password  = NULL;
 
-        // TODO may need to add second parameter to RequestHeaderDto
-        $this->header = new RequestHeaderDto($namespace);
+        $this->header = new RequestHeaderDto($namespace, $params);
     }
 
     /**

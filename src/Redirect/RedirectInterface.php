@@ -13,6 +13,6 @@ interface RedirectInterface
     /**
      * @param string $url
      */
-    public function make(string $url): void;
+    public function make(string $url): void ;
 
 }

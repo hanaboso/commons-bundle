@@ -15,6 +15,8 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
 {
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter::addFilterCriteria
+     *
      * @throws Exception
      */
     public function testAddFilterCriteria(): void
@@ -36,6 +38,8 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter::addFilterCriteria
+     *
      * @throws Exception;
      */
     public function testDisableFilter(): void
@@ -49,6 +53,25 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
         $this->dm->getFilterCollection()->disable(DeletedFilter::NAME);
 
         self::assertObjectHasAttribute('name', (object) $repository->findOneBy(['name' => 'example']));
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter::addFilterCriteria
+     *
+     * @throws Exception
+     */
+    public function testAddFilter(): void
+    {
+        $testDocument = new TestDocNoDeletedProp();
+        $testDocument->setName('example');
+        $this->pfd($testDocument);
+
+        $filter = $this->dm
+            ->getFilterCollection()
+            ->getFilter(DeletedFilter::NAME)
+            ->addFilterCriteria($this->dm->getClassMetadata(TestDocNoDeletedProp::class));
+
+        self::assertArrayNotHasKey(DeletedFilter::NAME, $filter);
     }
 
 }

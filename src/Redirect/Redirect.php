@@ -6,6 +6,7 @@ namespace Hanaboso\CommonsBundle\Redirect;
  * Class Redirect
  *
  * @package Hanaboso\CommonsBundle\Redirect
+ * @codeCoverageIgnore
  */
 final class Redirect implements RedirectInterface
 {

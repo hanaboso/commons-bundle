@@ -31,6 +31,7 @@ final class RedisSessionHandlerTest extends KernelTestCaseAbstract
 
     /**
      * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler::open()
+     * @covers \Hanaboso\CommonsBundle\Session\Handler\RedisSessionHandler
      *
      * @throws Exception
      */
