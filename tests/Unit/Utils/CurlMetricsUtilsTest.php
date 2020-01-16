@@ -36,7 +36,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
             ->expects(self::any())
             ->method('send')->will(
                 $this->returnCallback(
-                    function (array $times, array $data): bool {
+                    static function (array $times, array $data): bool {
                         $data;
 
                         self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);

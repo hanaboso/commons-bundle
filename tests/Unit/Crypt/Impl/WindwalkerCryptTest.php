@@ -96,7 +96,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     {
         $crypt = new WindwalkerCrypt();
         self::expectException(CryptException::class);
-        $func = function (): void {
+        $func = static function (): void {
             echo 'hello!';
         };
         $crypt->encrypt($func);

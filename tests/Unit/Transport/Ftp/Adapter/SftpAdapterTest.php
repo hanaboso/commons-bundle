@@ -167,7 +167,8 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
                 0 => 'el1',
                 1 => 'el2',
             ],
-            $this->adapter->listDir('dir'));
+            $this->adapter->listDir('dir')
+        );
     }
 
     /**
@@ -217,7 +218,8 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
                     'time' => '222',
                 ],
             ],
-            $this->adapter->listDirAdvanced('dir'));
+            $this->adapter->listDirAdvanced('dir')
+        );
     }
 
     /**
@@ -283,9 +285,11 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
      */
     public function testMakeDirRecursive(): void
     {
-        $this->mockSftpFn([
-            'isConnected' => TRUE, 'pwd' => '/path/', 'chdir' => FALSE, 'is_file' => FALSE, 'mkdir' => TRUE,
-        ]);
+        $this->mockSftpFn(
+            [
+                'isConnected' => TRUE, 'pwd' => '/path/', 'chdir' => FALSE, 'is_file' => FALSE, 'mkdir' => TRUE,
+            ]
+        );
 
         $this->adapter->makeDirRecursive('dir');
         self::assertTrue(TRUE);

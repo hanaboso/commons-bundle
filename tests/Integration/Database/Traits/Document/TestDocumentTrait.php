@@ -39,7 +39,7 @@ class TestDocumentTrait
      */
     public function __construct()
     {
-        $this->name = '';
+        $this->name    = '';
         $this->created = DateTimeUtils::getUtcDateTime();
         $this->updated = DateTimeUtils::getUtcDateTime();
     }

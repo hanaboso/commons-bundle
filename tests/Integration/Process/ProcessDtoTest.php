@@ -35,7 +35,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $headers[] = $processDto->getHeaders();
 
         self::assertEquals($this->getSetStopProcessHeaders(), $headers);
-
     }
 
     /**
@@ -68,7 +67,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
                 'pf-repeat-interval' => '5',
                 'pf-repeat-max-hops' => '10',
             ],
-            $processDto->getHeaders());
+            $processDto->getHeaders()
+        );
 
         self::assertEquals(5, $processDto->getHeader('pf-repeat-interval'));
     }
@@ -89,7 +89,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
                 'pf-result-message' => 'it is ok',
                 'pf-result-code'    => '0',
             ],
-            $processDto->getHeaders());
+            $processDto->getHeaders()
+        );
 
         self::expectException(PipesFrameworkException::class);
         $processDto->setStopProcess(5_555);
@@ -152,5 +153,3 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
 }
-
-

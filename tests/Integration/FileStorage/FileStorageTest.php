@@ -59,7 +59,7 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
     public function testGetFileDocument(): void
     {
         $storage = $this->mockStorageService();
-        $file = new File();
+        $file    = new File();
         $this->pfd($file);
 
         self::assertInstanceOf(File::class, $storage->getFileDocument($file->getId()));

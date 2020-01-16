@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31bb581cf90e369a769a2aadddf51e90",
+    "content-hash": "494625c63c82660b05419bd4c4620767",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.132.3",
+            "version": "3.133.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f814995664d4ad616f674e664ae069b9f4e340bf"
+                "reference": "fc59f16e01317c7445204baaeff7224050153a97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f814995664d4ad616f674e664ae069b9f4e340bf",
-                "reference": "f814995664d4ad616f674e664ae069b9f4e340bf",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fc59f16e01317c7445204baaeff7224050153a97",
+                "reference": "fc59f16e01317c7445204baaeff7224050153a97",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-01-10T19:14:49+00:00"
+            "time": "2020-01-15T19:18:01+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -742,16 +742,16 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "2.0.3",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "72ca04db10f68d3e6f442ab861add63ce6069670"
+                "reference": "638c4ec715941e9cfcaeff0dc3cd33576735548e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/72ca04db10f68d3e6f442ab861add63ce6069670",
-                "reference": "72ca04db10f68d3e6f442ab861add63ce6069670",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/638c4ec715941e9cfcaeff0dc3cd33576735548e",
+                "reference": "638c4ec715941e9cfcaeff0dc3cd33576735548e",
                 "shasum": ""
             },
             "require": {
@@ -760,7 +760,7 @@
                 "doctrine/collections": "^1.5",
                 "doctrine/event-manager": "^1.0",
                 "doctrine/instantiator": "^1.1",
-                "doctrine/persistence": "^1.1",
+                "doctrine/persistence": "^1.3.5",
                 "ext-mongodb": "^1.5",
                 "mongodb/mongodb": "^1.2.0",
                 "ocramius/proxy-manager": "^2.2",
@@ -828,7 +828,7 @@
                 "odm",
                 "php"
             ],
-            "time": "2019-11-26T08:29:21+00:00"
+            "time": "2020-01-14T20:52:40+00:00"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
@@ -912,16 +912,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "1.3.4",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "ff7e08b0f814be2cd20c52dc3c8a262579376b94"
+                "reference": "be70c016fdcd44a428405ee062ebcdd01a6867cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/ff7e08b0f814be2cd20c52dc3c8a262579376b94",
-                "reference": "ff7e08b0f814be2cd20c52dc3c8a262579376b94",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/be70c016fdcd44a428405ee062ebcdd01a6867cd",
+                "reference": "be70c016fdcd44a428405ee062ebcdd01a6867cd",
                 "shasum": ""
             },
             "require": {
@@ -991,7 +991,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2020-01-09T19:49:17+00:00"
+            "time": "2020-01-14T18:44:12+00:00"
         },
         {
             "name": "doctrine/reflection",
@@ -1262,16 +1262,16 @@
         },
         {
             "name": "hanaboso/utils",
-            "version": "1.0.5",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hanaboso/utils.git",
-                "reference": "e7712a4753e362fb7fba7399be837228b23019d9"
+                "reference": "d89bce260356677f7bbbaaa45c8cce0ecf13b38e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hanaboso/utils/zipball/e7712a4753e362fb7fba7399be837228b23019d9",
-                "reference": "e7712a4753e362fb7fba7399be837228b23019d9",
+                "url": "https://api.github.com/repos/hanaboso/utils/zipball/d89bce260356677f7bbbaaa45c8cce0ecf13b38e",
+                "reference": "d89bce260356677f7bbbaaa45c8cce0ecf13b38e",
                 "shasum": ""
             },
             "require": {
@@ -1311,7 +1311,7 @@
                     "role": "Developer"
                 }
             ],
-            "time": "2020-01-10T15:37:25+00:00"
+            "time": "2020-01-15T07:39:52+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -4833,16 +4833,16 @@
         },
         {
             "name": "hanaboso/php-check-utils",
-            "version": "1.1.9",
+            "version": "1.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hanaboso/php-check-utils.git",
-                "reference": "9197e49f9507116a168dc438974f5655595c587e"
+                "reference": "016a1ad188f228bb9de66b7a76b772a5ac1ffc5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/9197e49f9507116a168dc438974f5655595c587e",
-                "reference": "9197e49f9507116a168dc438974f5655595c587e",
+                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/016a1ad188f228bb9de66b7a76b772a5ac1ffc5a",
+                "reference": "016a1ad188f228bb9de66b7a76b772a5ac1ffc5a",
                 "shasum": ""
             },
             "require": {
@@ -4898,7 +4898,7 @@
                 }
             ],
             "description": "Utils for php development - CodeSniffer, PhpStan, PhpStorm",
-            "time": "2020-01-10T11:37:17+00:00"
+            "time": "2020-01-15T17:02:16+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7397,16 +7397,16 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "6.0.7",
+            "version": "6.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "2731353bf098f8a7b3552efa14c8d0614076859e"
+                "reference": "dd399a5ba9b112cb2d0ac1541875ee64d0cbf4a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/2731353bf098f8a7b3552efa14c8d0614076859e",
-                "reference": "2731353bf098f8a7b3552efa14c8d0614076859e",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/dd399a5ba9b112cb2d0ac1541875ee64d0cbf4a1",
+                "reference": "dd399a5ba9b112cb2d0ac1541875ee64d0cbf4a1",
                 "shasum": ""
             },
             "require": {
@@ -7434,7 +7434,7 @@
                 "MIT"
             ],
             "description": "Slevomat Coding Standard for PHP_CodeSniffer complements Consistence Coding Standard by providing sniffs with additional checks.",
-            "time": "2020-01-12T20:32:20+00:00"
+            "time": "2020-01-14T08:39:00+00:00"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",

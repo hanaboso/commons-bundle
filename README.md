@@ -10,4 +10,4 @@ Installation
 * Download package via composer
 ```bash
 composer require hanaboso/commons-bundle
-```~~~~
+```

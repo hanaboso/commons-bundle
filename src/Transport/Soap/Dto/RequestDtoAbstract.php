@@ -153,7 +153,7 @@ abstract class RequestDtoAbstract
     /**
      * @return string
      */
-    public abstract function getType(): string;
+    abstract public function getType(): string;
 
     /**
      * @return Uri

@@ -93,7 +93,6 @@ final class SoapManagerTest extends TestCase
         $request = new RequestDto('', [], 'namespace', new Uri(''), ['el1', 'el2']);
         $request->setVersion(SOAP_1_2);
         $request->setAuth('user', 'passwd');
-
     }
 
     /**

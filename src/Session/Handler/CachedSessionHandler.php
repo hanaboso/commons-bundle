@@ -60,8 +60,7 @@ class CachedSessionHandler implements SessionHandlerInterface
         $timeKey = sprintf('%s%s%s', self::APCU_TIME_KEY, self::APCU_DELIMITER, $sessionId);
 
         // return cached value if found in cache and is not too old
-        if (
-            count(apcu_exists([$dataKey, $timeKey])) === 2 &&
+        if (count(apcu_exists([$dataKey, $timeKey])) === 2 &&
             (DateTimeUtils::getUtcDateTime())->getTimestamp() < (int) apcu_fetch($timeKey) + $this->timeout
         ) {
             return (string) apcu_fetch($dataKey);
