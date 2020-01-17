@@ -140,7 +140,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
             'pf-repeat-interval'     => '10',
             'pf-repeat-max-hops'     => '20',
             'pf-repeat-hops'         => '15',
-            'pf-repeat-queue'        => (string) 'queue',
+            'pf-repeat-queue'        => 'queue',
         ];
     }
 

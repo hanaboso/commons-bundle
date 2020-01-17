@@ -73,7 +73,6 @@ final class FtpServiceTest extends TestCase
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->downloadFile('abc');
 
-        self::assertInstanceOf(SplFileInfo::class, $result);
         self::assertEquals('abc', $result->getBasename());
     }
 
@@ -104,8 +103,6 @@ final class FtpServiceTest extends TestCase
         $result = $service->downloadFiles('abc');
 
         self::assertCount(2, $result);
-        self::assertInstanceOf(SplFileInfo::class, $result[0]);
-        self::assertInstanceOf(SplFileInfo::class, $result[1]);
         self::assertEquals('abc', $result[0]->getBasename());
         self::assertEquals('def', $result[1]->getBasename());
     }

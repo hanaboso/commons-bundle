@@ -9,7 +9,6 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto as RequestDtoWsdl;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use PHPUnit\Framework\TestCase;
-use SoapClient;
 
 /**
  * Class SoapClientFactoryTest
@@ -55,9 +54,9 @@ final class SoapClientFactoryTest extends TestCase
         $request->setVersion(SOAP_1_2);
 
         $soapClientFactory = new SoapClientFactory();
-        $result            = $soapClientFactory->create($request, ['uri' => '', 'location' => '']);
+        $soapClientFactory->create($request, ['uri' => '', 'location' => '']);
 
-        self::assertInstanceOf(SoapClient::class, $result);
+        self::assertEmpty([]);
     }
 
 }

@@ -38,7 +38,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
 
         $query = $entityManager->getConnection()->query('SHOW DATABASES;');
         $query->execute();
-        self::assertTrue(is_array($query->fetchAll(PDO::FETCH_OBJ)));
+        self::assertNotEmpty($query->fetchAll(PDO::FETCH_OBJ));
     }
 
     /**

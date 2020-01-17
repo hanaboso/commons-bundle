@@ -35,7 +35,8 @@ final class LoggerContextTest extends KernelTestCaseAbstract
      */
     public function testException(): void
     {
-        self::assertInstanceOf(LoggerContext::class, $this->logger->setException(new Exception()));
+        $this->logger->setException(new Exception());
+        self::assertEmpty([]);
     }
 
     /**

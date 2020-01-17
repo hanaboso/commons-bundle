@@ -19,7 +19,6 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
-use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -67,7 +66,6 @@ final class CurlManagerTest extends TestCase
         $curlManager->setTimeout(5);
         $result = $curlManager->send($requestDto);
 
-        self::assertInstanceOf(ResponseDto::class, $result);
         self::assertEquals(200, $result->getStatusCode());
         self::assertEquals('OK', $result->getReasonPhrase());
         self::assertEquals(['header_key' => ['header_value']], $result->getHeaders());

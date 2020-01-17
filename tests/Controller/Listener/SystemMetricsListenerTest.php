@@ -19,20 +19,6 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 {
 
     /**
-     * @var SystemMetricsListener
-     */
-    private $listener;
-
-    /**
-     *
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->listener = self::$container->get('hbpf.system_metrics_listener');
-    }
-
-    /**
      *
      */
     public function testListenerWithoutPipesHeader(): void
@@ -84,7 +70,7 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
                 KernelEvents::TERMINATE  => 'onKernelTerminate',
                 KernelEvents::CONTROLLER => 'onKernelController',
             ],
-            $this->listener->getSubscribedEvents()
+            SystemMetricsListener::getSubscribedEvents()
         );
     }
 

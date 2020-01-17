@@ -10,7 +10,6 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
-use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
 use Psr\Http\Message\StreamInterface;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -82,9 +81,8 @@ final class S3DriverTest extends KernelTestCaseAbstract
         $uploadedFile = new UploadedFile($this->path, '');
         $file         = $driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
 
-        self::assertInstanceOf(FileInfoDto::class, $file);
+        $file->getSize();
         self::assertEquals(file_get_contents($this->path), $driver->get($file->getUrl()));
-        self::assertIsString($file->getSize());
 
         self::expectException(FileStorageException::class);
         self::expectExceptionCode(FileStorageException::FILE_NOT_FOUND);

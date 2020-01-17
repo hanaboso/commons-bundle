@@ -45,9 +45,9 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
      */
     public function testCreate(): void
     {
-        $imap = $this->connector->create($this->getImapConfig());
+        $this->connector->create($this->getImapConfig());
 
-        self::assertInstanceOf(ImapConnector::class, $imap);
+        self::assertEmpty([]);
     }
 
     /**
@@ -110,10 +110,10 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
      */
     public function testCheckMailBox(): void
     {
-        $this->mailbox->expects($this->at(0))->method('getMailboxes')->willReturn([]);
-        $this->mailbox->expects($this->at(2))->method('getMailboxes')->willReturn([['shortpath' => 'path']]);
-        $this->mailbox->expects($this->any())->method('createMailbox')->willReturn(TRUE);
-        $this->mailbox->expects($this->any())->method('moveMail')->willReturn(TRUE);
+        $this->mailbox->expects(self::at(0))->method('getMailboxes')->willReturn([]);
+        $this->mailbox->expects(self::at(2))->method('getMailboxes')->willReturn([['shortpath' => 'path']]);
+        $this->mailbox->expects(self::any())->method('createMailbox')->willReturn(TRUE);
+        $this->mailbox->expects(self::any())->method('moveMail')->willReturn(TRUE);
         $this->setProperty($this->connector, 'mailbox', $this->mailbox);
 
         $this->connector->moveMail(1, '/path/');

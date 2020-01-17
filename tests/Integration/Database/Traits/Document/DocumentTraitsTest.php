@@ -3,7 +3,6 @@
 namespace CommonsBundleTests\Integration\Database\Traits\Document;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
-use DateTime;
 use Exception;
 
 /**
@@ -34,9 +33,9 @@ final class DocumentTraitsTest extends DatabaseTestCaseAbstract
         $document->setDeleted(FALSE);
         $document->preUpdate();
 
-        self::assertInstanceOf(DateTime::class, $document->getCreated());
-        self::assertInstanceOf(DateTime::class, $document->getUpdated());
-        self::assertIsString($document->getId());
+        $document->getCreated();
+        $document->getUpdated();
+        $document->getId();
         self::assertFalse($document->isDeleted());
     }
 

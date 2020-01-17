@@ -3,7 +3,6 @@
 namespace CommonsBundleTests\Integration\Database\Traits\Entity;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
-use DateTime;
 use Exception;
 use Hanaboso\Utils\Exception\DateTimeException;
 
@@ -36,9 +35,9 @@ final class EntityTraitsTest extends DatabaseTestCaseAbstract
         $entity->setDeleted(FALSE);
         $entity->preUpdate();
 
-        self::assertInstanceOf(DateTime::class, $entity->getCreated());
-        self::assertInstanceOf(DateTime::class, $entity->getUpdated());
-        self::assertIsString($entity->getId());
+        $entity->getCreated();
+        $entity->getUpdated();
+        $entity->getId();
         self::assertFalse($entity->isDeleted());
     }
 

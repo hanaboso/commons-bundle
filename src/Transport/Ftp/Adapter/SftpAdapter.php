@@ -90,7 +90,7 @@ class SftpAdapter implements FtpAdapterInterface
 
         $files = [];
         foreach ($list as $item) {
-            if (!in_array($item, ['.', '..'])) {
+            if (!in_array($item, ['.', '..'], TRUE)) {
                 $files[] = $item;
             }
         }

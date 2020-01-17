@@ -7,7 +7,6 @@ use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
-use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
@@ -58,7 +57,6 @@ final class SoapManagerTest extends TestCase
         $soapManager->setMetricsSender($loader);
         $result = $soapManager->send($request);
 
-        self::assertInstanceOf(ResponseDto::class, $result);
         self::assertEquals($soapCallResponse, $result->getSoapCallResponse());
         self::assertEquals($lastResponseHeaders, $result->getLastResponseHeaders());
         self::assertInstanceOf(ResponseHeaderDto::class, $result->getResponseHeaderDto());
@@ -86,13 +84,12 @@ final class SoapManagerTest extends TestCase
         $request->setAuth('user', 'passwd');
 
         $soapManager = new SoapManager($soapClientFactory);
-        $result      = $soapManager->send($request);
-
-        self::assertInstanceOf(ResponseDto::class, $result);
+        $soapManager->send($request);
 
         $request = new RequestDto('', [], 'namespace', new Uri(''), ['el1', 'el2']);
         $request->setVersion(SOAP_1_2);
         $request->setAuth('user', 'passwd');
+        self::assertEmpty([]);
     }
 
     /**

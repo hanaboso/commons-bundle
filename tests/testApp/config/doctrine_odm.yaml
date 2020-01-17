@@ -33,12 +33,12 @@ doctrine_mongodb:
                     prefix: Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
                 TestDocument:
                     type: annotation
-                    dir: '%kernel.root_dir%/../tests/Integration/Database/Filters/ODM'
+                    dir: '%kernel.project_dir%/tests/Integration/Database/Filters/ODM'
                     is_bundle: false
                     prefix: CommonsBundleTests\Integration\Database\Filters\ODM
                 TestDocumentTrait:
                     type: annotation
-                    dir: '%kernel.root_dir%/../tests/Integration/Database/Traits/Document'
+                    dir: '%kernel.project_dir%/tests/Integration/Database/Traits/Document'
                     is_bundle: false
                     prefix: CommonsBundleTests\Integration\Database\Traits\Document
             filters:

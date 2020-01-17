@@ -208,7 +208,7 @@ final class ProcessDto
      */
     private function validateStatus(int $value): void
     {
-        if (!in_array($value, [self::DO_NOT_CONTINUE, self::SPLITTER_BATCH_END, self::STOP_AND_FAILED])) {
+        if (!in_array($value, [self::DO_NOT_CONTINUE, self::SPLITTER_BATCH_END, self::STOP_AND_FAILED], TRUE)) {
             throw new PipesFrameworkException(
                 'Value does not match with the required one',
                 PipesFrameworkException::WRONG_VALUE

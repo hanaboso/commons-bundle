@@ -33,7 +33,7 @@ final class SoapHelperTest extends TestCase
         $request = new RequestDtoNonWsdl('functionName', ['arguments'], 'namespace', new Uri(''), ['el1', 'el2']);
         $result  = SoapHelper::composeRequestHeaders($request);
 
-        self::assertIsArray($result);
+        self::assertNotEmpty($result);
     }
 
     /**
@@ -108,7 +108,7 @@ Content-Type: text/xml; charset="utf-8"
 Content-Length: nnnn';
         $result  = SoapHelper::parseResponseHeaders($headers);
 
-        self::assertTrue(is_array($result));
+        self::assertNotEmpty($result);
         self::assertArrayHasKey('version', $result);
         self::assertArrayHasKey('statusCode', $result);
         self::assertArrayHasKey('reason', $result);
@@ -118,7 +118,6 @@ Content-Length: nnnn';
         self::assertEquals(200, $result['statusCode']);
         self::assertEquals('OK', $result['reason']);
 
-        /** @var HeaderBag<mixed> $headerBag */
         $headerBag = $result['headers'];
         self::assertInstanceOf(HeaderBag::class, $headerBag);
 
@@ -136,7 +135,7 @@ Content-Length: nnnn';
     {
         $result = SoapHelper::parseResponseHeaders(NULL);
 
-        self::assertTrue(is_array($result));
+        self::assertNotEmpty($result);
         self::assertArrayHasKey('version', $result);
         self::assertArrayHasKey('statusCode', $result);
         self::assertArrayHasKey('reason', $result);

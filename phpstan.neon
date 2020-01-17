@@ -6,5 +6,5 @@ parameters:
         - tests/Live/*
     ignoreErrors:
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/test/testsCommonsBundleTests_KernelTestDebugContainer.xml
+        container_xml_path: %rootDir%/../../../var/cache/test/CommonsBundleTests_KernelTestDebugContainer.xml
 

@@ -245,7 +245,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     {
         $this->mockSftpFn(['isConnected' => TRUE, 'is_dir' => TRUE]);
 
-        self::assertTRUE($this->adapter->dirExists('dir'));
+        self::assertTrue($this->adapter->dirExists('dir'));
     }
 
     /**

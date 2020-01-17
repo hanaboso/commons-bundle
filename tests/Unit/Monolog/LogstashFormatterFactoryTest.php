@@ -3,7 +3,6 @@
 namespace CommonsBundleTests\Unit\Monolog;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
-use Hanaboso\CommonsBundle\Monolog\LogstashFormatter;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatterFactory;
 
 /**
@@ -20,8 +19,9 @@ final class LogstashFormatterFactoryTest extends KernelTestCaseAbstract
     public function testCreate(): void
     {
         $formatter = new LogstashFormatterFactory();
+        $formatter->create('test');
 
-        self::assertInstanceOf(LogstashFormatter::class, $formatter->create('test'));
+        self::assertEmpty([]);
     }
 
 }

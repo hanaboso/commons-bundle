@@ -18,17 +18,17 @@ final class NodeServiceLoaderUtilTest extends KernelTestCaseAbstract
      */
     public function testGetServices(): void
     {
-        $path = self::$container->getParameter('kernel.root_dir');
+        $path = self::$container->getParameter('kernel.project_dir');
 
         $dirs     = [
-            sprintf('%s/testApp/config/', $path),
+            sprintf('%s/tests/testApp/config/', $path),
         ];
         $services = NodeServiceLoader::getServices($dirs, 'hbpf.connector');
 
         self::assertNotEmpty($services);
-        self::assertTrue(in_array('null', $services));
-        self::assertFalse(in_array('_defaults', $services));
-        self::assertFalse(in_array('requestbin', $services));
+        self::assertTrue(in_array('null', $services, TRUE));
+        self::assertFalse(in_array('_defaults', $services, TRUE));
+        self::assertFalse(in_array('requestbin', $services, TRUE));
 
         $services = NodeServiceLoader::getServices($dirs, 'hbpf.connector', ['null']);
         self::assertEquals(['null1', 'null2'], $services);

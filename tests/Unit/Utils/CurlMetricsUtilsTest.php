@@ -35,7 +35,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $influx
             ->expects(self::any())
             ->method('send')->will(
-                $this->returnCallback(
+                self::returnCallback(
                     static function (array $times, array $data): bool {
                         $data;
 

@@ -84,7 +84,7 @@ abstract class RequestDtoAbstract
      */
     public function setVersion(int $version)
     {
-        if (!in_array($version, [SOAP_1_1, SOAP_1_2])) {
+        if (!in_array($version, [SOAP_1_1, SOAP_1_2], TRUE)) {
             throw new SoapException(
                 sprintf('Unknown SOAP version "%s".', $version),
                 SoapException::UNKNOWN_SOAP_VERSION

@@ -3,7 +3,6 @@
 namespace CommonsBundleTests\Integration\FileStorage\Driver\Impl\Mongo;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
-use DateTimeInterface;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo;
 use Hanaboso\Utils\Date\DateTimeUtils;
 use Hanaboso\Utils\Exception\DateTimeException;
@@ -37,10 +36,10 @@ final class FileMongoTest extends DatabaseTestCaseAbstract
             ->setLength(100)
             ->setUploadDate(DateTimeUtils::getUtcDateTime());
 
+        $mongo->getUploadDate();
         self::assertEquals('name', $mongo->getFilename());
         self::assertEquals(100, $mongo->getChunkSize());
         self::assertEquals(100, $mongo->getLength());
-        self::assertInstanceOf(DateTimeInterface::class, $mongo->getUploadDate());
     }
 
 }

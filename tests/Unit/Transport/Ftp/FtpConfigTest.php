@@ -41,7 +41,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
      */
     public function testIsSsl(): void
     {
-        self::assertTRUE($this->config->isSsl());
+        self::assertTrue($this->config->isSsl());
     }
 
     /**

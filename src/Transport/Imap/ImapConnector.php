@@ -57,7 +57,7 @@ class ImapConnector
 
             $mails[] = [
                 self::ID           => (string) $mail->id,
-                self::TIME         => DateTimeUtils::getUTCDateTime($mail->date),
+                self::TIME         => DateTimeUtils::getUtcDateTime($mail->date),
                 self::FROM_ADDRESS => $mail->fromAddress,
                 self::SUBJECT      => $mail->subject ?? '',
             ];

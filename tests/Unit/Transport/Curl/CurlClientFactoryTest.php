@@ -2,7 +2,6 @@
 
 namespace CommonsBundleTests\Unit\Transport\Curl;
 
-use GuzzleHttp\Client;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -20,9 +19,9 @@ final class CurlClientFactoryTest extends TestCase
     public function testCreate(): void
     {
         $curlClientFactory = new CurlClientFactory();
-        $result            = $curlClientFactory->create();
+        $curlClientFactory->create();
 
-        self::assertInstanceOf(Client::class, $result);
+        self::assertEmpty([]);
     }
 
 }

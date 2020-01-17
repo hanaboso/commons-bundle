@@ -20,12 +20,12 @@ doctrine:
         mappings:
             TestEntity:
                 type: annotation
-                dir: '%kernel.root_dir%/../tests/Integration/Database/Filters/ORM'
+                dir: '%kernel.project_dir%/tests/Integration/Database/Filters/ORM'
                 is_bundle: false
                 prefix: CommonsBundleTests\Integration\Database\Filters\ORM
             TestEntityTrait:
                 type: annotation
-                dir: '%kernel.root_dir%/../tests/Integration/Database/Traits/Entity'
+                dir: '%kernel.project_dir%/tests/Integration/Database/Traits/Entity'
                 is_bundle: false
                 prefix: CommonsBundleTests\Integration\Database\Traits\Entity
         filters:

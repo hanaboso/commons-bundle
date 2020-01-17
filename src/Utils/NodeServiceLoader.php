@@ -29,7 +29,7 @@ final class NodeServiceLoader
             $finder->name(['*.yaml'])->in($dir);
 
             foreach ($finder as $file) {
-                $list = Yaml::parse((string) $file->getContents(), Yaml::PARSE_CUSTOM_TAGS);
+                $list = Yaml::parse($file->getContents(), Yaml::PARSE_CUSTOM_TAGS);
 
                 foreach (array_keys($list['services'] ?? []) as $key) {
                     if (strrpos((string) $key, $nodeType) !== 0) {
@@ -37,12 +37,12 @@ final class NodeServiceLoader
                     }
 
                     $shortened = str_replace(sprintf('%s.', $nodeType), '', (string) $key);
-                    if (in_array($shortened, $exclude)) {
+                    if (in_array($shortened, $exclude, TRUE)) {
                         unset($exclude[$shortened]);
 
                         continue;
                     }
-                    if (in_array($shortened, $res)) {
+                    if (in_array($shortened, $res, TRUE)) {
                         continue;
                     }
                     $res[] = $shortened;

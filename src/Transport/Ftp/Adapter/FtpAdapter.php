@@ -41,11 +41,9 @@ class FtpAdapter implements FtpAdapterInterface
      */
     public function disconnect(): void
     {
-        if (is_resource($this->getResource())) {
-            $res = @ftp_close($this->getResource());
-            if ($res === FALSE) {
-                throw new FtpException('Connection close failed.', FtpException::CONNECTION_CLOSE_FAILED);
-            }
+        $res = @ftp_close($this->getResource());
+        if ($res === FALSE) {
+            throw new FtpException('Connection close failed.', FtpException::CONNECTION_CLOSE_FAILED);
         }
     }
 

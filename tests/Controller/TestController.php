@@ -3,7 +3,6 @@
 namespace CommonsBundleTests\Controller;
 
 use Hanaboso\Utils\Traits\ControllerTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package CommonsBundleTests\Controller
  */
-class TestController extends AbstractController
+class TestController
 {
 
     use ControllerTrait;
