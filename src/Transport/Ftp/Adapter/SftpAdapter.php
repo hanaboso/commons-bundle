@@ -192,6 +192,17 @@ class SftpAdapter implements FtpAdapterInterface
         }
     }
 
+    /**
+     * @param string $file
+     *
+     * @return bool
+     * @throws FtpException
+     */
+    public function isFile(string $file): bool
+    {
+        return $this->getResource()->is_file($file);
+    }
+
     /**************************************** HELPERS ****************************************/
 
     /**
@@ -205,17 +216,6 @@ class SftpAdapter implements FtpAdapterInterface
         }
 
         throw new FtpException('Connection to Ftp server not established.', FtpException::CONNECTION_NOT_ESTABLISHED);
-    }
-
-    /**
-     * @param string $file
-     *
-     * @return bool
-     * @throws FtpException
-     */
-    public function isFile(string $file): bool
-    {
-        return $this->getResource()->is_file($file);
     }
 
 }

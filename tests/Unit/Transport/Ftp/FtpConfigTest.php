@@ -19,15 +19,6 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     private FtpConfig $config;
 
     /**
-     *
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->config = new FtpConfig('host', TRUE, 222, 5, 'guest', 'guest');
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig::getHost
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig
      */
@@ -74,6 +65,16 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     public function testGetPassword(): void
     {
         self::assertEquals('guest', $this->config->getPassword());
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->config = new FtpConfig('host', TRUE, 222, 5, 'guest', 'guest');
     }
 
 }

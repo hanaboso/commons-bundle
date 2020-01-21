@@ -48,11 +48,7 @@ class FtpServiceFactory implements LoggerAwareInterface
      * @param SftpAdapter        $sftpAdapter
      * @param ContainerInterface $container
      */
-    public function __construct(
-        FtpAdapter $ftpAdapter,
-        SftpAdapter $sftpAdapter,
-        ContainerInterface $container
-    )
+    public function __construct(FtpAdapter $ftpAdapter, SftpAdapter $sftpAdapter, ContainerInterface $container)
     {
         $this->ftpAdapter  = $ftpAdapter;
         $this->sftpAdapter = $sftpAdapter;

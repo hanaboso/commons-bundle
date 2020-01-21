@@ -12,11 +12,11 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 final class NodeException extends PipesFrameworkExceptionAbstract
 {
 
-    protected const OFFSET = 2_300;
-
     public const INVALID_TYPE                        = self::OFFSET + 1;
     public const INVALID_HANDLER                     = self::OFFSET + 2;
     public const NODE_NOT_FOUND                      = self::OFFSET + 3;
     public const DISALLOWED_ACTION_ON_NON_EVENT_NODE = self::OFFSET + 4;
+
+    protected const OFFSET = 2_300;
 
 }

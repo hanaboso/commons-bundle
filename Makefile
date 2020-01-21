@@ -39,7 +39,7 @@ database-create:
 	$(DE) php tests/testApp/bin/console doctrine:database:drop --force --env=test || true
 	$(DE) php tests/testApp/bin/console doctrine:database:create --env=test
 	$(DE) php tests/testApp/bin/console doctrine:schema:create --env=test
-	for i in 1 2 3 4 5 6 7 8; do \
+	for i in 1 2 3 4 ; do \
 			$(DM) /bin/bash -c "mysql -uroot -proot <<< 'DROP DATABASE IF EXISTS commons$$i;'" ; \
 			$(DM) /bin/bash -c "mysql -uroot -proot <<< 'CREATE DATABASE commons$$i CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'" ; \
 			$(DM) /bin/bash -c "mysqldump -uroot -proot commons | mysql -uroot -proot commons$$i" ; \
@@ -67,7 +67,7 @@ phpcoverage:
 	$(DE) php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-html var/coverage --whitelist src tests
 
 phpcoverage-ci:
-	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh
+	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh -p 4
 
 test: docker-up-force composer-install fasttest
 

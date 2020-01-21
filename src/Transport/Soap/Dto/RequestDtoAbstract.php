@@ -49,6 +49,11 @@ abstract class RequestDtoAbstract
     private Uri $uri;
 
     /**
+     * @return string
+     */
+    abstract public function getType(): string;
+
+    /**
      * RequestDtoAbstract constructor.
      *
      * @param string  $function
@@ -149,11 +154,6 @@ abstract class RequestDtoAbstract
     {
         return $this->header;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getType(): string;
 
     /**
      * @return Uri

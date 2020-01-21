@@ -103,22 +103,6 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     }
 
     /**
-     * @return mixed[]
-     */
-    public static function getMethods(): array
-    {
-        return [
-            self::METHOD_GET,
-            self::METHOD_POST,
-            self::METHOD_HEAD,
-            self::METHOD_PUT,
-            self::METHOD_DELETE,
-            self::METHOD_OPTIONS,
-            self::METHOD_PATCH,
-        ];
-    }
-
-    /**
      * @param RequestDto $dto
      * @param mixed[]    $options
      *
@@ -206,13 +190,19 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     }
 
     /**
-     * @param RequestDto $dto
-     *
-     * @return Request
+     * @return mixed[]
      */
-    private function createRequest(RequestDto $dto): Request
+    public static function getMethods(): array
     {
-        return new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
+        return [
+            self::METHOD_GET,
+            self::METHOD_POST,
+            self::METHOD_HEAD,
+            self::METHOD_PUT,
+            self::METHOD_DELETE,
+            self::METHOD_OPTIONS,
+            self::METHOD_PATCH,
+        ];
     }
 
     /**
@@ -270,8 +260,11 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      *
      * @return CurlException
      */
-    protected function throwCurlError(Throwable $t, ?string $message = NULL,
-                                      ?ResponseInterface $response = NULL): CurlException
+    protected function throwCurlError(
+        Throwable $t,
+        ?string $message = NULL,
+        ?ResponseInterface $response = NULL
+    ): CurlException
     {
         return new CurlException(
             sprintf('CurlManager::send() failed: %s', $message ?? $t->getMessage()),
@@ -279,6 +272,16 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
             $t->getPrevious(),
             $response
         );
+    }
+
+    /**
+     * @param RequestDto $dto
+     *
+     * @return Request
+     */
+    private function createRequest(RequestDto $dto): Request
+    {
+        return new Request($dto->getMethod(), $dto->getUri(), $dto->getHeaders(), $dto->getBody());
     }
 
     /**

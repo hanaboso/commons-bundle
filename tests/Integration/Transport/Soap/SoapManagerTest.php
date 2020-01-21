@@ -23,18 +23,6 @@ final class SoapManagerTest extends KernelTestCaseAbstract
     private SoapManager $soap;
 
     /**
-     *
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        /** @var SoapManager $soapManager */
-        $soapManager = self::$container->get('hbpf.transport.soap_manager');
-        $this->soap  = $soapManager;
-    }
-
-    /**
      * @throws Exception
      */
     public function testSendInvalidWsdl(): void
@@ -44,6 +32,18 @@ final class SoapManagerTest extends KernelTestCaseAbstract
 
         $requestDto = (new RequestDto('function', [], 'namespcae', new Uri('http://google.cz')))->setVersion(1);
         self::assertEquals(200, $this->soap->send($requestDto)->getLastResponseHeaders());
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        /** @var SoapManager $soapManager */
+        $soapManager = self::$container->get('hbpf.transport.soap_manager');
+        $this->soap  = $soapManager;
     }
 
 }

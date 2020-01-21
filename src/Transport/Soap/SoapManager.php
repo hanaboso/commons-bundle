@@ -135,6 +135,30 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     }
 
     /**
+     * @param RequestDtoAbstract $dto
+     *
+     * @throws CurlException
+     */
+    protected function sendMetrics(RequestDtoAbstract $dto): void
+    {
+        if ($this->metricsSender !== NULL) {
+            $info  = $dto->getHeader()->getParams();
+            $times = CurlMetricUtils::getTimes($this->startTimes);
+
+            try {
+                CurlMetricUtils::sendCurlMetrics(
+                    $this->metricsSender->getSender(),
+                    $times,
+                    $info['node_id'][0] ?? NULL,
+                    $info['correlation_id'][0] ?? NULL
+                );
+            } catch (Exception $e) {
+                throw new CurlException($e->getMessage(), $e->getCode(), $e);
+            }
+        }
+    }
+
+    /**
      * @param mixed              $soapCallResponse
      * @param string             $lastResponseHeaders
      * @param mixed[]            $outputHeaders
@@ -217,30 +241,6 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         }
 
         return mb_substr($string, 0, -2);
-    }
-
-    /**
-     * @param RequestDtoAbstract $dto
-     *
-     * @throws CurlException
-     */
-    protected function sendMetrics(RequestDtoAbstract $dto): void
-    {
-        if ($this->metricsSender !== NULL) {
-            $info  = $dto->getHeader()->getParams();
-            $times = CurlMetricUtils::getTimes($this->startTimes);
-
-            try {
-                CurlMetricUtils::sendCurlMetrics(
-                    $this->metricsSender->getSender(),
-                    $times,
-                    $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL
-                );
-            } catch (Exception $e) {
-                throw new CurlException($e->getMessage(), $e->getCode(), $e);
-            }
-        }
     }
 
 }

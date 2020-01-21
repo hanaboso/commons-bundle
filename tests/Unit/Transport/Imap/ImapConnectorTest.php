@@ -31,16 +31,6 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     private ImapConnector $connector;
 
     /**
-     *
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->mailbox   = self::createMock(Mailbox::class);
-        $this->connector = new ImapConnector();
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::create
      */
     public function testCreate(): void
@@ -118,6 +108,17 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
 
         $this->connector->moveMail(1, '/path/');
         self::assertTrue(TRUE);
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->mailbox   = self::createMock(Mailbox::class);
+        $this->connector = new ImapConnector();
     }
 
     /**

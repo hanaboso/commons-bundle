@@ -50,14 +50,7 @@ class FtpConfig
      * @param string $username
      * @param string $password
      */
-    public function __construct(
-        string $host,
-        bool $ssl,
-        int $port,
-        int $timeout,
-        string $username,
-        string $password
-    )
+    public function __construct(string $host, bool $ssl, int $port, int $timeout, string $username, string $password)
     {
         $this->host     = $host;
         $this->ssl      = $ssl;

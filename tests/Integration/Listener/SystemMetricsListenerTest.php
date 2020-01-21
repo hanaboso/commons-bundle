@@ -27,15 +27,6 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
     private $listener;
 
     /**
-     * @throws Exception
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->listener = self::$container->get('hbpf.system_metrics_listener');
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Listener\SystemMetricsListener::onKernelController
      */
     public function testOnKernelController(): void
@@ -64,6 +55,16 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
 
         $this->listener->onKernelTerminate($event);
         self::assertTrue(TRUE);
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->listener = self::$container->get('hbpf.system_metrics_listener');
     }
 
 }

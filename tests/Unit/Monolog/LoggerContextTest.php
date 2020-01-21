@@ -22,15 +22,6 @@ final class LoggerContextTest extends KernelTestCaseAbstract
     private LoggerContext $logger;
 
     /**
-     *
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->logger = new LoggerContext();
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LoggerContext::setException
      */
     public function testException(): void
@@ -60,6 +51,16 @@ final class LoggerContextTest extends KernelTestCaseAbstract
             )
             ->setException(new Exception());
         self::assertEquals(6, count($this->logger->toArray()));
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->logger = new LoggerContext();
     }
 
 }

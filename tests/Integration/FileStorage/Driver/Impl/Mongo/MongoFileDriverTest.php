@@ -22,18 +22,6 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     private MongoFileDriver $driver;
 
     /**
-     * @throws Exception
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        /** @var MongoFileDriver $containerDriver */
-        $containerDriver = self::$container->get('hbpf.file_storage.driver.mongo');
-        $this->driver    = $containerDriver;
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save()
      * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::get()
      * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::delete()
@@ -97,6 +85,18 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
         $this->dm->close();
         self::expectException(FileStorageException::class);
         $this->driver->delete($fileInfo->getUrl());
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        /** @var MongoFileDriver $containerDriver */
+        $containerDriver = self::$container->get('hbpf.file_storage.driver.mongo');
+        $this->driver    = $containerDriver;
     }
 
 }

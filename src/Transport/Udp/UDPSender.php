@@ -113,30 +113,6 @@ class UDPSender implements LoggerAwareInterface
     }
 
     /**
-     * Returns socket resource or null if socket cannot be created
-     *
-     * @return resource|null
-     */
-    private function getSocket()
-    {
-        if ($this->socket && socket_last_error($this->socket) != 0) {
-            $this->socket = NULL;
-        }
-
-        if (!$this->socket) {
-            $socket = @socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-            if ($socket === FALSE) {
-                $this->logger->error(sprintf('Cannot create udp socket: %s', socket_strerror(socket_last_error())));
-                $socket = NULL;
-            }
-
-            $this->socket = $socket;
-        }
-
-        return $this->socket;
-    }
-
-    /**
      * Returns the ip addr for the hostname
      * Does the periodical checks
      *
@@ -162,6 +138,30 @@ class UDPSender implements LoggerAwareInterface
         apcu_store(sprintf('%s%s', self::APCU_REFRESH, $host), $this->lastIPRefresh);
 
         return $this->ip;
+    }
+
+    /**
+     * Returns socket resource or null if socket cannot be created
+     *
+     * @return resource|null
+     */
+    private function getSocket()
+    {
+        if ($this->socket && socket_last_error($this->socket) != 0) {
+            $this->socket = NULL;
+        }
+
+        if (!$this->socket) {
+            $socket = @socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+            if ($socket === FALSE) {
+                $this->logger->error(sprintf('Cannot create udp socket: %s', socket_strerror(socket_last_error())));
+                $socket = NULL;
+            }
+
+            $this->socket = $socket;
+        }
+
+        return $this->socket;
     }
 
     /**

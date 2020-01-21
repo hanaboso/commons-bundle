@@ -24,15 +24,6 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     private $factory;
 
     /**
-     *
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->factory = self::$container->get('hbpf.ftp.service.factory');
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory
      *
@@ -77,6 +68,16 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     {
         $this->factory->setLogger(new Logger('logger'));
         self::assertTrue(TRUE);
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = self::$container->get('hbpf.ftp.service.factory');
     }
 
 }

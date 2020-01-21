@@ -21,15 +21,6 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     private RequestDto $dto;
 
     /**
-     *
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->dto = new RequestDto('fn', [], '', new Uri());
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto::getType
      */
     public function testGetType(): void
@@ -79,6 +70,16 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     {
         self::expectException(SoapException::class);
         $this->dto->setVersion(5);
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->dto = new RequestDto('fn', [], '', new Uri());
     }
 
 }

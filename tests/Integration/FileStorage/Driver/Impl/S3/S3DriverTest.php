@@ -38,16 +38,6 @@ final class S3DriverTest extends KernelTestCaseAbstract
     private string $path = '';
 
     /**
-     *
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->path = sprintf('%s/data/Attachment.jpeg', __DIR__);
-    }
-
-    /**
      * @throws Exception
      */
     public function testDriver(): void
@@ -116,6 +106,16 @@ final class S3DriverTest extends KernelTestCaseAbstract
 
         self::expectException(FileStorageException::class);
         $driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->path = sprintf('%s/data/Attachment.jpeg', __DIR__);
     }
 
 }

@@ -14,11 +14,11 @@ use Throwable;
 final class CurlException extends PipesFrameworkExceptionAbstract
 {
 
-    protected const OFFSET = 300;
-
     public const INVALID_METHOD = self::OFFSET + 1;
     public const BODY_ON_GET    = self::OFFSET + 2;
     public const REQUEST_FAILED = self::OFFSET + 3;
+
+    protected const OFFSET = 300;
 
     /**
      * @var ResponseInterface|null

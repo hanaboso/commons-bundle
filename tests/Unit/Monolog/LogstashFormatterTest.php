@@ -26,16 +26,6 @@ final class LogstashFormatterTest extends TestCase
     private LogstashFormatter $logstashFormatter;
 
     /**
-     *
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->logstashFormatter = new LogstashFormatter('test-service');
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
      */
     public function testFormat(): void
@@ -147,23 +137,6 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed[] $message
-     *
-     * @return mixed[]
-     */
-    private function correctMessage(array $message): array
-    {
-        $message['timestamp'] = 1_505_381_163_375;
-        $message['hostname']  = 'localhost';
-
-        if (isset($message['stacktrace']['trace'])) {
-            $message['stacktrace']['trace'] = '';
-        }
-
-        return $message;
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
      */
     public function testContext(): void
@@ -207,6 +180,33 @@ final class LogstashFormatterTest extends TestCase
         $result    = $this->invokeMethod($this->logstashFormatter, 'normalizeException', [$exception]);
 
         self::assertEquals('detail', $result['detail']);
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->logstashFormatter = new LogstashFormatter('test-service');
+    }
+
+    /**
+     * @param mixed[] $message
+     *
+     * @return mixed[]
+     */
+    private function correctMessage(array $message): array
+    {
+        $message['timestamp'] = 1_505_381_163_375;
+        $message['hostname']  = 'localhost';
+
+        if (isset($message['stacktrace']['trace'])) {
+            $message['stacktrace']['trace'] = '';
+        }
+
+        return $message;
     }
 
 }

@@ -50,17 +50,6 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     }
 
     /**
-     * @return mixed[]
-     */
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            KernelEvents::TERMINATE  => 'onKernelTerminate',
-            KernelEvents::CONTROLLER => 'onKernelController',
-        ];
-    }
-
-    /**
      * Adds system metrics values to request object
      *
      * @param ControllerEvent $event
@@ -113,6 +102,17 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::TERMINATE  => 'onKernelTerminate',
+            KernelEvents::CONTROLLER => 'onKernelController',
+        ];
     }
 
     /**

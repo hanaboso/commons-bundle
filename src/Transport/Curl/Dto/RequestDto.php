@@ -67,6 +67,23 @@ class RequestDto
     }
 
     /**
+     * @param RequestDto  $dto
+     * @param Uri|null    $uri
+     * @param string|null $method
+     *
+     * @return RequestDto
+     * @throws CurlException
+     */
+    public static function from(RequestDto $dto, ?Uri $uri = NULL, ?string $method = NULL): RequestDto
+    {
+        $self = new self($method ?? $dto->getMethod(), $uri ?? new Uri((string) $dto->getUri(TRUE)));
+        $self->setHeaders($dto->getHeaders());
+        $self->debugInfo = $dto->getDebugInfo();
+
+        return $self;
+    }
+
+    /**
      * @return string
      */
     public function getMethod(): string
@@ -171,23 +188,6 @@ class RequestDto
         $this->debugInfo = PipesHeaders::debugInfo($dto->getHeaders());
 
         return $this;
-    }
-
-    /**
-     * @param RequestDto  $dto
-     * @param Uri|null    $uri
-     * @param string|null $method
-     *
-     * @return RequestDto
-     * @throws CurlException
-     */
-    public static function from(RequestDto $dto, ?Uri $uri = NULL, ?string $method = NULL): RequestDto
-    {
-        $self = new self($method ?? $dto->getMethod(), $uri ?? new Uri((string) $dto->getUri(TRUE)));
-        $self->setHeaders($dto->getHeaders());
-        $self->debugInfo = $dto->getDebugInfo();
-
-        return $self;
     }
 
 }

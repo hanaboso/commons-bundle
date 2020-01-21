@@ -13,6 +13,7 @@ final class DatabaseFilterEnum extends EnumAbstract
 {
 
     public const DELETED = 'deleted';
+
     /**
      * @var string[]
      */

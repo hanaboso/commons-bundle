@@ -12,8 +12,6 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 class FtpException extends PipesFrameworkExceptionAbstract
 {
 
-    protected const OFFSET = 2_500;
-
     public const CONNECTION_FAILED          = self::OFFSET + 1;
     public const CONNECTION_CLOSE_FAILED    = self::OFFSET + 2;
     public const LOGIN_FAILED               = self::OFFSET + 3;
@@ -24,5 +22,7 @@ class FtpException extends PipesFrameworkExceptionAbstract
     public const FILES_LISTING_FAILED       = self::OFFSET + 8;
     public const UNKNOWN_ADAPTER_TYPE       = self::OFFSET + 9;
     public const CREATING_SUBSYSTEM_FAILED  = self::OFFSET + 10;
+
+    protected const OFFSET = 2_500;
 
 }

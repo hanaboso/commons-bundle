@@ -13,6 +13,12 @@ use Hanaboso\Utils\System\PipesHeaders;
 final class ProcessDto
 {
 
+    public const OK                 = 0;
+    public const REPEAT             = 1_001;
+    public const DO_NOT_CONTINUE    = 1_003;
+    public const SPLITTER_BATCH_END = 1_005;
+    public const STOP_AND_FAILED    = 1_006;
+
     /**
      * @var string
      */
@@ -22,12 +28,6 @@ final class ProcessDto
      * @var mixed[]
      */
     private array $headers;
-
-    public const OK                 = 0;
-    public const REPEAT             = 1_001;
-    public const DO_NOT_CONTINUE    = 1_003;
-    public const SPLITTER_BATCH_END = 1_005;
-    public const STOP_AND_FAILED    = 1_006;
 
     /**
      * ProcessDto constructor.

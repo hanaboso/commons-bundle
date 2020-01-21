@@ -40,12 +40,7 @@ class ResponseDto
      * @param string  $body
      * @param mixed[] $headers
      */
-    public function __construct(
-        int $statusCode,
-        string $reasonPhrase,
-        string $body,
-        array $headers
-    )
+    public function __construct(int $statusCode, string $reasonPhrase, string $body, array $headers)
     {
         $this->statusCode   = $statusCode;
         $this->reasonPhrase = $reasonPhrase;
