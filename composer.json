@@ -1,6 +1,6 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
@@ -15,10 +15,12 @@
     "require": {
         "php": "^7.4",
         "ext-apcu": "*",
+        "ext-ctype": "*",
         "ext-ftp": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
         "ext-json": "*",
+        "ext-mbstring": "*",
         "ext-pdo": "*",
         "ext-soap": "*",
         "ext-sockets": "*",
@@ -34,8 +36,16 @@
     },
     "require-dev": {
         "hanaboso/php-check-utils": "^1.1",
-        "symfony/mailer": "^4.4 | ^5.0",
+        "symfony/mailer": "^5.0",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/yaml": "^4.4 | ^5.0"
+        "symfony/yaml": "^5.0"
+    },
+    "replace": {
+        "ralouphie/getallheaders": "*",
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-intl-idn": "*",
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*"
     }
 }

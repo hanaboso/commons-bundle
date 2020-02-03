@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <ruleset name="HANABOSO_CODESTYLE">
-    <!-- Slevomat coding standards -->
     <rule ref="./vendor/hanaboso/php-check-utils/ruleset.xml"/>
     <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
         <properties>
-            <property name="rootNamespaces" type="array" value="src=>Hanaboso\CommonsBundle,tests=>CommonsBundleTests"/>
+            <property name="rootNamespaces" type="array">
+                <element key="src" value="Hanaboso\CommonsBundle"/>
+                <element key="tests" value="CommonsBundleTests"/>
+            </property>
         </properties>
     </rule>
-
 </ruleset>

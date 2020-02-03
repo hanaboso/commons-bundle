@@ -105,7 +105,7 @@ class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInte
     }
 
     /**
-     * @return mixed[]
+     * @return array<string, array<int|string, array<int|string, int|string>|int|string>|string>
      */
     public static function getSubscribedEvents(): array
     {

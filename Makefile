@@ -48,11 +48,11 @@ database-create:
 # App dev
 init-dev: docker-up-force composer-install
 
-codesniffer:
-	$(DE) ./vendor/bin/phpcs --standard=./ruleset.xml --colors -p src/ tests/
+phpcodesniffer:
+	$(DE) ./vendor/bin/phpcs --standard=./ruleset.xml src tests
 
 phpstan:
-	$(DE) ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 8 src/ tests/
+	$(DE) ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 8 src tests
 
 phpunit:
 	$(DE) ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 tests/Unit
@@ -64,11 +64,11 @@ phpcontroller:
 	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Controller
 
 phpcoverage:
-	$(DE) php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-html var/coverage --whitelist src tests
+	$(DE) ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-html var/coverage --whitelist src tests
 
 phpcoverage-ci:
 	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh -p 4
 
 test: docker-up-force composer-install fasttest
 
-fasttest: clear-cache codesniffer phpstan phpunit phpintegration phpcontroller phpcoverage-ci
+fasttest: clear-cache phpcodesniffer phpstan phpunit phpintegration phpcontroller phpcoverage-ci
