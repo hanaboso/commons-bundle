@@ -1,6 +1,6 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
@@ -39,13 +39,5 @@
         "symfony/mailer": "^5.0",
         "symfony/monolog-bundle": "^3.5",
         "symfony/yaml": "^5.0"
-    },
-    "replace": {
-        "ralouphie/getallheaders": "*",
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-intl-idn": "*",
-        "symfony/polyfill-mbstring": "*",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php73": "*"
     }
 }
