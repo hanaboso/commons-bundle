@@ -3,7 +3,6 @@
 namespace Hanaboso\CommonsBundle\Transport\Curl;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Request;
@@ -141,7 +140,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
             $this->logAfterError($exception, $dto, $message);
 
             throw $this->throwCurlError($exception, $message, $response);
-        } catch (Throwable | GuzzleException $exception) {
+        } catch (Throwable $exception) {
             $this->sendMetrics($dto);
             $this->logAfterError($exception, $dto);
 

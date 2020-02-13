@@ -83,7 +83,6 @@ class FileContentDto
      *
      * @return FileContentDto
      * @throws FileStorageException
-     * @throws EnumException
      */
     public function setStorageType(string $type): FileContentDto
     {

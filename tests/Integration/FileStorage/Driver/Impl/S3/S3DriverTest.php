@@ -11,7 +11,6 @@ use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
 use Psr\Http\Message\StreamInterface;
-use ReflectionException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -83,8 +82,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver::save
      *
-     * @throws FileStorageException
-     * @throws ReflectionException
+     * @throws Exception
      */
     public function testDriverErr(): void
     {

@@ -3,9 +3,9 @@
 namespace CommonsBundleTests\Integration\FileStorage\Document;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Document\File;
-use Hanaboso\Utils\Exception\EnumException;
 
 /**
  * Class FileTest
@@ -49,8 +49,7 @@ final class FileTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setFileFormat
      *
-     * @throws FileStorageException
-     * @throws EnumException
+     * @throws Exception
      */
     public function testFileFormatException(): void
     {
@@ -62,8 +61,7 @@ final class FileTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setStorageType
      *
-     * @throws EnumException
-     * @throws FileStorageException
+     * @throws Exception
      */
     public function testStorageTypeException(): void
     {

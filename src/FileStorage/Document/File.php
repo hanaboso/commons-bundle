@@ -98,7 +98,6 @@ class File implements FileInterface
      *
      * @return FileInterface
      * @throws FileStorageException
-     * @throws EnumException
      */
     public function setFileFormat(string $fileFormat): FileInterface
     {
@@ -178,7 +177,6 @@ class File implements FileInterface
      *
      * @return FileInterface
      * @throws FileStorageException
-     * @throws EnumException
      */
     public function setStorageType(string $storageType): FileInterface
     {

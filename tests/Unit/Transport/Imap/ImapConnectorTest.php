@@ -3,14 +3,13 @@
 namespace CommonsBundleTests\Unit\Transport\Imap;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConnector;
-use Hanaboso\Utils\Exception\DateTimeException;
 use PhpImap\IncomingMail;
 use PhpImap\IncomingMailHeader;
 use PhpImap\Mailbox;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 
 /**
  * Class ImapConnectorTest
@@ -32,6 +31,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::create
+     * @throws Exception
      */
     public function testCreate(): void
     {
@@ -44,8 +44,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::listMails
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::getMail
      *
-     * @throws ReflectionException
-     * @throws DateTimeException
+     * @throws Exception
      */
     public function testListMails(): void
     {
@@ -70,7 +69,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::deleteMail
      *
-     * @throws ReflectionException
+     * @throws Exception
      */
     public function testDeleteMail(): void
     {
@@ -84,7 +83,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::moveMail
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::checkMailbox
      *
-     * @throws ReflectionException
+     * @throws Exception
      */
     public function testMoveMail(): void
     {
@@ -96,7 +95,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::checkMailbox
-     * @throws ReflectionException
+     * @throws Exception
      */
     public function testCheckMailBox(): void
     {
@@ -132,7 +131,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     /**
      * @param mixed[] $fns
      *
-     * @throws ReflectionException
+     * @throws Exception
      */
     private function mockImapMailBox(array $fns): void
     {

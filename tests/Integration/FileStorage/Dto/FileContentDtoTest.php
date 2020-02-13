@@ -3,9 +3,9 @@
 namespace CommonsBundleTests\Integration\FileStorage\Dto;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto;
-use Hanaboso\Utils\Exception\EnumException;
 
 /**
  * Class FileContentDtoTest
@@ -26,8 +26,7 @@ final class FileContentDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto::getFormat
      * @covers \Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto::setFormat
      *
-     * @throws FileStorageException
-     * @throws EnumException
+     * @throws Exception
      */
     public function testFileContentDto(): void
     {
@@ -46,8 +45,7 @@ final class FileContentDtoTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto::setStorageType
      *
-     * @throws EnumException
-     * @throws FileStorageException
+     * @throws Exception
      */
     public function testSetStorage(): void
     {
@@ -60,8 +58,7 @@ final class FileContentDtoTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto::setFormat
      *
-     * @throws EnumException
-     * @throws FileStorageException
+     * @throws Exception
      */
     public function testSetFormat(): void
     {
