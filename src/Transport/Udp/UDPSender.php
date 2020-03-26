@@ -30,9 +30,9 @@ class UDPSender implements LoggerAwareInterface
     private LoggerInterface $logger;
 
     /**
-     * @var string
+     * @var string[]
      */
-    private string $ip;
+    private array $ips = [];
 
     /**
      * @var int
@@ -50,7 +50,6 @@ class UDPSender implements LoggerAwareInterface
     public function __construct()
     {
         $this->logger        = new NullLogger();
-        $this->ip            = '';
         $this->lastIPRefresh = 0;
 
         // limit the ip addr hostname resolution
@@ -124,20 +123,21 @@ class UDPSender implements LoggerAwareInterface
     public function refreshIp(string $host): string
     {
         // we want to refresh it only in predefined time periods
-        if (DateTimeUtils::getUtcDateTime()->getTimestamp() <= $this->lastIPRefresh + self::REFRESH_INTERVAL) {
-            return $this->ip;
+        if (DateTimeUtils::getUtcDateTime()->getTimestamp() <= $this->lastIPRefresh + self::REFRESH_INTERVAL &&
+            isset($this->ips[$host])) {
+            return $this->ips[$host];
         }
 
-        $this->ip            = $this->getIp($host);
+        $this->ips[$host]    = $this->getIp($host);
         $this->lastIPRefresh = DateTimeUtils::getUtcDateTime()->getTimestamp();
 
         apcu_delete(sprintf('%s%s', self::APCU_IP, $host));
         apcu_delete(sprintf('%s%s', self::APCU_REFRESH, $host));
 
-        apcu_store(sprintf('%s%s', self::APCU_IP, $host), $this->ip);
+        apcu_store(sprintf('%s%s', self::APCU_IP, $host), $this->ips[$host]);
         apcu_store(sprintf('%s%s', self::APCU_REFRESH, $host), $this->lastIPRefresh);
 
-        return $this->ip;
+        return $this->ips[$host];
     }
 
     /**

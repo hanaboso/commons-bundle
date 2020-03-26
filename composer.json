@@ -1,6 +1,6 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.0.7",
+    "version": "2.0.8",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
@@ -24,7 +24,7 @@
         "ext-pdo": "*",
         "ext-soap": "*",
         "ext-sockets": "*",
-        "aws/aws-sdk-php-symfony": "^2.1",
+        "aws/aws-sdk-php-symfony": "^2.2",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/mongodb-odm-bundle": "^4.1",
         "guzzlehttp/guzzle": "^6.5",
