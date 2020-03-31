@@ -86,7 +86,7 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
         return new FileStorage(
             new FileStorageDriverLocator($driver, $driver, $driver),
             $managerLocator,
-            'Hanaboso\CommonsBundle\FileStorage\Document\File'
+            File::class
         );
     }
 

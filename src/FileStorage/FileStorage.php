@@ -32,7 +32,8 @@ class FileStorage
     private $dm;
 
     /**
-     * @phpstan-var class-string<\Hanaboso\CommonsBundle\FileStorage\Document\File>
+     * @template T of \Hanaboso\CommonsBundle\FileStorage\Document\File
+     * @phpstan-var class-string<T>
      *
      * @var string
      */
@@ -41,7 +42,8 @@ class FileStorage
     /**
      * FileStorage constructor.
      *
-     * @phpstan-param class-string<\Hanaboso\CommonsBundle\FileStorage\Document\File> $fileNamespace
+     * @template T
+     * @phpstan-param class-string<T> $fileNamespace
      *
      * @param FileStorageDriverLocator $locator
      * @param DatabaseManagerLocator   $dm
