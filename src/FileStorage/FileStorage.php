@@ -9,6 +9,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
+use Hanaboso\CommonsBundle\FileStorage\Document\File;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileStorageDto;
@@ -32,7 +33,7 @@ class FileStorage
     private $dm;
 
     /**
-     * @template T of \Hanaboso\CommonsBundle\FileStorage\Document\File
+     * @template T of File
      * @phpstan-var class-string<T>
      *
      * @var string

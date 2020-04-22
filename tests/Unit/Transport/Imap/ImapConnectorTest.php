@@ -49,7 +49,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     public function testListMails(): void
     {
         $headers              = new IncomingMailHeader();
-        $headers->id          = '1';
+        $headers->id          = 1;
         $headers->date        = 'now';
         $headers->fromAddress = 'from@adrress.com';
 
