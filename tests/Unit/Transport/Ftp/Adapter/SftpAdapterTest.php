@@ -281,6 +281,17 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::rename
+     * @throws Exception
+     */
+    public function testRename(): void
+    {
+        $this->mockSftpFn(['isConnected' => TRUE, 'rename' => TRUE]);
+
+        self::assertTrue($this->adapter->rename('oldName', 'newName'));
+    }
+
+    /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove()
      *
      * @throws Exception

@@ -203,6 +203,18 @@ class SftpAdapter implements FtpAdapterInterface
         return $this->getResource()->is_file($file);
     }
 
+    /**
+     * @param string $oldName
+     * @param string $newName
+     *
+     * @return bool
+     * @throws FtpException
+     */
+    public function rename(string $oldName, string $newName): bool
+    {
+        return $this->getResource()->rename($oldName, $newName);
+    }
+
     /**************************************** HELPERS ****************************************/
 
     /**
