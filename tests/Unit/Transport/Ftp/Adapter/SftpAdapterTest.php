@@ -292,6 +292,16 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
+     * @throws Exception
+     */
+    public function testFileExits(): void
+    {
+        $this->mockSftpFn(['isConnected' => TRUE, 'file_exists' => TRUE]);
+
+        self::assertTrue($this->adapter->fileExists('/tmp/test.txt'));
+    }
+
+    /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove()
      *
      * @throws Exception
