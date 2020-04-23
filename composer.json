@@ -1,6 +1,6 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.0.10",
+    "version": "2.0.11",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
