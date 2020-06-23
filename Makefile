@@ -27,6 +27,7 @@ composer-install:
 composer-update:
 	$(DE) composer update --no-suggest
 	$(DE) composer update --dry-run roave/security-advisories
+	$(DE) composer normalize
 
 composer-outdated:
 	$(DE) composer outdated
@@ -66,10 +67,10 @@ phpcontroller:
 	$(DE) ./vendor/bin/phpunit -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist tests/Controller
 
 phpcoverage:
-	$(DE) ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-html var/coverage --whitelist src tests
+	$(DE) ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 4 --coverage-html var/coverage --whitelist src --exclude-group live tests
 
 phpcoverage-ci:
-	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh -p 4
+	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh -p 4 -e live
 
 test: docker-up-force composer-install fasttest
 

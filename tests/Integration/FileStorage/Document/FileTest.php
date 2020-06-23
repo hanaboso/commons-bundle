@@ -27,6 +27,8 @@ final class FileTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setSize
      * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::getStorageType
      * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setStorageType
+     *
+     * @throws Exception
      */
     public function testFile(): void
     {

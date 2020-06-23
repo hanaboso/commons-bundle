@@ -10,12 +10,11 @@ use Hanaboso\CommonsBundle\HbPFCommonsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\MonologBundle\MonologBundle;
-use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 /**
  * Class Kernel
@@ -35,12 +34,12 @@ final class Kernel extends BaseKernel
     public function registerBundles(): iterable
     {
         $contents = [
-            AwsBundle::class              => ['all' => TRUE],
-            FrameworkBundle::class        => ['all' => TRUE],
-            DoctrineBundle::class         => ['all' => TRUE],
-            MonologBundle::class          => ['all' => TRUE],
-            DoctrineMongoDBBundle::class  => ['all' => TRUE],
-            HbPFCommonsBundle::class      => ['all' => TRUE],
+            AwsBundle::class             => ['all' => TRUE],
+            FrameworkBundle::class       => ['all' => TRUE],
+            DoctrineBundle::class        => ['all' => TRUE],
+            MonologBundle::class         => ['all' => TRUE],
+            DoctrineMongoDBBundle::class => ['all' => TRUE],
+            HbPFCommonsBundle::class     => ['all' => TRUE],
 
         ];
         foreach ($contents as $class => $envs) {
@@ -63,13 +62,11 @@ final class Kernel extends BaseKernel
     }
 
     /**
-     * @param RouteCollectionBuilder $routes
-     *
-     * @throws LoaderLoadException
+     * @param RoutingConfigurator $routes
      */
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $routes->import(sprintf('%s/*%s', $this->getRoutingDir(), self::CONFIG_EXTS), '/', 'glob');
+        $routes->import(sprintf('%s/*%s', $this->getRoutingDir(), self::CONFIG_EXTS), 'glob');
     }
 
     /**

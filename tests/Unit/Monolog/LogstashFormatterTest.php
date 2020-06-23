@@ -7,7 +7,6 @@ use Hanaboso\CommonsBundle\Monolog\LogstashFormatter;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Hanaboso\Utils\String\Json;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
 use SoapFault;
 
 /**
@@ -27,6 +26,8 @@ final class LogstashFormatterTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     *
+     * @throws Exception
      */
     public function testFormat(): void
     {
@@ -56,6 +57,8 @@ final class LogstashFormatterTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     *
+     * @throws Exception
      */
     public function testFormatPipes(): void
     {
@@ -94,6 +97,8 @@ final class LogstashFormatterTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     *
+     * @throws Exception
      */
     public function testFormatException(): void
     {
@@ -115,6 +120,8 @@ final class LogstashFormatterTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     *
+     * @throws Exception
      */
     public function testFormatExceptionPipes(): void
     {
@@ -138,6 +145,8 @@ final class LogstashFormatterTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     *
+     * @throws Exception
      */
     public function testContext(): void
     {
@@ -172,7 +181,7 @@ final class LogstashFormatterTest extends TestCase
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::normalizeException
      *
-     * @throws ReflectionException
+     * @throws Exception
      */
     public function testNormalizeException(): void
     {

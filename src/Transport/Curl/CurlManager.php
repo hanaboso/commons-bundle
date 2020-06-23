@@ -298,6 +298,7 @@ class CurlManager implements CurlManagerInterface, LoggerAwareInterface
             ),
             $context
         );
+        $response->getBody()->rewind();
     }
 
 }

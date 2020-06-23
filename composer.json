@@ -1,17 +1,7 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.0.11",
+    "version": "2.0.12",
     "license": "proprietary",
-    "autoload": {
-        "psr-4": {
-            "Hanaboso\\CommonsBundle\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "CommonsBundleTests\\": "tests/"
-        }
-    },
     "require": {
         "php": "^7.4",
         "ext-apcu": "*",
@@ -25,19 +15,29 @@
         "ext-soap": "*",
         "ext-sockets": "*",
         "aws/aws-sdk-php-symfony": "^2.2",
-        "doctrine/doctrine-bundle": "^2.0",
-        "doctrine/mongodb-odm-bundle": "^4.1",
+        "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/mongodb-odm-bundle": "^4.2",
         "guzzlehttp/guzzle": "^6.5",
         "hanaboso/utils": "^1.0",
-        "php-imap/php-imap": "^3.0",
+        "php-imap/php-imap": "^3.1",
         "phpseclib/phpseclib": "^2.0",
         "predis/predis": "^1.1",
         "windwalker/crypt": "^3.5"
     },
     "require-dev": {
         "hanaboso/php-check-utils": "^1.1",
-        "symfony/mailer": "^5.0",
+        "symfony/mailer": "^5.1",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/yaml": "^5.0"
+        "symfony/yaml": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hanaboso\\CommonsBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CommonsBundleTests\\": "tests/"
+        }
     }
 }

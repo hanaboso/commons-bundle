@@ -3,11 +3,11 @@
 namespace CommonsBundleTests\Controller\Listener;
 
 use CommonsBundleTests\ControllerTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Listener\SystemMetricsListener;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\Utils\System\PipesHeaders;
 use Hanaboso\Utils\System\SystemUsage;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -19,20 +19,19 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
 {
 
     /**
-     *
+     * @throws Exception
      */
     public function testListenerWithoutPipesHeader(): void
     {
         $this->sendRequest('GET', '/test/route');
 
-        /** @var Request $request */
         $request = $this->client->getRequest();
 
         self::assertArrayNotHasKey(SystemMetricsListener::METRICS_ATTRIBUTES_KEY, $request->attributes->all());
     }
 
     /**
-     *
+     * @throws Exception
      */
     public function testListenerWithPipesHeader(): void
     {
@@ -43,7 +42,6 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
         ];
         $this->sendRequest('GET', '/test/route', [], $headers);
 
-        /** @var Request $request */
         $request = $this->client->getRequest();
 
         self::assertArrayHasKey(SystemMetricsListener::METRICS_ATTRIBUTES_KEY, $request->attributes->all());

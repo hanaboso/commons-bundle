@@ -56,7 +56,6 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 
-        /** @var CurlManager $manager */
         $manager = new CurlManager($factory);
         $manager->setMetricsSender($loader);
         $dto = new RequestDto('GET', new Uri('http://google.com'));
@@ -74,7 +73,6 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
 
-        /** @var CurlManager $manager */
         $manager = new CurlManager($factory);
         $manager->setMetricsSender($sh);
         $dto = new RequestDto('GET', new Uri('http://google.com'));

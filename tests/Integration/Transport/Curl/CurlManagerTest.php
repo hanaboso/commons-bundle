@@ -34,7 +34,6 @@ final class CurlManagerTest extends KernelTestCaseAbstract
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 
-        /** @var CurlManager $curlManager */
         $curlManager = new CurlManager($factory);
 
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('https://google.cz'));

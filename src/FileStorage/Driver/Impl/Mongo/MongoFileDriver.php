@@ -54,7 +54,6 @@ class MongoFileDriver extends FileStorageDriverAbstract
      */
     public function delete(string $fileId): void
     {
-        /** @var FileMongo $file */
         $file = $this->getDocument($fileId);
 
         try {

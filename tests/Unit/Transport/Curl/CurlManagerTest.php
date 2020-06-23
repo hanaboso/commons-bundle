@@ -170,7 +170,6 @@ final class CurlManagerTest extends TestCase
                 )
             );
 
-        /** @var CurlManager $manager */
         $manager = new CurlManager($factory);
         $dto     = new RequestDto('GET', new Uri('http://google.com'));
 

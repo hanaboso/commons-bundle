@@ -3,6 +3,7 @@
 namespace Hanaboso\CommonsBundle\Transport\Curl\Dto;
 
 use Hanaboso\Utils\String\Json;
+use JsonException;
 
 /**
  * Class ResponseDto
@@ -74,6 +75,7 @@ class ResponseDto
 
     /**
      * @return mixed[]
+     * @throws JsonException
      */
     public function getJsonBody(): array
     {

@@ -3,6 +3,7 @@
 namespace CommonsBundleTests\Unit\Transport\Curl\Dto;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\Utils\String\Json;
 
@@ -19,6 +20,8 @@ class ResponseDtoTest extends KernelTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto::getBody
      * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto::getJsonBody
      * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto::getHeaders
+     *
+     * @throws Exception
      */
     public function testResponseDto(): void
     {
