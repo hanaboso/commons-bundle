@@ -21,7 +21,6 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -46,11 +45,9 @@ final class CurlManagerTest extends TestCase
 
         $psr7Response = new Response(200, $headers, $body);
 
-        /** @var MockObject|Client $client */
         $client = self::createPartialMock(Client::class, ['send']);
         $client->expects(self::any())->method('send')->willReturn($psr7Response);
 
-        /** @var MockObject|CurlClientFactory $curlClientFactory */
         $curlClientFactory = self::createPartialMock(CurlClientFactory::class, ['create']);
         $curlClientFactory->expects(self::any())->method('create')->willReturn($client);
 
@@ -159,7 +156,6 @@ final class CurlManagerTest extends TestCase
      */
     public function testSendErr(): void
     {
-        /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
         $factory->expects(self::any())->method('create')
             ->willThrowException(
@@ -187,11 +183,9 @@ final class CurlManagerTest extends TestCase
     {
         $promise = new FulfilledPromise(new Response(202, ['Accept-Language' => 'en', 'Accept' => 'text/html']));
 
-        /** @var MockObject|Client $client */
         $client = self::createMock(Client::class);
         $client->method('sendAsync')->willReturn($promise);
 
-        /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 
@@ -216,11 +210,9 @@ final class CurlManagerTest extends TestCase
             new ServerException('Ups, something with server went wrong.', new Request('message', 'uri'), new Response())
         );
 
-        /** @var MockObject|Client $client */
         $client = self::createMock(Client::class);
         $client->method('sendAsync')->willReturn($promise);
 
-        /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 
@@ -243,11 +235,9 @@ final class CurlManagerTest extends TestCase
             new Exception('Ups, something went wrong.')
         );
 
-        /** @var MockObject|Client $client */
         $client = self::createMock(Client::class);
         $client->method('sendAsync')->willReturn($promise);
 
-        /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 

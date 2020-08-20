@@ -73,7 +73,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
      */
     public function testDeleteMail(): void
     {
-        $this->mockImapMailBox(['deleteMail' => TRUE]);
+        $this->mockImapMailBox(['deleteMail' => NULL]);
 
         $this->connector->deleteMail(1);
         self::assertTrue(TRUE);
@@ -87,7 +87,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
      */
     public function testMoveMail(): void
     {
-        $this->mockImapMailBox(['moveMail' => TRUE, 'getMailboxes' => [['shortpath' => 'path']]]);
+        $this->mockImapMailBox(['moveMail' => NULL, 'getMailboxes' => [['shortpath' => 'path']]]);
 
         $this->connector->moveMail(1, '/path');
         self::assertTrue(TRUE);
@@ -99,10 +99,24 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
      */
     public function testCheckMailBox(): void
     {
-        $this->mailbox->expects(self::at(0))->method('getMailboxes')->willReturn([]);
-        $this->mailbox->expects(self::at(2))->method('getMailboxes')->willReturn([['shortpath' => 'path']]);
-        $this->mailbox->expects(self::any())->method('createMailbox')->willReturn(TRUE);
-        $this->mailbox->expects(self::any())->method('moveMail')->willReturn(TRUE);
+        $this->mailbox
+            ->expects(self::exactly(2))
+            ->method('getMailboxes')
+            ->willReturnOnConsecutiveCalls([], [['shortpath' => 'path']]);
+        $this->mailbox
+            ->expects(self::any())
+            ->method('createMailbox')
+            ->willReturnCallback(
+                static function (): void {
+                }
+            );
+        $this->mailbox
+            ->expects(self::any())
+            ->method('moveMail')
+            ->willReturnCallback(
+                static function (): void {
+                }
+            );
         $this->setProperty($this->connector, 'mailbox', $this->mailbox);
 
         $this->connector->moveMail(1, '/path/');
@@ -136,7 +150,14 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     private function mockImapMailBox(array $fns): void
     {
         foreach ($fns as $key => $value) {
-            $this->mailbox->expects(self::any())->method($key)->willReturn($value);
+            if ($value === NULL) {
+                $this->mailbox->expects(self::any())->method($key)->willReturnCallback(
+                    static function (): void {
+                    }
+                );
+            } else {
+                $this->mailbox->expects(self::any())->method($key)->willReturn($value);
+            }
         }
 
         $this->setProperty($this->connector, 'mailbox', $this->mailbox);

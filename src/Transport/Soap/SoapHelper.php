@@ -15,7 +15,7 @@ use function GuzzleHttp\headers_from_lines;
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap
  */
-class SoapHelper
+final class SoapHelper
 {
 
     /**

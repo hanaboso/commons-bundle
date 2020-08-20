@@ -10,7 +10,7 @@ use Doctrine\ODM\MongoDB\Query\Filter\BsonFilter;
  *
  * @package Hanaboso\CommonsBundle\Database\Filters\ODM
  */
-class DeletedFilter extends BsonFilter
+final class DeletedFilter extends BsonFilter
 {
 
     public const NAME = 'deleted';

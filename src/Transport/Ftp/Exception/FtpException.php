@@ -9,7 +9,7 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp\Exception
  */
-class FtpException extends PipesFrameworkExceptionAbstract
+final class FtpException extends PipesFrameworkExceptionAbstract
 {
 
     public const CONNECTION_FAILED          = self::OFFSET + 1;

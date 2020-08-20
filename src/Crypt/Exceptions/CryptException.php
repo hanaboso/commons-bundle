@@ -9,7 +9,7 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
  *
  * @package Hanaboso\CommonsBundle\Crypt\Exceptions
  */
-class CryptException extends PipesFrameworkExceptionAbstract
+final class CryptException extends PipesFrameworkExceptionAbstract
 {
 
     public const UNKNOWN_PREFIX = self::OFFSET + 1;

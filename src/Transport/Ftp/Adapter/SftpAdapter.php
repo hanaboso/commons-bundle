@@ -11,7 +11,7 @@ use phpseclib\Net\SFTP;
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp\Adapter
  */
-class SftpAdapter implements FtpAdapterInterface
+final class SftpAdapter implements FtpAdapterInterface
 {
 
     /**

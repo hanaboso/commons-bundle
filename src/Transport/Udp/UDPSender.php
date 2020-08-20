@@ -16,7 +16,7 @@ use Psr\Log\NullLogger;
  *
  * @package Hanaboso\CommonsBundle\Transport\Udp
  */
-class UDPSender implements LoggerAwareInterface
+final class UDPSender implements LoggerAwareInterface
 {
 
     private const APCU_IP      = 'metrics_collector_ip:';

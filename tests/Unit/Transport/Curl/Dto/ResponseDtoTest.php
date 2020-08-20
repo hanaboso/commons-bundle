@@ -12,7 +12,7 @@ use Hanaboso\Utils\String\Json;
  *
  * @package CommonsBundleTests\Unit\Transport\Curl\Dto
  */
-class ResponseDtoTest extends KernelTestCaseAbstract
+final class ResponseDtoTest extends KernelTestCaseAbstract
 {
 
     /**

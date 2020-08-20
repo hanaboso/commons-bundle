@@ -1,10 +1,35 @@
 includes:
-    - vendor/hanaboso/php-check-utils/phpstan.neon # hanaboso rules
+	- vendor/hanaboso/php-check-utils/phpstan.neon # hanaboso rules
 
 parameters:
-    excludes_analyse:
-        - tests/Live/*
-    ignoreErrors:
-    symfony:
-        container_xml_path: %rootDir%/../../../var/cache/test/CommonsBundleTests_KernelTestDebugContainer.xml
-
+	excludes_analyse:
+		- tests/Live/*
+	ignoreErrors:
+		-
+			message: '#Error suppression via "@" should not be used.#'
+			path: src/Transport/Udp/UDPSender.php
+		-
+			message: '#Error suppression via "@" should not be used.#'
+			path: src/Transport/Ftp/Adapter/FtpAdapter.php
+	symfony:
+		container_xml_path: %rootDir%/../../../var/cache/test/CommonsBundleTests_KernelTestDebugContainer.xml
+	ergebnis:
+			classesNotRequiredToBeAbstractOrFinal:
+				- CommonsBundleTests\Integration\Database\Filters\ODM\TestDocNoDeletedProp
+				- CommonsBundleTests\Integration\Database\Filters\ODM\TestDocument
+				- CommonsBundleTests\Integration\Database\Traits\Document\TestDocumentTrait
+				- Hanaboso\CommonsBundle\FileStorage\Document\File
+				- Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo
+				- Hanaboso\CommonsBundle\FileStorage\PathGenerator\HashPathGenerator
+			classesAllowedToBeExtended:
+				- CommonsBundleTests\ControllerTestCaseAbstract
+				- CommonsBundleTests\DatabaseTestCaseAbstract
+				- CommonsBundleTests\KernelTestCaseAbstract
+				- Doctrine\ODM\MongoDB\Query\Filter\BsonFilter
+				- Doctrine\ORM\Query\Filter\SQLFilter
+				- Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverAbstract
+				- Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract
+				- Hanaboso\Utils\Enum\EnumAbstract
+				- Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract
+				- Monolog\Formatter\NormalizerFormatter
+				- Monolog\Handler\AbstractProcessingHandler

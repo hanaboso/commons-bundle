@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\Transport\Soap\Dto;
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap\Dto
  */
-class RequestHeaderDto
+final class RequestHeaderDto
 {
 
     /**

@@ -10,7 +10,7 @@ use JsonException;
  *
  * @package Hanaboso\CommonsBundle\Transport\Curl\Dto
  */
-class ResponseDto
+final class ResponseDto
 {
 
     /**

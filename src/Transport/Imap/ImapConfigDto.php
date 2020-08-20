@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\Transport\Imap;
  *
  * @package Hanaboso\CommonsBundle\Transport\Imap
  */
-class ImapConfigDto
+final class ImapConfigDto
 {
 
     /**

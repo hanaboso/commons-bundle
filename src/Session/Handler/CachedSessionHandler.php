@@ -11,7 +11,7 @@ use SessionHandlerInterface;
  *
  * @package Hanaboso\CommonsBundle\Session\Handler
  */
-class CachedSessionHandler implements SessionHandlerInterface
+final class CachedSessionHandler implements SessionHandlerInterface
 {
 
     private const APCU_DELIMITER = '::';

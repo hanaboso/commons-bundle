@@ -14,7 +14,7 @@ use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
  *
  * @package CommonsBundleTests\Unit\Transport\Curl\Dto
  */
-class RequestDtoTest extends KernelTestCaseAbstract
+final class RequestDtoTest extends KernelTestCaseAbstract
 {
 
     /**

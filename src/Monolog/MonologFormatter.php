@@ -9,7 +9,7 @@ use Exception;
  *
  * @package Hanaboso\CommonsBundle\Monolog
  */
-class MonologFormatter
+final class MonologFormatter
 {
 
     /**

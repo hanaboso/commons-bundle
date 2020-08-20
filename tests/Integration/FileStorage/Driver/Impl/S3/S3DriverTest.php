@@ -10,6 +10,7 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
+use PHPUnit\Framework\MockObject\Stub\Exception as PhpUnitException;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -53,11 +54,10 @@ final class S3DriverTest extends KernelTestCaseAbstract
             ->addMethods(['deleteObject', 'putObject', 'getObject'])
             ->getMock();
         $client->method('deleteObject');
-        $client->expects(self::at(1))->method('getObject')->willReturn($ret);
         $client
-            ->expects(self::at(3))
+            ->expects(self::exactly(2))
             ->method('getObject')
-            ->willThrowException(new S3Exception('', new Command('a')));
+            ->willReturnOnConsecutiveCalls($ret, new PhpUnitException(new S3Exception('', new Command('a'))));
         $client->method('putObject');
 
         $driver = new S3Driver(

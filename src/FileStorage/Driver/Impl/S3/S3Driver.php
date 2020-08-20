@@ -15,7 +15,7 @@ use Hanaboso\CommonsBundle\FileStorage\PathGenerator\PathGeneratorInterface;
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3
  */
-class S3Driver extends FileStorageDriverAbstract
+final class S3Driver extends FileStorageDriverAbstract
 {
 
     private const BUCKET_FIELD = 'Bucket';

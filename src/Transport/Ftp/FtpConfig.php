@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp;
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp
  */
-class FtpConfig
+final class FtpConfig
 {
 
     /**

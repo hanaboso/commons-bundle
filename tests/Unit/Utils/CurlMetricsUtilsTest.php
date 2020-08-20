@@ -15,7 +15,6 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
-use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class CurlMetricsUtilsTest
@@ -30,7 +29,6 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
      */
     public function testCurlMetrics(): void
     {
-        /** @var InfluxDbSender|MockObject $influx */
         $influx = self::createMock(InfluxDbSender::class);
         $influx
             ->expects(self::any())
@@ -48,11 +46,9 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 
         $loader = new MetricsSenderLoader('influx', $influx, NULL);
 
-        /** @var MockObject|Client $client */
         $client = self::createMock(Client::class);
         $client->method('send')->willReturn(new Response(200, [], ''));
 
-        /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 
@@ -70,7 +66,6 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $sh = self::createMock(MetricsSenderLoader::class);
         $sh->expects(self::any())->method('getSender')->willThrowException(new Exception());
 
-        /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
 
         $manager = new CurlManager($factory);
@@ -88,7 +83,6 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
      */
     public function testSendCurlMetrics(): void
     {
-        /** @var InfluxDbSender|MockObject $influx */
         $influx = $this->createPartialMock(InfluxDbSender::class, ['send']);
         $influx->expects(self::any())->method('send')->willReturn(TRUE);
 

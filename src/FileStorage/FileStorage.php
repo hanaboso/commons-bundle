@@ -19,7 +19,7 @@ use Hanaboso\CommonsBundle\FileStorage\Dto\FileStorageDto;
  *
  * @package Hanaboso\CommonsBundle\FileStorage
  */
-class FileStorage
+final class FileStorage
 {
 
     /**

@@ -6,7 +6,6 @@ use Exception;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
 use Hanaboso\CommonsBundle\Transport\Udp\UDPSender;
 use InvalidArgumentException;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,7 +23,6 @@ final class InfluxDbSenderTest extends TestCase
      */
     public function testSend(): void
     {
-        /** @var MockObject|UDPSender $sender */
         $sender = self::createPartialMock(UDPSender::class, ['send']);
         $sender->expects(self::any())->method('send')->willReturn(TRUE);
 
@@ -48,7 +46,6 @@ final class InfluxDbSenderTest extends TestCase
      */
     public function testCreateMessage(): void
     {
-        /** @var MockObject|UDPSender $sender */
         $sender = self::createPartialMock(UDPSender::class, ['send']);
         $sender->expects(self::any())->method('send')->willReturn(TRUE);
 
@@ -72,7 +69,6 @@ final class InfluxDbSenderTest extends TestCase
      */
     public function testCreateMessageException(): void
     {
-        /** @var MockObject|UDPSender $sender */
         $sender = self::createPartialMock(UDPSender::class, ['send']);
         $sender->expects(self::any())->method('send')->willReturn(TRUE);
 

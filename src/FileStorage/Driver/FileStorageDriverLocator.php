@@ -10,7 +10,7 @@ use Hanaboso\CommonsBundle\Exception\FileStorageException;
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Driver
  */
-class FileStorageDriverLocator
+final class FileStorageDriverLocator
 {
 
     /**

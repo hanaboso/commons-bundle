@@ -10,7 +10,7 @@ use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp\Adapter
  */
-class FtpAdapter implements FtpAdapterInterface
+final class FtpAdapter implements FtpAdapterInterface
 {
 
     /**

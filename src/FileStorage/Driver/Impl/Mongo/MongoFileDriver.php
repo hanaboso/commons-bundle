@@ -13,7 +13,7 @@ use Throwable;
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
  */
-class MongoFileDriver extends FileStorageDriverAbstract
+final class MongoFileDriver extends FileStorageDriverAbstract
 {
 
     /**

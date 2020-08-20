@@ -11,7 +11,7 @@ use LogicException;
  *
  * @package Hanaboso\CommonsBundle\Database\Locator
  */
-class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
+final class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
 {
 
     /**

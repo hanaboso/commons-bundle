@@ -11,7 +11,7 @@ use Throwable;
  *
  * @package Hanaboso\CommonsBundle\Exception
  */
-class OnRepeatException extends Exception
+final class OnRepeatException extends Exception
 {
 
     /**

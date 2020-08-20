@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
  *
  * @package Hanaboso\CommonsBundle\Transport\Curl
  */
-class CurlClientFactory
+final class CurlClientFactory
 {
 
     /**

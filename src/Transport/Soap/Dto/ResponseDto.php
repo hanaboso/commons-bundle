@@ -9,7 +9,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\SoapHelper;
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap\Dto
  */
-class ResponseDto
+final class ResponseDto
 {
 
     /**

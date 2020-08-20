@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\HeaderBag;
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap\Dto
  */
-class ResponseHeaderDto
+final class ResponseHeaderDto
 {
 
     /**

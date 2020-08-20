@@ -9,7 +9,7 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
  *
  * @package Hanaboso\CommonsBundle\Metrics\Exception
  */
-class SystemMetricException extends PipesFrameworkExceptionAbstract
+final class SystemMetricException extends PipesFrameworkExceptionAbstract
 {
 
 }

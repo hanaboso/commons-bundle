@@ -12,7 +12,7 @@ use Hanaboso\Utils\Exception\EnumException;
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Dto
  */
-class FileContentDto
+final class FileContentDto
 {
 
     /**

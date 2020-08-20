@@ -10,7 +10,7 @@ use Doctrine\ORM\Query\Filter\SQLFilter;
  *
  * @package Hanaboso\CommonsBundle\Database\Filters\ORM
  */
-class DeletedFilter extends SQLFilter
+final class DeletedFilter extends SQLFilter
 {
 
     public const NAME = 'deleted';

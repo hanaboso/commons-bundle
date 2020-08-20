@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp
  */
-class FtpServiceFactory implements LoggerAwareInterface
+final class FtpServiceFactory implements LoggerAwareInterface
 {
 
     public const ADAPTER_FTP  = 'ftp';

@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\Monolog;
  *
  * @package Hanaboso\CommonsBundle\Monolog
  */
-class LogstashFormatterFactory
+final class LogstashFormatterFactory
 {
 
     /**

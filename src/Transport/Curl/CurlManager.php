@@ -24,7 +24,7 @@ use Throwable;
  *
  * @package Hanaboso\CommonsBundle\Transport\Curl
  */
-class CurlManager implements CurlManagerInterface, LoggerAwareInterface
+final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 {
 
     use MetricsTrait;

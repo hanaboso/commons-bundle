@@ -10,7 +10,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\SoapManagerInterface;
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl
  */
-class RequestDto extends RequestDtoAbstract
+final class RequestDto extends RequestDtoAbstract
 {
 
     /**

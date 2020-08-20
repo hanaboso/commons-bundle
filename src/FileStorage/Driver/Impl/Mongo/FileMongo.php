@@ -25,28 +25,28 @@ class FileMongo
      *
      * @ODM\File\Filename()
      */
-    protected $filename;
+    protected string $filename;
 
     /**
      * @var DateTimeInterface
      *
      * @ODM\File\UploadDate()
      */
-    protected $uploadDate;
+    protected DateTimeInterface $uploadDate;
 
     /**
      * @var int
      *
      * @ODM\File\Length()
      */
-    protected $length;
+    protected int $length;
 
     /**
      * @var int
      *
      * @ODM\File\ChunkSize()
      */
-    protected $chunkSize;
+    protected int $chunkSize;
 
     /**
      * FileMongo constructor.

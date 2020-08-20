@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package CommonsBundleTests\Controller
  */
-class TestController
+final class TestController
 {
 
     use ControllerTrait;

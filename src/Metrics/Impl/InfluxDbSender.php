@@ -12,7 +12,7 @@ use InvalidArgumentException;
  *
  * @package Hanaboso\CommonsBundle\Metrics\Impl
  */
-class InfluxDbSender implements MetricsSenderInterface
+final class InfluxDbSender implements MetricsSenderInterface
 {
 
     /**

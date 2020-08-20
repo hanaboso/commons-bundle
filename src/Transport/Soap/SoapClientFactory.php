@@ -14,7 +14,7 @@ use Throwable;
  *
  * @package Hanaboso\CommonsBundle\Transport\Soap
  */
-class SoapClientFactory implements LoggerAwareInterface
+final class SoapClientFactory implements LoggerAwareInterface
 {
 
     /**

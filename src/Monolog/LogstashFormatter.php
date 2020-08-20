@@ -12,7 +12,7 @@ use Throwable;
  *
  * @package Hanaboso\CommonsBundle\Monolog
  */
-class LogstashFormatter extends NormalizerFormatter
+final class LogstashFormatter extends NormalizerFormatter
 {
 
     /**

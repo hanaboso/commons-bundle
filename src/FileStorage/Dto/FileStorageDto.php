@@ -9,7 +9,7 @@ use Hanaboso\CommonsBundle\FileStorage\FileInterface;
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Dto
  */
-class FileStorageDto
+final class FileStorageDto
 {
 
     /**

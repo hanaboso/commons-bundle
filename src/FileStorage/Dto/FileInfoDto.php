@@ -7,7 +7,7 @@ namespace Hanaboso\CommonsBundle\FileStorage\Dto;
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Dto
  */
-class FileInfoDto
+final class FileInfoDto
 {
 
     /**

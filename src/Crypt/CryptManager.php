@@ -10,7 +10,7 @@ use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
  *
  * @package Hanaboso\CommonsBundle\Crypt
  */
-class CryptManager
+final class CryptManager
 {
 
     public const PREFIX_LENGTH = 3;

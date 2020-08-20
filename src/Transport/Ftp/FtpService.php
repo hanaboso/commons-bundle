@@ -15,7 +15,7 @@ use SplFileInfo;
  *
  * @package Hanaboso\CommonsBundle\Transport\Ftp
  */
-class FtpService implements FtpServiceInterface, LoggerAwareInterface
+final class FtpService implements FtpServiceInterface, LoggerAwareInterface
 {
 
     /**

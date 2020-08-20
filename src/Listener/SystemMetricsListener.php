@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  *
  * @package Hanaboso\CommonsBundle\Listener
  */
-class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInterface
+final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInterface
 {
 
     public const METRICS_ATTRIBUTES_KEY = 'system_metrics';

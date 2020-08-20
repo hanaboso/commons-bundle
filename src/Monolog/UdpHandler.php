@@ -12,7 +12,7 @@ use Monolog\Logger;
  *
  * @package Hanaboso\CommonsBundle\Monolog
  */
-class UdpHandler extends AbstractProcessingHandler
+final class UdpHandler extends AbstractProcessingHandler
 {
 
     /**

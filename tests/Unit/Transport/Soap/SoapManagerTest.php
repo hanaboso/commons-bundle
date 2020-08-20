@@ -12,7 +12,6 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapManager;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SoapClient;
 
@@ -38,12 +37,10 @@ final class SoapManagerTest extends TestCase
         $soapCallResponse    = 'abc';
         $lastResponseHeaders = 'def';
 
-        /** @var MockObject|SoapClient $client */
         $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
         $client->expects(self::any())->method('__soapCall')->willReturn($soapCallResponse);
         $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn($lastResponseHeaders);
 
-        /** @var MockObject|SoapClientFactory $soapClientFactory */
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
         $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
 
@@ -75,7 +72,6 @@ final class SoapManagerTest extends TestCase
         $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
         $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn(NULL);
 
-        /** @var MockObject|SoapClientFactory $soapClientFactory */
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
         $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
 
@@ -102,7 +98,6 @@ final class SoapManagerTest extends TestCase
         $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
         $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn(NULL);
 
-        /** @var MockObject|SoapClientFactory $soapClientFactory */
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
         $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
 
@@ -125,7 +120,6 @@ final class SoapManagerTest extends TestCase
      */
     public function testSendErr(): void
     {
-        /** @var MockObject|SoapClientFactory $soapClientFactory */
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
         $soapClientFactory->expects(self::any())->method('create')->willThrowException(new Exception());
 

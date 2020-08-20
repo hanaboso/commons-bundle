@@ -13,7 +13,7 @@ use Hanaboso\Utils\System\PipesHeaders;
  *
  * @package Hanaboso\CommonsBundle\Transport\Curl\Dto
  */
-class RequestDto
+final class RequestDto
 {
 
     /**

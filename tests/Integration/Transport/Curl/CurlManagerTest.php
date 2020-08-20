@@ -11,7 +11,6 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
-use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class CurlManagerTest
@@ -26,11 +25,9 @@ final class CurlManagerTest extends KernelTestCaseAbstract
      */
     public function testSend(): void
     {
-        /** @var MockObject|Client $client */
         $client = self::createMock(Client::class);
         $client->method('send')->willReturn(new Response(200, [], ''));
 
-        /** @var MockObject|CurlClientFactory $factory */
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 

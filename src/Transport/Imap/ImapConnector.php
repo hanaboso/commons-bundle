@@ -13,7 +13,7 @@ use PhpImap\Mailbox;
  *
  * @package Hanaboso\CommonsBundle\Transport\Imap
  */
-class ImapConnector
+final class ImapConnector
 {
 
     public const ID           = 'id';

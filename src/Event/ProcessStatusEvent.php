@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  *
  * @package Hanaboso\CommonsBundle\Event
  */
-class ProcessStatusEvent extends Event
+final class ProcessStatusEvent extends Event
 {
 
     public const PROCESS_FINISHED = 'finished';
