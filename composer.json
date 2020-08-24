@@ -1,6 +1,6 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.0.14",
+    "version": "2.0.15",
     "license": "proprietary",
     "require": {
         "php": "^7.4",
@@ -17,7 +17,7 @@
         "aws/aws-sdk-php-symfony": "^2.2",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/mongodb-odm-bundle": "^4.2",
-        "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/guzzle": "^6.0 || ^7.0",
         "hanaboso/utils": "^1.0",
         "php-imap/php-imap": "^4.1",
         "phpseclib/phpseclib": "^2.0",
