@@ -58,7 +58,12 @@ final class SoapHelperTest extends TestCase
 
         self::assertIsArray($result);
 
-        $request = new RequestDtoNonWsdl('functionName', ['arg1' => ['el1' => new StdClass()]], 'namespace', new Uri(''));
+        $request = new RequestDtoNonWsdl(
+            'functionName',
+            ['arg1' => ['el1' => new StdClass()]],
+            'namespace',
+            new Uri('')
+        );
         self::expectException(InvalidArgumentException::class);
         SoapHelper::composeArguments($request);
     }
