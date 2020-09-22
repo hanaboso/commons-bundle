@@ -3,7 +3,6 @@
 namespace Hanaboso\CommonsBundle\Crypt;
 
 use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
-use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
 
 /**
  * Class CryptManager
@@ -13,18 +12,37 @@ use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
 final class CryptManager
 {
 
-    public const PREFIX_LENGTH = 3;
+    public const PREFIX_LENGTH = 4;
+
+    /**
+     * @var CryptInterface[]
+     */
+    private array $providers = [];
+
+    /**
+     * CryptManager constructor.
+     *
+     * @param mixed[] $cryptProviders
+     */
+    public function __construct(array $cryptProviders = [])
+    {
+        foreach ($cryptProviders as $provider) {
+            if ($provider instanceof CryptInterface) {
+                $this->providers[$provider->getPrefix()] = $provider;
+            }
+        }
+    }
 
     /**
      * Encrypt data by concrete crypt service impl
      *
-     * @param mixed  $data
-     * @param string $prefix
+     * @param mixed       $data
+     * @param string|null $prefix
      *
      * @return string
      * @throws CryptException
      */
-    public static function encrypt($data, string $prefix = WindwalkerCrypt::PREFIX): string
+    public function encrypt($data, ?string $prefix = NULL): string
     {
         return self::getImplementation($prefix)->encrypt($data);
     }
@@ -37,11 +55,23 @@ final class CryptManager
      * @return mixed
      * @throws CryptException
      */
-    public static function decrypt(string $data)
+    public function decrypt(string $data)
     {
         $prefix = substr($data, 0, self::PREFIX_LENGTH);
 
-        return self::getImplementation($prefix)->decrypt($data);
+        return $this->getImplementation($prefix)->decrypt($data);
+    }
+
+    /**
+     * @param string $encryptedData
+     * @param string $newCryptProviderPrefix
+     *
+     * @return string
+     * @throws CryptException
+     */
+    public function transfer(string $encryptedData, string $newCryptProviderPrefix): string
+    {
+        return $this->encrypt($this->decrypt($encryptedData), $newCryptProviderPrefix);
     }
 
     /**
@@ -49,22 +79,29 @@ final class CryptManager
      */
 
     /**
-     * @param string $prefix
+     * @param string|null $prefix
      *
      * @return CryptInterface
      * @throws CryptException
      */
-    private static function getImplementation(string $prefix): CryptInterface
+    private function getImplementation(?string $prefix): CryptInterface
     {
-        switch ($prefix) {
-            // add new implementation of crypt services as you wish
-            case WindwalkerCrypt::PREFIX:
-                return new WindwalkerCrypt();
-            case '00_':
-                throw new CryptException('The prefix was removed for license reasons.', CryptException::UNKNOWN_PREFIX);
-            default:
-                throw new CryptException('Unknown crypt service prefix', CryptException::UNKNOWN_PREFIX);
+        // Pick first if provider not specified
+        if ($prefix === NULL && !empty($this->providers)) {
+            return reset($this->providers);
         }
+
+        // Use selected provider
+        if (array_key_exists($prefix ?? '', $this->providers)) {
+            return $this->providers[$prefix];
+        }
+
+        // BC break
+        if ($prefix === '00_') {
+            throw new CryptException('The prefix was removed for license reasons.', CryptException::UNKNOWN_PREFIX);
+        }
+
+        throw new CryptException('Unknown crypt service prefix', CryptException::UNKNOWN_PREFIX);
     }
 
 }

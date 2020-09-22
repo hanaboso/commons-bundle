@@ -4,8 +4,10 @@ namespace CommonsBundleTests\Unit\Crypt;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
+use Hanaboso\CommonsBundle\Crypt\CryptInterface;
 use Hanaboso\CommonsBundle\Crypt\CryptManager;
 use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
+use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
 use stdClass;
 
 /**
@@ -20,6 +22,7 @@ final class CryptManagerTest extends KernelTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::encrypt()
      * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
      * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::__construct()
      *
      * @throws Exception
      */
@@ -35,10 +38,11 @@ final class CryptManagerTest extends KernelTestCaseAbstract
         $stdClass->false = FALSE;
         $stdClass->arr   = ['foo'];
         $arr[]           = $stdClass;
+        $cryptManager    = $this->getCryptManager();
 
         foreach ($arr as $item) {
-            $encrypted = CryptManager::encrypt($item);
-            $decrypted = CryptManager::decrypt($encrypted);
+            $encrypted = $cryptManager->encrypt($item);
+            $decrypted = $cryptManager->decrypt($encrypted);
             self::assertEquals($item, $decrypted);
         }
     }
@@ -53,7 +57,8 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     {
         self::expectException(CryptException::class);
         self::expectExceptionCode(CryptException::UNKNOWN_PREFIX);
-        CryptManager::encrypt('hash', '00_');
+        $cryptManager = $this->getCryptManager();
+        $cryptManager->encrypt('hash', '00_');
     }
 
     /**
@@ -66,7 +71,40 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     {
         self::expectException(CryptException::class);
         self::expectExceptionCode(CryptException::UNKNOWN_PREFIX);
-        CryptManager::encrypt('hash', 'bad00_');
+        $cryptManager = $this->getCryptManager();
+        $cryptManager->encrypt('hash', 'bad00_');
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::transfer()
+     *
+     * @throws Exception
+     */
+    public function testTransfer(): void
+    {
+        $expected     = ['string' => 'awdawd24ad5a2d5a2d55ad5'];
+        $cryptManager = $this->getCryptManager([new WindwalkerCrypt('11111111111+AFAFASFSEF8443513513854AWD', '010_')]);
+
+        $encryptedData  = $cryptManager->encrypt($expected);
+        $newCryptedData = $cryptManager->transfer($encryptedData, '010_');
+        $transferedData = $cryptManager->decrypt($newCryptedData);
+        self::assertEquals($expected, $transferedData);
+    }
+
+    /**
+     * -------------------------------------------- HELPERS ----------------------------------------
+     */
+
+    /**
+     * @param CryptInterface[] $anotherProviders
+     *
+     * @return CryptManager
+     */
+    private function getCryptManager(array $anotherProviders = []): CryptManager
+    {
+        return new CryptManager(
+            [new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645'), ...$anotherProviders]
+        );
     }
 
 }

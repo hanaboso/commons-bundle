@@ -27,6 +27,7 @@ parameters:
 				- CommonsBundleTests\KernelTestCaseAbstract
 				- Doctrine\ODM\MongoDB\Query\Filter\BsonFilter
 				- Doctrine\ORM\Query\Filter\SQLFilter
+				- Hanaboso\CommonsBundle\Crypt\CryptImplAbstract
 				- Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverAbstract
 				- Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract
 				- Hanaboso\Utils\Enum\EnumAbstract

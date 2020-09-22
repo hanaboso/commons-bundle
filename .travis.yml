@@ -3,7 +3,6 @@ language: php
 services:
     - mariadb
     - mongodb
-    - redis-server
 addons:
     mariadb: '10.3'
 
@@ -21,7 +20,6 @@ before_install:
     - wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.7_amd64.deb
     - sudo dpkg -i influxdb_1.7.7_amd64.deb
     - travis_retry sudo service influxdb restart
-    - export REDIS_DSN=redis://localhost/10
     - export MONGODB_DSN=mongodb://localhost
     - export MONGODB_DB=commons
     - export MARIADB_DSN=localhost

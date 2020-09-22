@@ -20,6 +20,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt()
      * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt()
      * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::__construct()
      *
      * @throws Exception
      */
@@ -35,7 +36,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
         $stdClass->false = FALSE;
         $stdClass->arr   = ['foo'];
         $arr[]           = $stdClass;
-        $crypt           = new WindwalkerCrypt();
+        $crypt           = new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645');
 
         foreach ($arr as $item) {
             $encrypted = $crypt->encrypt($item);
@@ -43,6 +44,22 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
 
             self::assertEquals($item, $decrypted);
         }
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getPrefix()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptImplAbstract::__construct()
+     *
+     * @throws Exception
+     */
+    public function testGetPrefix(): void
+    {
+        $crypt = new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645');
+        self::assertEquals('001_', $crypt->getPrefix());
+
+        self::expectException(CryptException::class);
+        self::expectExceptionCode(CryptException::BAD_PREFIX_LENGTH);
+        new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645', '01_');
     }
 
     /**
@@ -55,7 +72,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     public function testEncryptAndDecryptFail(): void
     {
         $str       = 'Some random text';
-        $crypt     = new WindwalkerCrypt();
+        $crypt     = new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645');
         $encrypted = $crypt->encrypt($str);
 
         self::expectException(CryptException::class);
@@ -73,7 +90,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
      */
     public function testEncryptAndDecrypt2(): void
     {
-        $crypt        = new WindwalkerCrypt();
+        $crypt        = new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645');
         $str          = 'asdf12342~!@#$%^&*()_+{}|:"<>?[]\;,./';
         $encryptedStr = $crypt->encrypt($str);
 
@@ -94,7 +111,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
      */
     public function testEncryptErr(): void
     {
-        $crypt = new WindwalkerCrypt();
+        $crypt = new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645');
         self::expectException(CryptException::class);
         $func = static function (): void {
             echo 'hello!';
@@ -109,9 +126,10 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
      */
     public function testDecryptErr(): void
     {
-        $crypt = new WindwalkerCrypt();
+        $crypt = new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645');
         self::expectException(CryptException::class);
-        $crypt->decrypt('01_some_hash');
+        self::expectExceptionCode(0);
+        $crypt->decrypt('001_some_hash');
     }
 
 }

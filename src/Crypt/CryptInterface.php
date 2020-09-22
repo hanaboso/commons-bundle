@@ -13,6 +13,11 @@ interface CryptInterface
 {
 
     /**
+     * @return string
+     */
+    public function getPrefix(): string;
+
+    /**
      * @param mixed $data
      *
      * @return string

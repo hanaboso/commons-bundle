@@ -13,7 +13,6 @@ services:
             - DEV_UID=${DEV_UID}
             - DEV_GID=${DEV_GID}
             - COMPOSER_HOME=${HOME}/dev/.composer
-            - REDIS_DSN=redis://redis/10
             - MONGODB_DSN=mongodb://mongo
             - MONGODB_DB=commons
             - MARIADB_DSN=mariadb
@@ -36,11 +35,6 @@ services:
         volumes:
             - mariadb:/var/lib/mysql
 
-    redis:
-        image: redis:alpine
-        volumes:
-            - redis:/data
-
     influxdb:
         image: influxdb:alpine
         volumes:
@@ -50,5 +44,4 @@ services:
 volumes:
     mongo: {}
     mariadb: {}
-    redis: {}
     influxdb: {}
