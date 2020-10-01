@@ -47,16 +47,29 @@ final class CurlMetricUtils
      * @param string|null            $nodeId
      * @param string|null            $correlationId
      *
+     * @param string|null            $user
+     * @param string|null            $application
+     *
      * @throws Exception
      */
     public static function sendCurlMetrics(
         MetricsSenderInterface $sender,
         array $timeData,
         ?string $nodeId = NULL,
-        ?string $correlationId = NULL
+        ?string $correlationId = NULL,
+        ?string $user = NULL,
+        ?string $application = NULL
     ): void
     {
         $info = [];
+
+        if ($user) {
+            $info[MetricsEnum::USER_ID] = $user;
+        }
+
+        if ($application) {
+            $info[MetricsEnum::APPLICATION_ID] = $application;
+        }
 
         if ($nodeId) {
             $info[MetricsEnum::NODE_ID] = $nodeId;
@@ -69,6 +82,8 @@ final class CurlMetricUtils
         $sender->send(
             [
                 MetricsEnum::REQUEST_TOTAL_DURATION_SENT => $timeData[self::KEY_REQUEST_DURATION],
+                MetricsEnum::APPLICATION_ID              => $application,
+                MetricsEnum::USER_ID                     => $user,
             ],
             $info
         );
@@ -80,7 +95,7 @@ final class CurlMetricUtils
     public static function getCurrentMetrics(): array
     {
         return [
-            self::KEY_TIMESTAMP => SystemUsage::getCurrentTimestamp(),
+            self::KEY_TIMESTAMP => SystemUsage::getCurrentTgimestamp(),
             self::KEY_CPU       => SystemUsage::getCpuTimes(),
         ];
     }

@@ -18,6 +18,8 @@ final class MetricsEnum extends EnumAbstract
     public const CORRELATION_ID = 'correlation_id';
     public const TOPOLOGY_ID    = 'topology_id';
     public const NODE_ID        = 'node_id';
+    public const USER_ID        = 'user_id';
+    public const APPLICATION_ID = 'application_id';
 
     // Fields
     public const REQUEST_TOTAL_DURATION      = 'fpm_request_total_duration';
@@ -34,6 +36,8 @@ final class MetricsEnum extends EnumAbstract
         self::URI                         => self::URI,
         self::CORRELATION_ID              => self::CORRELATION_ID,
         self::TOPOLOGY_ID                 => self::TOPOLOGY_ID,
+        self::USER_ID                     => self::USER_ID,
+        self::APPLICATION_ID              => self::APPLICATION_ID,
         // fields
         self::REQUEST_TOTAL_DURATION      => self::REQUEST_TOTAL_DURATION,
         self::CPU_USER_TIME               => self::CPU_USER_TIME,
