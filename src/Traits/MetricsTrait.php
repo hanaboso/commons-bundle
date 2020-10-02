@@ -42,7 +42,9 @@ trait MetricsTrait
                     $this->metricsSender->getSender(),
                     $times,
                     $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL
+                    $info['correlation_id'][0] ?? NULL,
+                    $info['user'][0] ?? NULL,
+                    $info['application'][0] ?? NULL
                 );
             } catch (Exception $e) {
                 throw new CurlException($e->getMessage(), $e->getCode(), $e);
