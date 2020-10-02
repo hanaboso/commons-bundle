@@ -86,7 +86,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $influx = $this->createPartialMock(InfluxDbSender::class, ['send']);
         $influx->expects(self::any())->method('send')->willReturn(TRUE);
 
-        CurlMetricUtils::sendCurlMetrics($influx, ['request_duration' => 2], '1', '2');
+        CurlMetricUtils::sendCurlMetrics($influx, ['request_duration' => 2], '1', '2', 'user', 'app');
 
         self::assertTrue(TRUE);
     }

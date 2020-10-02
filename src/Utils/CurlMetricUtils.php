@@ -95,7 +95,7 @@ final class CurlMetricUtils
     public static function getCurrentMetrics(): array
     {
         return [
-            self::KEY_TIMESTAMP => SystemUsage::getCurrentTgimestamp(),
+            self::KEY_TIMESTAMP => SystemUsage::getCurrentTimestamp(),
             self::KEY_CPU       => SystemUsage::getCpuTimes(),
         ];
     }
