@@ -1,3 +1,6 @@
+parameters:
+    aws_bucket: bucket
+
 aws:
     use_path_style_endpoint: true
     version: latest

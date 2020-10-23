@@ -25,9 +25,6 @@ final class HbPFCommonsExtension extends Extension implements PrependExtensionIn
      */
     public function prepend(ContainerBuilder $container): void
     {
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/prepend-config'));
-        $loader->load('parameters.yaml');
-
         $container->setParameter('src_dir', __DIR__ . '/../..');
     }
 
@@ -43,8 +40,7 @@ final class HbPFCommonsExtension extends Extension implements PrependExtensionIn
         $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('transport.yaml');
-        $loader->load('ftp.yaml');
+        $loader->load('services.yaml');
     }
 
 }
