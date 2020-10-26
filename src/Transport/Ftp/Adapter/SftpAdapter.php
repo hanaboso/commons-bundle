@@ -163,7 +163,7 @@ final class SftpAdapter implements FtpAdapterInterface
      * @return void
      * @throws FtpException
      */
-    public function makeDirRecursive($dir): void
+    public function makeDirRecursive(string $dir): void
     {
         $current = $this->getResource()->pwd();
         $parts   = explode('/', trim($dir, '/'));

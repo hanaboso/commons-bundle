@@ -32,9 +32,9 @@ final class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
     /**
      * DatabaseManagerLocator constructor.
      *
-     * @param DocumentManager $documentManager
-     * @param EntityManager   $entityManager
-     * @param string          $db
+     * @param DocumentManager|null $documentManager
+     * @param EntityManager|null   $entityManager
+     * @param string               $db
      */
     public function __construct(?DocumentManager $documentManager, ?EntityManager $entityManager, string $db)
     {

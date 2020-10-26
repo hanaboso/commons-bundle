@@ -160,8 +160,8 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
 
     /**
      * @param mixed              $soapCallResponse
-     * @param string             $lastResponseHeaders
-     * @param mixed[]            $outputHeaders
+     * @param string|null        $lastResponseHeaders
+     * @param mixed[]|null       $outputHeaders
      * @param RequestDtoAbstract $request
      *
      * @return ResponseDto

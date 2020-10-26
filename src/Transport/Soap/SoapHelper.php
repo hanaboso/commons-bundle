@@ -2,13 +2,13 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Soap;
 
+use GuzzleHttp\Utils;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
 use InvalidArgumentException;
 use SoapHeader;
 use SoapParam;
 use SoapVar;
 use Symfony\Component\HttpFoundation\HeaderBag;
-use function GuzzleHttp\headers_from_lines;
 
 /**
  * Class SoapHelper
@@ -72,7 +72,7 @@ final class SoapHelper
         }
 
         $headers = explode("\n", $headers);
-        $parts   = explode(' ', (string) array_shift($headers), 3);
+        $parts   = explode(' ', array_shift($headers), 3);
 
         if (count($parts) > 2) {
             $result['version']    = explode('/', $parts[0])[1];
@@ -80,7 +80,7 @@ final class SoapHelper
             $result['reason']     = $parts[2] ?? NULL;
         }
 
-        $result['headers'] = new HeaderBag(headers_from_lines($headers));
+        $result['headers'] = new HeaderBag(Utils::headersFromLines($headers));
 
         return $result;
     }

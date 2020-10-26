@@ -15,7 +15,7 @@ final class FileTypes
     /**
      * @var string[]
      */
-    protected static $mimetypes = [
+    protected static array $mimetypes = [
         '3dml'        => 'text/vnd.in3d.3dml',
         '3g2'         => 'video/3gpp2',
         '3gp'         => 'video/3gpp',

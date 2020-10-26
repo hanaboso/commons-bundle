@@ -1,33 +1,33 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.1.1",
+    "version": "2.2.0",
     "license": "Apache-2.0",
     "require": {
         "php": "^7.4",
         "ext-apcu": "*",
-        "ext-ctype": "*",
-        "ext-ftp": "*",
-        "ext-iconv": "*",
-        "ext-intl": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*",
-        "ext-pdo": "*",
-        "ext-soap": "*",
         "ext-sockets": "*",
-        "aws/aws-sdk-php-symfony": "^2.2",
-        "doctrine/doctrine-bundle": "^2.1",
-        "doctrine/mongodb-odm-bundle": "^4.2",
-        "guzzlehttp/guzzle": "^7.1",
+        "guzzlehttp/guzzle": "^7.2",
         "hanaboso/utils": "^1.0",
-        "php-imap/php-imap": "^4.1",
         "phpseclib/phpseclib": "^2.0",
         "windwalker/crypt": "^3.5"
     },
     "require-dev": {
+        "ext-ftp": "*",
+        "ext-soap": "*",
+        "aws/aws-sdk-php-symfony": "^2.2",
+        "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/mongodb-odm-bundle": "^4.2",
         "hanaboso/php-check-utils": "^1.1",
+        "php-imap/php-imap": "^4.1",
         "symfony/mailer": "^5.1",
-        "symfony/monolog-bundle": "^3.5",
+        "symfony/monolog-bundle": "^3.6",
         "symfony/yaml": "^5.1"
+    },
+    "suggest": {
+        "aws/aws-sdk-php-symfony": "Install me, if you need to use FileStorage\\Driver\\Impl\\S3\\S3Driver.",
+        "doctrine/doctrine-bundle": "Install me, if you using MySQL.",
+        "doctrine/mongodb-odm-bundle": "Install me, if you using MongoDB.",
+        "php-imap/php-imap": "Install me, if you need to use ImapConnector."
     },
     "autoload": {
         "psr-4": {

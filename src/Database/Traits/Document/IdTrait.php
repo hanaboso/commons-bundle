@@ -17,7 +17,7 @@ trait IdTrait
      *
      * @ODM\Id()
      */
-    protected $id;
+    protected string $id;
 
     /**
      * @return string

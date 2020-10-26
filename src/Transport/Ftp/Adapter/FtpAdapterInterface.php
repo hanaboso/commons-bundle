@@ -77,6 +77,6 @@ interface FtpAdapterInterface
      * @return void
      * @throws FtpException
      */
-    public function makeDirRecursive($dir): void;
+    public function makeDirRecursive(string $dir): void;
 
 }

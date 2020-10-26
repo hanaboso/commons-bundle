@@ -35,10 +35,10 @@ final class ResponseHeaderDto
     /**
      * ResponseHeaderDto constructor.
      *
-     * @param HeaderBag<mixed> $httpHeaders
-     * @param string|null      $httpVersion
-     * @param int              $httpStatusCode
-     * @param string|null      $httpReason
+     * @param HeaderBag|null $httpHeaders
+     * @param string|null    $httpVersion
+     * @param int|null       $httpStatusCode
+     * @param string|null    $httpReason
      */
     public function __construct(
         ?HeaderBag $httpHeaders,

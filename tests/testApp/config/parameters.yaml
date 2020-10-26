@@ -39,3 +39,5 @@ parameters:
     public.services: true
 
     database_type: 'ODM'
+
+    metrics_service: '%env(string:METRICS_SERVICE)%'

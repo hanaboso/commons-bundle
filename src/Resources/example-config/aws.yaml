@@ -1,3 +1,13 @@
+parameters:
+    env(aws_key): key
+    aws_key: '%env(string:aws_key)%'
+
+    env(aws_secret): secret
+    aws_secret: '%env(string:aws_secret)%'
+
+    env(aws_bucket): bucket
+    aws_bucket: '%env(string:aws_bucket)%'
+
 aws:
     version: latest
     region: eu-west-1
