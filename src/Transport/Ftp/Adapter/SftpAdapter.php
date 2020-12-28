@@ -4,7 +4,8 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp\Adapter;
 
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
-use phpseclib3\Net\SFTP;
+use phpseclib\Net\SFTP;
+use phpseclib3\Net\SFTP as SFTP3;
 
 /**
  * Class SftpAdapter
@@ -15,16 +16,27 @@ final class SftpAdapter implements FtpAdapterInterface
 {
 
     /**
-     * @var SFTP|null
+     * @var SFTP3|SFTP|null
      */
-    protected ?SFTP $sftp;
+    private $sftp;
+
+    /**
+     * @var int
+     */
+    private int $mode = 1;
 
     /**
      * @param FtpConfig $ftpConfig
      */
     public function connect(FtpConfig $ftpConfig): void
     {
-        $this->sftp = new SFTP($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
+        if (class_exists(SFTP3::class)) {
+            $this->sftp = new SFTP3($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
+            $this->mode = SFTP3::SOURCE_LOCAL_FILE;
+        } else {
+            $this->sftp = new SFTP($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
+            $this->mode = SFTP::SOURCE_LOCAL_FILE;
+        }
     }
 
     /**
@@ -34,7 +46,7 @@ final class SftpAdapter implements FtpAdapterInterface
      */
     public function login(FtpConfig $ftpConfig): void
     {
-        if (!$this->sftp || !$this->sftp->login($ftpConfig->getUsername(), $ftpConfig->getPassword())) {
+        if (!$this->sftp || !$this->sftp->login($ftpConfig->getUsername(), [$ftpConfig->getPassword()])) {
             throw new FtpException('Login failed.', FtpException::LOGIN_FAILED);
         }
     }
@@ -56,7 +68,7 @@ final class SftpAdapter implements FtpAdapterInterface
      */
     public function uploadFile(string $remoteFile, string $localFile): void
     {
-        if (!$this->getResource()->put($remoteFile, $localFile, SFTP::SOURCE_LOCAL_FILE)) {
+        if (!$this->getResource()->put($remoteFile, $localFile, $this->mode)) {
             throw new FtpException('File upload failed.', FtpException::FILE_UPLOAD_FAILED);
         }
     }
@@ -229,10 +241,10 @@ final class SftpAdapter implements FtpAdapterInterface
     /**************************************** HELPERS ****************************************/
 
     /**
-     * @return SFTP
+     * @return SFTP|SFTP3
      * @throws FtpException
      */
-    private function getResource(): SFTP
+    private function getResource()
     {
         if ($this->sftp && $this->sftp->isConnected()) {
             return $this->sftp;

@@ -11,6 +11,12 @@ parameters:
 		-
 			message: '#Error suppression via "@" should not be used.#'
 			path: src/Transport/Ftp/Adapter/FtpAdapter.php
+		-
+			message: '#phpseclib3?\\Net\\SFTP#'
+			path: src/Transport/Ftp/Adapter/SftpAdapter.php
+		-
+			message: '#phpseclib3?\\Net\\SFTP#'
+			path: tests/Unit/Transport/Ftp/Adapter/SftpAdapterTest.php
 	symfony:
 		container_xml_path: %rootDir%/../../../var/cache/test/CommonsBundleTests_KernelTestDebugContainer.xml
 	ergebnis:

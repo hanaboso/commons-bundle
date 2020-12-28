@@ -9,7 +9,8 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
-use phpseclib3\Net\SFTP;
+use phpseclib\Net\SFTP;
+use phpseclib3\Net\SFTP as SFTP3;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -29,7 +30,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     private SftpAdapter $adapter;
 
     /**
-     * @var SFTP|MockObject
+     * @var SFTP|SFTP3|MockObject
      */
     private $sftp;
 
@@ -38,7 +39,12 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
      */
     public function setUp(): void
     {
-        $this->sftp    = self::createMock(SFTP::class);
+        if (class_exists(SFTP3::class)) {
+            $this->sftp = self::createMock(SFTP3::class);
+        } else {
+            $this->sftp = self::createMock(SFTP::class);
+        }
+
         $this->adapter = new SftpAdapter();
     }
 
