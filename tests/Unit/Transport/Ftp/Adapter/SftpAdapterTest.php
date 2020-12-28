@@ -9,7 +9,7 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
-use phpseclib\Net\SFTP;
+use phpseclib3\Net\SFTP;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**

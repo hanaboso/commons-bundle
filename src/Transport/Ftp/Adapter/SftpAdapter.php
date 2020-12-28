@@ -4,7 +4,7 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp\Adapter;
 
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
-use phpseclib\Net\SFTP;
+use phpseclib3\Net\SFTP;
 
 /**
  * Class SftpAdapter

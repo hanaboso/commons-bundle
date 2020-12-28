@@ -167,4 +167,4 @@ services:
             - '@hbpf.ftp.sftp_adapter'
             - '@service_container'
         calls:
-            - ['setLogger',['@monolog.logger.ftp']]
+            - ['setLogger',['@monolog.logger.commons']]

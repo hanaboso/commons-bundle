@@ -1,6 +1,6 @@
 monolog:
     use_microseconds: false
-    channels: [commons, ftp, stdout, connector]
+    channels: [commons, stdout]
     handlers:
         commons:
             type: service
@@ -15,16 +15,6 @@ monolog:
             formatter: logstash_formatter
             max_files: 10
             channels: '!php'
-        ftp:
-            type: service
-            id: udp_handler
-            level: info
-            channels: [ftp]
-        connector:
-            type: service
-            id: udp_handler
-            level: info
-            channels: [connector]
 
 services:
     _defaults:
