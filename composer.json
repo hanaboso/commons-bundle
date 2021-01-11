@@ -1,9 +1,9 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.2.2",
+    "version": "2.2.3",
     "license": "Apache-2.0",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "ext-apcu": "*",
         "ext-sockets": "*",
         "guzzlehttp/guzzle": "^7.2",
@@ -12,8 +12,6 @@
         "windwalker/crypt": "^3.5"
     },
     "require-dev": {
-        "ext-ftp": "*",
-        "ext-soap": "*",
         "aws/aws-sdk-php-symfony": "^2.2",
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/mongodb-odm-bundle": "^4.2",
