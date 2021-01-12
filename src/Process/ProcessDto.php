@@ -2,6 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Process;
 
+use DateTime;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
 use Hanaboso\Utils\System\PipesHeaders;
 
@@ -103,6 +104,20 @@ final class ProcessDto
     }
 
     /**
+     * @param string $key
+     *
+     * @return ProcessDto
+     */
+    public function deleteHeader(string $key): ProcessDto
+    {
+        if (isset($this->headers[$key])) {
+            unset($this->headers[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
      * @param string|null $message
      *
      * @return ProcessDto
@@ -161,8 +176,6 @@ final class ProcessDto
         }
 
         $this->setStatusHeader(self::REPEAT, $message);
-        $keyRepeat = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
-        $this->addHeader($keyRepeat, (string) self::REPEAT);
 
         $keyInterval = PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL);
         $this->addHeader($keyInterval, (string) $interval);
@@ -179,6 +192,57 @@ final class ProcessDto
             $keyQueue = PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE);
             $this->addHeader($keyQueue, $queue);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return ProcessDto
+     */
+    public function removeRepeater(): ProcessDto
+    {
+        $this->setStatusHeader(self::OK, NULL);
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL));
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS));
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS));
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE));
+
+        return $this;
+    }
+
+    /**
+     * @param string        $key
+     * @param int           $time
+     * @param int           $value
+     * @param DateTime|null $lastUpdate
+     *
+     * @return ProcessDto
+     */
+    public function setLimiter(string $key, int $time, int $value, ?DateTime $lastUpdate = NULL): ProcessDto
+    {
+        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY), $key);
+        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_TIME), (string) $time);
+        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_VALUE), (string) $value);
+
+        if ($lastUpdate) {
+            $this->addHeader(
+                PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE),
+                (string) $lastUpdate->getTimestamp()
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ProcessDto
+     */
+    public function removeLimiter(): ProcessDto
+    {
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY));
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_TIME));
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_VALUE));
+        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE));
 
         return $this;
     }
