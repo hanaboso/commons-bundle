@@ -5,6 +5,7 @@ namespace CommonsBundleTests\Integration\Process;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
+use Hanaboso\Utils\Date\DateTimeUtils;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
 use Hanaboso\Utils\System\PipesHeaders;
 
@@ -44,10 +45,12 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRepeater
      *
-     * @throws PipesFrameworkException
+     * @throws Exception
      */
-    public function testSetRepeator(): void
+    public function testSetRepeater(): void
     {
         $processDto = (new ProcessDto())
             ->setRepeater(10, 20, 15, 'queue')
@@ -71,6 +74,40 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         );
 
         self::assertEquals(5, $processDto->getHeader('pf-repeat-interval'));
+
+        $processDto->removeRepeater();
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL)));
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setData
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getData
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setLimiter
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
+     *
+     * @throws Exception
+     */
+    public function testSetLimiter(): void
+    {
+        $now        = DateTimeUtils::getUtcDateTime();
+        $processDto = (new ProcessDto())
+            ->setLimiter('testLimit', 1, 100, $now)
+            ->setData('data');
+
+        self::assertEquals($this->getSetLimiterHeaders($now->getTimestamp()), $processDto->getHeaders());
+
+        $processDto->removeLimiter();
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_VALUE)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_TIME)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE)));
     }
 
     /**
@@ -78,7 +115,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setStatusHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::validateStatus
      *
-     * @throws PipesFrameworkException
+     * @throws Exception
      */
     public function testProcess(): void
     {
@@ -99,7 +136,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
      *
-     * @throws PipesFrameworkException
+     * @throws Exception
      */
     public function testSetRepeaterIntervalErr(): void
     {
@@ -110,7 +147,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
      *
-     * @throws PipesFrameworkException
+     * @throws Exception
      */
     public function testSetRepeaterHopsErr(): void
     {
@@ -141,6 +178,21 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
             'pf-repeat-max-hops'     => '20',
             'pf-repeat-hops'         => '15',
             'pf-repeat-queue'        => 'queue',
+        ];
+    }
+
+    /**
+     * @param int $timestamp
+     *
+     * @return mixed[]
+     */
+    private function getSetLimiterHeaders(int $timestamp): array
+    {
+        return [
+            'pf-limit-key'         => 'testLimit',
+            'pf-limit-time'        => '1',
+            'pf-limit-value'       => '100',
+            'pf-limit-last-update' => $timestamp,
         ];
     }
 
