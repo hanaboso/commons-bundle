@@ -106,14 +106,25 @@ final class FtpServiceFactory implements LoggerAwareInterface
      */
     private function prepareConfig(string $prefix): FtpConfig
     {
-        return new FtpConfig(
-            $this->container->getParameter(sprintf('%s.host', $prefix)),
-            $prefix == self::ADAPTER_FTP ? $this->container->getParameter(sprintf('%s.ssl', $prefix)) : FALSE,
-            $this->container->getParameter(sprintf('%s.port', $prefix)),
-            $this->container->getParameter(sprintf('%s.timeout', $prefix)),
-            $this->container->getParameter(sprintf('%s.user', $prefix)),
-            $this->container->getParameter(sprintf('%s.password', $prefix))
-        );
+        /** @var string $host */
+        $host = $this->container->getParameter(sprintf('%s.host', $prefix));
+
+        /** @var int $port */
+        $port = $this->container->getParameter(sprintf('%s.port', $prefix));
+
+        /** @var int $timeout */
+        $timeout = $this->container->getParameter(sprintf('%s.timeout', $prefix));
+
+        /** @var string $user */
+        $user = $this->container->getParameter(sprintf('%s.user', $prefix));
+
+        /** @var string $password */
+        $password = $this->container->getParameter(sprintf('%s.password', $prefix));
+
+        /** @var bool $ssl */
+        $ssl = $prefix == self::ADAPTER_FTP ? $this->container->getParameter(sprintf('%s.ssl', $prefix)) : FALSE;
+
+        return new FtpConfig($host, $ssl, $port, $timeout, $user, $password);
     }
 
 }

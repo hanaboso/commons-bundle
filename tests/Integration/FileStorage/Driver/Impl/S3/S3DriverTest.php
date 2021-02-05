@@ -60,11 +60,14 @@ final class S3DriverTest extends KernelTestCaseAbstract
             ->willReturnOnConsecutiveCalls($ret, new PhpUnitException(new S3Exception('', new Command('a'))));
         $client->method('putObject');
 
+        /** @var string $bucket */
+        $bucket = self::$container->getParameter('aws_bucket');
+
         $driver = new S3Driver(
             self::$container->get('doctrine_mongodb.odm.default_document_manager'),
             self::$container->get('hbpf.path_generator.hash'),
             $client,
-            self::$container->getParameter('aws_bucket')
+            $bucket
         );
 
         $uploadedFile = new UploadedFile($this->path, '');
@@ -92,11 +95,15 @@ final class S3DriverTest extends KernelTestCaseAbstract
             ->addMethods(['putObject'])
             ->getMock();
         $client->method('putObject');
+
+        /** @var string $bucket */
+        $bucket = self::$container->getParameter('aws_bucket');
+
         $driver = new S3Driver(
             self::$container->get('doctrine_mongodb.odm.default_document_manager'),
             self::$container->get('hbpf.path_generator.hash'),
             $client,
-            self::$container->getParameter('aws_bucket')
+            $bucket
         );
 
         $uploadedFile = new UploadedFile($this->path, '');

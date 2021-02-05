@@ -156,6 +156,26 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::addHeader
+     */
+    public function testReplace(): void
+    {
+        $dto = new ProcessDto();
+        $dto->addHeader('keyR', "\rLosos\rLos");
+        $dto->addHeader('keyN', "\nLosos\nLos");
+        $dto->addHeader('keyNR', "\r\nLosos\r\nLos");
+        $headers = $dto->getHeaders();
+        self::assertEquals(
+            [
+                'keyR' => ' Losos Los',
+                'keyN' => ' Losos Los',
+                'keyNR' => '  Losos  Los',
+            ],
+            $headers
+        );
+    }
+
+    /**
      * @return mixed[]
      */
     private function getSetStopProcessHeaders(): array
