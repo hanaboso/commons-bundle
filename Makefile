@@ -22,8 +22,8 @@ docker-down-clean: .env
 
 # Composer
 composer-install:
-	$(DE) composer install
-	$(DE) composer update --dry-run roave/security-advisories
+	$(DE) composer install --ignore-platform-reqs
+	$(DE) composer update --ignore-platform-reqs --dry-run roave/security-advisories
 
 composer-update:
 	$(DE) composer update --ignore-platform-reqs
