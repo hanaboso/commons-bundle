@@ -11,36 +11,6 @@ final class FtpConfig
 {
 
     /**
-     * @var string
-     */
-    private string $host;
-
-    /**
-     * @var bool
-     */
-    private bool $ssl;
-
-    /**
-     * @var int
-     */
-    private int $port;
-
-    /**
-     * @var int
-     */
-    private int $timeout;
-
-    /**
-     * @var string
-     */
-    private string $username;
-
-    /**
-     * @var string
-     */
-    private string $password;
-
-    /**
      * FtpConfig constructor.
      *
      * @param string $host
@@ -50,14 +20,15 @@ final class FtpConfig
      * @param string $username
      * @param string $password
      */
-    public function __construct(string $host, bool $ssl, int $port, int $timeout, string $username, string $password)
+    public function __construct(
+        private string $host,
+        private bool $ssl,
+        private int $port,
+        private int $timeout,
+        private string $username,
+        private string $password
+    )
     {
-        $this->host     = $host;
-        $this->ssl      = $ssl;
-        $this->port     = $port;
-        $this->timeout  = $timeout;
-        $this->username = $username;
-        $this->password = $password;
     }
 
     /**

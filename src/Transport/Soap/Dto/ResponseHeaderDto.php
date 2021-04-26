@@ -13,26 +13,6 @@ final class ResponseHeaderDto
 {
 
     /**
-     * @var HeaderBag<mixed>|null
-     */
-    private ?HeaderBag $httpHeaders;
-
-    /**
-     * @var string|null
-     */
-    private ?string $httpVersion;
-
-    /**
-     * @var int|null
-     */
-    private ?int $httpStatusCode;
-
-    /**
-     * @var string|null
-     */
-    private ?string $httpReason;
-
-    /**
      * ResponseHeaderDto constructor.
      *
      * @param HeaderBag|null $httpHeaders
@@ -41,17 +21,12 @@ final class ResponseHeaderDto
      * @param string|null    $httpReason
      */
     public function __construct(
-        ?HeaderBag $httpHeaders,
-        ?string $httpVersion,
-        ?int $httpStatusCode,
-        ?string $httpReason
+        private ?HeaderBag $httpHeaders,
+        private ?string $httpVersion,
+        private ?int $httpStatusCode,
+        private ?string $httpReason
     )
     {
-
-        $this->httpHeaders    = $httpHeaders;
-        $this->httpVersion    = $httpVersion;
-        $this->httpStatusCode = $httpStatusCode;
-        $this->httpReason     = $httpReason;
     }
 
     /**

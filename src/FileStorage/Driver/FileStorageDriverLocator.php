@@ -14,21 +14,6 @@ final class FileStorageDriverLocator
 {
 
     /**
-     * @var FileStorageDriverInterface
-     */
-    private FileStorageDriverInterface $persistent;
-
-    /**
-     * @var FileStorageDriverInterface
-     */
-    private FileStorageDriverInterface $temporary;
-
-    /**
-     * @var FileStorageDriverInterface
-     */
-    private FileStorageDriverInterface $public;
-
-    /**
      * FileStorageDriverLocator constructor.
      *
      * @param FileStorageDriverInterface $persistent
@@ -36,14 +21,11 @@ final class FileStorageDriverLocator
      * @param FileStorageDriverInterface $public
      */
     function __construct(
-        FileStorageDriverInterface $persistent,
-        FileStorageDriverInterface $temporary,
-        FileStorageDriverInterface $public
+        private FileStorageDriverInterface $persistent,
+        private FileStorageDriverInterface $temporary,
+        private FileStorageDriverInterface $public
     )
     {
-        $this->persistent = $persistent;
-        $this->temporary  = $temporary;
-        $this->public     = $public;
     }
 
     /**
@@ -54,19 +36,15 @@ final class FileStorageDriverLocator
      */
     public function get(string $type): FileStorageDriverInterface
     {
-        switch ($type) {
-            case StorageTypeEnum::PERSISTENT:
-                return $this->persistent;
-            case StorageTypeEnum::TEMPORARY:
-                return $this->temporary;
-            case StorageTypeEnum::PUBLIC:
-                return $this->public;
-            default:
-                throw new FileStorageException(
-                    sprintf('Given storage type [%s] is not a valid option.', $type),
-                    FileStorageException::INVALID_STORAGE_TYPE
-                );
-        }
+        return match ($type) {
+            StorageTypeEnum::PERSISTENT => $this->persistent,
+            StorageTypeEnum::TEMPORARY => $this->temporary,
+            StorageTypeEnum::PUBLIC => $this->public,
+            default => throw new FileStorageException(
+                sprintf('Given storage type [%s] is not a valid option.', $type),
+                FileStorageException::INVALID_STORAGE_TYPE
+            ),
+        };
     }
 
 }

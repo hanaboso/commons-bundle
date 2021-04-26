@@ -32,7 +32,7 @@ final class FtpAdapter implements FtpAdapterInterface
         }
 
         if (!is_resource($this->ftp)) {
-            throw new FtpException(sprintf('Connection to Ftp server failed.'), FtpException::CONNECTION_FAILED);
+            throw new FtpException('Connection to Ftp server failed.', FtpException::CONNECTION_FAILED);
         }
     }
 

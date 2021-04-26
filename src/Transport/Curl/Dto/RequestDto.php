@@ -19,21 +19,6 @@ final class RequestDto
     /**
      * @var string
      */
-    private string $method;
-
-    /**
-     * @var Uri
-     */
-    private Uri $uri;
-
-    /**
-     * @var mixed[]
-     */
-    private array $headers;
-
-    /**
-     * @var string
-     */
     private string $body;
 
     /**
@@ -50,7 +35,7 @@ final class RequestDto
      *
      * @throws CurlException
      */
-    public function __construct(string $method, Uri $uri, array $headers = [])
+    public function __construct(private string $method, private Uri $uri, private array $headers = [])
     {
         if (!in_array($method, CurlManager::getMethods(), TRUE)) {
             throw new CurlException(
@@ -59,9 +44,6 @@ final class RequestDto
             );
         }
 
-        $this->method    = $method;
-        $this->uri       = $uri;
-        $this->headers   = $headers;
         $this->debugInfo = PipesHeaders::debugInfo($headers);
         $this->body      = '';
     }
@@ -96,7 +78,7 @@ final class RequestDto
      *
      * @return Uri|string
      */
-    public function getUri($asString = FALSE)
+    public function getUri($asString = FALSE): Uri|string
     {
         if ($asString) {
             return $this->getUriString();
@@ -139,7 +121,7 @@ final class RequestDto
      * @return $this
      * @throws CurlException
      */
-    public function setBody(string $body)
+    public function setBody(string $body): self
     {
         if ($this->method == CurlManager::METHOD_GET) {
             throw new CurlException('Setting body on GET method.', CurlException::BODY_ON_GET);
@@ -163,7 +145,7 @@ final class RequestDto
      *
      * @return $this
      */
-    public function setHeaders(array $headers)
+    public function setHeaders(array $headers): self
     {
         $this->headers = $headers;
 

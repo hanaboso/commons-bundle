@@ -30,7 +30,7 @@ trait DeletedTrait
     /**
      * @param bool $deleted
      *
-     * @return self
+     * @return $this
      */
     public function setDeleted(bool $deleted): self
     {

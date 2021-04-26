@@ -21,33 +21,15 @@ final class FileContentDto
     private string $type;
 
     /**
-     * @var string
-     */
-    private string $content;
-
-    /**
-     * @var string|null
-     */
-    private ?string $filename;
-
-    /**
-     * @var string
-     */
-    private string $format;
-
-    /**
      * FileContentDto constructor.
      *
      * @param string      $content
      * @param string      $format
      * @param string|null $filename
      */
-    function __construct(string $content, string $format, ?string $filename = NULL)
+    function __construct(private string $content, private string $format, private ?string $filename = NULL)
     {
-        $this->content  = $content;
-        $this->filename = $filename;
-        $this->type     = StorageTypeEnum::PERSISTENT;
-        $this->format   = $format;
+        $this->type = StorageTypeEnum::PERSISTENT;
     }
 
     /**
@@ -88,7 +70,7 @@ final class FileContentDto
     {
         try {
             StorageTypeEnum::isValid($type);
-        } catch (EnumException $exception) {
+        } catch (EnumException) {
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE
@@ -137,7 +119,7 @@ final class FileContentDto
     {
         try {
             FileFormatEnum::isValid($format);
-        } catch (EnumException $exception) {
+        } catch (EnumException) {
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $format),
                 FileStorageException::INVALID_FILE_FORMAT

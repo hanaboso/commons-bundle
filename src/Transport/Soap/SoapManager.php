@@ -25,11 +25,6 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
     public const CONNECTION_TIMEOUT = 15;
 
     /**
-     * @var SoapClientFactory
-     */
-    private SoapClientFactory $soapClientFactory;
-
-    /**
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
@@ -49,12 +44,11 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
      *
      * @param SoapClientFactory $soapClientFactory
      */
-    public function __construct(SoapClientFactory $soapClientFactory)
+    public function __construct(private SoapClientFactory $soapClientFactory)
     {
-        $this->soapClientFactory = $soapClientFactory;
-        $this->logger            = new NullLogger();
-        $this->metricsSender     = NULL;
-        $this->startTimes        = [];
+        $this->logger        = new NullLogger();
+        $this->metricsSender = NULL;
+        $this->startTimes    = [];
     }
 
     /**
@@ -167,7 +161,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
      * @return ResponseDto
      */
     private function handleResponse(
-        $soapCallResponse,
+        mixed $soapCallResponse,
         ?string $lastResponseHeaders,
         ?array $outputHeaders,
         RequestDtoAbstract $request

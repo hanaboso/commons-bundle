@@ -48,13 +48,13 @@ final class MongoFileDriver extends FileStorageDriverAbstract
     }
 
     /**
-     * @param string $fileId
+     * @param string $fileUrl
      *
      * @throws FileStorageException
      */
-    public function delete(string $fileId): void
+    public function delete(string $fileUrl): void
     {
-        $file = $this->getDocument($fileId);
+        $file = $this->getDocument($fileUrl);
 
         try {
             $this->dm->remove($file);
@@ -65,14 +65,14 @@ final class MongoFileDriver extends FileStorageDriverAbstract
     }
 
     /**
-     * @param string $fileId
+     * @param string $fileUrl
      *
      * @return string
      * @throws FileStorageException
      */
-    public function get(string $fileId): string
+    public function get(string $fileUrl): string
     {
-        $file = $this->getDocument($fileId);
+        $file = $this->getDocument($fileUrl);
 
         /** @var GridFSRepository $repository */
         $repository = $this->dm->getRepository(FileMongo::class);

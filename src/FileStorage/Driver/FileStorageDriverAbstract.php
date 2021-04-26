@@ -19,26 +19,14 @@ abstract class FileStorageDriverAbstract implements FileStorageDriverInterface
     protected string $filePrefix;
 
     /**
-     * @var DocumentManager
-     */
-    protected DocumentManager $dm;
-
-    /**
-     * @var PathGeneratorInterface
-     */
-    protected PathGeneratorInterface $pathGenerator;
-
-    /**
      * FileStorageDriverAbstract constructor.
      *
      * @param DocumentManager        $dm
-     * @param PathGeneratorInterface $defaultPathGenerator
+     * @param PathGeneratorInterface $pathGenerator
      */
-    function __construct(DocumentManager $dm, PathGeneratorInterface $defaultPathGenerator)
+    function __construct(protected DocumentManager $dm, protected PathGeneratorInterface $pathGenerator)
     {
-        $this->dm            = $dm;
-        $this->pathGenerator = $defaultPathGenerator;
-        $this->filePrefix    = '';
+        $this->filePrefix = '';
     }
 
     /**

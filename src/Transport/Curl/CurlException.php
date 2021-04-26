@@ -21,11 +21,6 @@ final class CurlException extends PipesFrameworkExceptionAbstract
     protected const OFFSET = 300;
 
     /**
-     * @var ResponseInterface|null
-     */
-    private ?ResponseInterface $response;
-
-    /**
      * CurlException constructor.
      *
      * @param string                 $message
@@ -37,12 +32,10 @@ final class CurlException extends PipesFrameworkExceptionAbstract
         $message = '',
         $code = 0,
         ?Throwable $previous = NULL,
-        ?ResponseInterface $response = NULL
+        private ?ResponseInterface $response = NULL
     )
     {
         parent::__construct($message, $code, $previous);
-
-        $this->response = $response;
     }
 
     /**

@@ -31,22 +31,16 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
     /**
      * @var LoggerInterface
      */
-    private $logger;
-
-    /**
-     * @var MetricsSenderLoader
-     */
-    private MetricsSenderLoader $metricsSender;
+    private LoggerInterface $logger;
 
     /**
      * SystemMetricsListener constructor.
      *
      * @param MetricsSenderLoader $metricsSender
      */
-    public function __construct(MetricsSenderLoader $metricsSender)
+    public function __construct(private MetricsSenderLoader $metricsSender)
     {
-        $this->metricsSender = $metricsSender;
-        $this->logger        = new NullLogger();
+        $this->logger = new NullLogger();
     }
 
     /**

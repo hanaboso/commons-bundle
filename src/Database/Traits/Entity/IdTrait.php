@@ -19,7 +19,7 @@ trait IdTrait
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $id;
+    protected string $id;
 
     /**
      * @return string

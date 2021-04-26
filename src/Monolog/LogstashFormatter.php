@@ -2,7 +2,6 @@
 
 namespace Hanaboso\CommonsBundle\Monolog;
 
-use Exception;
 use Monolog\Formatter\NormalizerFormatter;
 use SoapFault;
 use Throwable;
@@ -16,21 +15,14 @@ final class LogstashFormatter extends NormalizerFormatter
 {
 
     /**
-     * @var string
-     */
-    protected string $serviceType;
-
-    /**
      * LogstashFormatter constructor.
      *
      * @param string $serviceType
      */
-    public function __construct(string $serviceType = '')
+    public function __construct(protected string $serviceType = '')
     {
         // logstash requires a ISO 8601 format date with optional millisecond precision.
         parent::__construct('Y-m-d\TH:i:s.uP');
-
-        $this->serviceType = $serviceType;
     }
 
     /**
@@ -103,8 +95,8 @@ final class LogstashFormatter extends NormalizerFormatter
     }
 
     /**
-     * @param Exception|Throwable $e
-     * @param int                 $depth
+     * @param Throwable $e
+     * @param int       $depth
      *
      * @return mixed[]
      */
@@ -113,7 +105,7 @@ final class LogstashFormatter extends NormalizerFormatter
         $depth;
 
         $data = [
-            'class'   => get_class($e),
+            'class'   => $e::class,
             'message' => $e->getMessage(),
             'code'    => $e->getCode(),
             'file'    => sprintf('%s:%s', $e->getFile(), $e->getLine()),
@@ -136,9 +128,8 @@ final class LogstashFormatter extends NormalizerFormatter
         $data['trace'] = $this->toJson($e->getTraceAsString());
 
         if ($e->getPrevious()) {
-            /** @var Throwable $previous */
             $previous         = $e->getPrevious();
-            $data['previous'] = $this->normalizeException($previous);
+            $data['previous'] = $previous ? $this->normalizeException($previous) : '';
         }
 
         return $data;

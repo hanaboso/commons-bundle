@@ -29,24 +29,9 @@ abstract class RequestDtoAbstract
     protected ?string $password;
 
     /**
-     * @var string
-     */
-    private string $function;
-
-    /**
-     * @var mixed[]
-     */
-    private array $arguments;
-
-    /**
      * @var RequestHeaderDto
      */
     private RequestHeaderDto $header;
-
-    /**
-     * @var Uri
-     */
-    private Uri $uri;
 
     /**
      * @return string
@@ -62,13 +47,16 @@ abstract class RequestDtoAbstract
      * @param Uri     $uri
      * @param mixed[] $params
      */
-    public function __construct(string $function, array $arguments, string $namespace, Uri $uri, array $params = [])
+    public function __construct(
+        private string $function,
+        private array $arguments,
+        string $namespace,
+        private Uri $uri,
+        array $params = []
+    )
     {
-        $this->function  = $function;
-        $this->arguments = $arguments;
-        $this->uri       = $uri;
-        $this->user      = NULL;
-        $this->password  = NULL;
+        $this->user     = NULL;
+        $this->password = NULL;
 
         $this->header = new RequestHeaderDto($namespace, $params);
     }
@@ -87,7 +75,7 @@ abstract class RequestDtoAbstract
      * @return $this
      * @throws SoapException
      */
-    public function setVersion(int $version)
+    public function setVersion(int $version): self
     {
         if (!in_array($version, [SOAP_1_1, SOAP_1_2], TRUE)) {
             throw new SoapException(

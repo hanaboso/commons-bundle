@@ -15,38 +15,24 @@ final class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
 {
 
     /**
-     * @var DocumentManager|null
-     */
-    private ?DocumentManager $documentManager;
-
-    /**
-     * @var EntityManager|null
-     */
-    private ?EntityManager $entityManager;
-
-    /**
-     * @var string
-     */
-    private string $type;
-
-    /**
      * DatabaseManagerLocator constructor.
      *
      * @param DocumentManager|null $documentManager
      * @param EntityManager|null   $entityManager
-     * @param string               $db
+     * @param string               $type
      */
-    public function __construct(?DocumentManager $documentManager, ?EntityManager $entityManager, string $db)
+    public function __construct(
+        private ?DocumentManager $documentManager,
+        private ?EntityManager $entityManager,
+        private string $type
+    )
     {
-        $this->documentManager = $documentManager;
-        $this->entityManager   = $entityManager;
-        $this->type            = $db;
     }
 
     /**
      * @return DocumentManager|EntityManager
      */
-    public function get()
+    public function get(): DocumentManager|EntityManager
     {
         $manager = NULL;
         if ($this->type === 'ODM') {

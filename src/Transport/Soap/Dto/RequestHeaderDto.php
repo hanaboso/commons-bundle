@@ -11,25 +11,13 @@ final class RequestHeaderDto
 {
 
     /**
-     * @var string
-     */
-    private string $namespace;
-
-    /**
-     * @var mixed[]
-     */
-    private array $params;
-
-    /**
      * RequestHeaderDto constructor.
      *
      * @param string  $namespace
      * @param mixed[] $params
      */
-    public function __construct(string $namespace, array $params = [])
+    public function __construct(private string $namespace, private array $params = [])
     {
-        $this->namespace = $namespace;
-        $this->params    = $params;
     }
 
     /**
@@ -54,7 +42,7 @@ final class RequestHeaderDto
      *
      * @return RequestHeaderDto
      */
-    public function setParam(string $key, $value): RequestHeaderDto
+    public function setParam(string $key, mixed $value): RequestHeaderDto
     {
         $this->params[$key] = $value;
 

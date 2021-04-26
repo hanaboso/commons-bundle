@@ -15,11 +15,6 @@ final class OnRepeatException extends Exception
 {
 
     /**
-     * @var ProcessDto
-     */
-    private ProcessDto $processDto;
-
-    /**
      * interval in ms
      *
      * @var int
@@ -39,13 +34,12 @@ final class OnRepeatException extends Exception
      * @param int            $code
      * @param Throwable|null $previous
      */
-    public function __construct(ProcessDto $processDto, $message = '', $code = 0, ?Throwable $previous = NULL)
+    public function __construct(private ProcessDto $processDto, $message = '', $code = 0, ?Throwable $previous = NULL)
     {
         parent::__construct($message, $code, $previous);
 
-        $this->processDto = $processDto;
-        $this->interval   = 60_000;
-        $this->maxHops    = 3;
+        $this->interval = 60_000;
+        $this->maxHops  = 3;
     }
 
     /**

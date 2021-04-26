@@ -1,26 +1,27 @@
 {
     "name": "hanaboso/commons-bundle",
-    "version": "2.2.5",
+    "description": "Hanaboso - commons-bundle",
+    "version": "2.3.0",
     "license": "Apache-2.0",
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0",
         "ext-apcu": "*",
         "ext-sockets": "*",
-        "guzzlehttp/guzzle": "^7.2",
-        "hanaboso/utils": "^1.0",
-        "phpseclib/phpseclib": "^2.0 || ^3.0",
+        "guzzlehttp/guzzle": "^7.3",
+        "hanaboso/utils": "^1.1",
+        "phpseclib/phpseclib": "^3.0",
         "windwalker/crypt": "^3.5"
     },
     "require-dev": {
         "aws/aws-sdk-php-symfony": "^2.2",
-        "doctrine/doctrine-bundle": "^2.2",
-        "doctrine/mongodb-odm-bundle": "^4.2",
+        "doctrine/doctrine-bundle": "^2.3",
+        "doctrine/mongodb-odm-bundle": "^4.3",
         "doctrine/orm": "^2.8",
-        "hanaboso/php-check-utils": "^1.1",
+        "hanaboso/php-check-utils": "^1.2",
         "php-imap/php-imap": "^4.1",
-        "symfony/mailer": "^5.2",
-        "symfony/monolog-bundle": "^3.6",
-        "symfony/yaml": "^5.2"
+        "symfony/mailer": "^v5.2",
+        "symfony/monolog-bundle": "^v3.7",
+        "symfony/yaml": "^v5.2"
     },
     "suggest": {
         "aws/aws-sdk-php-symfony": "Install me, if you need to use FileStorage\\Driver\\Impl\\S3\\S3Driver.",

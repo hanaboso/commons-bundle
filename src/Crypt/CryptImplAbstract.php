@@ -13,18 +13,13 @@ abstract class CryptImplAbstract implements CryptInterface
 {
 
     /**
-     * @var string
-     */
-    protected string $prefix;
-
-    /**
      * CryptImplAbstract constructor.
      *
      * @param string $prefix
      *
      * @throws CryptException
      */
-    public function __construct(string $prefix)
+    public function __construct(protected string $prefix)
     {
         if (strlen($prefix) !== CryptManager::PREFIX_LENGTH) {
             throw new CryptException(
@@ -37,7 +32,6 @@ abstract class CryptImplAbstract implements CryptInterface
                 CryptException::BAD_PREFIX_LENGTH
             );
         }
-        $this->prefix = $prefix;
     }
 
     /**

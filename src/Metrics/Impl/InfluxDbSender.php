@@ -16,32 +16,14 @@ final class InfluxDbSender implements MetricsSenderInterface
 {
 
     /**
-     * @var UDPSender
-     */
-    private UDPSender $sender;
-
-    /**
-     * @var string
-     */
-    private string $measurement;
-
-    /**
-     * @var string
-     */
-    private string $host;
-
-    /**
      * InfluxDbSender constructor.
      *
      * @param UDPSender $sender
      * @param string    $host
      * @param string    $measurement
      */
-    public function __construct(UDPSender $sender, string $host, string $measurement)
+    public function __construct(private UDPSender $sender, private string $host, private string $measurement)
     {
-        $this->sender      = $sender;
-        $this->measurement = $measurement;
-        $this->host        = $host;
     }
 
     /**
@@ -97,9 +79,7 @@ final class InfluxDbSender implements MetricsSenderInterface
             $result .= sprintf('%s=%s,', $key, $value);
         }
 
-        $result = substr($result, 0, -1);
-
-        return $result;
+        return substr($result, 0, -1);
     }
 
     /**

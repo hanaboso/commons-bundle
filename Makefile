@@ -13,7 +13,8 @@ DEC=docker-compose exec -T app composer
 
 # Docker
 docker-up-force: .env
-	$(DC) pull
+	$(DC) build
+	$(DC) pull --ignore-pull-failures
 	$(DC) up -d --force-recreate --remove-orphans
 
 docker-down-clean: .env
@@ -25,8 +26,8 @@ composer-install:
 	$(DE) composer update --dry-run roave/security-advisories
 
 composer-update:
-	$(DE) composer update
-	$(DE) composer update --dry-run roave/security-advisories
+	$(DE) composer update --ignore-platform-reqs
+	$(DE) composer update --ignore-platform-reqs --dry-run roave/security-advisories
 	$(DE) composer normalize
 
 composer-outdated:

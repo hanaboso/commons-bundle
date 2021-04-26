@@ -23,38 +23,27 @@ final class FileStorage
 {
 
     /**
-     * @var FileStorageDriverLocator
-     */
-    private FileStorageDriverLocator $locator;
-
-    /**
      * @var EntityManager|DocumentManager
      */
-    private $dm;
-
-    /**
-     * @template T of File
-     * @phpstan-var class-string<T>
-     *
-     * @var string
-     */
-    private string $fileNamespace;
+    private DocumentManager|EntityManager $dm;
 
     /**
      * FileStorage constructor.
      *
-     * @template T
-     * @phpstan-param class-string<T> $fileNamespace
+     * @template T of File
+     * @phpstan-param class-string<T>  $fileNamespace
      *
      * @param FileStorageDriverLocator $locator
      * @param DatabaseManagerLocator   $dm
      * @param string                   $fileNamespace
      */
-    function __construct(FileStorageDriverLocator $locator, DatabaseManagerLocator $dm, string $fileNamespace)
+    function __construct(
+        private FileStorageDriverLocator $locator,
+        DatabaseManagerLocator $dm,
+        private string $fileNamespace
+    )
     {
-        $this->locator       = $locator;
-        $this->dm            = $dm->get();
-        $this->fileNamespace = $fileNamespace;
+        $this->dm = $dm->get();
     }
 
     /**

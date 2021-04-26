@@ -24,16 +24,6 @@ final class S3Driver extends FileStorageDriverAbstract
     private const META_FIELD   = 'Metadata';
 
     /**
-     * @var S3Client
-     */
-    private S3Client $client;
-
-    /**
-     * @var string
-     */
-    private string $bucket;
-
-    /**
      * S3Driver constructor.
      *
      * @param DocumentManager        $dm
@@ -44,14 +34,11 @@ final class S3Driver extends FileStorageDriverAbstract
     public function __construct(
         DocumentManager $dm,
         PathGeneratorInterface $generator,
-        S3Client $client,
-        string $bucket
+        private S3Client $client,
+        private string $bucket
     )
     {
         parent::__construct($dm, $generator);
-
-        $this->client = $client;
-        $this->bucket = $bucket;
     }
 
     /**

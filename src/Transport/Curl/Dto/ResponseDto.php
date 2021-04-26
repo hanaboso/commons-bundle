@@ -3,7 +3,6 @@
 namespace Hanaboso\CommonsBundle\Transport\Curl\Dto;
 
 use Hanaboso\Utils\String\Json;
-use JsonException;
 
 /**
  * Class ResponseDto
@@ -14,26 +13,6 @@ final class ResponseDto
 {
 
     /**
-     * @var int
-     */
-    private int $statusCode;
-
-    /**
-     * @var string
-     */
-    private string $reasonPhrase;
-
-    /**
-     * @var string
-     */
-    private string $body;
-
-    /**
-     * @var mixed[]
-     */
-    private array $headers;
-
-    /**
      * ResponseDto constructor.
      *
      * @param int     $statusCode
@@ -41,12 +20,13 @@ final class ResponseDto
      * @param string  $body
      * @param mixed[] $headers
      */
-    public function __construct(int $statusCode, string $reasonPhrase, string $body, array $headers)
+    public function __construct(
+        private int $statusCode,
+        private string $reasonPhrase,
+        private string $body,
+        private array $headers
+    )
     {
-        $this->statusCode   = $statusCode;
-        $this->reasonPhrase = $reasonPhrase;
-        $this->body         = $body;
-        $this->headers      = $headers;
     }
 
     /**
@@ -75,7 +55,6 @@ final class ResponseDto
 
     /**
      * @return mixed[]
-     * @throws JsonException
      */
     public function getJsonBody(): array
     {

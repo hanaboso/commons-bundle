@@ -13,25 +13,13 @@ final class FileStorageDto
 {
 
     /**
-     * @var string
-     */
-    private string $content;
-
-    /**
-     * @var FileInterface
-     */
-    private FileInterface $file;
-
-    /**
      * FileStorageDto constructor.
      *
      * @param FileInterface $file
      * @param string        $content
      */
-    function __construct(FileInterface $file, string $content)
+    function __construct(private FileInterface $file, private string $content)
     {
-        $this->file    = $file;
-        $this->content = $content;
     }
 
     /**

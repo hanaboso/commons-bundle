@@ -16,25 +16,13 @@ final class MongoDbSender implements MetricsSenderInterface
 {
 
     /**
-     * @var DocumentManager
-     */
-    private DocumentManager $dm;
-
-    /**
-     * @var string
-     */
-    private string $collection;
-
-    /**
      * MongoDbSender constructor.
      *
      * @param DocumentManager $dm
      * @param string          $collection
      */
-    public function __construct(DocumentManager $dm, string $collection)
+    public function __construct(private DocumentManager $dm, private string $collection)
     {
-        $this->dm         = $dm;
-        $this->collection = $collection;
     }
 
     /**

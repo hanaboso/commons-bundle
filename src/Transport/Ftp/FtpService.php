@@ -19,19 +19,9 @@ final class FtpService implements FtpServiceInterface, LoggerAwareInterface
 {
 
     /**
-     * @var FtpAdapterInterface
-     */
-    protected FtpAdapterInterface $adapter;
-
-    /**
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
-
-    /**
-     * @var FtpConfig
-     */
-    private FtpConfig $ftpConfig;
 
     /**
      * FtpService constructor.
@@ -39,11 +29,9 @@ final class FtpService implements FtpServiceInterface, LoggerAwareInterface
      * @param FtpAdapterInterface $adapter
      * @param FtpConfig           $ftpConfig
      */
-    public function __construct(FtpAdapterInterface $adapter, FtpConfig $ftpConfig)
+    public function __construct(protected FtpAdapterInterface $adapter, private FtpConfig $ftpConfig)
     {
-        $this->adapter   = $adapter;
-        $this->ftpConfig = $ftpConfig;
-        $this->logger    = new NullLogger();
+        $this->logger = new NullLogger();
     }
 
     /**

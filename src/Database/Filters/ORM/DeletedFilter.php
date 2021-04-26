@@ -16,15 +16,15 @@ final class DeletedFilter extends SQLFilter
     public const NAME = 'deleted';
 
     /**
-     * @param ClassMetadata $metadata
-     * @param string        $table
+     * @param ClassMetadata $targetEntity
+     * @param string        $targetTableAlias
      *
      * @return string
      */
-    public function addFilterConstraint(ClassMetadata $metadata, $table): string
+    public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias): string
     {
-        if ($metadata->getReflectionClass()->hasProperty(self::NAME)) {
-            return sprintf('%s.%s = 0', $table, self::NAME);
+        if ($targetEntity->getReflectionClass()->hasProperty(self::NAME)) {
+            return sprintf('%s.%s = 0', $targetTableAlias, self::NAME);
         }
 
         return '';

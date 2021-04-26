@@ -113,9 +113,9 @@ final class SoapHelper
      * @return SoapVar
      * @throws InvalidArgumentException
      */
-    private static function composeDataForSoapParam(string $nodeName, $data): SoapVar
+    private static function composeDataForSoapParam(string $nodeName, mixed $data): SoapVar
     {
-        if (strpos($nodeName, ':') === FALSE) {
+        if (!str_contains($nodeName, ':')) {
             $nodeName = sprintf('ns1:%s', $nodeName);
         }
 

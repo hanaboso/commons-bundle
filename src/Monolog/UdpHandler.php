@@ -16,16 +16,6 @@ final class UdpHandler extends AbstractProcessingHandler
 {
 
     /**
-     * @var UDPSender
-     */
-    private UDPSender $UDPSender;
-
-    /**
-     * @var string
-     */
-    private string $host;
-
-    /**
      * UdpHandler constructor.
      *
      * @param UDPSender $UDPSender
@@ -33,12 +23,14 @@ final class UdpHandler extends AbstractProcessingHandler
      * @param int       $level
      * @param bool      $bubble
      */
-    public function __construct(UDPSender $UDPSender, string $host, $level = Logger::DEBUG, $bubble = TRUE)
+    public function __construct(
+        private UDPSender $UDPSender,
+        private string $host,
+        $level = Logger::DEBUG,
+        $bubble = TRUE
+    )
     {
         parent::__construct($level, $bubble);
-
-        $this->UDPSender = $UDPSender;
-        $this->host      = $host;
     }
 
     /**

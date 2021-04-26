@@ -17,11 +17,6 @@ final class WindwalkerCrypt extends CryptImplAbstract
 {
 
     /**
-     * @var string
-     */
-    private string $secretKey;
-
-    /**
      * WindwalkerCrypt constructor.
      *
      * @param string $secretKey
@@ -29,12 +24,9 @@ final class WindwalkerCrypt extends CryptImplAbstract
      *
      * @throws CryptException
      */
-    public function __construct(string $secretKey, string $prefix = '001_')
+    public function __construct(private string $secretKey, string $prefix = '001_')
     {
         parent::__construct($prefix);
-
-        $this->secretKey = $secretKey;
-        $this->prefix    = $prefix;
     }
 
     /**
@@ -43,7 +35,7 @@ final class WindwalkerCrypt extends CryptImplAbstract
      * @return string
      * @throws CryptException
      */
-    public function encrypt($data): string
+    public function encrypt(mixed $data): string
     {
         try {
             $crypt = $this->getCrypt();
@@ -55,19 +47,19 @@ final class WindwalkerCrypt extends CryptImplAbstract
     }
 
     /**
-     * @param string $hash
+     * @param string $data
      *
      * @return mixed
      * @throws CryptException
      */
-    public function decrypt(string $hash)
+    public function decrypt(string $data): mixed
     {
-        if (strpos($hash, $this->getPrefix()) !== 0) {
+        if (!str_starts_with($data, $this->getPrefix())) {
             throw new CryptException('Unknown prefix in hash.', CryptException::UNKNOWN_PREFIX);
         }
 
         try {
-            $hiddenString = $this->getCrypt()->decrypt(substr($hash, strlen($this->getPrefix())));
+            $hiddenString = $this->getCrypt()->decrypt(substr($data, strlen($this->getPrefix())));
 
             return unserialize($hiddenString);
         } catch (Throwable $t) {

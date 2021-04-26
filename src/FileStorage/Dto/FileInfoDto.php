@@ -11,25 +11,13 @@ final class FileInfoDto
 {
 
     /**
-     * @var string
-     */
-    private string $url;
-
-    /**
-     * @var string
-     */
-    private string $size;
-
-    /**
      * FileInfoDto constructor.
      *
      * @param string $url
      * @param string $size
      */
-    function __construct(string $url, string $size)
+    function __construct(private string $url, private string $size)
     {
-        $this->url  = $url;
-        $this->size = $size;
     }
 
     /**

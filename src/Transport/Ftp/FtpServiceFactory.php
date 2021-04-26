@@ -22,24 +22,9 @@ final class FtpServiceFactory implements LoggerAwareInterface
     public const ADAPTER_SFTP = 'sftp';
 
     /**
-     * @var FtpAdapter
-     */
-    private FtpAdapter $ftpAdapter;
-
-    /**
-     * @var SftpAdapter
-     */
-    private SftpAdapter $sftpAdapter;
-
-    /**
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
-
-    /**
-     * @var ContainerInterface
-     */
-    private ContainerInterface $container;
 
     /**
      * FtpServiceFactory constructor.
@@ -48,12 +33,13 @@ final class FtpServiceFactory implements LoggerAwareInterface
      * @param SftpAdapter        $sftpAdapter
      * @param ContainerInterface $container
      */
-    public function __construct(FtpAdapter $ftpAdapter, SftpAdapter $sftpAdapter, ContainerInterface $container)
+    public function __construct(
+        private FtpAdapter $ftpAdapter,
+        private SftpAdapter $sftpAdapter,
+        private ContainerInterface $container
+    )
     {
-        $this->ftpAdapter  = $ftpAdapter;
-        $this->sftpAdapter = $sftpAdapter;
-        $this->container   = $container;
-        $this->logger      = new NullLogger();
+        $this->logger = new NullLogger();
     }
 
     /**
@@ -78,21 +64,14 @@ final class FtpServiceFactory implements LoggerAwareInterface
      */
     public function getFtpService(string $type): FtpService
     {
-        switch ($type) {
-            case self::ADAPTER_FTP:
-                $service = new FtpService($this->ftpAdapter, $this->prepareConfig(self::ADAPTER_FTP));
-
-                break;
-            case self::ADAPTER_SFTP:
-                $service = new FtpService($this->sftpAdapter, $this->prepareConfig(self::ADAPTER_SFTP));
-
-                break;
-            default:
-                throw new FtpException(
-                    sprintf('Unknown ftp adapter type "%s"', $type),
-                    FtpException::UNKNOWN_ADAPTER_TYPE
-                );
-        }
+        $service = match ($type) {
+            self::ADAPTER_FTP => new FtpService($this->ftpAdapter, $this->prepareConfig(self::ADAPTER_FTP)),
+            self::ADAPTER_SFTP => new FtpService($this->sftpAdapter, $this->prepareConfig(self::ADAPTER_SFTP)),
+            default => throw new FtpException(
+                sprintf('Unknown ftp adapter type "%s"', $type),
+                FtpException::UNKNOWN_ADAPTER_TYPE
+            ),
+        };
 
         $service->setLogger($this->logger);
 

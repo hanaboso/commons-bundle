@@ -15,25 +15,13 @@ final class ProcessStatusEvent extends Event
     public const PROCESS_FINISHED = 'finished';
 
     /**
-     * @var string
-     */
-    private string $processId;
-
-    /**
-     * @var bool
-     */
-    private bool $status;
-
-    /**
      * ProcessStatusEvent constructor.
      *
      * @param string $processId
      * @param bool   $status
      */
-    public function __construct(string $processId, bool $status)
+    public function __construct(private string $processId, private bool $status)
     {
-        $this->processId = $processId;
-        $this->status    = $status;
     }
 
     /**

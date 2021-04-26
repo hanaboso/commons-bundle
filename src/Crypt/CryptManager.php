@@ -42,7 +42,7 @@ final class CryptManager
      * @return string
      * @throws CryptException
      */
-    public function encrypt($data, ?string $prefix = NULL): string
+    public function encrypt(mixed $data, ?string $prefix = NULL): string
     {
         return self::getImplementation($prefix)->encrypt($data);
     }
@@ -55,7 +55,7 @@ final class CryptManager
      * @return mixed
      * @throws CryptException
      */
-    public function decrypt(string $data)
+    public function decrypt(string $data): mixed
     {
         $prefix = substr($data, 0, self::PREFIX_LENGTH);
 

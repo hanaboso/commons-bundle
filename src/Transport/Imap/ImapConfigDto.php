@@ -13,21 +13,6 @@ final class ImapConfigDto
     /**
      * @var string
      */
-    private string $user;
-
-    /**
-     * @var string
-     */
-    private string $password;
-
-    /**
-     * @var string
-     */
-    private string $host;
-
-    /**
-     * @var string
-     */
     private string $path;
 
     /**
@@ -42,13 +27,10 @@ final class ImapConfigDto
      * @param string $password
      * @param string $host
      */
-    public function __construct(string $user, string $password, string $host)
+    public function __construct(private string $user, private string $password, private string $host)
     {
-        $this->user     = $user;
-        $this->password = $password;
-        $this->host     = $host;
-        $this->folder   = 'INBOX';
-        $this->path     = '/imap/ssl/novalidate-cert';
+        $this->folder = 'INBOX';
+        $this->path   = '/imap/ssl/novalidate-cert';
     }
 
     /**

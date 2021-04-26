@@ -94,24 +94,24 @@ class File implements FileInterface
     }
 
     /**
-     * @param string $fileFormat
+     * @param string $format
      *
      * @return FileInterface
      * @throws FileStorageException
      */
-    public function setFileFormat(string $fileFormat): FileInterface
+    public function setFileFormat(string $format): FileInterface
     {
         try {
-            FileFormatEnum::isValid($fileFormat);
-        } catch (EnumException $exception) {
+            FileFormatEnum::isValid($format);
+        } catch (EnumException) {
             throw new FileStorageException(
-                sprintf('Given file format [%s] is not a valid option.', $fileFormat),
+                sprintf('Given file format [%s] is not a valid option.', $format),
                 FileStorageException::INVALID_FILE_FORMAT
             );
         }
 
-        $this->mimeType   = FileTypes::fromExtension($fileFormat);
-        $this->fileFormat = $fileFormat;
+        $this->mimeType   = FileTypes::fromExtension($format);
+        $this->fileFormat = $format;
 
         return $this;
     }
@@ -133,13 +133,13 @@ class File implements FileInterface
     }
 
     /**
-     * @param string $fileUrl
+     * @param string $url
      *
      * @return FileInterface
      */
-    public function setFileUrl(string $fileUrl): FileInterface
+    public function setFileUrl(string $url): FileInterface
     {
-        $this->fileUrl = $fileUrl;
+        $this->fileUrl = $url;
 
         return $this;
     }
@@ -173,23 +173,23 @@ class File implements FileInterface
     }
 
     /**
-     * @param string $storageType
+     * @param string $type
      *
      * @return FileInterface
      * @throws FileStorageException
      */
-    public function setStorageType(string $storageType): FileInterface
+    public function setStorageType(string $type): FileInterface
     {
         try {
-            StorageTypeEnum::isValid($storageType);
-        } catch (EnumException $exception) {
+            StorageTypeEnum::isValid($type);
+        } catch (EnumException) {
             throw new FileStorageException(
-                sprintf('Given storage type [%s] is not a valid option.', $storageType),
+                sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE
             );
         }
 
-        $this->storageType = $storageType;
+        $this->storageType = $type;
 
         return $this;
     }

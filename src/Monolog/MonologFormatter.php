@@ -19,7 +19,7 @@ final class MonologFormatter
      */
     public static function formatException(Exception $exception): string
     {
-        return sprintf('%s %s: %s', get_class($exception), $exception->getCode(), $exception->getMessage());
+        return sprintf('%s %s: %s', $exception::class, $exception->getCode(), $exception->getMessage());
     }
 
     /**

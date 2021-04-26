@@ -13,16 +13,6 @@ final class ResponseDto
 {
 
     /**
-     * @var mixed
-     */
-    private $soapCallResponse;
-
-    /**
-     * @var string|null
-     */
-    private ?string $lastResponseHeaders;
-
-    /**
      * @var ResponseHeaderDto
      */
     private ResponseHeaderDto $responseHeaderDto;
@@ -34,11 +24,12 @@ final class ResponseDto
      * @param string|null  $lastResponseHeaders
      * @param mixed[]|null $outputHeaders
      */
-    public function __construct($soapCallResponse, ?string $lastResponseHeaders, ?array $outputHeaders)
+    public function __construct(
+        private mixed $soapCallResponse,
+        private ?string $lastResponseHeaders,
+        ?array $outputHeaders
+    )
     {
-        $this->soapCallResponse    = $soapCallResponse;
-        $this->lastResponseHeaders = $lastResponseHeaders;
-
         //@todo fatal error
         $parsedHeaders           = SoapHelper::parseResponseHeaders(implode("\n", $outputHeaders ?? []));
         $this->responseHeaderDto = new ResponseHeaderDto(
@@ -52,7 +43,7 @@ final class ResponseDto
     /**
      * @return mixed
      */
-    public function getSoapCallResponse()
+    public function getSoapCallResponse(): mixed
     {
         return $this->soapCallResponse;
     }

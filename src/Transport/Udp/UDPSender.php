@@ -10,6 +10,7 @@ use Hanaboso\Utils\String\LoggerFormater;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Socket;
 
 /**
  * Class UDPSender
@@ -40,7 +41,7 @@ final class UDPSender implements LoggerAwareInterface
     private int $lastIPRefresh;
 
     /**
-     * @var resource|null
+     * @var Socket|null
      */
     private $socket = NULL;
 
@@ -81,8 +82,10 @@ final class UDPSender implements LoggerAwareInterface
     {
         $parsed = parse_url($host) ?: [];
         $ip     = $this->refreshIp($parsed['host'] ?? '');
-        /** @var resource $socket */
         $socket = $this->getSocket();
+        if ($socket === NULL) {
+            return FALSE;
+        }
 
         try {
             if ($ip === '') {
@@ -91,7 +94,6 @@ final class UDPSender implements LoggerAwareInterface
                 );
             }
 
-            /** @var int|false $sent */
             $sent = @socket_sendto($socket, $message, strlen($message), 0, $ip, intval($parsed['port'] ?? 80));
 
             if ($sent === FALSE) {
@@ -143,9 +145,9 @@ final class UDPSender implements LoggerAwareInterface
     /**
      * Returns socket resource or null if socket cannot be created
      *
-     * @return resource|null
+     * @return Socket|null
      */
-    private function getSocket()
+    private function getSocket(): ?Socket
     {
         if ($this->socket && socket_last_error($this->socket) != 0) {
             $this->socket = NULL;

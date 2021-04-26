@@ -16,13 +16,13 @@ final class DeletedFilter extends BsonFilter
     public const NAME = 'deleted';
 
     /**
-     * @param ClassMetadata $targetDocument
+     * @param ClassMetadata $class
      *
      * @return mixed[]
      */
-    public function addFilterCriteria(ClassMetadata $targetDocument): array
+    public function addFilterCriteria(ClassMetadata $class): array
     {
-        if ($targetDocument->reflClass->hasProperty(self::NAME)) {
+        if ($class->reflClass->hasProperty(self::NAME)) {
             return [self::NAME => FALSE];
         }
 

@@ -4,8 +4,7 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp\Adapter;
 
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
-use phpseclib\Net\SFTP;
-use phpseclib3\Net\SFTP as SFTP3;
+use phpseclib3\Net\SFTP;
 
 /**
  * Class SftpAdapter
@@ -16,9 +15,9 @@ final class SftpAdapter implements FtpAdapterInterface
 {
 
     /**
-     * @var SFTP3|SFTP|null
+     * @var SFTP|null
      */
-    private $sftp;
+    private ?SFTP $sftp;
 
     /**
      * @var int
@@ -30,13 +29,8 @@ final class SftpAdapter implements FtpAdapterInterface
      */
     public function connect(FtpConfig $ftpConfig): void
     {
-        if (class_exists(SFTP3::class)) {
-            $this->sftp = new SFTP3($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
-            $this->mode = SFTP3::SOURCE_LOCAL_FILE;
-        } else {
-            $this->sftp = new SFTP($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
-            $this->mode = SFTP::SOURCE_LOCAL_FILE;
-        }
+        $this->sftp = new SFTP($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
+        $this->mode = SFTP::SOURCE_LOCAL_FILE;
     }
 
     /**
@@ -241,10 +235,10 @@ final class SftpAdapter implements FtpAdapterInterface
     /**************************************** HELPERS ****************************************/
 
     /**
-     * @return SFTP|SFTP3
+     * @return SFTP
      * @throws FtpException
      */
-    private function getResource()
+    private function getResource(): SFTP
     {
         if ($this->sftp && $this->sftp->isConnected()) {
             return $this->sftp;

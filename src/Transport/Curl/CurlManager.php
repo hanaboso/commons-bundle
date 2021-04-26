@@ -38,11 +38,6 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     public const METHOD_PATCH   = 'PATCH';
 
     /**
-     * @var CurlClientFactory
-     */
-    private CurlClientFactory $curlClientFactory;
-
-    /**
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
@@ -57,12 +52,11 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      *
      * @param CurlClientFactory $curlClientFactory
      */
-    public function __construct(CurlClientFactory $curlClientFactory)
+    public function __construct(private CurlClientFactory $curlClientFactory)
     {
-        $this->curlClientFactory = $curlClientFactory;
-        $this->logger            = new NullLogger();
-        $this->metricsSender     = NULL;
-        $this->timeout           = 30;
+        $this->logger        = new NullLogger();
+        $this->metricsSender = NULL;
+        $this->timeout       = 30;
     }
 
     /**

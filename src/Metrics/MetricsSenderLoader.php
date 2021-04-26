@@ -16,21 +16,6 @@ final class MetricsSenderLoader
     private const MONGO  = 'mongo';
 
     /**
-     * @var MetricsSenderInterface|null
-     */
-    private ?MetricsSenderInterface $influxSender;
-
-    /**
-     * @var MetricsSenderInterface|null
-     */
-    private ?MetricsSenderInterface $mongoSender;
-
-    /**
-     * @var string
-     */
-    private string $metricsService;
-
-    /**
      * MetricsSenderLoader constructor.
      *
      * @param string                      $metricsService
@@ -38,15 +23,11 @@ final class MetricsSenderLoader
      * @param MetricsSenderInterface|null $mongoSender
      */
     public function __construct(
-        string $metricsService,
-        ?MetricsSenderInterface $influxSender,
-        ?MetricsSenderInterface $mongoSender
+        private string $metricsService,
+        private ?MetricsSenderInterface $influxSender,
+        private ?MetricsSenderInterface $mongoSender
     )
     {
-
-        $this->metricsService = $metricsService;
-        $this->influxSender   = $influxSender;
-        $this->mongoSender    = $mongoSender;
     }
 
     /**
