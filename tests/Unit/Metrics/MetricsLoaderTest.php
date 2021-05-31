@@ -33,7 +33,7 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
         string $env,
         ?MetricsSenderInterface $influxSender,
         ?MetricsSenderInterface $mongoSender,
-        ?string $exp
+        ?string $exp,
     ): void
     {
         $loader = new MetricsSenderLoader($env, $influxSender, $mongoSender);

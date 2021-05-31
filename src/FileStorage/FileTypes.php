@@ -934,7 +934,7 @@ final class FileTypes
         if (!isset(self::$mimetypes[$extension])) {
             throw new FileStorageException(
                 sprintf('Missing mimic format for [%s] file format.', $extension),
-                FileStorageException::INVALID_MIMIC_FORMAT
+                FileStorageException::INVALID_MIMIC_FORMAT,
             );
         }
 

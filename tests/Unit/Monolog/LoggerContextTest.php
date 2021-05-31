@@ -46,8 +46,8 @@ final class LoggerContextTest extends KernelTestCaseAbstract
                             PipesHeaders::NODE_NAME      => 'name',
                             PipesHeaders::TOPOLOGY_ID    => '1',
                             PipesHeaders::TOPOLOGY_NAME  => 'name',
-                        ]
-                    )
+                        ],
+                    ),
             )
             ->setException(new Exception());
         self::assertEquals(6, count($this->logger->toArray()));

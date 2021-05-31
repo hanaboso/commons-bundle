@@ -40,7 +40,7 @@ final class RequestDto
         if (!in_array($method, CurlManager::getMethods(), TRUE)) {
             throw new CurlException(
                 sprintf('Method %s is not a valid curl method', $method),
-                CurlException::INVALID_METHOD
+                CurlException::INVALID_METHOD,
             );
         }
 

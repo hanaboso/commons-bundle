@@ -40,8 +40,8 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
                         self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
 
                         return TRUE;
-                    }
-                )
+                    },
+                ),
             );
 
         $loader = new MetricsSenderLoader('influx', $influx, NULL);

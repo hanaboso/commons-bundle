@@ -37,7 +37,7 @@ final class ImapConnector
         $this->mailbox = new Mailbox(
             sprintf('{%s:993%s}%s', $dto->getHost(), $dto->getPath(), $dto->getFolder()),
             $dto->getUser(),
-            $dto->getPassword()
+            $dto->getPassword(),
         );
 
         return $this;

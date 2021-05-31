@@ -23,7 +23,7 @@ final class FileStorageDriverLocator
     function __construct(
         private FileStorageDriverInterface $persistent,
         private FileStorageDriverInterface $temporary,
-        private FileStorageDriverInterface $public
+        private FileStorageDriverInterface $public,
     )
     {
     }
@@ -42,7 +42,7 @@ final class FileStorageDriverLocator
             StorageTypeEnum::PUBLIC => $this->public,
             default => throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
-                FileStorageException::INVALID_STORAGE_TYPE
+                FileStorageException::INVALID_STORAGE_TYPE,
             ),
         };
     }

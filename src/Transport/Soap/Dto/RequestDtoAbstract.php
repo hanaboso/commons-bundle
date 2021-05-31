@@ -52,7 +52,7 @@ abstract class RequestDtoAbstract
         private array $arguments,
         string $namespace,
         private Uri $uri,
-        array $params = []
+        array $params = [],
     )
     {
         $this->user     = NULL;
@@ -80,7 +80,7 @@ abstract class RequestDtoAbstract
         if (!in_array($version, [SOAP_1_1, SOAP_1_2], TRUE)) {
             throw new SoapException(
                 sprintf('Unknown SOAP version "%s".', $version),
-                SoapException::UNKNOWN_SOAP_VERSION
+                SoapException::UNKNOWN_SOAP_VERSION,
             );
         }
 

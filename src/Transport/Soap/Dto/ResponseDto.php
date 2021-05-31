@@ -27,7 +27,7 @@ final class ResponseDto
     public function __construct(
         private mixed $soapCallResponse,
         private ?string $lastResponseHeaders,
-        ?array $outputHeaders
+        ?array $outputHeaders,
     )
     {
         //@todo fatal error
@@ -36,7 +36,7 @@ final class ResponseDto
             $parsedHeaders['headers'],
             $parsedHeaders['version'],
             $parsedHeaders['statusCode'],
-            $parsedHeaders['reason']
+            $parsedHeaders['reason'],
         );
     }
 

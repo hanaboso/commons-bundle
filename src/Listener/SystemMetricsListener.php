@@ -56,12 +56,12 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
             }
 
             $event->getRequest()->attributes->add(
-                [self::METRICS_ATTRIBUTES_KEY => CurlMetricUtils::getCurrentMetrics()]
+                [self::METRICS_ATTRIBUTES_KEY => CurlMetricUtils::getCurrentMetrics()],
             );
         } catch (Exception $e) {
             $this->logger->error(
                 'Metrics listener onKernelController exception',
-                LoggerFormater::getContextForLogger($e)
+                LoggerFormater::getContextForLogger($e),
             );
         }
     }
@@ -83,7 +83,7 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
         } catch (Exception $e) {
             $this->logger->error(
                 'Metrics listener onKernelTerminate exception',
-                LoggerFormater::getContextForLogger($e)
+                LoggerFormater::getContextForLogger($e),
             );
         }
     }
@@ -133,7 +133,7 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
                 MetricsEnum::TOPOLOGY_ID    => $headers->get(PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID)),
                 MetricsEnum::CORRELATION_ID => $headers->get(PipesHeaders::createKey(PipesHeaders::CORRELATION_ID)),
                 MetricsEnum::NODE_ID        => $headers->get(PipesHeaders::createKey(PipesHeaders::NODE_ID)),
-            ]
+            ],
         );
     }
 

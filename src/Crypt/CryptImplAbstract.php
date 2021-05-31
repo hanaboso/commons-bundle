@@ -27,9 +27,9 @@ abstract class CryptImplAbstract implements CryptInterface
                     'Crypt prefix of class "%s" has bad length "%s", allowed length is %s.',
                     self::class,
                     strlen($prefix),
-                    CryptManager::PREFIX_LENGTH
+                    CryptManager::PREFIX_LENGTH,
                 ),
-                CryptException::BAD_PREFIX_LENGTH
+                CryptException::BAD_PREFIX_LENGTH,
             );
         }
     }

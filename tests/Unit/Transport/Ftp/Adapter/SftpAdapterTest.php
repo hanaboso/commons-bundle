@@ -160,7 +160,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
                 0 => 'el1',
                 1 => 'el2',
             ],
-            $this->adapter->listDir('dir')
+            $this->adapter->listDir('dir'),
         );
     }
 
@@ -191,7 +191,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
                     ['filename' => 'name1', 'size' => 1, 'mtime' => '222'],
                     ['filename' => 'el2', 'size' => 2, 'mtime' => '222'],
                 ],
-            ]
+            ],
         );
 
         self::assertEquals(
@@ -209,7 +209,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
                     'time' => '222',
                 ],
             ],
-            $this->adapter->listDirAdvanced('dir')
+            $this->adapter->listDirAdvanced('dir'),
         );
     }
 
@@ -274,7 +274,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         $this->mockSftpFn(
             [
                 'isConnected' => TRUE, 'pwd' => '/path/', 'chdir' => FALSE, 'is_file' => FALSE, 'mkdir' => TRUE,
-            ]
+            ],
         );
 
         $this->adapter->makeDirRecursive('dir');

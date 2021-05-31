@@ -34,7 +34,7 @@ final class InfluxDbSenderTest extends TestCase
                 MetricsEnum::TOPOLOGY_ID    => '#999',
                 MetricsEnum::CORRELATION_ID => '#456',
                 MetricsEnum::NODE_ID        => '#123',
-            ]
+            ],
         );
         self::assertTrue($res);
     }

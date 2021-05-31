@@ -158,7 +158,7 @@ final class SftpAdapter implements FtpAdapterInterface
         if (!$mkdir) {
             throw new FtpException(
                 sprintf('Unable to create directory %s', $dir),
-                FtpException::UNABLE_TO_CREATE_DIR
+                FtpException::UNABLE_TO_CREATE_DIR,
             );
         }
     }
@@ -193,7 +193,7 @@ final class SftpAdapter implements FtpAdapterInterface
     {
         if (!$this->getResource()->delete($file, FALSE)) {
             throw new FtpException(
-                sprintf('Unable to delete file or folder "%s"', $file)
+                sprintf('Unable to delete file or folder "%s"', $file),
             );
         }
     }

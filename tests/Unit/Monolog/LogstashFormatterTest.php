@@ -37,7 +37,7 @@ final class LogstashFormatterTest extends TestCase
                 'context'    => [],
                 'level_name' => 'INFO',
                 'channel'    => 'test',
-            ]
+            ],
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -51,7 +51,7 @@ final class LogstashFormatterTest extends TestCase
                 'channel'   => 'test',
                 'severity'  => 'INFO',
             ],
-            $message
+            $message,
         );
     }
 
@@ -73,7 +73,7 @@ final class LogstashFormatterTest extends TestCase
                 ],
                 'level_name' => 'INFO',
                 'channel'    => 'test',
-            ]
+            ],
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -91,7 +91,7 @@ final class LogstashFormatterTest extends TestCase
                 'node_name'      => 'name',
                 'topology_id'    => '1',
             ],
-            $message
+            $message,
         );
     }
 
@@ -110,7 +110,7 @@ final class LogstashFormatterTest extends TestCase
                 ],
                 'level_name' => 'INFO',
                 'channel'    => 'test',
-            ]
+            ],
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -135,7 +135,7 @@ final class LogstashFormatterTest extends TestCase
                 ],
                 'level_name' => 'INFO',
                 'channel'    => 'test',
-            ]
+            ],
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -159,7 +159,7 @@ final class LogstashFormatterTest extends TestCase
                 ],
                 'level_name' => 'INFO',
                 'channel'    => 'test',
-            ]
+            ],
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -174,7 +174,7 @@ final class LogstashFormatterTest extends TestCase
                 'severity'      => 'INFO',
                 'topology_name' => 'topology_1',
             ],
-            $message
+            $message,
         );
     }
 

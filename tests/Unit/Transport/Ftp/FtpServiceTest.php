@@ -32,7 +32,7 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['connect', 'login', 'disconnect', 'dirExists', 'makeDirRecursive', 'uploadFile']
+            ['connect', 'login', 'disconnect', 'dirExists', 'makeDirRecursive', 'uploadFile'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
@@ -60,7 +60,7 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['connect', 'login', 'disconnect', 'downloadFile']
+            ['connect', 'login', 'disconnect', 'downloadFile'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
@@ -86,7 +86,7 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['connect', 'login', 'disconnect', 'listDir', 'downloadFile']
+            ['connect', 'login', 'disconnect', 'listDir', 'downloadFile'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
@@ -127,7 +127,7 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['uploadFile', 'connect', 'login', 'dirExists', 'makeDirRecursive']
+            ['uploadFile', 'connect', 'login', 'dirExists', 'makeDirRecursive'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
@@ -149,7 +149,7 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['downloadFile', 'connect', 'login']
+            ['downloadFile', 'connect', 'login'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
@@ -169,7 +169,7 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['downloadFile', 'connect', 'login', 'listDir']
+            ['downloadFile', 'connect', 'login', 'listDir'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');

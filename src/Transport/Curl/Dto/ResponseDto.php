@@ -24,7 +24,7 @@ final class ResponseDto
         private int $statusCode,
         private string $reasonPhrase,
         private string $body,
-        private array $headers
+        private array $headers,
     )
     {
     }

@@ -32,7 +32,7 @@ final class CurlException extends PipesFrameworkExceptionAbstract
         $message = '',
         $code = 0,
         ?Throwable $previous = NULL,
-        private ?ResponseInterface $response = NULL
+        private ?ResponseInterface $response = NULL,
     )
     {
         parent::__construct($message, $code, $previous);

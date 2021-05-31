@@ -24,7 +24,7 @@ final class DatabaseManagerLocator implements DatabaseManagerLocatorInterface
     public function __construct(
         private ?DocumentManager $documentManager,
         private ?EntityManager $entityManager,
-        private string $type
+        private string $type,
     )
     {
     }

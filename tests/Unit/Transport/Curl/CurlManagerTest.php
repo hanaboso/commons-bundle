@@ -126,7 +126,7 @@ final class CurlManagerTest extends TestCase
             [
                 PipesHeaders::createKey(PipesHeaders::NODE_ID)        => '123',
                 PipesHeaders::createKey(PipesHeaders::CORRELATION_ID) => 'aaa222',
-            ]
+            ],
         );
 
         $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
@@ -162,8 +162,8 @@ final class CurlManagerTest extends TestCase
                 new RequestException(
                     'Ups, something went wrong',
                     new Request('method', ''),
-                    new Response()
-                )
+                    new Response(),
+                ),
             );
 
         $manager = new CurlManager($factory);
@@ -207,7 +207,11 @@ final class CurlManagerTest extends TestCase
     {
         /** @var Promise $promise */
         $promise = new RejectedPromise(
-            new ServerException('Ups, something with server went wrong.', new Request('message', 'uri'), new Response())
+            new ServerException(
+                'Ups, something with server went wrong.',
+                new Request('message', 'uri'),
+                new Response(),
+            ),
         );
 
         $client = self::createMock(Client::class);
@@ -232,7 +236,7 @@ final class CurlManagerTest extends TestCase
     {
         /** @var Promise $promise */
         $promise = new RejectedPromise(
-            new Exception('Ups, something went wrong.')
+            new Exception('Ups, something went wrong.'),
         );
 
         $client = self::createMock(Client::class);

@@ -70,7 +70,7 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
             ->getFilter(DeletedFilter::NAME)
             ->addFilterConstraint(
                 $this->em->getClassMetadata(TestEntityNoDeletedProp::class),
-                'test_entity_no_deleted_prop'
+                'test_entity_no_deleted_prop',
             );
 
         self::assertEquals('', $filter);

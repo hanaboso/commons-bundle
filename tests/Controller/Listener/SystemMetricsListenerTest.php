@@ -68,7 +68,7 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
                 KernelEvents::TERMINATE  => 'onKernelTerminate',
                 KernelEvents::CONTROLLER => 'onKernelController',
             ],
-            SystemMetricsListener::getSubscribedEvents()
+            SystemMetricsListener::getSubscribedEvents(),
         );
     }
 

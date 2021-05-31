@@ -90,7 +90,7 @@ final class UDPSender implements LoggerAwareInterface
         try {
             if ($ip === '') {
                 throw new SystemMetricException(
-                    sprintf('Could not sent udp packet. IP address for "%s" not resolved', $parsed['host'] ?? '')
+                    sprintf('Could not sent udp packet. IP address for "%s" not resolved', $parsed['host'] ?? ''),
                 );
             }
 
@@ -98,7 +98,7 @@ final class UDPSender implements LoggerAwareInterface
 
             if ($sent === FALSE) {
                 throw new SystemMetricException(
-                    sprintf('Unable to send udp packet. Err: %s', socket_strerror(socket_last_error()))
+                    sprintf('Unable to send udp packet. Err: %s', socket_strerror(socket_last_error())),
                 );
             }
 
@@ -106,7 +106,7 @@ final class UDPSender implements LoggerAwareInterface
         } catch (Exception $e) {
             $this->logger->error(
                 sprintf('Udp sender err: %s', $e->getMessage()),
-                LoggerFormater::getContextForLogger($e)
+                LoggerFormater::getContextForLogger($e),
             );
 
             return FALSE;

@@ -100,7 +100,7 @@ final class MongoFileDriver extends FileStorageDriverAbstract
         if (!$file) {
             throw new FileStorageException(
                 sprintf('File in Mongo with given id [%s] not found.', $fileId),
-                FileStorageException::FILE_NOT_FOUND
+                FileStorageException::FILE_NOT_FOUND,
             );
         }
 

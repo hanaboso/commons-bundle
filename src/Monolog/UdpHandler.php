@@ -27,7 +27,7 @@ final class UdpHandler extends AbstractProcessingHandler
         private UDPSender $UDPSender,
         private string $host,
         $level = Logger::DEBUG,
-        $bubble = TRUE
+        $bubble = TRUE,
     )
     {
         parent::__construct($level, $bubble);

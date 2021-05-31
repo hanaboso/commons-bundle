@@ -26,7 +26,7 @@ final class FtpConfig
         private int $port,
         private int $timeout,
         private string $username,
-        private string $password
+        private string $password,
     )
     {
     }

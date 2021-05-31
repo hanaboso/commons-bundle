@@ -58,7 +58,7 @@ final class InfluxDbSender implements MetricsSenderInterface
             empty($tags) ? ' ' : ',',
             $this->join($this->prepareTags($tags)),
             $this->join($this->prepareFields($fields)),
-            $nanoTimestamp
+            $nanoTimestamp,
         );
     }
 

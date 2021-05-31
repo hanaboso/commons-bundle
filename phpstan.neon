@@ -17,6 +17,9 @@ parameters:
 		-
 			message: '#phpseclib3?\\Net\\SFTP#'
 			path: tests/Unit/Transport/Ftp/Adapter/SftpAdapterTest.php
+		-
+			message: '#with generic class#'
+			path: src/Database/Filters/ORM/DeletedFilter.php
 	symfony:
 		container_xml_path: %rootDir%/../../../var/cache/test/CommonsBundleTests_KernelTestDebugContainer.xml
 	ergebnis:

@@ -67,7 +67,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
             self::$container->get('doctrine_mongodb.odm.default_document_manager'),
             self::$container->get('hbpf.path_generator.hash'),
             $client,
-            $bucket
+            $bucket,
         );
 
         $uploadedFile = new UploadedFile($this->path, '');
@@ -103,7 +103,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
             self::$container->get('doctrine_mongodb.odm.default_document_manager'),
             self::$container->get('hbpf.path_generator.hash'),
             $client,
-            $bucket
+            $bucket,
         );
 
         $uploadedFile = new UploadedFile($this->path, '');

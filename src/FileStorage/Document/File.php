@@ -106,7 +106,7 @@ class File implements FileInterface
         } catch (EnumException) {
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $format),
-                FileStorageException::INVALID_FILE_FORMAT
+                FileStorageException::INVALID_FILE_FORMAT,
             );
         }
 
@@ -185,7 +185,7 @@ class File implements FileInterface
         } catch (EnumException) {
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
-                FileStorageException::INVALID_STORAGE_TYPE
+                FileStorageException::INVALID_STORAGE_TYPE,
             );
         }
 

@@ -24,7 +24,7 @@ final class ResponseHeaderDto
         private ?HeaderBag $httpHeaders,
         private ?string $httpVersion,
         private ?int $httpStatusCode,
-        private ?string $httpReason
+        private ?string $httpReason,
     )
     {
     }

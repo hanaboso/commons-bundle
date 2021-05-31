@@ -40,7 +40,7 @@ final class FileStorage
     function __construct(
         private FileStorageDriverLocator $locator,
         DatabaseManagerLocator $dm,
-        private string $fileNamespace
+        private string $fileNamespace,
     )
     {
         $this->dm = $dm->get();
@@ -119,7 +119,7 @@ final class FileStorage
         if (!$file) {
             throw new FileStorageException(
                 sprintf('File with given id [%s] was not found.', $fileId),
-                FileStorageException::FILE_NOT_FOUND
+                FileStorageException::FILE_NOT_FOUND,
             );
         }
 

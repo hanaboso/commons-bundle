@@ -159,19 +159,19 @@ final class ProcessDto
         int $maxHops,
         ?int $repeatHops = NULL,
         string $queue = '',
-        ?string $message = NULL
+        ?string $message = NULL,
     ): ProcessDto
     {
         if ($interval < 1) {
             throw new PipesFrameworkException(
                 'Value inverval is obligatory and cant be NULL',
-                PipesFrameworkException::WRONG_VALUE
+                PipesFrameworkException::WRONG_VALUE,
             );
         }
         if ($maxHops < 1) {
             throw new PipesFrameworkException(
                 'Value maxHops is obligatory and cant be NULL',
-                PipesFrameworkException::WRONG_VALUE
+                PipesFrameworkException::WRONG_VALUE,
             );
         }
 
@@ -227,7 +227,7 @@ final class ProcessDto
         if ($lastUpdate) {
             $this->addHeader(
                 PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE),
-                (string) $lastUpdate->getTimestamp()
+                (string) $lastUpdate->getTimestamp(),
             );
         }
 
@@ -275,7 +275,7 @@ final class ProcessDto
         if (!in_array($value, [self::DO_NOT_CONTINUE, self::SPLITTER_BATCH_END, self::STOP_AND_FAILED], TRUE)) {
             throw new PipesFrameworkException(
                 'Value does not match with the required one',
-                PipesFrameworkException::WRONG_VALUE
+                PipesFrameworkException::WRONG_VALUE,
             );
         }
     }

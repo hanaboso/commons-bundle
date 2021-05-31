@@ -103,7 +103,7 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     private function getCryptManager(array $anotherProviders = []): CryptManager
     {
         return new CryptManager(
-            [new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645'), ...$anotherProviders]
+            [new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645'), ...$anotherProviders],
         );
     }
 

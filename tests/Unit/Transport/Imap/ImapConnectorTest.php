@@ -60,7 +60,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
             [
                 'searchMailbox' => [1, 2],
                 'getMail'       => $mail,
-            ]
+            ],
         );
 
         self::assertEquals(2, count($this->connector->listMails()));
@@ -108,14 +108,14 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
             ->method('createMailbox')
             ->willReturnCallback(
                 static function (): void {
-                }
+                },
             );
         $this->mailbox
             ->expects(self::any())
             ->method('moveMail')
             ->willReturnCallback(
                 static function (): void {
-                }
+                },
             );
         $this->setProperty($this->connector, 'mailbox', $this->mailbox);
 
@@ -153,7 +153,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
             if ($value === NULL) {
                 $this->mailbox->expects(self::any())->method($key)->willReturnCallback(
                     static function (): void {
-                    }
+                    },
                 );
             } else {
                 $this->mailbox->expects(self::any())->method($key)->willReturn($value);

@@ -36,7 +36,7 @@ final class FtpServiceFactory implements LoggerAwareInterface
     public function __construct(
         private FtpAdapter $ftpAdapter,
         private SftpAdapter $sftpAdapter,
-        private ContainerInterface $container
+        private ContainerInterface $container,
     )
     {
         $this->logger = new NullLogger();
@@ -69,7 +69,7 @@ final class FtpServiceFactory implements LoggerAwareInterface
             self::ADAPTER_SFTP => new FtpService($this->sftpAdapter, $this->prepareConfig(self::ADAPTER_SFTP)),
             default => throw new FtpException(
                 sprintf('Unknown ftp adapter type "%s"', $type),
-                FtpException::UNKNOWN_ADAPTER_TYPE
+                FtpException::UNKNOWN_ADAPTER_TYPE,
             ),
         };
 

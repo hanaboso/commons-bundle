@@ -62,7 +62,7 @@ final class SoapHelperTest extends TestCase
             'functionName',
             ['arg1' => ['el1' => new StdClass()]],
             'namespace',
-            new Uri('')
+            new Uri(''),
         );
         self::expectException(InvalidArgumentException::class);
         SoapHelper::composeArguments($request);

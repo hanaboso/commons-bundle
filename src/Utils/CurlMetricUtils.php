@@ -58,7 +58,7 @@ final class CurlMetricUtils
         ?string $nodeId = NULL,
         ?string $correlationId = NULL,
         ?string $user = NULL,
-        ?string $application = NULL
+        ?string $application = NULL,
     ): void
     {
         $info = [];
@@ -85,7 +85,7 @@ final class CurlMetricUtils
                 MetricsEnum::APPLICATION_ID              => $application,
                 MetricsEnum::USER_ID                     => $user,
             ],
-            $info
+            $info,
         );
     }
 

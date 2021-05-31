@@ -116,7 +116,7 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $psrResponse->getStatusCode(),
                 $psrResponse->getReasonPhrase(),
                 $psrResponse->getBody()->getContents(),
-                $psrResponse->getHeaders()
+                $psrResponse->getHeaders(),
             );
 
             $this->logAfterSend($psrResponse, $dto);
@@ -178,7 +178,7 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                     }
 
                     throw $e;
-                }
+                },
             );
     }
 
@@ -218,9 +218,9 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $dto->getMethod(),
                 (string) $dto->getUri(),
                 $dto->getHeaders(),
-                $dto->getBody()
+                $dto->getBody(),
             ),
-            $dto->getDebugInfo()
+            $dto->getDebugInfo(),
         );
     }
 
@@ -242,7 +242,7 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     {
         $this->logger->error(
             sprintf('CurlManager::send() failed: %s', $message ?? $t->getMessage()),
-            LoggerFormater::getContextForLogger($t, $dto->getDebugInfo())
+            LoggerFormater::getContextForLogger($t, $dto->getDebugInfo()),
         );
     }
 
@@ -256,14 +256,14 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     protected function throwCurlError(
         Throwable $t,
         ?string $message = NULL,
-        ?ResponseInterface $response = NULL
+        ?ResponseInterface $response = NULL,
     ): CurlException
     {
         return new CurlException(
             sprintf('CurlManager::send() failed: %s', $message ?? $t->getMessage()),
             CurlException::REQUEST_FAILED,
             $t->getPrevious(),
-            $response
+            $response,
         );
     }
 
@@ -288,9 +288,9 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
                 $response->getStatusCode(),
                 $response->getReasonPhrase(),
                 $response->getHeaders(),
-                $response->getBody()->getContents()
+                $response->getBody()->getContents(),
             ),
-            $context
+            $context,
         );
         $response->getBody()->rewind();
     }

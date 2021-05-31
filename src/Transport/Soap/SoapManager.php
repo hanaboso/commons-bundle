@@ -94,8 +94,8 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                     $request->getUri(),
                     $this->getHeadersAsString($request->getHeader()->getParams()),
                     $request->getUser(),
-                    $request->getPassword()
-                )
+                    $request->getPassword(),
+                ),
             );
 
             $this->startTimes = CurlMetricUtils::getCurrentMetrics();
@@ -104,7 +104,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                 (array) SoapHelper::composeArguments($request),
                 [],
                 SoapHelper::composeRequestHeaders($request),
-                $outputHeaders
+                $outputHeaders,
             );
             $this->sendMetrics($request);
 
@@ -112,7 +112,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                 $soapCallResponse,
                 $client->__getLastResponseHeaders(),
                 $outputHeaders,
-                $request
+                $request,
             );
         } catch (SoapException $e) {
             $this->logger->error($e->getMessage(), LoggerFormater::getContextForLogger($e));
@@ -121,7 +121,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         } catch (Exception $e) {
             $this->logger->error(
                 sprintf('Unknown exception: %s', $e->getMessage()),
-                LoggerFormater::getContextForLogger($e)
+                LoggerFormater::getContextForLogger($e),
             );
 
             throw new SoapException('Unknown exception.', SoapException::UNKNOWN_EXCEPTION, $e);
@@ -144,7 +144,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                     $this->metricsSender->getSender(),
                     $times,
                     $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL
+                    $info['correlation_id'][0] ?? NULL,
                 );
             } catch (Exception $e) {
                 throw new CurlException($e->getMessage(), $e->getCode(), $e);
@@ -164,7 +164,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         mixed $soapCallResponse,
         ?string $lastResponseHeaders,
         ?array $outputHeaders,
-        RequestDtoAbstract $request
+        RequestDtoAbstract $request,
     ): ResponseDto
     {
         $request;
@@ -179,8 +179,8 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                     $headers->getHttpStatusCode(),
                     $headers->getHttpReason(),
                     $response->getLastResponseHeaders(),
-                    $response->getSoapCallResponse()
-                )
+                    $response->getSoapCallResponse(),
+                ),
             );
         }
 
@@ -216,7 +216,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
                     'verify_peer_name'  => FALSE,
                     'allow_self_signed' => TRUE,
                 ],
-            ]
+            ],
         );
 
         return $options;

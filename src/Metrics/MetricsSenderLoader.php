@@ -25,7 +25,7 @@ final class MetricsSenderLoader
     public function __construct(
         private string $metricsService,
         private ?MetricsSenderInterface $influxSender,
-        private ?MetricsSenderInterface $mongoSender
+        private ?MetricsSenderInterface $mongoSender,
     )
     {
     }
@@ -53,8 +53,8 @@ final class MetricsSenderLoader
                     sprintf(
                         'Environment [METRICS_SERVICE=%s] is not a valid option. Valid options are: [%s]',
                         $this->metricsService,
-                        implode(', ', [self::INFLUX, self::MONGO])
-                    )
+                        implode(', ', [self::INFLUX, self::MONGO]),
+                    ),
                 );
         }
     }

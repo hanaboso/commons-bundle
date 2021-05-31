@@ -35,7 +35,7 @@ final class S3Driver extends FileStorageDriverAbstract
         DocumentManager $dm,
         PathGeneratorInterface $generator,
         private S3Client $client,
-        private string $bucket
+        private string $bucket,
     )
     {
         parent::__construct($dm, $generator);
@@ -67,7 +67,7 @@ final class S3Driver extends FileStorageDriverAbstract
             throw new FileStorageException(
                 sprintf("Cannot write file '%s': %s", $path, $e->getMessage()),
                 $e->getCode(),
-                $e
+                $e,
             );
         }
 
@@ -98,7 +98,7 @@ final class S3Driver extends FileStorageDriverAbstract
             throw new FileStorageException(
                 sprintf("Cannot read file '%s': %s", $fileUrl, $e->getMessage()),
                 FileStorageException::FILE_NOT_FOUND,
-                $e
+                $e,
             );
         }
     }
