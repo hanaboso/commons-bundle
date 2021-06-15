@@ -1,12 +1,13 @@
 {
     "name": "hanaboso/commons-bundle",
     "description": "Hanaboso - commons-bundle",
-    "version": "2.3.1",
+    "version": "2.4.0",
     "license": "Apache-2.0",
     "require": {
         "php": "^8.0",
         "ext-apcu": "*",
         "ext-sockets": "*",
+        "ext-sodium": "*",
         "guzzlehttp/guzzle": "^7.3",
         "hanaboso/utils": "^1.1",
         "phpseclib/phpseclib": "^3.0",
@@ -14,10 +15,10 @@
     },
     "require-dev": {
         "aws/aws-sdk-php-symfony": "^2.2",
-        "doctrine/doctrine-bundle": "^2.3",
+        "doctrine/doctrine-bundle": "^2.4",
         "doctrine/mongodb-odm-bundle": "^4.3",
         "doctrine/orm": "^2.9",
-        "hanaboso/php-check-utils": "^1.2",
+        "hanaboso/php-check-utils": "^1.3",
         "php-imap/php-imap": "^4.1",
         "symfony/mailer": "^v5.3",
         "symfony/monolog-bundle": "^v3.7",

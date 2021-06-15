@@ -43,3 +43,4 @@ parameters:
 				- Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract
 				- Monolog\Formatter\NormalizerFormatter
 				- Monolog\Handler\AbstractProcessingHandler
+				- Windwalker\Crypt\Cipher\SodiumCipher
