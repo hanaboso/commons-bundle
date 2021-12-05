@@ -23,7 +23,7 @@ final class FileStorageDriverLocatorTest extends DatabaseTestCaseAbstract
      */
     public function testGet(): void
     {
-        $mongo            = self::$container->get('hbpf.file_storage.driver.mongo');
+        $mongo            = self::getContainer()->get('hbpf.file_storage.driver.mongo');
         $fileDrive        = new FileStorageDriverLocator($mongo, $mongo, $mongo);
         $persistentDriver = $fileDrive->get('persistent');
         $temporaryDriver  = $fileDrive->get('temporary');

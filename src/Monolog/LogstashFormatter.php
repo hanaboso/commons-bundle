@@ -112,7 +112,7 @@ final class LogstashFormatter extends NormalizerFormatter
         ];
 
         if ($e instanceof SoapFault) {
-            if (isset($e->faultcode)) {
+            if ($e->faultcode) {
                 $data['faultcode'] = $e->faultcode;
             }
 
@@ -129,7 +129,7 @@ final class LogstashFormatter extends NormalizerFormatter
 
         if ($e->getPrevious()) {
             $previous         = $e->getPrevious();
-            $data['previous'] = $previous ? $this->normalizeException($previous) : '';
+            $data['previous'] = $this->normalizeException($previous);
         }
 
         return $data;

@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManager;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
 use LogicException;
-use PDO;
 
 /**
  * Class DatabaseManagerLocatorTest
@@ -24,7 +23,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
     public function testConnectDocumentManager(): void
     {
         /** @var DocumentManager $documentManager */
-        $documentManager = self::$container->get('doctrine_mongodb.odm.default_document_manager');
+        $documentManager = self::getContainer()->get('doctrine_mongodb.odm.default_document_manager');
         self::assertNotEmpty($documentManager->getClient()->listDatabases());
     }
 
@@ -34,11 +33,11 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
     public function testConnectEntityManager(): void
     {
         /** @var EntityManager $entityManager */
-        $entityManager = self::$container->get('doctrine.orm.default_entity_manager');
+        $entityManager = self::getContainer()->get('doctrine.orm.default_entity_manager');
 
-        $query = $entityManager->getConnection()->query('SHOW DATABASES;');
-        $query->execute();
-        self::assertNotEmpty($query->fetchAll(PDO::FETCH_OBJ));
+        self::assertNotEmpty(
+            $entityManager->getConnection()->executeQuery('SHOW DATABASES;')->fetchAllAssociative(),
+        );
     }
 
     /**
@@ -49,8 +48,8 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
      */
     public function testGet(): void
     {
-        $entityManager   = self::$container->get('doctrine.orm.default_entity_manager');
-        $documentManager = self::$container->get('doctrine_mongodb.odm.default_document_manager');
+        $entityManager   = self::getContainer()->get('doctrine.orm.default_entity_manager');
+        $documentManager = self::getContainer()->get('doctrine_mongodb.odm.default_document_manager');
 
         $manager = new DatabaseManagerLocator($documentManager, NULL, 'ODM');
         self::assertInstanceOf(DocumentManager::class, $manager->get());

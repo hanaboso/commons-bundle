@@ -2,9 +2,10 @@ includes:
 	- vendor/hanaboso/php-check-utils/phpstan.neon # hanaboso rules
 
 parameters:
-	excludes_analyse:
-		- tests/Live/*
 	ignoreErrors:
+		-
+			message: '#Calling putenv\(\) is forbidden, might overwrite existing variables#'
+			path: src/Transport/Udp/UDPSender.php
 		-
 			message: '#Error suppression via "@" should not be used.#'
 			path: src/Transport/Udp/UDPSender.php
@@ -12,7 +13,7 @@ parameters:
 			message: '#Error suppression via "@" should not be used.#'
 			path: src/Transport/Ftp/Adapter/FtpAdapter.php
 		-
-			message: '#phpseclib3?\\Net\\SFTP#'
+			message: '#phpseclib3#'
 			path: src/Transport/Ftp/Adapter/SftpAdapter.php
 		-
 			message: '#phpseclib3?\\Net\\SFTP#'
@@ -20,6 +21,18 @@ parameters:
 		-
 			message: '#with generic class#'
 			path: src/Database/Filters/ORM/DeletedFilter.php
+		-
+			message: '#with generic class#'
+			path: src/Database/Filters/ODM/DeletedFilter.php
+		-
+			message: '#Parameter \#1 \$level of method#'
+			path: src/Monolog/UdpHandler.php
+		-
+			message: '#contains generic interface#'
+			path: src/FileStorage/Driver/Impl/Mongo/MongoFileDriver.php
+		-
+			message: '#Property SoapFault\:\:\$faultactor \(string\) in isset\(\) is not nullable#'
+			path: src/Monolog/LogstashFormatter.php
 	symfony:
 		container_xml_path: %rootDir%/../../../var/cache/test/CommonsBundleTests_KernelTestDebugContainer.xml
 	ergebnis:

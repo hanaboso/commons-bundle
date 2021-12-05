@@ -37,7 +37,7 @@ services:
             - mariadb:/var/lib/mysql
 
     influxdb:
-        image: influxdb:alpine
+        image: influxdb:1.8-alpine
         volumes:
             - influxdb:/var/lib/influxdb
             - ./tests/testApp/influx/influxdb.conf:/etc/influxdb/influxdb.conf

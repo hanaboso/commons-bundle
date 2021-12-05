@@ -4,6 +4,7 @@ namespace Hanaboso\CommonsBundle\Transport\Ftp;
 
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapterInterface;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
+use Hanaboso\Utils\File\File;
 use Hanaboso\Utils\String\LoggerFormater;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -71,7 +72,7 @@ final class FtpService implements FtpServiceInterface, LoggerAwareInterface
         }
 
         $filename = (string) tempnam(sys_get_temp_dir(), 'tmp');
-        file_put_contents($filename, $content);
+        File::putContent($filename, $content);
 
         try {
             $this->adapter->uploadFile($remoteFile, $filename);

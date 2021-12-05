@@ -22,8 +22,8 @@ abstract class DatabaseTestCaseAbstract extends KernelTestCaseAbstract
     {
         parent::setUp();
 
-        $this->dm = self::$container->get('doctrine_mongodb.odm.default_document_manager');
-        $this->em = self::$container->get('doctrine.orm.default_entity_manager');
+        $this->dm = self::getContainer()->get('doctrine_mongodb.odm.default_document_manager');
+        $this->em = self::getContainer()->get('doctrine.orm.default_entity_manager');
         $this->clearMongo();
         $this->clearMysql();
     }

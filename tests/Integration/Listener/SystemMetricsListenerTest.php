@@ -64,7 +64,7 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
     {
         parent::setUp();
 
-        $this->listener = self::$container->get('hbpf.system_metrics_listener');
+        $this->listener = self::getContainer()->get('hbpf.system_metrics_listener');
     }
 
 }

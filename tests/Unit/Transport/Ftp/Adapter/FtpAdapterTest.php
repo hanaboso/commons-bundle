@@ -28,6 +28,8 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function setUp(): void
     {
+        parent::setUp();
+
         $this->ftp = new FtpAdapter();
     }
 

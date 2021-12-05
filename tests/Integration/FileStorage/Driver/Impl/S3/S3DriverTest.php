@@ -10,6 +10,7 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
+use Hanaboso\Utils\File\File;
 use PHPUnit\Framework\MockObject\Stub\Exception as PhpUnitException;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -43,7 +44,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
     public function testDriver(): void
     {
         $stream = self::createMock(StreamInterface::class);
-        $stream->method('getContents')->willReturn(file_get_contents($this->path));
+        $stream->method('getContents')->willReturn(File::getContent($this->path));
 
         $ret = self::createMock(Result::class);
         $ret->method('get')->willReturn($stream);
@@ -61,20 +62,20 @@ final class S3DriverTest extends KernelTestCaseAbstract
         $client->method('putObject');
 
         /** @var string $bucket */
-        $bucket = self::$container->getParameter('aws_bucket');
+        $bucket = self::getContainer()->getParameter('aws_bucket');
 
         $driver = new S3Driver(
-            self::$container->get('doctrine_mongodb.odm.default_document_manager'),
-            self::$container->get('hbpf.path_generator.hash'),
+            self::getContainer()->get('doctrine_mongodb.odm.default_document_manager'),
+            self::getContainer()->get('hbpf.path_generator.hash'),
             $client,
             $bucket,
         );
 
         $uploadedFile = new UploadedFile($this->path, '');
-        $file         = $driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
+        $file         = $driver->save(File::getContent((string) $uploadedFile->getRealPath()));
 
         $file->getSize();
-        self::assertEquals(file_get_contents($this->path), $driver->get($file->getUrl()));
+        self::assertEquals(File::getContent($this->path), $driver->get($file->getUrl()));
 
         self::expectException(FileStorageException::class);
         self::expectExceptionCode(FileStorageException::FILE_NOT_FOUND);
@@ -97,11 +98,11 @@ final class S3DriverTest extends KernelTestCaseAbstract
         $client->method('putObject');
 
         /** @var string $bucket */
-        $bucket = self::$container->getParameter('aws_bucket');
+        $bucket = self::getContainer()->getParameter('aws_bucket');
 
         $driver = new S3Driver(
-            self::$container->get('doctrine_mongodb.odm.default_document_manager'),
-            self::$container->get('hbpf.path_generator.hash'),
+            self::getContainer()->get('doctrine_mongodb.odm.default_document_manager'),
+            self::getContainer()->get('hbpf.path_generator.hash'),
             $client,
             $bucket,
         );
@@ -110,7 +111,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
         $this->setProperty($driver, 'client', new S3Client(self::FAKE_AWS_CONNECTION_ARGS));
 
         self::expectException(FileStorageException::class);
-        $driver->save((string) file_get_contents((string) $uploadedFile->getRealPath()));
+        $driver->save(File::getContent((string) $uploadedFile->getRealPath()));
     }
 
     /**

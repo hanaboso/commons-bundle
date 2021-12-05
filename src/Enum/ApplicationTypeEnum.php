@@ -30,7 +30,7 @@ final class ApplicationTypeEnum extends EnumAbstract
      */
     public static function isWebhook(string $type): bool
     {
-        return in_array($type, [self::WEBHOOK], TRUE);
+        return $type === self::WEBHOOK;
     }
 
     /**
@@ -40,7 +40,7 @@ final class ApplicationTypeEnum extends EnumAbstract
      */
     public static function isCron(string $type): bool
     {
-        return in_array($type, [self::CRON], TRUE);
+        return $type === self::CRON;
     }
 
 }

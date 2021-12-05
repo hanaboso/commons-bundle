@@ -23,7 +23,7 @@ final class MongoDbSenderTest extends DatabaseTestCaseAbstract
     public function testSend(): void
     {
         /** @var DocumentManager $dm */
-        $dm     = self::$container->get('doctrine_mongodb.odm.metrics_document_manager');
+        $dm     = self::getContainer()->get('doctrine_mongodb.odm.metrics_document_manager');
         $sender = new MongoDbSender($dm, 'test');
         $this->dm->getClient()->dropDatabase('metrics');
 

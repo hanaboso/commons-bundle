@@ -81,7 +81,7 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
         $driver->expects(self::any())->method('get')->willReturn('test_content');
 
         /** @var DatabaseManagerLocator $managerLocator */
-        $managerLocator = self::$container->get('hbpf.database_manager_locator');
+        $managerLocator = self::getContainer()->get('hbpf.database_manager_locator');
 
         return new FileStorage(
             new FileStorageDriverLocator($driver, $driver, $driver),

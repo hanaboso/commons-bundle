@@ -51,7 +51,7 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
     public function onKernelController(ControllerEvent $event): void
     {
         try {
-            if (!$event->isMasterRequest() || !$this->isPipesRequest($event->getRequest())) {
+            if (!$event->isMainRequest() || !$this->isPipesRequest($event->getRequest())) {
                 return;
             }
 
@@ -72,7 +72,7 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
     public function onKernelTerminate(TerminateEvent $event): void
     {
         try {
-            if (!$event->isMasterRequest() || !$this->isPipesRequest($event->getRequest())) {
+            if (!$event->isMainRequest() || !$this->isPipesRequest($event->getRequest())) {
                 return;
             }
             if (!$event->getRequest()->attributes->has(self::METRICS_ATTRIBUTES_KEY)) {

@@ -38,8 +38,9 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
      */
     public function setUp(): void
     {
-        $this->sftp = self::createMock(SFTP::class);
+        parent::setUp();
 
+        $this->sftp    = self::createMock(SFTP::class);
         $this->adapter = new SftpAdapter();
     }
 

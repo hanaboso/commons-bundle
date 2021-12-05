@@ -19,7 +19,7 @@ final class NodeServiceLoaderUtilTest extends KernelTestCaseAbstract
     public function testGetServices(): void
     {
         /** @var string $path */
-        $path = self::$container->getParameter('kernel.project_dir');
+        $path = self::getContainer()->getParameter('kernel.project_dir');
 
         $dirs     = [
             sprintf('%s/tests/testApp/config/', $path),

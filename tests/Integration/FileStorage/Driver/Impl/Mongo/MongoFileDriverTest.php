@@ -95,7 +95,7 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
         parent::setUp();
 
         /** @var MongoFileDriver $containerDriver */
-        $containerDriver = self::$container->get('hbpf.file_storage.driver.mongo');
+        $containerDriver = self::getContainer()->get('hbpf.file_storage.driver.mongo');
         $this->driver    = $containerDriver;
     }
 

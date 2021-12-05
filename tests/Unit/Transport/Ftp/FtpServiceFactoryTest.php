@@ -77,7 +77,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     {
         parent::setUp();
 
-        $this->factory = self::$container->get('hbpf.ftp.service.factory');
+        $this->factory = self::getContainer()->get('hbpf.ftp.service.factory');
     }
 
 }

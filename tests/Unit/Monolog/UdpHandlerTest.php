@@ -24,7 +24,7 @@ final class UdpHandlerTest extends KernelTestCaseAbstract
      */
     public function testUdpHandler(): void
     {
-        $sender  = self::$container->get('hbpf.transport.udp_sender');
+        $sender  = self::getContainer()->get('hbpf.transport.udp_sender');
         $handler = new UdpHandler($sender, 'host');
 
         $this->invokeMethod($handler, 'write', [['formatted' => 'message']]);

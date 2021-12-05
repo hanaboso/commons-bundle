@@ -42,7 +42,7 @@ final class SoapManagerTest extends KernelTestCaseAbstract
         parent::setUp();
 
         /** @var SoapManager $soapManager */
-        $soapManager = self::$container->get('hbpf.transport.soap_manager');
+        $soapManager = self::getContainer()->get('hbpf.transport.soap_manager');
         $this->soap  = $soapManager;
     }
 
