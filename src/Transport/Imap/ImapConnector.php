@@ -105,10 +105,10 @@ final class ImapConnector
         if (empty($mailboxes)) {
             $this->mailbox->createMailbox($name);
 
-            return $this->mailbox->getMailboxes(sprintf('*%s*', $name))[0]['shortpath'];
+            return (string) $this->mailbox->getMailboxes(sprintf('*%s*', $name))[0]['shortpath'];
         }
 
-        return $mailboxes[0]['shortpath'];
+        return (string) $mailboxes[0]['shortpath'];
     }
 
 }
