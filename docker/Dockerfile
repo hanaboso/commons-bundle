@@ -1,8 +1,8 @@
-FROM hanabosocom/php-dev:php-8.0-alpine
+FROM hanabosocom/php-dev:php-8.1-alpine
 
 RUN apk update && apk upgrade && apk add --no-cache \
-    autoconf build-base g++ krb5-dev imap-dev libxml2-dev && \
+    autoconf build-base g++ krb5-dev imap-dev && \
     docker-php-ext-install imap && \
     docker-php-ext-install soap && \
-    apk del autoconf build-base g++ krb5-dev libxml2-dev && \
+    apk del autoconf build-base g++ krb5-dev && \
     rm -rf /var/cache/apk/* /var/log/* /tmp/* /var/www/*
