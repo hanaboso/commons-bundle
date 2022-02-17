@@ -88,6 +88,8 @@ final class AdwancedWindwalkerCrypt extends CryptImplAbstract
      */
     private static function normalizeLengthOfSecretKey(string $key): string
     {
+        $key = str_repeat($key, intval(ceil(SODIUM_CRYPTO_SECRETBOX_KEYBYTES / strlen($key))));
+
         if (strlen($key) > SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
             return substr($key, 0, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
         }
