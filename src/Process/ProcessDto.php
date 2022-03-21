@@ -4,6 +4,7 @@ namespace Hanaboso\CommonsBundle\Process;
 
 use DateTime;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
+use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
 
 /**
@@ -14,11 +15,24 @@ use Hanaboso\Utils\System\PipesHeaders;
 final class ProcessDto
 {
 
-    public const OK                 = 0;
-    public const REPEAT             = 1_001;
-    public const DO_NOT_CONTINUE    = 1_003;
-    public const SPLITTER_BATCH_END = 1_005;
-    public const STOP_AND_FAILED    = 1_006;
+    public const SUCCESS = 0;
+
+    // NON_STANDARD: 1000+
+    public const REPEAT                  = 1_001;
+    public const FORWARD_TO_TARGET_QUEUE = 1_002;
+    public const DO_NOT_CONTINUE         = 1_003;
+    public const SPLITTER_BATCH_END      = 1_005;
+    public const LIMIT_EXCEEDED          = 1_004;
+    public const STOP_AND_FAILED         = 1_006;
+
+    // BATCH
+    public const BATCH_CURSOR_WITH_FOLLOWERS = 1_010;
+    public const BATCH_CURSOR_ONLY           = 1_011;
+
+    // MESSAGE ERRORS: 2000+
+    public const UNKNOWN_ERROR   = 2_001;
+    public const INVALID_HEADERS = 2_002;
+    public const INVALID_CONTENT = 2_003;
 
     /**
      * @var string
@@ -31,12 +45,18 @@ final class ProcessDto
     private array $headers;
 
     /**
+     * @var bool
+     */
+    private bool $free;
+
+    /**
      * ProcessDto constructor.
      */
     public function __construct()
     {
         $this->data    = '{}';
         $this->headers = [];
+        $this->free    = TRUE;
     }
 
     /**
@@ -57,6 +77,22 @@ final class ProcessDto
         $this->data = $data;
 
         return $this;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getJsonData(): array
+    {
+        return Json::decode($this->data);
+    }
+
+    /**
+     * @param mixed[] $body
+     */
+    public function setJsonData(array $body): void
+    {
+        $this->data = Json::encode($body);
     }
 
     /**
@@ -118,13 +154,41 @@ final class ProcessDto
     }
 
     /**
+     *
+     */
+    public function deleteHeaders(): void
+    {
+        $this->headers = [];
+    }
+
+    /**
+     * @return bool
+     */
+    public function getFree(): bool
+    {
+        return $this->free;
+    }
+
+    /**
+     * @param bool $free
+     */
+    public function setFree(bool $free): void
+    {
+        if ($free) {
+            $this->data    = '';
+            $this->headers = [];
+        }
+        $this->free = $free;
+    }
+
+    /**
      * @param string|null $message
      *
      * @return ProcessDto
      */
     public function setSuccessProcess(?string $message = NULL): ProcessDto
     {
-        $this->setStatusHeader(self::OK, $message);
+        $this->setStatusHeader(self::SUCCESS, $message);
 
         return $this;
     }
@@ -142,6 +206,14 @@ final class ProcessDto
         $this->setStatusHeader($value, $message);
 
         return $this;
+    }
+
+    /**
+     * @param string $reason
+     */
+    public function setLimitExceeded(string $reason): void
+    {
+        $this->setStatusHeader(self::LIMIT_EXCEEDED, $reason);
     }
 
     /**
@@ -201,7 +273,7 @@ final class ProcessDto
      */
     public function removeRepeater(): ProcessDto
     {
-        $this->setStatusHeader(self::OK, NULL);
+        $this->setStatusHeader(self::SUCCESS, NULL);
         $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL));
         $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS));
         $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS));
@@ -220,7 +292,7 @@ final class ProcessDto
      */
     public function setLimiter(string $key, int $time, int $value, ?DateTime $lastUpdate = NULL): ProcessDto
     {
-        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY), $key);
+        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY), self::decorateLimitKey($key));
         $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_TIME), (string) $time);
         $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_VALUE), (string) $value);
 
@@ -245,6 +317,24 @@ final class ProcessDto
         $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE));
 
         return $this;
+    }
+
+    /**
+     * @param int $code
+     *
+     * @return bool
+     */
+    public function isSuccessResultCode(int $code): bool
+    {
+        return in_array($code, [
+            self::SUCCESS,
+            self::REPEAT,
+            self::FORWARD_TO_TARGET_QUEUE,
+            self::DO_NOT_CONTINUE,
+            self::SPLITTER_BATCH_END,
+            self::BATCH_CURSOR_WITH_FOLLOWERS,
+            self::BATCH_CURSOR_ONLY,
+        ], TRUE);
     }
 
     /**
@@ -278,6 +368,21 @@ final class ProcessDto
                 PipesFrameworkException::WRONG_VALUE,
             );
         }
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
+    private static function decorateLimitKey(string $key): string
+    {
+        $newKey = $key;
+        if (!str_contains($key, '|')) {
+            $newKey = sprintf('%s|', $key);
+        }
+
+        return $newKey;
     }
 
 }

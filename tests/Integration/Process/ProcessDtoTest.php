@@ -91,6 +91,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::decorateLimitKey()
      *
      * @throws Exception
      */
@@ -176,6 +177,68 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getJsonData
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setJsonData
+     */
+    public function testJsonData(): void
+    {
+        $dto = new ProcessDto();
+        $dto->setJsonData(['key' => 'value']);
+        $jsonData = $dto->getJsonData();
+        self::assertEquals(['key' => 'value'], $jsonData);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeaders
+     */
+    public function testDeleteHeaders(): void
+    {
+        $dto = new ProcessDto();
+        $dto->addHeader('keyR', "\rLosos\rLos");
+        $dto->deleteHeaders();
+        self::assertEquals([], $dto->getHeaders());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setFree
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getFree
+     */
+    public function testFree(): void
+    {
+        $dto = new ProcessDto();
+        $dto->setData('Bobr');
+        self::assertEquals(TRUE, $dto->getFree());
+        $dto->setFree(TRUE);
+        self::assertEquals('', $dto->getData());
+        $dto->setFree(FALSE);
+        self::assertEquals(FALSE, $dto->getFree());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setLimitExceeded
+     */
+    public function testSetLimitExceeded(): void
+    {
+        $dto = new ProcessDto();
+        $dto->setLimitExceeded('Bobr');
+        $headers = $dto->getHeaders();
+        self::assertEquals([
+            'pf-result-message' => 'Bobr',
+            'pf-result-code' => '1004',
+        ], $headers);
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::isSuccessResultCode
+     */
+    public function testIsSuccessResultCode(): void
+    {
+        $dto    = new ProcessDto();
+        $result = $dto->isSuccessResultCode(0);
+        self::assertEquals(TRUE, $result);
+    }
+
+    /**
      * @return mixed[]
      */
     private function getSetStopProcessHeaders(): array
@@ -209,7 +272,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetLimiterHeaders(int $timestamp): array
     {
         return [
-            'pf-limit-key'         => 'testLimit',
+            'pf-limit-key'         => 'testLimit|',
             'pf-limit-time'        => '1',
             'pf-limit-value'       => '100',
             'pf-limit-last-update' => $timestamp,
