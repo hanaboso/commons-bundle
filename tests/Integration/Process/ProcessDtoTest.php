@@ -200,21 +200,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setFree
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getFree
-     */
-    public function testFree(): void
-    {
-        $dto = new ProcessDto();
-        $dto->setData('Bobr');
-        self::assertEquals(TRUE, $dto->getFree());
-        $dto->setFree(TRUE);
-        self::assertEquals('', $dto->getData());
-        $dto->setFree(FALSE);
-        self::assertEquals(FALSE, $dto->getFree());
-    }
-
-    /**
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setLimitExceeded
      */
     public function testSetLimitExceeded(): void
