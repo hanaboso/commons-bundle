@@ -45,12 +45,18 @@ final class ProcessDto
     private array $headers;
 
     /**
+     * @var bool
+     */
+    private bool $free;
+
+    /**
      * ProcessDto constructor.
      */
     public function __construct()
     {
         $this->data    = '{}';
         $this->headers = [];
+        $this->free    = TRUE;
     }
 
     /**
@@ -153,6 +159,26 @@ final class ProcessDto
     public function deleteHeaders(): void
     {
         $this->headers = [];
+    }
+
+    /**
+     * @return bool
+     */
+    public function getFree(): bool
+    {
+        return $this->free;
+    }
+
+    /**
+     * @param bool $free
+     */
+    public function setFree(bool $free): void
+    {
+        if ($free) {
+            $this->data    = '';
+            $this->headers = [];
+        }
+        $this->free = $free;
     }
 
     /**
