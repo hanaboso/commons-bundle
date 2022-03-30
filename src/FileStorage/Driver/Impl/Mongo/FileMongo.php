@@ -15,6 +15,7 @@ use Hanaboso\Utils\Exception\DateTimeException;
  *
  * @ODM\File(bucketName="files")
  */
+// phpcs:ignore
 class FileMongo
 {
 

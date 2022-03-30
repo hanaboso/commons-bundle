@@ -18,6 +18,7 @@ use Hanaboso\Utils\Exception\EnumException;
  *
  * @ODM\Document
  */
+// phpcs:ignore
 class File implements FileInterface
 {
 
@@ -103,7 +104,9 @@ class File implements FileInterface
     {
         try {
             FileFormatEnum::isValid($format);
-        } catch (EnumException) {
+        } catch (EnumException $e) {
+            $e;
+
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $format),
                 FileStorageException::INVALID_FILE_FORMAT,
@@ -182,7 +185,9 @@ class File implements FileInterface
     {
         try {
             StorageTypeEnum::isValid($type);
-        } catch (EnumException) {
+        } catch (EnumException $e) {
+            $e;
+
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE,

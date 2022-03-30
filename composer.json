@@ -10,7 +10,7 @@
         "ext-sockets": "*",
         "ext-sodium": "*",
         "guzzlehttp/guzzle": "^7.4",
-        "hanaboso/utils": "^1.1",
+        "hanaboso/utils": "^1.1.7",
         "phpseclib/phpseclib": "^3.0",
         "windwalker/crypt": "^3.5"
     },
