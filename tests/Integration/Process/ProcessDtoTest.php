@@ -3,7 +3,6 @@
 namespace CommonsBundleTests\Integration\Process;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
-use Error;
 use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
@@ -27,13 +26,10 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $processDto = new ProcessDto();
         $headers    = [];
 
-        $processDto->setStopProcess(ProcessDto::DO_NOT_CONTINUE);
+        $processDto->setStopProcess(ProcessDto::DO_NOT_CONTINUE, 'nok');
         $headers[] = $processDto->getHeaders();
 
-        $processDto->setStopProcess(ProcessDto::SPLITTER_BATCH_END);
-        $headers[] = $processDto->getHeaders();
-
-        $processDto->setStopProcess(ProcessDto::STOP_AND_FAILED);
+        $processDto->setStopProcess(ProcessDto::STOP_AND_FAILED, 'nok');
         $headers[] = $processDto->getHeaders();
 
         self::assertEquals($this->getSetStopProcessHeaders(), $headers);
@@ -54,7 +50,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     public function testSetRepeater(): void
     {
         $processDto = (new ProcessDto())
-            ->setRepeater(10, 20, 15, 'queue')
+            ->setRepeater(10, 20, 'queue')
             ->setData('data');
 
         self::assertEquals($this->getSetRepeaterHeaders(), $processDto->getHeaders());
@@ -128,7 +124,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         );
 
         self::expectException(PipesFrameworkException::class);
-        $processDto->setStopProcess(5_555);
+        $processDto->setStopProcess(5_555, 'nok');
     }
 
     /**
@@ -139,7 +135,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     public function testSetRepeaterIntervalErr(): void
     {
         self::expectException(PipesFrameworkException::class);
-        (new ProcessDto())->setRepeater(-1, 1);
+        (new ProcessDto())->setRepeater(-1, 1, 'nok');
     }
 
     /**
@@ -150,7 +146,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     public function testSetRepeaterHopsErr(): void
     {
         self::expectException(PipesFrameworkException::class);
-        (new ProcessDto())->setRepeater(1, -1);
+        (new ProcessDto())->setRepeater(1, -1, 'nok');
     }
 
     /**
@@ -186,13 +182,13 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeaders
      */
     public function testDeleteHeaders(): void
     {
         $dto = new ProcessDto();
         $dto->addHeader('keyR', "\rLosos\rLos");
-        $dto->deleteHeaders();
+        $dto->removeHeaders();
         self::assertEquals([], $dto->getHeaders());
     }
 
@@ -208,16 +204,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
                                'pf-result-message' => 'Bobr',
                                'pf-result-code'    => '1004',
                            ], $headers);
-    }
-
-    /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::isSuccessResultCode
-     */
-    public function testIsSuccessResultCode(): void
-    {
-        $dto    = new ProcessDto();
-        $result = $dto->isSuccessResultCode(0);
-        self::assertEquals(TRUE, $result);
     }
 
     /**
@@ -310,7 +296,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      */
     public function testSetForceFollowersFollowerNotAvailable(): void
     {
-        self::expectException(Error::class);
+        self::expectException(PipesFrameworkException::class);
         $processDto = new ProcessDto();
         $processDto->addHeader(
             'worker-followers',
@@ -329,9 +315,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetStopProcessHeaders(): array
     {
         return [
-            [$this->getPfResultCode() => (string) ProcessDto::DO_NOT_CONTINUE],
-            [$this->getPfResultCode() => (string) ProcessDto::SPLITTER_BATCH_END],
-            [$this->getPfResultCode() => (string) ProcessDto::STOP_AND_FAILED],
+            [$this->getPfResultCode() => (string) ProcessDto::DO_NOT_CONTINUE, 'pf-result-message' => 'nok'],
+            [$this->getPfResultCode() => (string) ProcessDto::STOP_AND_FAILED, 'pf-result-message' => 'nok'],
         ];
     }
 
@@ -344,8 +329,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
             $this->getPfResultCode() => (string) ProcessDto::REPEAT,
             'pf-repeat-interval'     => '10',
             'pf-repeat-max-hops'     => '20',
-            'pf-repeat-hops'         => '15',
-            'pf-repeat-queue'        => 'queue',
+            'pf-result-message'      => 'queue',
         ];
     }
 
