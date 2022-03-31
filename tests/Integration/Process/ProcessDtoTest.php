@@ -5,8 +5,8 @@ namespace CommonsBundleTests\Integration\Process;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
-use Hanaboso\Utils\Date\DateTimeUtils;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
+use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
 
 /**
@@ -26,13 +26,10 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $processDto = new ProcessDto();
         $headers    = [];
 
-        $processDto->setStopProcess(ProcessDto::DO_NOT_CONTINUE);
+        $processDto->setStopProcess(ProcessDto::DO_NOT_CONTINUE, 'nok');
         $headers[] = $processDto->getHeaders();
 
-        $processDto->setStopProcess(ProcessDto::SPLITTER_BATCH_END);
-        $headers[] = $processDto->getHeaders();
-
-        $processDto->setStopProcess(ProcessDto::STOP_AND_FAILED);
+        $processDto->setStopProcess(ProcessDto::STOP_AND_FAILED, 'nok');
         $headers[] = $processDto->getHeaders();
 
         self::assertEquals($this->getSetStopProcessHeaders(), $headers);
@@ -45,7 +42,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRepeater
      *
      * @throws Exception
@@ -53,7 +50,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     public function testSetRepeater(): void
     {
         $processDto = (new ProcessDto())
-            ->setRepeater(10, 20, 15, 'queue')
+            ->setRepeater(10, 20, 'queue')
             ->setData('data');
 
         self::assertEquals($this->getSetRepeaterHeaders(), $processDto->getHeaders());
@@ -73,13 +70,13 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
             $processDto->getHeaders(),
         );
 
-        self::assertEquals(5, $processDto->getHeader('pf-repeat-interval'));
+        self::assertEquals(5, $processDto->getHeader('repeat-interval'));
 
         $processDto->removeRepeater();
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE)));
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS)));
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS)));
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::REPEAT_QUEUE));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::REPEAT_MAX_HOPS));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::REPEAT_HOPS));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::REPEAT_INTERVAL));
     }
 
     /**
@@ -89,7 +86,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::decorateLimitKey()
      *
@@ -97,18 +94,14 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      */
     public function testSetLimiter(): void
     {
-        $now        = DateTimeUtils::getUtcDateTime();
         $processDto = (new ProcessDto())
-            ->setLimiter('testLimit', 1, 100, $now)
+            ->setLimiter('testLimit', 1, 100)
             ->setData('data');
 
-        self::assertEquals($this->getSetLimiterHeaders($now->getTimestamp()), $processDto->getHeaders());
+        self::assertEquals($this->getLimiterHeaders(), $processDto->getHeaders());
 
         $processDto->removeLimiter();
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY)));
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_VALUE)));
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_TIME)));
-        self::assertEmpty($processDto->getHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE)));
+        self::assertEmpty($processDto->getHeader(PipesHeaders::LIMITER_KEY));
     }
 
     /**
@@ -131,7 +124,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         );
 
         self::expectException(PipesFrameworkException::class);
-        $processDto->setStopProcess(5_555);
+        $processDto->setStopProcess(5_555, 'nok');
     }
 
     /**
@@ -142,7 +135,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     public function testSetRepeaterIntervalErr(): void
     {
         self::expectException(PipesFrameworkException::class);
-        (new ProcessDto())->setRepeater(-1, 1);
+        (new ProcessDto())->setRepeater(-1, 1, 'nok');
     }
 
     /**
@@ -153,7 +146,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     public function testSetRepeaterHopsErr(): void
     {
         self::expectException(PipesFrameworkException::class);
-        (new ProcessDto())->setRepeater(1, -1);
+        (new ProcessDto())->setRepeater(1, -1, 'nok');
     }
 
     /**
@@ -168,9 +161,9 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $headers = $dto->getHeaders();
         self::assertEquals(
             [
-                'keyR' => ' Losos Los',
-                'keyN' => ' Losos Los',
-                'keyNR' => '  Losos  Los',
+                'pf-keyR'  => ' Losos Los',
+                'pf-keyN'  => ' Losos Los',
+                'pf-keyNR' => '  Losos  Los',
             ],
             $headers,
         );
@@ -189,13 +182,13 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeaders
      */
-    public function testDeleteHeaders(): void
+    public function testRemoveHeaders(): void
     {
         $dto = new ProcessDto();
         $dto->addHeader('keyR', "\rLosos\rLos");
-        $dto->deleteHeaders();
+        $dto->removeHeaders();
         self::assertEquals([], $dto->getHeaders());
     }
 
@@ -208,19 +201,112 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $dto->setLimitExceeded('Bobr');
         $headers = $dto->getHeaders();
         self::assertEquals([
-            'pf-result-message' => 'Bobr',
-            'pf-result-code' => '1004',
-        ], $headers);
+                               'pf-result-message' => 'Bobr',
+                               'pf-result-code'    => '1004',
+                           ], $headers);
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::isSuccessResultCode
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setLimiterWithGroup
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
      */
-    public function testIsSuccessResultCode(): void
+    public function testSetLimiterWithGroup(): void
     {
-        $dto    = new ProcessDto();
-        $result = $dto->isSuccessResultCode(0);
-        self::assertEquals(TRUE, $result);
+        $processDto = new ProcessDto();
+        $processDto->setLimiterWithGroup('limiterKey', 1, 10, 'groupKey', 2, 20);
+        self::assertEquals(['pf-limiter-key' => 'limiterKey|;1;10;groupKey|;2;20'], $processDto->getHeaders());
+        $processDto->removeLimiter();
+        self::assertEquals([], $processDto->getHeaders());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setBatchCursor
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getBatchCursor
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeBatchCursor
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
+     */
+    public function testSetBatchCursor(): void
+    {
+        $processDto = new ProcessDto();
+        $processDto->setBatchCursor('testCursor');
+        self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
+        self::assertEquals([
+            'pf-cursor'            => 'testCursor',
+            'pf-result-message' => 'Message will be used as a iterator with cursor [testCursor]. Data will be send to follower(s).',
+            'pf-result-code'    => '1010',
+        ], $processDto->getHeaders());
+        $processDto->removeBatchCursor();
+        self::assertEquals([], $processDto->getHeaders());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setBatchCursor
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeBatchCursor
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
+     */
+    public function testSetBatchCursorIterateOnly(): void
+    {
+        $processDto = new ProcessDto();
+        $processDto->setBatchCursor('testCursor', TRUE);
+        self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
+        self::assertEquals([
+            'pf-cursor'            => 'testCursor',
+            'pf-result-message' => 'Message will be used as a iterator with cursor [testCursor]. No follower will be called.',
+            'pf-result-code'    => '1011',
+        ], $processDto->getHeaders());
+        $processDto->removeBatchCursor();
+        self::assertEquals([], $processDto->getHeaders());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setForceFollowers
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeForceFollowers
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
+     */
+    public function testSetForceFollowers(): void
+    {
+        $processDto = new ProcessDto();
+        $processDto->addHeader(
+            'worker-followers',
+            Json::encode(
+                [['name' => 'testFollower1', 'id' => '1'], ['name' => 'testFollower2', 'id' => '2']],
+            ),
+        );
+        $processDto->setForceFollowers(['testFollower1', 'testFollower2']);
+        self::assertEquals([
+            'pf-worker-followers'   => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
+            'pf-force-target-queue' => '1,2',
+            'pf-result-message'  => 'Message will be force re-routed to [1,2] follower(s).',
+            'pf-result-code'     => '1002',
+        ], $processDto->getHeaders());
+        $processDto->removeForceFollowers();
+        self::assertEquals([
+            'pf-worker-followers' => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
+        ], $processDto->getHeaders());
+    }
+
+    /**
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setForceFollowers
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeForceFollowers
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
+     */
+    public function testSetForceFollowersFollowerNotAvailable(): void
+    {
+        self::expectException(PipesFrameworkException::class);
+        $processDto = new ProcessDto();
+        $processDto->addHeader(
+            'worker-followers',
+            Json::encode(
+                [['name' => 'testFollower1', 'id' => '1'], ['name' => 'testFollower2', 'id' => '2']],
+            ),
+        );
+        $processDto->setForceFollowers(['testFollower3']);
+        $result = $processDto->getHeaders();
+        $result;
     }
 
     /**
@@ -229,9 +315,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetStopProcessHeaders(): array
     {
         return [
-            [$this->getPfResultCode() => (string) ProcessDto::DO_NOT_CONTINUE],
-            [$this->getPfResultCode() => (string) ProcessDto::SPLITTER_BATCH_END],
-            [$this->getPfResultCode() => (string) ProcessDto::STOP_AND_FAILED],
+            [$this->getPfResultCode() => (string) ProcessDto::DO_NOT_CONTINUE, 'pf-result-message' => 'nok'],
+            [$this->getPfResultCode() => (string) ProcessDto::STOP_AND_FAILED, 'pf-result-message' => 'nok'],
         ];
     }
 
@@ -244,23 +329,17 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
             $this->getPfResultCode() => (string) ProcessDto::REPEAT,
             'pf-repeat-interval'     => '10',
             'pf-repeat-max-hops'     => '20',
-            'pf-repeat-hops'         => '15',
-            'pf-repeat-queue'        => 'queue',
+            'pf-result-message'      => 'queue',
         ];
     }
 
     /**
-     * @param int $timestamp
-     *
-     * @return mixed[]
+     * @return string[]
      */
-    private function getSetLimiterHeaders(int $timestamp): array
+    private function getLimiterHeaders(): array
     {
         return [
-            'pf-limit-key'         => 'testLimit|',
-            'pf-limit-time'        => '1',
-            'pf-limit-value'       => '100',
-            'pf-limit-last-update' => $timestamp,
+            'pf-limiter-key' => 'testLimit|;1;100',
         ];
     }
 

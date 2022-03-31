@@ -31,9 +31,9 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
      */
     public function testOnKernelController(): void
     {
-        $event = $this->createPartialMock(ControllerEvent::class, ['getRequest', 'isMasterRequest']);
+        $event = $this->createPartialMock(ControllerEvent::class, ['getRequest', 'isMainRequest']);
         $event->method('getRequest')->willThrowException(new Exception());
-        $event->method('isMasterRequest')->willReturn(TRUE);
+        $event->method('isMainRequest')->willReturn(TRUE);
 
         $this->listener->onKernelController($event);
         self::assertTrue(TRUE);
@@ -49,8 +49,8 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
         $request->headers->set(PipesHeaders::createKey(PipesHeaders::CORRELATION_ID), '1');
         $request->headers->set(PipesHeaders::createKey(PipesHeaders::NODE_ID), '1');
 
-        $event = $this->createPartialMock(TerminateEvent::class, ['isMasterRequest', 'getRequest']);
-        $event->method('isMasterRequest')->willReturn(TRUE);
+        $event = $this->createPartialMock(TerminateEvent::class, ['isMainRequest', 'getRequest']);
+        $event->method('isMainRequest')->willReturn(TRUE);
         $event->method('getRequest')->willReturn($request);
 
         $this->listener->onKernelTerminate($event);
