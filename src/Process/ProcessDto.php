@@ -240,6 +240,7 @@ final class ProcessDto
         $this->removeHeader(PipesHeaders::REPEAT_MAX_HOPS);
         $this->removeHeader(PipesHeaders::REPEAT_HOPS);
         $this->removeHeader(PipesHeaders::REPEAT_QUEUE);
+        $this->removeRelatedHeaders([ProcessDto::REPEAT]);
 
         return $this;
     }

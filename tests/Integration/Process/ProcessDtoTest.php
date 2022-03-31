@@ -42,7 +42,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRepeater
      *
      * @throws Exception
@@ -86,7 +86,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::deleteHeader
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::decorateLimitKey()
      *
@@ -184,7 +184,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeaders
      */
-    public function testDeleteHeaders(): void
+    public function testRemoveHeaders(): void
     {
         $dto = new ProcessDto();
         $dto->addHeader('keyR', "\rLosos\rLos");
