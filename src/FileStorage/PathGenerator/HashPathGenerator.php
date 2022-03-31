@@ -10,7 +10,7 @@ use Hanaboso\Utils\String\SafePathGenerator;
  *
  * @package Hanaboso\CommonsBundle\FileStorage\PathGenerator
  */
-final class HashPathGenerator implements PathGeneratorInterface
+class HashPathGenerator implements PathGeneratorInterface
 {
 
     /**

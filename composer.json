@@ -2,7 +2,7 @@
     "name": "hanaboso/commons-bundle",
     "description": "Hanaboso - commons-bundle",
     "license": "Apache-2.0",
-    "version": "2.4.5",
+    "version": "2.5.0",
     "require": {
         "php": "^8.0",
         "ext-apcu": "*",
@@ -10,7 +10,7 @@
         "ext-sockets": "*",
         "ext-sodium": "*",
         "guzzlehttp/guzzle": "^7.4",
-        "hanaboso/utils": "^1.1.7",
+        "hanaboso/utils": "^1.1",
         "phpseclib/phpseclib": "^3.0",
         "windwalker/crypt": "^3.5"
     },

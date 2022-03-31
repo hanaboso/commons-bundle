@@ -35,11 +35,6 @@ final class ProcessDto
     public const INVALID_CONTENT = 2_003;
 
     /**
-     * @var bool
-     */
-    private bool $free;
-
-    /**
      * @var string
      */
     private string $data;
@@ -56,27 +51,6 @@ final class ProcessDto
     {
         $this->data    = '{}';
         $this->headers = [];
-        $this->free    = TRUE;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getFree(): bool
-    {
-        return $this->free;
-    }
-
-    /**
-     * @param bool $free
-     */
-    public function setFree(bool $free): void
-    {
-        if ($free) {
-            $this->data    = '';
-            $this->headers = [];
-        }
-        $this->free = $free;
     }
 
     /**
@@ -143,7 +117,7 @@ final class ProcessDto
      */
     public function addHeader(string $key, string $value): ProcessDto
     {
-        $this->headers[$key] = str_replace(["\n", "\r"], ' ', $value);
+        $this->headers[PipesHeaders::createKey($key)] = str_replace(["\n", "\r"], ' ', $value);
 
         return $this;
     }
@@ -156,7 +130,7 @@ final class ProcessDto
      */
     public function getHeader(string $key, $default = NULL): mixed
     {
-        return $this->headers[$key] ?? $default;
+        return $this->headers[PipesHeaders::createKey($key)] ?? $default;
     }
 
     /**
@@ -166,6 +140,7 @@ final class ProcessDto
      */
     public function deleteHeader(string $key): ProcessDto
     {
+        $key = PipesHeaders::createKey($key);
         if (isset($this->headers[$key])) {
             unset($this->headers[$key]);
         }
@@ -249,20 +224,16 @@ final class ProcessDto
 
         $this->setStatusHeader(self::REPEAT, $message);
 
-        $keyInterval = PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL);
-        $this->addHeader($keyInterval, (string) $interval);
+        $this->addHeader(PipesHeaders::REPEAT_INTERVAL, (string) $interval);
 
-        $keyMaxHops = PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS);
-        $this->addHeader($keyMaxHops, (string) $maxHops);
+        $this->addHeader(PipesHeaders::REPEAT_MAX_HOPS, (string) $maxHops);
 
         if ($repeatHops !== NULL) {
-            $keyRepeatHops = PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS);
-            $this->addHeader($keyRepeatHops, (string) $repeatHops);
+            $this->addHeader(PipesHeaders::REPEAT_HOPS, (string) $repeatHops);
         }
 
         if ($queue !== '') {
-            $keyQueue = PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE);
-            $this->addHeader($keyQueue, $queue);
+            $this->addHeader(PipesHeaders::REPEAT_QUEUE, $queue);
         }
 
         return $this;
@@ -274,10 +245,10 @@ final class ProcessDto
     public function removeRepeater(): ProcessDto
     {
         $this->setStatusHeader(self::SUCCESS, NULL);
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE));
+        $this->deleteHeader(PipesHeaders::REPEAT_INTERVAL);
+        $this->deleteHeader(PipesHeaders::REPEAT_HOPS);
+        $this->deleteHeader(PipesHeaders::REPEAT_MAX_HOPS);
+        $this->deleteHeader(PipesHeaders::REPEAT_QUEUE);
 
         return $this;
     }
@@ -434,7 +405,7 @@ final class ProcessDto
             self::SPLITTER_BATCH_END,
             self::BATCH_CURSOR_WITH_FOLLOWERS,
             self::BATCH_CURSOR_ONLY,
-        ], TRUE);
+        ],              TRUE);
     }
 
     /**
@@ -447,12 +418,10 @@ final class ProcessDto
      */
     private function setStatusHeader(int $value, ?string $message): void
     {
-        $key = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
-
         if ($message) {
-            $this->addHeader(PipesHeaders::createKey(PipesHeaders::RESULT_MESSAGE), $message);
+            $this->addHeader(PipesHeaders::RESULT_MESSAGE, $message);
         }
-        $this->addHeader($key, (string) $value);
+        $this->addHeader(PipesHeaders::RESULT_CODE, (string) $value);
     }
 
     /**
@@ -460,9 +429,7 @@ final class ProcessDto
      */
     private function getStatusHeader(): string
     {
-        $key = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
-
-        return $this->getHeader($key, '');
+        return $this->getHeader(PipesHeaders::RESULT_CODE, '');
     }
 
     /**
@@ -471,8 +438,8 @@ final class ProcessDto
     private function removeRelatedHeaders(int $headerCode): void
     {
         if ((int) $this->getStatusHeader() === $headerCode) {
-            $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::RESULT_MESSAGE));
-            $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::RESULT_CODE));
+            $this->deleteHeader(PipesHeaders::RESULT_MESSAGE);
+            $this->deleteHeader(PipesHeaders::RESULT_CODE);
         }
     }
 
