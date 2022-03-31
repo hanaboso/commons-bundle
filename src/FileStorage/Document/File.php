@@ -18,7 +18,6 @@ use Hanaboso\Utils\Exception\EnumException;
  *
  * @ODM\Document
  */
-// phpcs:ignore
 class File implements FileInterface
 {
 

@@ -17,7 +17,6 @@ use Hanaboso\Utils\Exception\DateTimeException;
  *
  * @ODM\Document()
  */
-// phpcs:ignore
 class TestDocumentTrait
 {
 

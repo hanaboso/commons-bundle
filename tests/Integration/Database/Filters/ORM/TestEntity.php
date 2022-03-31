@@ -13,7 +13,6 @@ use Hanaboso\CommonsBundle\Database\Traits\Entity\IdTrait;
  *
  * @ORM\Entity()
  */
-// phpcs:ignore
 class TestEntity
 {
 

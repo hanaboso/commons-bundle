@@ -13,7 +13,6 @@ use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
  *
  * @ODM\Document()
  */
-// phpcs:ignore
 class TestDocument
 {
 

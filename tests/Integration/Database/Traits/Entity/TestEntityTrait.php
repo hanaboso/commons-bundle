@@ -17,7 +17,6 @@ use Hanaboso\Utils\Exception\DateTimeException;
  *
  * @ORM\Entity()
  */
-// phpcs:ignore
 class TestEntityTrait
 {
 
