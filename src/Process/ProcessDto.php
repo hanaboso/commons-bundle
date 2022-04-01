@@ -2,7 +2,6 @@
 
 namespace Hanaboso\CommonsBundle\Process;
 
-use DateTime;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
@@ -84,9 +83,11 @@ final class ProcessDto
     /**
      * @param mixed[] $body
      */
-    public function setJsonData(array $body): void
+    public function setJsonData(array $body): ProcessDto
     {
         $this->data = Json::encode($body);
+
+        return $this;
     }
 
     /**
@@ -117,20 +118,9 @@ final class ProcessDto
      */
     public function addHeader(string $key, string $value): ProcessDto
     {
-        $this->headers[$key] = str_replace(["\n", "\r"], ' ', $value);
+        $this->headers[PipesHeaders::createKey($key)] = str_replace(["\n", "\r"], ' ', $value);
 
         return $this;
-    }
-
-    /**
-     * @param string     $key
-     * @param mixed|null $default
-     *
-     * @return mixed
-     */
-    public function getHeader(string $key, $default = NULL): mixed
-    {
-        return $this->headers[$key] ?? $default;
     }
 
     /**
@@ -138,8 +128,9 @@ final class ProcessDto
      *
      * @return ProcessDto
      */
-    public function deleteHeader(string $key): ProcessDto
+    public function removeHeader(string $key): ProcessDto
     {
+        $key = PipesHeaders::createKey($key);
         if (isset($this->headers[$key])) {
             unset($this->headers[$key]);
         }
@@ -150,17 +141,30 @@ final class ProcessDto
     /**
      *
      */
-    public function deleteHeaders(): void
+    public function removeHeaders(): ProcessDto
     {
         $this->headers = [];
+
+        return $this;
     }
 
     /**
-     * @param string|null $message
+     * @param string     $key
+     * @param mixed|null $defaultValue
      *
-     * @return ProcessDto
+     * @return mixed
      */
-    public function setSuccessProcess(?string $message = NULL): ProcessDto
+    public function getHeader(string $key, $defaultValue = NULL): mixed
+    {
+        return $this->headers[PipesHeaders::createKey($key)] ?? $defaultValue;
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return $this
+     */
+    public function setSuccessProcess(string $message = 'Message has been processed successfully.'): ProcessDto
     {
         $this->setStatusHeader(self::SUCCESS, $message);
 
@@ -168,45 +172,42 @@ final class ProcessDto
     }
 
     /**
-     * @param int         $value
-     * @param string|null $message
+     * @param int    $status
+     * @param string $reason
      *
-     * @return ProcessDto
+     * @return $this
      * @throws PipesFrameworkException
      */
-    public function setStopProcess(int $value = self::DO_NOT_CONTINUE, ?string $message = NULL): ProcessDto
+    public function setStopProcess(int $status, string $reason): ProcessDto
     {
-        $this->validateStatus($value);
-        $this->setStatusHeader($value, $message);
+        ProcessDto::validateStatus($status);
+
+        $this->setStatusHeader($status, $reason);
 
         return $this;
     }
 
     /**
      * @param string $reason
+     *
+     * @return $this
      */
-    public function setLimitExceeded(string $reason): void
+    public function setLimitExceeded(string $reason): ProcessDto
     {
         $this->setStatusHeader(self::LIMIT_EXCEEDED, $reason);
+
+        return $this;
     }
 
     /**
-     * @param int         $interval
-     * @param int         $maxHops
-     * @param int|null    $repeatHops
-     * @param string      $queue
-     * @param string|null $message
+     * @param int    $interval
+     * @param int    $maxHops
+     * @param string $reason
      *
-     * @return ProcessDto
+     * @return $this
      * @throws PipesFrameworkException
      */
-    public function setRepeater(
-        int $interval,
-        int $maxHops,
-        ?int $repeatHops = NULL,
-        string $queue = '',
-        ?string $message = NULL,
-    ): ProcessDto
+    public function setRepeater(int $interval, int $maxHops, string $reason ): ProcessDto
     {
         if ($interval < 1) {
             throw new PipesFrameworkException(
@@ -221,61 +222,73 @@ final class ProcessDto
             );
         }
 
-        $this->setStatusHeader(self::REPEAT, $message);
+        $this->setStatusHeader(self::REPEAT, $reason);
 
-        $keyInterval = PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL);
-        $this->addHeader($keyInterval, (string) $interval);
+        $this->addHeader(PipesHeaders::REPEAT_INTERVAL, (string) $interval);
 
-        $keyMaxHops = PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS);
-        $this->addHeader($keyMaxHops, (string) $maxHops);
-
-        if ($repeatHops !== NULL) {
-            $keyRepeatHops = PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS);
-            $this->addHeader($keyRepeatHops, (string) $repeatHops);
-        }
-
-        if ($queue !== '') {
-            $keyQueue = PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE);
-            $this->addHeader($keyQueue, $queue);
-        }
+        $this->addHeader(PipesHeaders::REPEAT_MAX_HOPS, (string) $maxHops);
 
         return $this;
     }
 
     /**
-     * @return ProcessDto
+     *
      */
     public function removeRepeater(): ProcessDto
     {
-        $this->setStatusHeader(self::SUCCESS, NULL);
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_INTERVAL));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_HOPS));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_MAX_HOPS));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::REPEAT_QUEUE));
+        $this->removeHeader(PipesHeaders::REPEAT_INTERVAL);
+        $this->removeHeader(PipesHeaders::REPEAT_MAX_HOPS);
+        $this->removeHeader(PipesHeaders::REPEAT_HOPS);
+        $this->removeHeader(PipesHeaders::REPEAT_QUEUE);
+        $this->removeRelatedHeaders([ProcessDto::REPEAT]);
 
         return $this;
     }
 
     /**
-     * @param string        $key
-     * @param int           $time
-     * @param int           $value
-     * @param DateTime|null $lastUpdate
+     * @param string $key
+     * @param int    $time
+     * @param int    $amount
      *
      * @return ProcessDto
      */
-    public function setLimiter(string $key, int $time, int $value, ?DateTime $lastUpdate = NULL): ProcessDto
+    public function setLimiter(string $key, int $time, int $amount): ProcessDto
     {
-        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY), self::decorateLimitKey($key));
-        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_TIME), (string) $time);
-        $this->addHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_VALUE), (string) $value);
+        $lk = sprintf('%s;%s;%s', ProcessDto::decorateLimitKey($key), $time, $amount);
+        $this->addHeader(PipesHeaders::LIMITER_KEY, $lk);
 
-        if ($lastUpdate) {
-            $this->addHeader(
-                PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE),
-                (string) $lastUpdate->getTimestamp(),
-            );
-        }
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param int    $time
+     * @param int    $amount
+     * @param string $groupKey
+     * @param int    $groupTime
+     * @param int    $groupAmount
+     *
+     * @return ProcessDto
+     */
+    public function setLimiterWithGroup(
+        string $key,
+        int $time,
+        int $amount,
+        string $groupKey,
+        int $groupTime,
+        int $groupAmount,
+    ): ProcessDto
+    {
+        $lk = sprintf(
+            '%s;%s;%s;%s;%s;%s',
+            ProcessDto::decorateLimitKey($key),
+            $time,
+            $amount,
+            ProcessDto::decorateLimitKey($groupKey),
+            $groupTime,
+            $groupAmount,
+        );
+        $this->addHeader(PipesHeaders::LIMITER_KEY, $lk);
 
         return $this;
     }
@@ -285,30 +298,103 @@ final class ProcessDto
      */
     public function removeLimiter(): ProcessDto
     {
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_KEY));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_TIME));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_VALUE));
-        $this->deleteHeader(PipesHeaders::createKey(PipesHeaders::LIMIT_LAST_UPDATE));
+        $this->removeHeader(PipesHeaders::LIMITER_KEY);
 
         return $this;
     }
 
     /**
-     * @param int $code
+     * @param string $cursor
+     * @param bool   $iterateOnly
      *
-     * @return bool
+     * @return ProcessDto
      */
-    public function isSuccessResultCode(int $code): bool
+    public function setBatchCursor(string $cursor, bool $iterateOnly = FALSE): ProcessDto
     {
-        return in_array($code, [
-            self::SUCCESS,
-            self::REPEAT,
-            self::FORWARD_TO_TARGET_QUEUE,
-            self::DO_NOT_CONTINUE,
-            self::SPLITTER_BATCH_END,
-            self::BATCH_CURSOR_WITH_FOLLOWERS,
-            self::BATCH_CURSOR_ONLY,
-        ], TRUE);
+        $this->addHeader(PipesHeaders::BATCH_CURSOR, $cursor);
+        if ($iterateOnly) {
+            $this->setStatusHeader(
+                ProcessDto::BATCH_CURSOR_ONLY,
+                sprintf('Message will be used as a iterator with cursor [%s]. No follower will be called.', $cursor),
+            );
+        } else {
+            $this->setStatusHeader(
+                ProcessDto::BATCH_CURSOR_WITH_FOLLOWERS,
+                sprintf(
+                    'Message will be used as a iterator with cursor [%s]. Data will be send to follower(s).',
+                    $cursor,
+                ),
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $defaultValue
+     *
+     * @return string
+     */
+    public function getBatchCursor(string $defaultValue = ''): string
+    {
+        return (string) $this->getHeader(PipesHeaders::BATCH_CURSOR, $defaultValue);
+    }
+
+    /**
+     * @return $this
+     */
+    public function removeBatchCursor(): ProcessDto
+    {
+        $this->removeHeader(PipesHeaders::BATCH_CURSOR);
+        $this->removeRelatedHeaders([ProcessDto::BATCH_CURSOR_ONLY, ProcessDto::BATCH_CURSOR_WITH_FOLLOWERS]);
+
+        return $this;
+    }
+
+    /**
+     * @param mixed[] $followers
+     *
+     * @throws PipesFrameworkException
+     */
+    public function setForceFollowers(array $followers): ProcessDto
+    {
+        $workerFollowers = Json::decode(
+            (string) $this->getHeader(PipesHeaders::WORKER_FOLLOWERS, '[]'),
+        );
+        $filtered        = array_filter(
+            $workerFollowers,
+            static fn(array $item) => in_array($item['name'], $followers, TRUE),
+        );
+        $targetQueues    = implode(',', array_column($filtered, 'id'));
+        if (!$targetQueues) {
+            $workerFollowerNames = implode(',', array_column($workerFollowers, 'name'));
+
+            throw new PipesFrameworkException(
+                sprintf(
+                    "Inserted follower(s) [%s] can't be reached. Available follower(s) [%s]",
+                    implode(',', $followers),
+                    $workerFollowerNames,
+                ),
+            );
+        }
+        $this->addHeader(PipesHeaders::FORCE_TARGET_QUEUE, $targetQueues);
+        $this->setStatusHeader(
+            ProcessDto::FORWARD_TO_TARGET_QUEUE,
+            sprintf('Message will be force re-routed to [%s] follower(s).', $targetQueues),
+        );
+
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function removeForceFollowers(): ProcessDto
+    {
+        $this->removeHeader(PipesHeaders::FORCE_TARGET_QUEUE);
+        $this->removeRelatedHeaders([ProcessDto::FORWARD_TO_TARGET_QUEUE]);
+
+        return $this;
     }
 
     /**
@@ -321,26 +407,20 @@ final class ProcessDto
      */
     private function setStatusHeader(int $value, ?string $message): void
     {
-        $key = PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
-
         if ($message) {
-            $this->addHeader(PipesHeaders::createKey(PipesHeaders::RESULT_MESSAGE), $message);
+            $this->addHeader(PipesHeaders::RESULT_MESSAGE, preg_replace('/\r?\n|\r/', '', $message) ?? '');
         }
-        $this->addHeader($key, (string) $value);
+        $this->addHeader(PipesHeaders::RESULT_CODE, (string) $value);
     }
 
     /**
-     * @param int $value
-     *
-     * @throws PipesFrameworkException
+     * @param int[] $headerCodes
      */
-    private function validateStatus(int $value): void
+    private function removeRelatedHeaders(array $headerCodes): void
     {
-        if (!in_array($value, [self::DO_NOT_CONTINUE, self::SPLITTER_BATCH_END, self::STOP_AND_FAILED], TRUE)) {
-            throw new PipesFrameworkException(
-                'Value does not match with the required one',
-                PipesFrameworkException::WRONG_VALUE,
-            );
+        if (in_array((int) $this->getHeader(PipesHeaders::RESULT_CODE, ''), $headerCodes, TRUE)) {
+            $this->removeHeader(PipesHeaders::RESULT_MESSAGE);
+            $this->removeHeader(PipesHeaders::RESULT_CODE);
         }
     }
 
@@ -357,6 +437,21 @@ final class ProcessDto
         }
 
         return $newKey;
+    }
+
+    /**
+     * @param int $code
+     *
+     * @throws PipesFrameworkException
+     */
+    private static function validateStatus(int $code): void
+    {
+        if (!in_array($code, [self::DO_NOT_CONTINUE, self::STOP_AND_FAILED], TRUE)) {
+            throw new PipesFrameworkException(
+                'Value does not match with the required one',
+                PipesFrameworkException::WRONG_VALUE,
+            );
+        }
     }
 
 }
