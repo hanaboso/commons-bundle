@@ -70,7 +70,9 @@ final class FileContentDto
     {
         try {
             StorageTypeEnum::isValid($type);
-        } catch (EnumException) {
+        } catch (EnumException $e) {
+            $e;
+
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE,
@@ -119,7 +121,9 @@ final class FileContentDto
     {
         try {
             FileFormatEnum::isValid($format);
-        } catch (EnumException) {
+        } catch (EnumException $e) {
+            $e;
+
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $format),
                 FileStorageException::INVALID_FILE_FORMAT,
