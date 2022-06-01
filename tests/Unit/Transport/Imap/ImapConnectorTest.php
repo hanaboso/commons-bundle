@@ -6,6 +6,7 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConnector;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use PhpImap\IncomingMail;
 use PhpImap\IncomingMailHeader;
 use PhpImap\Mailbox;
@@ -18,6 +19,8 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class ImapConnectorTest extends KernelTestCaseAbstract
 {
+
+    use CustomAssertTrait;
 
     /**
      * @var Mailbox|MockObject
@@ -76,7 +79,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
         $this->mockImapMailBox(['deleteMail' => NULL]);
 
         $this->connector->deleteMail(1);
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -90,7 +93,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
         $this->mockImapMailBox(['moveMail' => NULL, 'getMailboxes' => [['shortpath' => 'path']]]);
 
         $this->connector->moveMail(1, '/path');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -120,7 +123,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
         $this->setProperty($this->connector, 'mailbox', $this->mailbox);
 
         $this->connector->moveMail(1, '/path/');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**

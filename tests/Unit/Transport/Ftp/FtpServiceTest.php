@@ -127,10 +127,11 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['uploadFile', 'connect', 'login', 'dirExists', 'makeDirRecursive'],
+            ['uploadFile', 'connect', 'login', 'dirExists', 'makeDirRecursive', 'disconnect'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
+        $adapter->expects(self::any())->method('disconnect');
         $adapter->expects(self::any())->method('uploadFile')->willThrowException(new FtpException());
         $adapter->expects(self::any())->method('dirExists')->willReturn(FALSE);
         $adapter->expects(self::any())->method('makeDirRecursive');
@@ -149,10 +150,11 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['downloadFile', 'connect', 'login'],
+            ['downloadFile', 'connect', 'login', 'disconnect'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
+        $adapter->expects(self::any())->method('disconnect');
         $adapter->expects(self::any())->method('downloadFile')->willThrowException(new FtpException());
 
         $service = new FtpService($adapter, $this->getFtpConfig());
@@ -169,10 +171,11 @@ final class FtpServiceTest extends TestCase
     {
         $adapter = self::createPartialMock(
             FtpAdapter::class,
-            ['downloadFile', 'connect', 'login', 'listDir'],
+            ['downloadFile', 'connect', 'login', 'listDir', 'disconnect'],
         );
         $adapter->expects(self::any())->method('connect');
         $adapter->expects(self::any())->method('login');
+        $adapter->expects(self::any())->method('disconnect');
         $adapter->expects(self::any())->method('downloadFile')->willThrowException(new FtpException());
         $adapter->expects(self::any())->method('listDir')->willReturn(['abc', 'def']);
 

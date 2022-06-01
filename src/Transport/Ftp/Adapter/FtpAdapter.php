@@ -2,6 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Transport\Ftp\Adapter;
 
+use FTP\Connection;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 
@@ -14,7 +15,7 @@ final class FtpAdapter implements FtpAdapterInterface
 {
 
     /**
-     * @var resource|bool
+     * @var Connection|bool
      */
     private $ftp;
 
@@ -31,7 +32,7 @@ final class FtpAdapter implements FtpAdapterInterface
             $this->ftp = @ftp_connect($ftpConfig->getHost(), $ftpConfig->getPort(), $ftpConfig->getTimeout());
         }
 
-        if (!is_resource($this->ftp)) {
+        if (is_bool($this->ftp)) {
             throw new FtpException('Connection to Ftp server failed.', FtpException::CONNECTION_FAILED);
         }
     }
@@ -194,12 +195,12 @@ final class FtpAdapter implements FtpAdapterInterface
     /**************************************** HELPERS ****************************************/
 
     /**
-     * @return resource
+     * @return mixed
      * @throws FtpException
      */
-    private function getResource()
+    private function getResource(): mixed
     {
-        if (is_resource($this->ftp)) {
+        if (!is_bool($this->ftp)) {
             return $this->ftp;
         }
 

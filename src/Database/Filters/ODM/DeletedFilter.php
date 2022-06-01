@@ -18,7 +18,7 @@ final class DeletedFilter extends BsonFilter
     /**
      * @param ClassMetadata $class
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     public function addFilterCriteria(ClassMetadata $class): array
     {

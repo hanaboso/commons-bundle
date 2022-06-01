@@ -6,6 +6,7 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -16,6 +17,8 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class MetricsLoaderTest extends KernelTestCaseAbstract
 {
+
+    use CustomAssertTrait;
 
     /**
      * @covers       \Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader::getSender
@@ -43,7 +46,7 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
         }
 
         $loader->getSender();
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**

@@ -6,6 +6,8 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
 
 /**
@@ -17,6 +19,8 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
 {
 
     use PHPMock;
+    use PrivateTrait;
+    use CustomAssertTrait;
 
     /**
      * @var FtpAdapter
@@ -31,6 +35,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
         parent::setUp();
 
         $this->ftp = new FtpAdapter();
+        $this->setProperty($this->ftp, 'ftp', TRUE);
     }
 
     /**
@@ -39,11 +44,11 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function testConnect(): void
     {
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_ssl_connect', TRUE);
 
         $this->ftp->connect(new FtpConfig('host', TRUE, 222, 5, 'guest', 'guest'));
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -68,11 +73,11 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
         $this->mockFtpFunction('ftp_connect', TRUE);
         $this->mockFtpFunction('ftp_login', TRUE);
         $this->mockFtpFunction('ftp_pasv', TRUE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         $this->ftp->login($this->config());
 
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -81,7 +86,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function testLoginErr(): void
     {
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_login', FALSE);
 
         self::expectException(FtpException::class);
@@ -95,7 +100,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function testDisconnect(): void
     {
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_close', TRUE);
 
         $this->ftp->disconnect();
@@ -108,7 +113,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function testDisconnectErr(): void
     {
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_close', FALSE);
 
         self::expectException(FtpException::class);
@@ -123,7 +128,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testUploadFile(): void
     {
         $this->mockFtpFunction('ftp_put', TRUE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         $this->ftp->uploadFile('file', 'local');
     }
@@ -136,7 +141,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testUploadFileErr(): void
     {
         $this->mockFtpFunction('ftp_put', FALSE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         self::expectException(FtpException::class);
         $this->ftp->uploadFile('file', 'local');
@@ -150,7 +155,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testDownloadFileErr(): void
     {
         $this->mockFtpFunction('ftp_get', FALSE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         self::expectException(FtpException::class);
         $this->ftp->downloadFile('file', 'local');
@@ -164,10 +169,10 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testDownloadFile(): void
     {
         $this->mockFtpFunction('ftp_get', TRUE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         $this->ftp->downloadFile('file', 'local');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -177,7 +182,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testListDir(): void
     {
         $this->mockFtpFunction('ftp_nlist', FALSE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         self::expectException(FtpException::class);
         $this->ftp->listDir('dir');
@@ -190,7 +195,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testListDirErr(): void
     {
         $this->mockFtpFunction('ftp_nlist', []);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         self::assertEquals([], $this->ftp->listDir('dir'));
     }
@@ -202,7 +207,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testDirExists(): void
     {
         $this->mockFtpFunction('ftp_pwd', 'string');
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_chdir', TRUE);
 
         self::assertTrue($this->ftp->dirExists('dir'));
@@ -215,7 +220,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testDirExistsErr(): void
     {
         $this->mockFtpFunction('ftp_pwd', '/path/');
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_chdir', FALSE);
 
         self::assertTrue(!$this->ftp->dirExists('dir'));
@@ -229,10 +234,10 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testMakeDir(): void
     {
         $this->mockFtpFunction('ftp_mkdir', TRUE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->ftp->makeDir('dir');
 
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -243,7 +248,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testMakeDirErr(): void
     {
         $this->mockFtpFunction('ftp_mkdir', FALSE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         self::expectException(FtpException::class);
         $this->ftp->makeDir('dir');
@@ -256,10 +261,10 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     public function testRemove(): void
     {
         $this->mockFtpFunction('ftp_delete', TRUE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
 
         $this->ftp->remove('file');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -268,7 +273,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function testRemoveErr(): void
     {
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_delete', FALSE);
 
         self::expectException(FtpException::class);
@@ -297,12 +302,12 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     {
         $this->mockFtpFunction('ftp_pwd', '/path/');
         $this->mockFtpFunction('ftp_chdir', FALSE);
-        $this->mockFtpFunction('is_resource', TRUE);
+        $this->mockFtpFunction('is_bool', FALSE);
         $this->mockFtpFunction('ftp_mkdir', TRUE);
         $this->mockFtpFunction('ftp_size', -1);
 
         $this->ftp->makeDirRecursive('dir');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**

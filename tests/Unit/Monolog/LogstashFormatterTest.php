@@ -2,10 +2,13 @@
 
 namespace CommonsBundleTests\Unit\Monolog;
 
+use DateTimeImmutable;
 use Exception;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatter;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Hanaboso\Utils\String\Json;
+use Monolog\Level;
+use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
 use SoapFault;
 
@@ -32,12 +35,7 @@ final class LogstashFormatterTest extends TestCase
     public function testFormat(): void
     {
         $message = $this->logstashFormatter->format(
-            [
-                'message'    => 'Test message',
-                'context'    => [],
-                'level_name' => 'INFO',
-                'channel'    => 'test',
-            ],
+            new LogRecord(new DateTimeImmutable(), 'test', Level::Info, 'Test message'),
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -63,17 +61,18 @@ final class LogstashFormatterTest extends TestCase
     public function testFormatPipes(): void
     {
         $message = $this->logstashFormatter->format(
-            [
-                'message'    => 'Test message',
-                'context'    => [
+            new LogRecord(
+                new DateTimeImmutable(),
+                'test',
+                Level::Info,
+                'Test message',
+                [
                     'correlation_id' => '123',
                     'node_id'        => '456',
                     'node_name'      => 'name',
                     'topology_id'    => '1',
                 ],
-                'level_name' => 'INFO',
-                'channel'    => 'test',
-            ],
+            ),
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -103,14 +102,15 @@ final class LogstashFormatterTest extends TestCase
     public function testFormatException(): void
     {
         $message = $this->logstashFormatter->format(
-            [
-                'message'    => 'Test message',
-                'context'    => [
+            new LogRecord(
+                new DateTimeImmutable(),
+                'test',
+                Level::Info,
+                'Test message',
+                [
                     'exception' => new Exception('Default exception'),
                 ],
-                'level_name' => 'INFO',
-                'channel'    => 'test',
-            ],
+            ),
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -126,16 +126,17 @@ final class LogstashFormatterTest extends TestCase
     public function testFormatExceptionPipes(): void
     {
         $message = $this->logstashFormatter->format(
-            [
-                'message'    => 'Test message',
-                'context'    => [
+            new LogRecord(
+                new DateTimeImmutable(),
+                'test',
+                Level::Info,
+                'Test message',
+                [
                     'correlation_id' => '123',
                     'node_id'        => '456',
                     'exception'      => new Exception('Default exception'),
                 ],
-                'level_name' => 'INFO',
-                'channel'    => 'test',
-            ],
+            ),
         );
 
         $message = $this->correctMessage(Json::decode($message));
@@ -151,15 +152,16 @@ final class LogstashFormatterTest extends TestCase
     public function testContext(): void
     {
         $message = $this->logstashFormatter->format(
-            [
-                'message'    => 'Test message',
-                'context'    => [
+            new LogRecord(
+                new DateTimeImmutable(),
+                'test',
+                Level::Info,
+                'Test message',
+                [
                     'type'          => 'starting_point',
                     'topology_name' => 'topology_1',
                 ],
-                'level_name' => 'INFO',
-                'channel'    => 'test',
-            ],
+            ),
         );
 
         $message = $this->correctMessage(Json::decode($message));

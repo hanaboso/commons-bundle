@@ -5,6 +5,7 @@ namespace CommonsBundleTests\Integration\Listener;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Listener\SystemMetricsListener;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Hanaboso\Utils\System\PipesHeaders;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
 {
 
     use PrivateTrait;
+    use CustomAssertTrait;
 
     /**
      * @var SystemMetricsListener
@@ -36,7 +38,7 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
         $event->method('isMainRequest')->willReturn(TRUE);
 
         $this->listener->onKernelController($event);
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -54,7 +56,7 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
         $event->method('getRequest')->willReturn($request);
 
         $this->listener->onKernelTerminate($event);
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**

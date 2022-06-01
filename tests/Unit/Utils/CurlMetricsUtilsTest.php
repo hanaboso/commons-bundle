@@ -15,6 +15,7 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 
 /**
  * Class CurlMetricsUtilsTest
@@ -23,6 +24,8 @@ use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
  */
 final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 {
+
+    use CustomAssertTrait;
 
     /**
      * @throws Exception
@@ -88,7 +91,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 
         CurlMetricUtils::sendCurlMetrics($influx, ['request_duration' => 2], '1', '2', 'user', 'app');
 
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
 }

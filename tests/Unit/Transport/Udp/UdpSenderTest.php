@@ -5,6 +5,7 @@ namespace CommonsBundleTests\Unit\Transport\Udp;
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Transport\Udp\UDPSender;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
 
@@ -18,6 +19,7 @@ final class UdpSenderTest extends KernelTestCaseAbstract
 
     use PHPMock;
     use PrivateTrait;
+    use CustomAssertTrait;
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Udp\UDPSender::getSocket
@@ -42,7 +44,7 @@ final class UdpSenderTest extends KernelTestCaseAbstract
         $this->setProperty($sender, 'socket', '1');
         $this->invokeMethod($sender, 'getSocket');
 
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**

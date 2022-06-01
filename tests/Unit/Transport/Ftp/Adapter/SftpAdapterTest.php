@@ -7,6 +7,7 @@ use Exception;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
 use phpseclib3\Net\SFTP;
@@ -22,6 +23,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
 
     use PHPMock;
     use PrivateTrait;
+    use CustomAssertTrait;
 
     /**
      * @var SftpAdapter
@@ -53,7 +55,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     {
         $this->adapter->connect($this->config());
 
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -66,7 +68,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         $this->mockSftpFn(['login' => TRUE]);
         $this->adapter->login($this->config());
 
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -92,7 +94,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         $this->mockSftpFn(['isConnected' => TRUE]);
         $this->adapter->disconnect();
 
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -105,7 +107,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         $this->mockSftpFn(['isConnected' => TRUE, 'put' => TRUE]);
 
         $this->adapter->uploadFile('file', 'path');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -131,7 +133,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         $this->mockSftpFn(['isConnected' => TRUE, 'get' => TRUE]);
 
         $this->adapter->downloadFile('file', 'path');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -248,7 +250,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         $this->mockSftpFn(['isConnected' => TRUE, 'mkdir' => TRUE]);
 
         $this->adapter->makeDir('dir');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -279,7 +281,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         );
 
         $this->adapter->makeDirRecursive('dir');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**
@@ -313,7 +315,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
         $this->mockSftpFn(['isConnected' => TRUE, 'delete' => TRUE]);
 
         $this->adapter->remove('file');
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**

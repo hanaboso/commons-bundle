@@ -3,6 +3,7 @@
 namespace Hanaboso\CommonsBundle\Monolog;
 
 use Monolog\Formatter\NormalizerFormatter;
+use Monolog\LogRecord;
 use SoapFault;
 use Throwable;
 
@@ -26,11 +27,11 @@ final class LogstashFormatter extends NormalizerFormatter
     }
 
     /**
-     * @param mixed[] $record
+     * @param LogRecord $record
      *
      * @return string
      */
-    public function format(array $record): string
+    public function format(LogRecord $record): string
     {
         $record = parent::format($record);
 

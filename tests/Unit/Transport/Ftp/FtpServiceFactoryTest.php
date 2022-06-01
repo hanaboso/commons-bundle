@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Monolog\Logger;
 
 /**
@@ -17,6 +18,8 @@ use Monolog\Logger;
  */
 final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 {
+
+    use CustomAssertTrait;
 
     /**
      * @var FtpServiceFactory
@@ -67,7 +70,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     public function testSetLogger(): void
     {
         $this->factory->setLogger(new Logger('logger'));
-        self::assertTrue(TRUE);
+        self::assertFake();
     }
 
     /**

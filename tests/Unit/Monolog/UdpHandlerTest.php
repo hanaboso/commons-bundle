@@ -3,8 +3,12 @@
 namespace CommonsBundleTests\Unit\Monolog;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
+use DateTimeImmutable;
 use Hanaboso\CommonsBundle\Monolog\UdpHandler;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
+use Monolog\Level;
+use Monolog\LogRecord;
 use ReflectionException;
 
 /**
@@ -16,6 +20,7 @@ final class UdpHandlerTest extends KernelTestCaseAbstract
 {
 
     use PrivateTrait;
+    use CustomAssertTrait;
 
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\UdpHandler
@@ -27,8 +32,12 @@ final class UdpHandlerTest extends KernelTestCaseAbstract
         $sender  = self::getContainer()->get('hbpf.transport.udp_sender');
         $handler = new UdpHandler($sender, 'host');
 
-        $this->invokeMethod($handler, 'write', [['formatted' => 'message']]);
-        self::assertTrue(TRUE);
+        $this->invokeMethod(
+            $handler,
+            'write',
+            [new LogRecord(new DateTimeImmutable(), 'test', Level::Info, 'testMessage')],
+        );
+        self::assertFake();
     }
 
 }
