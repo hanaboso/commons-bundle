@@ -61,14 +61,10 @@ final class UDPSender implements LoggerAwareInterface
      * Sets a logger instance on the object.
      *
      * @param LoggerInterface $logger
-     *
-     * @return UDPSender
      */
-    public function setLogger(LoggerInterface $logger): UDPSender
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**

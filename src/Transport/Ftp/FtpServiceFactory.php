@@ -46,14 +46,10 @@ final class FtpServiceFactory implements LoggerAwareInterface
      * Sets a logger instance on the object.
      *
      * @param LoggerInterface $logger
-     *
-     * @return FtpServiceFactory
      */
-    public function setLogger(LoggerInterface $logger): FtpServiceFactory
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**

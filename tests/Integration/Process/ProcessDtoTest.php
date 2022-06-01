@@ -224,7 +224,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getBatchCursor
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeBatchCursor
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
      */
     public function testSetBatchCursor(): void
     {
@@ -244,7 +243,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setBatchCursor
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeBatchCursor
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
      */
     public function testSetBatchCursorIterateOnly(): void
     {
@@ -264,7 +262,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setForceFollowers
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeForceFollowers
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
      */
     public function testSetForceFollowers(): void
     {
@@ -292,7 +289,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setForceFollowers
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeForceFollowers
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getStatusHeader
      */
     public function testSetForceFollowersFollowerNotAvailable(): void
     {

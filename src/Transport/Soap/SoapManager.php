@@ -53,14 +53,10 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
 
     /**
      * @param LoggerInterface $logger
-     *
-     * @return SoapManager
      */
-    public function setLogger(LoggerInterface $logger): SoapManager
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**

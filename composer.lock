@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0381c3e777084472d6811c2b563133cd",
+    "content-hash": "01497e84710207a96bb83b38518cfdd7",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -331,16 +331,16 @@
         },
         {
             "name": "hanaboso/utils",
-            "version": "1.1.8",
+            "version": "1.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hanaboso/utils.git",
-                "reference": "c84c2d51606c1d086f78623fdf562b27ae489947"
+                "reference": "68f55ada40a3588dcd9d02d95eacd5c7c86cfdc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hanaboso/utils/zipball/c84c2d51606c1d086f78623fdf562b27ae489947",
-                "reference": "c84c2d51606c1d086f78623fdf562b27ae489947",
+                "url": "https://api.github.com/repos/hanaboso/utils/zipball/68f55ada40a3588dcd9d02d95eacd5c7c86cfdc0",
+                "reference": "68f55ada40a3588dcd9d02d95eacd5c7c86cfdc0",
                 "shasum": ""
             },
             "require": {
@@ -348,7 +348,7 @@
                 "ext-intl": "*",
                 "ext-json": "*",
                 "php": "^8.0",
-                "psr/log": "^2",
+                "psr/log": "^3",
                 "symfony/http-foundation": "^v6.1"
             },
             "require-dev": {
@@ -385,9 +385,9 @@
             "description": "Hanaboso - utils",
             "support": {
                 "issues": "https://github.com/hanaboso/utils/issues",
-                "source": "https://github.com/hanaboso/utils/tree/1.1.8"
+                "source": "https://github.com/hanaboso/utils/tree/1.1.9"
             },
-            "time": "2022-06-01T07:43:50+00:00"
+            "time": "2022-06-01T10:39:34+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -777,16 +777,16 @@
         },
         {
             "name": "psr/log",
-            "version": "2.0.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376"
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/ef29f6d262798707a9edd554e2b82517ef3a9376",
-                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
                 "shasum": ""
             },
             "require": {
@@ -795,7 +795,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
@@ -821,9 +821,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/2.0.0"
+                "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
-            "time": "2021-07-14T16:41:46+00:00"
+            "time": "2021-07-14T16:46:02+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

@@ -61,14 +61,10 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 
     /**
      * @param LoggerInterface $logger
-     *
-     * @return CurlManager
      */
-    public function setLogger(LoggerInterface $logger): CurlManager
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**

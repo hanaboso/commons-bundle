@@ -32,14 +32,10 @@ final class SoapClientFactory implements LoggerAwareInterface
 
     /**
      * @param LoggerInterface $logger
-     *
-     * @return SoapClientFactory
      */
-    public function setLogger(LoggerInterface $logger): SoapClientFactory
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**

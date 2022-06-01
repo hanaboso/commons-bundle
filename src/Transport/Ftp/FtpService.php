@@ -37,14 +37,10 @@ final class FtpService implements FtpServiceInterface, LoggerAwareInterface
 
     /**
      * @param LoggerInterface $logger
-     *
-     * @return FtpService
      */
-    public function setLogger(LoggerInterface $logger): FtpService
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**
