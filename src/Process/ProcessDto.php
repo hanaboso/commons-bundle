@@ -160,6 +160,25 @@ final class ProcessDto
     }
 
     /**
+     * @param string $user
+     *
+     * @return $this
+     */
+    public function setUser(string $user): ProcessDto {
+        $this->headers[PipesHeaders::createKey(PipesHeaders::USER)] = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUser(): ?string
+    {
+        return $this->headers[PipesHeaders::createKey(PipesHeaders::USER)] ?? NULL;
+    }
+
+    /**
      * @param string $message
      *
      * @return $this
