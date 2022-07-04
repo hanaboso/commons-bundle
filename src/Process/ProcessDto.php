@@ -2,6 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Process;
 
+use Hanaboso\CommonsBundle\Enum\HeaderEnum;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
@@ -157,6 +158,25 @@ final class ProcessDto
     public function getHeader(string $key, $defaultValue = NULL): mixed
     {
         return $this->headers[PipesHeaders::createKey($key)] ?? $defaultValue;
+    }
+
+    /**
+     * @param string $user
+     *
+     * @return $this
+     */
+    public function setUser(string $user): ProcessDto {
+        $this->headers[PipesHeaders::createKey(HeaderEnum::USER)] = str_replace(["\n", "\r"], ' ', $user);
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUser(): ?string
+    {
+        return $this->headers[PipesHeaders::createKey(HeaderEnum::USER)] ?? NULL;
     }
 
     /**
