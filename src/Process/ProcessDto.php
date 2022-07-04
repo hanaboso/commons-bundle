@@ -165,7 +165,7 @@ final class ProcessDto
      * @return $this
      */
     public function setUser(string $user): ProcessDto {
-        $this->headers[PipesHeaders::createKey(PipesHeaders::USER)] = str_replace(["\n", "\r"], ' ', $user);
+        $this->headers[PipesHeaders::createKey(PipesHeaders::USER)] = $user;
 
         return $this;
     }
