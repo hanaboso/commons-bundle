@@ -47,9 +47,9 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
     public function testOnKernelTerminate(): void
     {
         $request = new Request();
-        $request->headers->set(PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID), '1');
-        $request->headers->set(PipesHeaders::createKey(PipesHeaders::CORRELATION_ID), '1');
-        $request->headers->set(PipesHeaders::createKey(PipesHeaders::NODE_ID), '1');
+        $request->headers->set(PipesHeaders::TOPOLOGY_ID, '1');
+        $request->headers->set(PipesHeaders::CORRELATION_ID, '1');
+        $request->headers->set(PipesHeaders::NODE_ID, '1');
 
         $event = $this->createPartialMock(TerminateEvent::class, ['isMainRequest', 'getRequest']);
         $event->method('isMainRequest')->willReturn(TRUE);

@@ -130,9 +130,9 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
                 MetricsEnum::CPU_KERNEL_TIME        => $times[CurlMetricUtils::KEY_KERNEL_TIME],
             ],
             [
-                MetricsEnum::TOPOLOGY_ID    => $headers->get(PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID)),
-                MetricsEnum::CORRELATION_ID => $headers->get(PipesHeaders::createKey(PipesHeaders::CORRELATION_ID)),
-                MetricsEnum::NODE_ID        => $headers->get(PipesHeaders::createKey(PipesHeaders::NODE_ID)),
+                MetricsEnum::TOPOLOGY_ID    => $headers->get(PipesHeaders::TOPOLOGY_ID),
+                MetricsEnum::CORRELATION_ID => $headers->get(PipesHeaders::CORRELATION_ID),
+                MetricsEnum::NODE_ID        => $headers->get(PipesHeaders::NODE_ID),
             ],
         );
     }
@@ -144,9 +144,9 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
      */
     private function isPipesRequest(Request $request): bool
     {
-        return $request->headers->has(PipesHeaders::createKey(PipesHeaders::TOPOLOGY_ID))
-            && $request->headers->has(PipesHeaders::createKey(PipesHeaders::CORRELATION_ID))
-            && $request->headers->has(PipesHeaders::createKey(PipesHeaders::NODE_ID));
+        return $request->headers->has(PipesHeaders::TOPOLOGY_ID)
+            && $request->headers->has(PipesHeaders::CORRELATION_ID)
+            && $request->headers->has(PipesHeaders::NODE_ID);
     }
 
 }

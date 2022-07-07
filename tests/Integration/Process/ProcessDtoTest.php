@@ -58,14 +58,14 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
 
         $processDto->setHeaders(
             [
-                'pf-repeat-interval' => '5',
-                'pf-repeat-max-hops' => '10',
+                'repeat-interval' => '5',
+                'repeat-max-hops' => '10',
             ],
         );
         self::assertEquals(
             [
-                'pf-repeat-interval' => '5',
-                'pf-repeat-max-hops' => '10',
+                'repeat-interval' => '5',
+                'repeat-max-hops' => '10',
             ],
             $processDto->getHeaders(),
         );
@@ -117,8 +117,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
 
         self::assertEquals(
             [
-                'pf-result-message' => 'it is ok',
-                'pf-result-code'    => '0',
+                'result-message' => 'it is ok',
+                'result-code'    => '0',
             ],
             $processDto->getHeaders(),
         );
@@ -161,9 +161,9 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $headers = $dto->getHeaders();
         self::assertEquals(
             [
-                'pf-keyR'  => ' Losos Los',
-                'pf-keyN'  => ' Losos Los',
-                'pf-keyNR' => '  Losos  Los',
+                'keyR'  => ' Losos Los',
+                'keyN'  => ' Losos Los',
+                'keyNR' => '  Losos  Los',
             ],
             $headers,
         );
@@ -201,8 +201,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $dto->setLimitExceeded('Bobr');
         $headers = $dto->getHeaders();
         self::assertEquals([
-                               'pf-result-message' => 'Bobr',
-                               'pf-result-code'    => '1004',
+                               'result-message' => 'Bobr',
+                               'result-code'    => '1004',
                            ], $headers);
     }
 
@@ -214,7 +214,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     {
         $processDto = new ProcessDto();
         $processDto->setLimiterWithGroup('limiterKey', 1, 10, 'groupKey', 2, 20);
-        self::assertEquals(['pf-limiter-key' => 'limiterKey|;1;10;groupKey|;2;20'], $processDto->getHeaders());
+        self::assertEquals(['limiter-key' => 'limiterKey|;1;10;groupKey|;2;20'], $processDto->getHeaders());
         $processDto->removeLimiter();
         self::assertEquals([], $processDto->getHeaders());
     }
@@ -231,9 +231,9 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $processDto->setBatchCursor('testCursor');
         self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
         self::assertEquals([
-            'pf-cursor'            => 'testCursor',
-            'pf-result-message' => 'Message will be used as a iterator with cursor [testCursor]. Data will be send to follower(s).',
-            'pf-result-code'    => '1010',
+            'cursor'            => 'testCursor',
+            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. Data will be send to follower(s).',
+            'result-code'    => '1010',
         ], $processDto->getHeaders());
         $processDto->removeBatchCursor();
         self::assertEquals([], $processDto->getHeaders());
@@ -250,9 +250,9 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $processDto->setBatchCursor('testCursor', TRUE);
         self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
         self::assertEquals([
-            'pf-cursor'            => 'testCursor',
-            'pf-result-message' => 'Message will be used as a iterator with cursor [testCursor]. No follower will be called.',
-            'pf-result-code'    => '1011',
+            'cursor'            => 'testCursor',
+            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. No follower will be called.',
+            'result-code'    => '1011',
         ], $processDto->getHeaders());
         $processDto->removeBatchCursor();
         self::assertEquals([], $processDto->getHeaders());
@@ -274,14 +274,14 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         );
         $processDto->setForceFollowers(['testFollower1', 'testFollower2']);
         self::assertEquals([
-            'pf-worker-followers'   => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
-            'pf-force-target-queue' => '1,2',
-            'pf-result-message'  => 'Message will be force re-routed to [1,2] follower(s).',
-            'pf-result-code'     => '1002',
+            'worker-followers'   => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
+            'force-target-queue' => '1,2',
+            'result-message'  => 'Message will be force re-routed to [1,2] follower(s).',
+            'result-code'     => '1002',
         ], $processDto->getHeaders());
         $processDto->removeForceFollowers();
         self::assertEquals([
-            'pf-worker-followers' => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
+            'worker-followers' => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
         ], $processDto->getHeaders());
     }
 
@@ -311,8 +311,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetStopProcessHeaders(): array
     {
         return [
-            [$this->getPfResultCode() => (string) ProcessDto::DO_NOT_CONTINUE, 'pf-result-message' => 'nok'],
-            [$this->getPfResultCode() => (string) ProcessDto::STOP_AND_FAILED, 'pf-result-message' => 'nok'],
+            [PipesHeaders::RESULT_CODE => (string) ProcessDto::DO_NOT_CONTINUE, 'result-message' => 'nok'],
+            [PipesHeaders::RESULT_CODE => (string) ProcessDto::STOP_AND_FAILED, 'result-message' => 'nok'],
         ];
     }
 
@@ -322,10 +322,10 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetRepeaterHeaders(): array
     {
         return [
-            $this->getPfResultCode() => (string) ProcessDto::REPEAT,
-            'pf-repeat-interval'     => '10',
-            'pf-repeat-max-hops'     => '20',
-            'pf-result-message'      => 'queue',
+            PipesHeaders::RESULT_CODE => (string) ProcessDto::REPEAT,
+            'repeat-interval'     => '10',
+            'repeat-max-hops'     => '20',
+            'result-message'      => 'queue',
         ];
     }
 
@@ -335,16 +335,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getLimiterHeaders(): array
     {
         return [
-            'pf-limiter-key' => 'testLimit|;1;100',
+            'limiter-key' => 'testLimit|;1;100',
         ];
-    }
-
-    /**
-     * @return string
-     */
-    private function getPfResultCode(): string
-    {
-        return PipesHeaders::createKey(PipesHeaders::RESULT_CODE);
     }
 
 }
