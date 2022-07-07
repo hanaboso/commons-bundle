@@ -118,7 +118,7 @@ final class ProcessDto
      */
     public function addHeader(string $key, string $value): ProcessDto
     {
-        $this->headers[$key] = str_replace(["\n", "\r"], ' ', $value);
+        $this->headers[$key] = $value;
 
         return $this;
     }
