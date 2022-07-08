@@ -148,6 +148,17 @@ final class BatchProcessDto extends ProcessDtoAbstract
     }
 
     /**
+     * @param string $data
+     *
+     * @return $this
+     */
+    public function setBridgeData(string $data): self {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getBridgeData(): string

@@ -4,7 +4,6 @@ namespace CommonsBundleTests\Integration\Process;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
-use Hanaboso\CommonsBundle\Process\BatchProcessDto;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Process\ProcessDtoAbstract;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
@@ -198,45 +197,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $processDto->setLimiterWithGroup('limiterKey', 1, 10, 'groupKey', 2, 20);
         self::assertEquals(['limiter-key' => 'limiterKey|;1;10;groupKey|;2;20'], $processDto->getHeaders());
         $processDto->removeLimiter();
-        self::assertEquals([], $processDto->getHeaders());
-    }
-
-    /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
-     */
-    public function testSetBatchCursor(): void
-    {
-        $processDto = new BatchProcessDto();
-        $processDto->setBatchCursor('testCursor');
-        self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
-        self::assertEquals([
-            'cursor'            => 'testCursor',
-            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. Data will be send to follower(s).',
-            'result-code'    => '1010',
-        ], $processDto->getHeaders());
-        $processDto->removeBatchCursor();
-        self::assertEquals([], $processDto->getHeaders());
-    }
-
-    /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
-     */
-    public function testSetBatchCursorIterateOnly(): void
-    {
-        $processDto = new BatchProcessDto();
-        $processDto->setBatchCursor('testCursor', TRUE);
-        self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
-        self::assertEquals([
-            'cursor'            => 'testCursor',
-            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. No follower will be called.',
-            'result-code'    => '1011',
-        ], $processDto->getHeaders());
-        $processDto->removeBatchCursor();
         self::assertEquals([], $processDto->getHeaders());
     }
 
