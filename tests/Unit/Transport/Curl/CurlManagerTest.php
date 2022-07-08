@@ -124,8 +124,8 @@ final class CurlManagerTest extends TestCase
         $processDto = new ProcessDto();
         $processDto->setHeaders(
             [
-                PipesHeaders::createKey(PipesHeaders::NODE_ID)        => '123',
-                PipesHeaders::createKey(PipesHeaders::CORRELATION_ID) => 'aaa222',
+                PipesHeaders::NODE_ID        => '123',
+                PipesHeaders::CORRELATION_ID => 'aaa222',
             ],
         );
 
@@ -136,7 +136,7 @@ final class CurlManagerTest extends TestCase
 
         self::assertEquals('www.google.com', $res->getUriString());
         self::assertEquals(CurlManager::METHOD_POST, $res->getMethod());
-        self::assertEquals(['node_id' => '123', 'correlation_id' => 'aaa222'], $res->getDebugInfo());
+        self::assertEquals(['node-id' => '123', 'correlation-id' => 'aaa222'], $res->getDebugInfo());
     }
 
     /**
