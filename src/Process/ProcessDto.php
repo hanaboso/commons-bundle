@@ -105,7 +105,7 @@ final class ProcessDto
      */
     public function setHeaders(array $headers): ProcessDto
     {
-        $this->headers = PipesHeaders::clear($headers);
+        $this->headers = $headers;
 
         return $this;
     }
@@ -118,7 +118,7 @@ final class ProcessDto
      */
     public function addHeader(string $key, string $value): ProcessDto
     {
-        $this->headers[PipesHeaders::createKey($key)] = str_replace(["\n", "\r"], ' ', $value);
+        $this->headers[$key] = $value;
 
         return $this;
     }
@@ -130,7 +130,6 @@ final class ProcessDto
      */
     public function removeHeader(string $key): ProcessDto
     {
-        $key = PipesHeaders::createKey($key);
         if (isset($this->headers[$key])) {
             unset($this->headers[$key]);
         }
@@ -156,7 +155,7 @@ final class ProcessDto
      */
     public function getHeader(string $key, $defaultValue = NULL): mixed
     {
-        return $this->headers[PipesHeaders::createKey($key)] ?? $defaultValue;
+        return $this->headers[$key] ?? $defaultValue;
     }
 
     /**
@@ -165,7 +164,7 @@ final class ProcessDto
      * @return $this
      */
     public function setUser(string $user): ProcessDto {
-        $this->headers[PipesHeaders::createKey(PipesHeaders::USER)] = $user;
+        $this->headers[PipesHeaders::USER] = $user;
 
         return $this;
     }
@@ -175,7 +174,7 @@ final class ProcessDto
      */
     public function getUser(): ?string
     {
-        return $this->headers[PipesHeaders::createKey(PipesHeaders::USER)] ?? NULL;
+        return $this->headers[PipesHeaders::USER] ?? NULL;
     }
 
     /**
