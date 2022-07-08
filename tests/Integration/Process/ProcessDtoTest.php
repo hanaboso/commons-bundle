@@ -4,7 +4,9 @@ namespace CommonsBundleTests\Integration\Process;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
+use Hanaboso\CommonsBundle\Process\BatchProcessDto;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
+use Hanaboso\CommonsBundle\Process\ProcessDtoAbstract;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
@@ -26,10 +28,10 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $processDto = new ProcessDto();
         $headers    = [];
 
-        $processDto->setStopProcess(ProcessDto::DO_NOT_CONTINUE, 'nok');
+        $processDto->setStopProcess(ProcessDtoAbstract::DO_NOT_CONTINUE, 'nok');
         $headers[] = $processDto->getHeaders();
 
-        $processDto->setStopProcess(ProcessDto::STOP_AND_FAILED, 'nok');
+        $processDto->setStopProcess(ProcessDtoAbstract::STOP_AND_FAILED, 'nok');
         $headers[] = $processDto->getHeaders();
 
         self::assertEquals($this->getSetStopProcessHeaders(), $headers);
@@ -207,7 +209,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      */
     public function testSetBatchCursor(): void
     {
-        $processDto = new ProcessDto();
+        $processDto = new BatchProcessDto();
         $processDto->setBatchCursor('testCursor');
         self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
         self::assertEquals([
@@ -226,7 +228,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      */
     public function testSetBatchCursorIterateOnly(): void
     {
-        $processDto = new ProcessDto();
+        $processDto = new BatchProcessDto();
         $processDto->setBatchCursor('testCursor', TRUE);
         self::assertEquals('testCursor', $processDto->getBatchCursor('0'));
         self::assertEquals([
@@ -291,8 +293,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetStopProcessHeaders(): array
     {
         return [
-            [PipesHeaders::RESULT_CODE => (string) ProcessDto::DO_NOT_CONTINUE, 'result-message' => 'nok'],
-            [PipesHeaders::RESULT_CODE => (string) ProcessDto::STOP_AND_FAILED, 'result-message' => 'nok'],
+            [PipesHeaders::RESULT_CODE => (string) ProcessDtoAbstract::DO_NOT_CONTINUE, 'result-message' => 'nok'],
+            [PipesHeaders::RESULT_CODE => (string) ProcessDtoAbstract::STOP_AND_FAILED, 'result-message' => 'nok'],
         ];
     }
 
@@ -302,7 +304,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetRepeaterHeaders(): array
     {
         return [
-            PipesHeaders::RESULT_CODE => (string) ProcessDto::REPEAT,
+            PipesHeaders::RESULT_CODE => (string) ProcessDtoAbstract::REPEAT,
             'repeat-interval'     => '10',
             'repeat-max-hops'     => '20',
             'result-message'      => 'queue',
