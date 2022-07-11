@@ -163,7 +163,7 @@ final class BatchProcessDto extends ProcessDtoAbstract
      */
     public function getBridgeData(): string
     {
-        return Json::encode($this->messages);
+        return Json::encode(array_map(static fn(BatchMessageDto $dto): string => $dto->getBody(), $this->messages));
     }
 
 }
