@@ -3,7 +3,7 @@
 namespace Hanaboso\CommonsBundle\Exception;
 
 use Exception;
-use Hanaboso\CommonsBundle\Process\ProcessDto;
+use Hanaboso\CommonsBundle\Process\ProcessDtoAbstract;
 use Throwable;
 
 /**
@@ -29,12 +29,17 @@ final class OnRepeatException extends Exception
     /**
      * OnRepeatException constructor.
      *
-     * @param ProcessDto     $processDto
-     * @param string         $message
-     * @param int            $code
-     * @param Throwable|null $previous
+     * @param ProcessDtoAbstract $processDto
+     * @param string             $message
+     * @param int                $code
+     * @param Throwable|null     $previous
      */
-    public function __construct(private ProcessDto $processDto, $message = '', $code = 0, ?Throwable $previous = NULL)
+    public function __construct(
+        private ProcessDtoAbstract $processDto,
+        $message = '',
+        $code = 0,
+        ?Throwable $previous = NULL,
+    )
     {
         parent::__construct($message, $code, $previous);
 
@@ -83,9 +88,9 @@ final class OnRepeatException extends Exception
     }
 
     /**
-     * @return ProcessDto
+     * @return ProcessDtoAbstract
      */
-    public function getProcessDto(): ProcessDto
+    public function getProcessDto(): ProcessDtoAbstract
     {
         return $this->processDto;
     }
