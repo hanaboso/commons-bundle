@@ -82,7 +82,7 @@ abstract class ProcessDtoAbstract
      */
     public function getJsonData(): array
     {
-        return Json::decode($this->data ?? '{}');
+        return Json::decode($this->data ?: '{}');
     }
 
     /**
