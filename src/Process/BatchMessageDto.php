@@ -16,20 +16,35 @@ final class BatchMessageDto
      * @param string  $body
      * @param mixed[] $headers
      */
-    public function __construct(private readonly string $body = '', private readonly array $headers = []) {}
+    public function __construct(private readonly string $body = '', private readonly array $headers = [])
+    {
+    }
 
     /**
      * @return string
      */
-    public function getBody(): string {
+    public function getBody(): string
+    {
         return $this->body;
     }
 
     /**
      * @return mixed[]
      */
-    public function getHeaders(): array {
+    public function getHeaders(): array
+    {
         return $this->headers;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function toArray(): array
+    {
+        return [
+            'headers' => $this->headers,
+            'body'    => $this->body,
+        ];
     }
 
 }

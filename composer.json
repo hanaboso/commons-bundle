@@ -2,7 +2,7 @@
     "name": "hanaboso/commons-bundle",
     "description": "Hanaboso - commons-bundle",
     "license": "Apache-2.0",
-    "version": "2.6.2",
+    "version": "2.6.3",
     "require": {
         "php": "^8.1",
         "ext-apcu": "*",
