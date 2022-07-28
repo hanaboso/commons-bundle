@@ -28,7 +28,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
      */
     public function testRequestDto(): void
     {
-        $dto = new RequestDto(CurlManager::METHOD_POST, new Uri('www.example.com?id=5'));
+        $dto = new RequestDto(new Uri('www.example.com?id=5'), CurlManager::METHOD_POST, new ProcessDto());
 
         self::assertEquals('www.example.com?id=5', $dto->getUri(TRUE));
         self::assertEquals('www.example.com?id=5', $dto->getUriString());
@@ -50,7 +50,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
      */
     public function testRequestDtoErr(): void
     {
-        $dto = new RequestDto(CurlManager::METHOD_GET, new Uri('www.example.com?id=5'));
+        $dto = new RequestDto(new Uri('www.example.com?id=5'), CurlManager::METHOD_GET, new ProcessDto());
 
         self::expectException(CurlException::class);
         $dto->setBody('body');
@@ -64,7 +64,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     public function testRequestConstrErr(): void
     {
         self::expectException(CurlException::class);
-        new RequestDto('aaaa', new Uri('www.example.com?id=5'));
+        new RequestDto(new Uri('www.example.com?id=5'), 'aaaa', new ProcessDto());
     }
 
 }

@@ -51,7 +51,7 @@ final class CurlManagerTest extends TestCase
         $curlClientFactory = self::createPartialMock(CurlClientFactory::class, ['create']);
         $curlClientFactory->expects(self::any())->method('create')->willReturn($client);
 
-        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
+        $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
         /** @var InfluxDbSender $influx */
         $influx = self::createMock(InfluxDbSender::class);
@@ -78,7 +78,7 @@ final class CurlManagerTest extends TestCase
     public function testSendFail(): void
     {
         self::expectException(CurlException::class);
-        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
+        $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
         /** @var InfluxDbSender $influx */
         $influx = self::createMock(InfluxDbSender::class);
@@ -98,7 +98,7 @@ final class CurlManagerTest extends TestCase
     {
         self::expectException(CurlException::class);
         self::expectExceptionCode(CurlException::INVALID_METHOD);
-        new RequestDto('nonsense', new Uri('http://example.com'));
+        new RequestDto(new Uri('http://example.com'), 'nonsense', new ProcessDto());
     }
 
     /**
@@ -110,7 +110,7 @@ final class CurlManagerTest extends TestCase
     {
         self::expectException(CurlException::class);
         self::expectExceptionCode(CurlException::BODY_ON_GET);
-        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
+        $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
         $requestDto->setBody('');
     }
 
@@ -129,10 +129,9 @@ final class CurlManagerTest extends TestCase
             ],
         );
 
-        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('http://example.com'));
-        $requestDto->setDebugInfo($processDto);
+        $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, $processDto);
 
-        $res = RequestDto::from($requestDto, new Uri('www.google.com'), CurlManager::METHOD_POST);
+        $res = RequestDto::from($requestDto, $processDto, new Uri('www.google.com'), CurlManager::METHOD_POST);
 
         self::assertEquals('www.google.com', $res->getUriString());
         self::assertEquals(CurlManager::METHOD_POST, $res->getMethod());
@@ -167,7 +166,7 @@ final class CurlManagerTest extends TestCase
             );
 
         $manager = new CurlManager($factory);
-        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+        $dto     = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
         self::expectException(CurlException::class);
         $manager->send($dto);
@@ -190,7 +189,7 @@ final class CurlManagerTest extends TestCase
         $factory->method('create')->willReturn($client);
 
         $manager = new CurlManager($factory);
-        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+        $dto     = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
         /** @var Response $response */
         $response = $manager->sendAsync($dto)->wait();
@@ -221,7 +220,7 @@ final class CurlManagerTest extends TestCase
         $factory->method('create')->willReturn($client);
 
         $manager = new CurlManager($factory);
-        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+        $dto     = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
         self::expectException(RequestException::class);
         $manager->sendAsync($dto)->wait();
@@ -246,7 +245,7 @@ final class CurlManagerTest extends TestCase
         $factory->method('create')->willReturn($client);
 
         $manager = new CurlManager($factory);
-        $dto     = new RequestDto('GET', new Uri('http://google.com'));
+        $dto     = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
         self::expectException(Exception::class);
         $manager->sendAsync($dto)->wait();

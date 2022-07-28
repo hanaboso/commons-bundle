@@ -71,7 +71,7 @@ phpcoverage:
 	$(DE) ./vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p $$(nproc) --coverage-html var/coverage --whitelist src --exclude-group live tests
 
 phpcoverage-ci:
-	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh -p $$(nproc) -e live -c 99
+	$(DE) ./vendor/hanaboso/php-check-utils/bin/coverage.sh -p $$(nproc) -e live -c 95
 
 test: docker-up-force composer-install fasttest
 

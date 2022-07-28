@@ -7,6 +7,7 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
+use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
@@ -33,7 +34,7 @@ final class CurlManagerTest extends KernelTestCaseAbstract
 
         $curlManager = new CurlManager($factory);
 
-        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('https://google.cz'));
+        $requestDto = new RequestDto(new Uri('https://google.cz'), CurlManager::METHOD_GET, new ProcessDto());
         $requestDto->setHeaders(['Cache-Control' => 'private, max-age=0']);
         self::assertEquals(200, $curlManager->send($requestDto)->getStatusCode());
     }
@@ -49,7 +50,7 @@ final class CurlManagerTest extends KernelTestCaseAbstract
         /** @var CurlManager $curlManager */
         $curlManager = self::getContainer()->get('hbpf.transport.curl_manager');
 
-        $requestDto = new RequestDto(CurlManager::METHOD_GET, new Uri('some-unknown-address'));
+        $requestDto = new RequestDto(new Uri('some-unknown-address'), CurlManager::METHOD_GET, new ProcessDto());
         $curlManager->send($requestDto)->getStatusCode();
     }
 

@@ -4,6 +4,7 @@ namespace Hanaboso\CommonsBundle\Transport\Curl\Dto;
 
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
+use Hanaboso\CommonsBundle\Process\ProcessDtoAbstract;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\Utils\System\PipesHeaders;
@@ -17,11 +18,6 @@ final class RequestDto
 {
 
     /**
-     * @var string
-     */
-    private string $body;
-
-    /**
      * @var mixed[]
      */
     private array $debugInfo;
@@ -29,13 +25,21 @@ final class RequestDto
     /**
      * RequestDto constructor.
      *
-     * @param string  $method
-     * @param Uri     $uri
-     * @param mixed[] $headers
+     * @param Uri                $uri
+     * @param string             $method
+     * @param ProcessDtoAbstract $debugInfo
+     * @param string             $body
+     * @param mixed[]            $headers
      *
      * @throws CurlException
      */
-    public function __construct(private string $method, private Uri $uri, private array $headers = [])
+    public function __construct(
+        private Uri $uri,
+        private readonly string $method,
+        ProcessDtoAbstract $debugInfo,
+        private string $body = '',
+        private array $headers = [],
+    )
     {
         if (!in_array($method, CurlManager::getMethods(), TRUE)) {
             throw new CurlException(
@@ -44,23 +48,27 @@ final class RequestDto
             );
         }
 
-        $this->debugInfo = PipesHeaders::debugInfo($headers);
-        $this->body      = '';
+        $this->debugInfo = PipesHeaders::debugInfo($debugInfo->getHeaders());
     }
 
     /**
-     * @param RequestDto  $dto
-     * @param Uri|null    $uri
-     * @param string|null $method
+     * @param RequestDto         $dto
+     * @param ProcessDtoAbstract $debugInfo
+     * @param Uri|null           $uri
+     * @param string|null        $method
      *
      * @return RequestDto
      * @throws CurlException
      */
-    public static function from(RequestDto $dto, ?Uri $uri = NULL, ?string $method = NULL): RequestDto
+    public static function from(
+        RequestDto $dto,
+        ProcessDtoAbstract $debugInfo,
+        ?Uri $uri = NULL,
+        ?string $method = NULL,
+    ): RequestDto
     {
-        $self = new self($method ?? $dto->getMethod(), $uri ?? new Uri((string) $dto->getUri(TRUE)));
+        $self = new self($uri ?? new Uri((string) $dto->getUri(TRUE)), $method ?? $dto->getMethod(), $debugInfo);
         $self->setHeaders($dto->getHeaders());
-        $self->debugInfo = $dto->getDebugInfo();
 
         return $self;
     }
@@ -78,7 +86,7 @@ final class RequestDto
      *
      * @return Uri|string
      */
-    public function getUri($asString = FALSE): Uri|string
+    public function getUri(bool $asString = FALSE): Uri|string
     {
         if ($asString) {
             return $this->getUriString();

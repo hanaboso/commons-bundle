@@ -10,6 +10,7 @@ use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
 use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
+use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
@@ -57,7 +58,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 
         $manager = new CurlManager($factory);
         $manager->setMetricsSender($loader);
-        $dto = new RequestDto('GET', new Uri('http://google.com'));
+        $dto = new RequestDto(new Uri('http://google.com'), 'GET', new ProcessDto());
         $manager->send($dto);
     }
 
@@ -73,7 +74,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 
         $manager = new CurlManager($factory);
         $manager->setMetricsSender($sh);
-        $dto = new RequestDto('GET', new Uri('http://google.com'));
+        $dto = new RequestDto(new Uri('http://google.com'), 'GET', new ProcessDto());
 
         self::expectException(Exception::class);
         $manager->send($dto);
