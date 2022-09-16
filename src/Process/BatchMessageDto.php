@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\Process;
 
+use stdClass;
+
 /**
  * Class BatchMessageDto
  *
@@ -42,7 +44,7 @@ final class BatchMessageDto
     public function toArray(): array
     {
         return [
-            'headers' => $this->headers,
+            'headers' => $this->headers ?: new stdClass(),
             'body'    => $this->body,
         ];
     }
