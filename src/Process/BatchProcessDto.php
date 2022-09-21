@@ -37,10 +37,11 @@ final class BatchProcessDto extends ProcessDtoAbstract
     /**
      * @param mixed[]     $body
      * @param string|NULL $user
+     * @param string|NULL $limit
      *
      * @return $this
      */
-    public function addItem(array | string $body, ?string $user = NULL): self
+    public function addItem(array | string $body, ?string $user = NULL, ?string $limit = NULL): self
     {
         /** @var string $b */
         $b = $body;
@@ -48,7 +49,26 @@ final class BatchProcessDto extends ProcessDtoAbstract
             $b = Json::encode($body);
         }
 
-        $this->messages[] = new BatchMessageDto($b, $user ? [PipesHeaders::USER => $user] : []);
+        $limits = PipesHeaders::parseLimitKey($this->getHeaders()[PipesHeaders::LIMITER_KEY] ?? NULL);
+
+        if ($limit) {
+            $limits[explode(';',$limit)[0]] = $limit;
+        }
+
+        $newHeaders = [
+            PipesHeaders::USER        => NULL,
+            PipesHeaders::LIMITER_KEY => NULL,
+        ];
+
+        if ($user){
+            $newHeaders[PipesHeaders::USER] = $user;
+        }
+
+        if ($limit) {
+            $newHeaders[PipesHeaders::LIMITER_KEY] = implode(';', array_values($limits));
+        }
+
+        $this->messages[] = new BatchMessageDto($b, $newHeaders);
 
         return $this;
     }
