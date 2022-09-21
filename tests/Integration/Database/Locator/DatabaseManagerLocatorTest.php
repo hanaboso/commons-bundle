@@ -18,7 +18,7 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     *
+     * @throws Exception
      */
     public function testConnectDocumentManager(): void
     {
@@ -45,6 +45,8 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::getEm
      * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::getDm
      * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator
+     *
+     * @throws Exception
      */
     public function testGet(): void
     {

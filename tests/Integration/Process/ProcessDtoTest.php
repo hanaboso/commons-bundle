@@ -204,6 +204,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setForceFollowers
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeForceFollowers
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
+     *
+     * @throws Exception
      */
     public function testSetForceFollowers(): void
     {

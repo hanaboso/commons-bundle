@@ -4,12 +4,12 @@ namespace CommonsBundleTests\Unit\Monolog;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use DateTimeImmutable;
+use Exception;
 use Hanaboso\CommonsBundle\Monolog\UdpHandler;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Monolog\Level;
 use Monolog\LogRecord;
-use ReflectionException;
 
 /**
  * Class UdpHandlerTest
@@ -25,7 +25,8 @@ final class UdpHandlerTest extends KernelTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\UdpHandler
      * @covers \Hanaboso\CommonsBundle\Monolog\UdpHandler::write
-     * @throws ReflectionException
+     *
+     * @throws Exception
      */
     public function testUdpHandler(): void
     {

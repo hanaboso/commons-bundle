@@ -35,7 +35,7 @@ final class SoapManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     *
+     * @throws Exception
      */
     protected function setUp(): void
     {

@@ -138,7 +138,7 @@ Content-Length: nnnn';
      */
     public function testParseResponseHeadersEmpty(): void
     {
-        $result = SoapHelper::parseResponseHeaders(NULL);
+        $result = SoapHelper::parseResponseHeaders();
 
         self::assertNotEmpty($result);
         self::assertArrayHasKey('version', $result);

@@ -30,7 +30,9 @@ final class MongoDbSenderTest extends DatabaseTestCaseAbstract
         self::assertTrue($sender->send(['asd' => '123'], ['a' => 'c']));
         self::assertTrue($sender->send(['asd' => 'qwe'], ['a' => 'b']));
 
-        $res = (array) $this->dm->getClient()->selectCollection('metrics', 'test')->count([]);
+        $res = (array) $this->dm->getClient()
+            ->selectCollection('metrics', 'test')
+            ->estimatedDocumentCount();
         self::assertEquals([2], $res);
     }
 

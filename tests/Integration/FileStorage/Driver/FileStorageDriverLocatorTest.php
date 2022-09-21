@@ -3,6 +3,7 @@
 namespace CommonsBundleTests\Integration\FileStorage\Driver;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
+use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver;
@@ -19,7 +20,7 @@ final class FileStorageDriverLocatorTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator::get
      * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator
      *
-     * @throws FileStorageException
+     * @throws Exception
      */
     public function testGet(): void
     {

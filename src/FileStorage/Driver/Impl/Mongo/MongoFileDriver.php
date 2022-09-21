@@ -2,6 +2,8 @@
 
 namespace Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo;
 
+use Doctrine\ODM\MongoDB\LockException;
+use Doctrine\ODM\MongoDB\Mapping\MappingException;
 use Doctrine\ODM\MongoDB\Repository\GridFSRepository;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverAbstract;
@@ -91,6 +93,8 @@ final class MongoFileDriver extends FileStorageDriverAbstract
      *
      * @return FileMongo
      * @throws FileStorageException
+     * @throws LockException
+     * @throws MappingException
      */
     private function getDocument(string $fileId): FileMongo
     {

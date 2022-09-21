@@ -74,7 +74,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     *
+     * @throws Exception
      */
     protected function setUp(): void
     {

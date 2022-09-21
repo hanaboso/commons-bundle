@@ -72,7 +72,7 @@ final class FtpAdapter implements FtpAdapterInterface
      */
     public function uploadFile(string $remoteFile, string $localFile): void
     {
-        $res = ftp_put($this->getResource(), $remoteFile, $localFile, FTP_BINARY);
+        $res = ftp_put($this->getResource(), $remoteFile, $localFile);
 
         if ($res === FALSE) {
             throw new FtpException('File upload failed.', FtpException::FILE_UPLOAD_FAILED);
@@ -87,7 +87,7 @@ final class FtpAdapter implements FtpAdapterInterface
      */
     public function downloadFile(string $remoteFile, string $localFile): void
     {
-        $res = ftp_get($this->getResource(), $localFile, $remoteFile, FTP_BINARY);
+        $res = ftp_get($this->getResource(), $localFile, $remoteFile);
 
         if ($res === FALSE) {
             throw new FtpException('File download failed.', FtpException::FILE_DOWNLOAD_FAILED);

@@ -3,6 +3,8 @@
 namespace Hanaboso\CommonsBundle\FileStorage;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\LockException;
+use Doctrine\ODM\MongoDB\Mapping\MappingException;
 use Doctrine\ODM\MongoDB\MongoDBException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
@@ -110,6 +112,8 @@ final class FileStorage
      *
      * @return FileInterface
      * @throws FileStorageException
+     * @throws LockException
+     * @throws MappingException
      */
     public function getFileDocument(string $fileId): FileInterface
     {
