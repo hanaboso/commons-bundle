@@ -25,21 +25,14 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
      *
      * @dataProvider metricsDataProvider
      *
-     * @param string                      $env
-     * @param MetricsSenderInterface|null $influxSender
      * @param MetricsSenderInterface|null $mongoSender
      * @param string|null                 $exp
      *
      * @throws Exception
      */
-    public function testLoaderMissingSender(
-        string $env,
-        ?MetricsSenderInterface $influxSender,
-        ?MetricsSenderInterface $mongoSender,
-        ?string $exp,
-    ): void
+    public function testLoaderMissingSender(?MetricsSenderInterface $mongoSender, ?string $exp = NULL): void
     {
-        $loader = new MetricsSenderLoader($env, $influxSender, $mongoSender);
+        $loader = new MetricsSenderLoader($mongoSender);
         if ($exp) {
             self::expectException(LogicException::class);
             self::expectExceptionMessage($exp);
@@ -59,16 +52,7 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
         /** @var MetricsSenderInterface|MockObject $sender */
         $sender = self::createMock(MetricsSenderInterface::class);
 
-        return [
-            ['influx', $sender, NULL, NULL],
-            ['mongo', NULL, $sender, NULL],
-            ['influx', NULL, $sender, 'Influx metrics sender has not been set.'],
-            ['mongo', $sender, NULL, 'Mongo metrics sender has not been set.'],
-            [
-                'asd', $sender, NULL,
-                'Environment [METRICS_SERVICE=asd] is not a valid option. Valid options are: [influx, mongo]',
-            ],
-        ];
+        return [[$sender]];
     }
 
 }

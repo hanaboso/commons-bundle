@@ -17,17 +17,12 @@ before_install:
     - mysql -utravis -e 'CREATE DATABASE IF NOT EXISTS commons2;'
     - mysql -utravis -e 'CREATE DATABASE IF NOT EXISTS commons3;'
     - mysql -utravis -e 'CREATE DATABASE IF NOT EXISTS commons4;'
-    - wget https://dl.influxdata.com/influxdb/releases/influxdb_1.7.7_amd64.deb
-    - sudo dpkg -i influxdb_1.7.7_amd64.deb
-    - travis_retry sudo service influxdb restart
     - export MONGODB_DSN=mongodb://localhost
     - export MONGODB_DB=commons
     - export MARIADB_DSN=localhost
     - export MARIADB_DB=commons
     - export MARIADB_USER=root
     - export MARIADB_PASS=
-    - export METRICS_SERVICE=influx
-    - export INFLUXDB_HOST=localhost
     - export KERNEL_CLASS="CommonsBundleTests\\Kernel"
 
 install:
