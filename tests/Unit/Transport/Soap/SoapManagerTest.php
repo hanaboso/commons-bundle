@@ -4,7 +4,7 @@ namespace CommonsBundleTests\Unit\Transport\Soap;
 
 use Exception;
 use GuzzleHttp\Psr7\Uri;
-use Hanaboso\CommonsBundle\Metrics\Impl\InfluxDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
@@ -47,9 +47,9 @@ final class SoapManagerTest extends TestCase
         $request = new RequestDto('', [], '', new Uri(''));
         $request->setVersion(SOAP_1_2);
 
-        /** @var InfluxDbSender $influx */
-        $influx      = self::createMock(InfluxDbSender::class);
-        $loader      = new MetricsSenderLoader('influx', $influx, NULL);
+        /** @var MongoDbSender $influx */
+        $influx      = self::createMock(MongoDbSender::class);
+        $loader      = new MetricsSenderLoader($influx);
         $soapManager = new SoapManager($soapClientFactory);
         $soapManager->setMetricsSender($loader);
         $result = $soapManager->send($request);

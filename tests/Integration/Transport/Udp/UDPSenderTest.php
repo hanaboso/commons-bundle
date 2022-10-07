@@ -66,11 +66,6 @@ final class UDPSenderTest extends TestCase
         $result = $sender->send('invalidhost:61999', $message);
         self::assertFalse($result);
 
-        // here we cannot assert result because we don't know if influxdb host exists
-        // but we can check if packets are delivered right in influxdb container using tcpdump or similar tool
-        $sender = new UDPSender();
-        $sender->send('influxdb:61999', $message);
-
         // Check if sending is not delaying too much
         $end = microtime(TRUE);
         self::assertLessThanOrEqual(self::LIMIT, $end - $start);
