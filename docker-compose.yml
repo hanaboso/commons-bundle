@@ -20,8 +20,6 @@ services:
             - MARIADB_DB=commons
             - MARIADB_USER=root
             - MARIADB_PASS=root
-            - METRICS_SERVICE=influx
-            - INFLUXDB_HOST=influxdb
 
     mongo:
         image: mongo:latest
@@ -36,13 +34,6 @@ services:
         volumes:
             - mariadb:/var/lib/mysql
 
-    influxdb:
-        image: influxdb:1.8-alpine
-        volumes:
-            - influxdb:/var/lib/influxdb
-            - ./tests/testApp/influx/influxdb.conf:/etc/influxdb/influxdb.conf
-
 volumes:
     mongo: {}
     mariadb: {}
-    influxdb: {}

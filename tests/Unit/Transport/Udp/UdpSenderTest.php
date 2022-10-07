@@ -65,7 +65,7 @@ final class UdpSenderTest extends KernelTestCaseAbstract
             ->willReturn(FALSE);
 
         $sender = new UDPSender();
-        $result = $sender->send('influxdb:61999', $message);
+        $result = $sender->send('mongodb:61999', $message);
         self::assertFalse($result);
     }
 
