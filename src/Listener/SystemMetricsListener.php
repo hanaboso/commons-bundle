@@ -9,8 +9,8 @@ use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\Utils\String\LoggerFormater;
 use Hanaboso\Utils\System\PipesHeaders;
+use Hanaboso\Utils\Traits\LoggerTrait;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,12 +26,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwareInterface
 {
 
-    public const METRICS_ATTRIBUTES_KEY = 'system_metrics';
+    use LoggerTrait;
 
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
+    public const METRICS_ATTRIBUTES_KEY = 'system_metrics';
 
     /**
      * SystemMetricsListener constructor.
@@ -86,16 +83,6 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
                 LoggerFormater::getContextForLogger($e),
             );
         }
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     *
-     * @return void
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 
     /**

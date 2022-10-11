@@ -7,8 +7,8 @@ use Hanaboso\CommonsBundle\Metrics\Exception\SystemMetricException;
 use Hanaboso\Utils\Date\DateTimeUtils;
 use Hanaboso\Utils\Exception\DateTimeException;
 use Hanaboso\Utils\String\LoggerFormater;
+use Hanaboso\Utils\Traits\LoggerTrait;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Socket;
 
@@ -20,15 +20,12 @@ use Socket;
 final class UDPSender implements LoggerAwareInterface
 {
 
+    use LoggerTrait;
+
     private const APCU_IP      = 'metrics_collector_ip:';
     private const APCU_REFRESH = 'metrics_collector_refresh:';
 
     private const REFRESH_INTERVAL = 60;
-
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
 
     /**
      * @var string[]
@@ -55,16 +52,6 @@ final class UDPSender implements LoggerAwareInterface
 
         // limit the ip addr hostname resolution
         putenv('RES_OPTIONS=retrans:1 retry:1 timeout:1 attempts:1');
-    }
-
-    /**
-     * Sets a logger instance on the object.
-     *
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 
     /**

@@ -6,8 +6,8 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapterInterface;
 use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\Utils\File\File;
 use Hanaboso\Utils\String\LoggerFormater;
+use Hanaboso\Utils\Traits\LoggerTrait;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SplFileInfo;
 
@@ -19,10 +19,7 @@ use SplFileInfo;
 final class FtpService implements FtpServiceInterface, LoggerAwareInterface
 {
 
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
+    use LoggerTrait;
 
     /**
      * FtpService constructor.
@@ -33,14 +30,6 @@ final class FtpService implements FtpServiceInterface, LoggerAwareInterface
     public function __construct(protected FtpAdapterInterface $adapter, private FtpConfig $ftpConfig)
     {
         $this->logger = new NullLogger();
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 
     /**

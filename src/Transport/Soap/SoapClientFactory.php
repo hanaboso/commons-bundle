@@ -3,8 +3,8 @@
 namespace Hanaboso\CommonsBundle\Transport\Soap;
 
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract;
+use Hanaboso\Utils\Traits\LoggerTrait;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SoapClient;
 use Throwable;
@@ -17,10 +17,7 @@ use Throwable;
 final class SoapClientFactory implements LoggerAwareInterface
 {
 
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
+    use LoggerTrait;
 
     /**
      * SoapClientFactory constructor.
@@ -28,14 +25,6 @@ final class SoapClientFactory implements LoggerAwareInterface
     public function __construct()
     {
         $this->logger = new NullLogger();
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 
     /**
