@@ -13,9 +13,9 @@ use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\CurlManagerInterface;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\Utils\String\LoggerFormater;
+use Hanaboso\Utils\Traits\LoggerTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Throwable;
 
@@ -28,6 +28,7 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 {
 
     use MetricsTrait;
+    use LoggerTrait;
 
     public const METHOD_GET     = 'GET';
     public const METHOD_POST    = 'POST';
@@ -36,11 +37,6 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
     public const METHOD_DELETE  = 'DELETE';
     public const METHOD_OPTIONS = 'OPTIONS';
     public const METHOD_PATCH   = 'PATCH';
-
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
 
     /**
      * @var int
@@ -57,14 +53,6 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
         $this->logger        = new NullLogger();
         $this->metricsSender = NULL;
         $this->timeout       = 30;
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 
     /**

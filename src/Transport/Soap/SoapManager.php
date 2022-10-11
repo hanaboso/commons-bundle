@@ -10,8 +10,8 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\Utils\String\LoggerFormater;
+use Hanaboso\Utils\Traits\LoggerTrait;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
@@ -22,12 +22,9 @@ use Psr\Log\NullLogger;
 final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
 {
 
-    public const CONNECTION_TIMEOUT = 15;
+    use LoggerTrait;
 
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
+    public const CONNECTION_TIMEOUT = 15;
 
     /**
      * @var MetricsSenderLoader|null
@@ -49,14 +46,6 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         $this->logger        = new NullLogger();
         $this->metricsSender = NULL;
         $this->startTimes    = [];
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
     }
 
     /**
