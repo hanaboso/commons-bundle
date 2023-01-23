@@ -3524,16 +3524,16 @@
         },
         {
             "name": "hanaboso/php-check-utils",
-            "version": "1.4.8",
+            "version": "1.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hanaboso/php-check-utils.git",
-                "reference": "39f4a7059d01fd234cd9082b63773101ba68709b"
+                "reference": "5455670bb3ae6fe4166608aa1d3c0d194b333713"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/39f4a7059d01fd234cd9082b63773101ba68709b",
-                "reference": "39f4a7059d01fd234cd9082b63773101ba68709b",
+                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/5455670bb3ae6fe4166608aa1d3c0d194b333713",
+                "reference": "5455670bb3ae6fe4166608aa1d3c0d194b333713",
                 "shasum": ""
             },
             "require": {
@@ -3562,7 +3562,7 @@
             "require-dev": {
                 "doctrine/mongodb-odm": "^2.4",
                 "doctrine/orm": "^2.14",
-                "friendsoftwig/twigcs": "^v6.1",
+                "friendsoftwig/twigcs": "^v6.2",
                 "phpstan/phpstan-nette": "^1.2"
             },
             "suggest": {
@@ -3604,9 +3604,9 @@
             "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
             "support": {
                 "issues": "https://github.com/hanaboso/php-check-utils/issues",
-                "source": "https://github.com/hanaboso/php-check-utils/tree/1.4.8"
+                "source": "https://github.com/hanaboso/php-check-utils/tree/1.4.9"
             },
-            "time": "2023-01-10T12:31:39+00:00"
+            "time": "2023-01-23T15:02:49+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
