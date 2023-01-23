@@ -5,6 +5,7 @@ namespace Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverAbstract;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
@@ -63,7 +64,7 @@ final class S3Driver extends FileStorageDriverAbstract
             $key = $args[self::KEY_FIELD];
 
             $innerFile = new FileInfoDto($key, (string) strlen($content));
-        } catch (S3Exception $e) {
+        } catch (S3Exception | Exception $e) {
             throw new FileStorageException(
                 sprintf("Cannot write file '%s': %s", $path, $e->getMessage()),
                 $e->getCode(),

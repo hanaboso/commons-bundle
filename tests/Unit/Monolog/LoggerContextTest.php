@@ -6,6 +6,7 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Monolog\LoggerContext;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\Utils\System\PipesHeaders;
 
 /**
@@ -15,6 +16,8 @@ use Hanaboso\Utils\System\PipesHeaders;
  */
 final class LoggerContextTest extends KernelTestCaseAbstract
 {
+
+    use CustomAssertTrait;
 
     /**
      * @var LoggerContext
@@ -27,7 +30,7 @@ final class LoggerContextTest extends KernelTestCaseAbstract
     public function testException(): void
     {
         $this->logger->setException(new Exception());
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
     /**

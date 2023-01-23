@@ -12,6 +12,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapManager;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use PHPUnit\Framework\TestCase;
 use SoapClient;
 
@@ -22,6 +23,8 @@ use SoapClient;
  */
 final class SoapManagerTest extends TestCase
 {
+
+    use CustomAssertTrait;
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send()
@@ -85,7 +88,7 @@ final class SoapManagerTest extends TestCase
         $request = new RequestDto('', [], 'namespace', new Uri(''), ['el1', 'el2']);
         $request->setVersion(SOAP_1_2);
         $request->setAuth('user', 'passwd');
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
     /**

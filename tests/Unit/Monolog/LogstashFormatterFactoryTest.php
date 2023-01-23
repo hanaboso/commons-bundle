@@ -4,6 +4,7 @@ namespace CommonsBundleTests\Unit\Monolog;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatterFactory;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 
 /**
  * Class LogstashFormatterFactoryTest
@@ -13,6 +14,8 @@ use Hanaboso\CommonsBundle\Monolog\LogstashFormatterFactory;
 final class LogstashFormatterFactoryTest extends KernelTestCaseAbstract
 {
 
+    use CustomAssertTrait;
+
     /**
      * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatterFactory::create
      */
@@ -21,7 +24,7 @@ final class LogstashFormatterFactoryTest extends KernelTestCaseAbstract
         $formatter = new LogstashFormatterFactory();
         $formatter->create('test');
 
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
 }

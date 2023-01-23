@@ -6,6 +6,7 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 
 /**
  * Class RequestDtoTest
@@ -14,6 +15,8 @@ use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
  */
 final class RequestDtoTest extends KernelTestCaseAbstract
 {
+
+    use CustomAssertTrait;
 
     /**
      * @var RequestDto
@@ -34,7 +37,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     public function testSetAuth(): void
     {
         $this->dto->setAuth('guest', 'guest');
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
     /**
@@ -59,7 +62,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     public function testGetHeaders(): void
     {
         $this->dto->getHeader();
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace CommonsBundleTests\Unit\Transport\Curl;
 
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,6 +14,8 @@ use PHPUnit\Framework\TestCase;
 final class CurlClientFactoryTest extends TestCase
 {
 
+    use CustomAssertTrait;
+
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory::create()
      */
@@ -21,7 +24,7 @@ final class CurlClientFactoryTest extends TestCase
         $curlClientFactory = new CurlClientFactory();
         $curlClientFactory->create();
 
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
 }

@@ -1,4 +1,4 @@
-FROM hanabosocom/php-dev:php-8.1-alpine
+FROM hanabosocom/php-dev:php-8.2-alpine
 
 RUN apk update && apk upgrade && apk add --no-cache \
     autoconf build-base g++ krb5-dev imap-dev && \

@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto as RequestDtoNo
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto as RequestDtoWsdl;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,6 +18,8 @@ use PHPUnit\Framework\TestCase;
  */
 final class SoapClientFactoryTest extends TestCase
 {
+
+    use CustomAssertTrait;
 
     /**
      *
@@ -56,7 +59,7 @@ final class SoapClientFactoryTest extends TestCase
         $soapClientFactory = new SoapClientFactory();
         $soapClientFactory->create($request, ['uri' => '', 'location' => '']);
 
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
 }

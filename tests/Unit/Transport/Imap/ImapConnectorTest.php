@@ -40,7 +40,7 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     {
         $this->connector->create($this->getImapConfig());
 
-        self::assertEmpty([]);
+        self::assertFake();
     }
 
     /**
