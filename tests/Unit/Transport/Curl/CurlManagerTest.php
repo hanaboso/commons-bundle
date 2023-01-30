@@ -12,7 +12,7 @@ use GuzzleHttp\Promise\RejectedPromise;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
-use Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\CurlSender;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
@@ -53,10 +53,10 @@ final class CurlManagerTest extends TestCase
 
         $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
-        /** @var MongoDbSender $mongo */
-        $mongo = self::createMock(MongoDbSender::class);
+        /** @var CurlSender $curlSender */
+        $curlSender = self::createMock(CurlSender::class);
 
-        $loader = new MetricsSenderLoader($mongo);
+        $loader = new MetricsSenderLoader($curlSender);
 
         $curlManager = new CurlManager($curlClientFactory);
         $curlManager->setMetricsSender($loader);
@@ -80,9 +80,9 @@ final class CurlManagerTest extends TestCase
         self::expectException(CurlException::class);
         $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
-        /** @var MongoDbSender $mongo */
-        $mongo  = self::createMock(MongoDbSender::class);
-        $loader = new MetricsSenderLoader($mongo);
+        /** @var CurlSender $curlSender */
+        $curlSender = self::createMock(CurlSender::class);
+        $loader     = new MetricsSenderLoader($curlSender);
 
         $curlManager = new CurlManager(new CurlClientFactory());
         $curlManager->setMetricsSender($loader);

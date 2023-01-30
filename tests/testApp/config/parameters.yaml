@@ -3,9 +3,9 @@ parameters:
     kapacitor.host: kapacitor
     kapacitor.port: 9100
 
-    #MongoDb sender
-    mongodb.monolith_table: connector
-    mongodb.connector_table: monolith
+    #Curl sender
+    curl.monolith_host: https://connector.com
+    curl.connector_host: https://monolith.com
 
     # FTP
     ftp.host: ''

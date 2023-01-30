@@ -86,6 +86,7 @@ final class CurlMetricUtils
                 MetricsEnum::USER_ID                     => $user,
             ],
             $info,
+            FALSE,
         );
     }
 
