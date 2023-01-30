@@ -2,10 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Monolog;
 
-use GuzzleHttp\Psr7\Request;
-use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
-use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
-use Hanaboso\Utils\String\Json;
+use Hanaboso\CommonsBundle\WorkerApi\Client;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
@@ -20,24 +17,13 @@ final class HttpHandler extends AbstractProcessingHandler
 {
 
     /**
-     * @var int
-     */
-    private int $timeout = 5;
-
-    /**
      * HttpHandler constructor.
      *
-     * @param CurlClientFactory $curlClientFactory
-     * @param string            $host
-     * @param Level             $level
-     * @param bool              $bubble
+     * @param Client $client
+     * @param Level  $level
+     * @param bool   $bubble
      */
-    public function __construct(
-        private readonly CurlClientFactory $curlClientFactory,
-        private readonly string $host,
-        Level $level = Level::Debug,
-        bool $bubble = TRUE,
-    )
+    public function __construct(private readonly Client $client, Level $level = Level::Debug, bool $bubble = TRUE,)
     {
         parent::__construct($level, $bubble);
     }
@@ -53,14 +39,7 @@ final class HttpHandler extends AbstractProcessingHandler
     {
         try {
             if (isset($record['context']['is_for_ui']) && $record['context']['is_for_ui']) {
-                $client  = $this->curlClientFactory->create(['timeout' => $this->timeout]);
-                $request = new Request(
-                    CurlManager::METHOD_POST,
-                    sprintf('%s/logger/logs', $this->host),
-                    ['Content-Type' => 'application/json'],
-                    Json::encode($record),
-                );
-                $client->send($request);
+                $this->client->send('/logger/logs', $record);
             }
         } catch (Throwable) {}
     }

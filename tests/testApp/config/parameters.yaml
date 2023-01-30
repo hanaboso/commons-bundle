@@ -3,8 +3,9 @@ parameters:
     kapacitor.host: kapacitor
     kapacitor.port: 9100
 
-    #Curl sender
+    #Worker Api
     worker-api: https://connector.com
+    api-key: OrchestyApiKey
 
     # FTP
     ftp.host: ''

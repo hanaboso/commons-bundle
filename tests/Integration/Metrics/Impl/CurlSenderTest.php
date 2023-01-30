@@ -5,10 +5,10 @@ namespace CommonsBundleTests\Integration\Metrics\Impl;
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use Hanaboso\CommonsBundle\Metrics\Impl\CurlSender;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
+use Hanaboso\CommonsBundle\WorkerApi\Client as WorkerApiClient;
 
 /**
  * Class CurlSenderTest
@@ -22,7 +22,6 @@ final class CurlSenderTest extends KernelTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Metrics\Impl\CurlSender::send
      *
      * @throws Exception
-     * @throws GuzzleException
      */
     public function testSend(): void
     {
@@ -32,7 +31,9 @@ final class CurlSenderTest extends KernelTestCaseAbstract
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 
-        $sender = new CurlSender($factory, 'https://test.com');
+        $workerApi = new WorkerApiClient($factory, 'https://test.com', 'OrchestyApiKey');
+
+        $sender = new CurlSender($workerApi);
 
         self::assertTrue($sender->send(['asd' => '123'], ['a' => 'c']));
         self::assertTrue($sender->send(['asd' => 'qwe'], ['a' => 'b']));

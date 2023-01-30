@@ -5,9 +5,10 @@ parameters:
     database_type: 'ODM' # 'ORM'
 
     ##########################
-    #        Metrics         #
+    #        Worker Api      #
     ##########################
     worker-api: '%env(string:WORKER_API)%'
+    api-key: '%env(string:ORCHESTY_API_KEY)%'
 
 services:
     _defaults:
@@ -33,6 +34,17 @@ services:
             - '%kernel.secret%'
 
     ##########################
+    #        Worker Api      #
+    ##########################
+
+    hbpf.worker-api:
+        class: Hanaboso\CommonsBundle\WorkerApi\Client
+        arguments:
+            - '@hbpf.transport.curl_client_factory'
+            - '%worker-api%'
+            - '%api-key%'
+
+    ##########################
     #        Metrics         #
     ##########################
 
@@ -49,14 +61,12 @@ services:
     hbpf.metrics.curl_connector:
         class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
-            - '@hbpf.transport.curl_client_factory'
-            - '%worker-api%'
+            - '@hbpf.worker-api'
 
     hbpf.metrics.curl_monolith:
         class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
-            - '@hbpf.transport.curl_client_factory'
-            - '%worker-api%'
+            - '@hbpf.worker-api'
 
     hbpf.metrics_connector.loader:
         class: Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader
@@ -127,11 +137,6 @@ services:
         arguments:
         calls:
             - [ 'setLogger', [ '@monolog.logger.commons' ] ]
-
-    hbpf.transport.udp_sender:
-        class: Hanaboso\CommonsBundle\Transport\Udp\UDPSender
-        calls:
-            - ['setLogger', ['@monolog.logger.commons']]
 
     hbpf.transport.curl_manager:
         class: Hanaboso\CommonsBundle\Transport\Curl\CurlManager
