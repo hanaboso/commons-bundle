@@ -25,9 +25,6 @@ parameters:
 			message: '#with generic class#'
 			path: src/Database/Filters/ODM/DeletedFilter.php
 		-
-			message: '#Parameter \#1 \$level of method#'
-			path: src/Monolog/UdpHandler.php
-		-
 			message: '#contains generic interface#'
 			path: src/FileStorage/Driver/Impl/Mongo/MongoFileDriver.php
 		-

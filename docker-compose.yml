@@ -20,6 +20,7 @@ services:
             - MARIADB_DB=commons
             - MARIADB_USER=root
             - MARIADB_PASS=root
+            - WORKER_API=https://connector.com
 
     mongo:
         image: mongo:latest

@@ -4,8 +4,7 @@ parameters:
     kapacitor.port: 9100
 
     #Curl sender
-    curl.monolith_host: https://connector.com
-    curl.connector_host: https://monolith.com
+    worker-api: https://connector.com
 
     # FTP
     ftp.host: ''

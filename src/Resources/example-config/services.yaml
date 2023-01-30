@@ -7,12 +7,7 @@ parameters:
     ##########################
     #        Metrics         #
     ##########################
-    #MongoDb sender
-    mongodb.monolith_table: monolith
-    mongodb.connector_table: connectors
-    mongodb.node_table: pipes_node
-    mongodb.rabbit_table: rabbitmq
-    mongodb.counter_table: pipes_counter
+    worker-api: '%env(string:WORKER_API)%'
 
 services:
     _defaults:
@@ -55,13 +50,13 @@ services:
         class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
             - '@hbpf.transport.curl_client_factory'
-            - '%curl.connector_host%'
+            - '%worker-api%'
 
     hbpf.metrics.curl_monolith:
         class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
             - '@hbpf.transport.curl_client_factory'
-            - '%curl.monolith_host%'
+            - '%worker-api%'
 
     hbpf.metrics_connector.loader:
         class: Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader

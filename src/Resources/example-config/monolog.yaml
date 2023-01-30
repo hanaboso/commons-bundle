@@ -4,7 +4,7 @@ monolog:
     handlers:
         commons:
             type: service
-            id: udp_handler
+            id: http_handler
             level: info
             channels: [commons]
         # Handler for docker container

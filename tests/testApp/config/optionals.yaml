@@ -39,13 +39,13 @@ services:
         class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
             - '@hbpf.transport.curl_client_factory'
-            - '%curl.connector_host%'
+            - '%worker-api%'
 
     hbpf.metrics.curl_monolith:
         class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
             - '@hbpf.transport.curl_client_factory'
-            - '%curl.monolith_host%'
+            - '%worker-api%'
 
     hbpf.metrics_connector.loader:
         class: Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader
