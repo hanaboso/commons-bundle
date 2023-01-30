@@ -4,7 +4,7 @@ monolog:
     handlers:
         commons:
             type: service
-            id: udp_handler
+            id: http_handler
             level: info
             channels: [commons]
         # Handler for docker container
@@ -23,11 +23,10 @@ services:
     logstash_formatter:
         class: Hanaboso\CommonsBundle\Monolog\LogstashFormatter
 
-    udp_handler:
-        class: Hanaboso\CommonsBundle\Monolog\UdpHandler
+    http_handler:
+        class: Hanaboso\CommonsBundle\Monolog\HttpHandler
         arguments:
-            - '@hbpf.transport.udp_sender'
-            - 'logstash:5120'
+            - '@hbpf.transport.curl_client_factory'
             - 'info'
         calls:
             - ['setFormatter', ['@logstash_formatter']]

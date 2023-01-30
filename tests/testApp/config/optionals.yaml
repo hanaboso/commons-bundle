@@ -35,27 +35,27 @@ services:
             - { name: kernel.event_subscriber, event: kernel.terminate }
             - { name: kernel.event_subscriber, event: kernel.controller }
 
-    hbpf.metrics.mongodb_connector:
-        class: Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender
+    hbpf.metrics.curl_connector:
+        class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
-            - '@doctrine_mongodb.odm.metrics_document_manager'
-            - '%mongodb.connector_table%'
+            - '@hbpf.transport.curl_client_factory'
+            - '%worker-api%'
 
-    hbpf.metrics.mongodb_monolith:
-        class: Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender
+    hbpf.metrics.curl_monolith:
+        class: Hanaboso\CommonsBundle\Metrics\Impl\CurlSender
         arguments:
-            - '@doctrine_mongodb.odm.metrics_document_manager'
-            - '%mongodb.monolith_table%'
+            - '@hbpf.transport.curl_client_factory'
+            - '%worker-api%'
 
     hbpf.metrics_connector.loader:
         class: Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader
         arguments:
-            - '@hbpf.metrics.mongodb_connector'
+            - '@hbpf.metrics.curl_connector'
 
     hbpf.metrics_monolith.loader:
         class: Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader
         arguments:
-            - '@hbpf.metrics.mongodb_monolith'
+            - '@hbpf.metrics.curl_monolith'
 
     ##########################
     #      File Storage      #
