@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Hanaboso\CommonsBundle\Monolog\HttpHandler;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
+use Hanaboso\CommonsBundle\WorkerApi\Client as WorkerApiClient;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Monolog\Level;
@@ -39,7 +40,9 @@ final class HttpHandlerTest extends KernelTestCaseAbstract
         $factory = self::createMock(CurlClientFactory::class);
         $factory->method('create')->willReturn($client);
 
-        $handler = new HttpHandler($factory, 'https://test.com');
+        $workerApi = new WorkerApiClient($factory, 'https://test.com', 'OrchestyApiKey');
+
+        $handler = new HttpHandler($workerApi);
 
         $this->invokeMethod(
             $handler,

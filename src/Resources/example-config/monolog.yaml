@@ -26,7 +26,7 @@ services:
     http_handler:
         class: Hanaboso\CommonsBundle\Monolog\HttpHandler
         arguments:
-            - '@hbpf.transport.curl_client_factory'
+            - '@hbpf.worker-api'
             - 'info'
         calls:
             - ['setFormatter', ['@logstash_formatter']]
