@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Enum\MetricsEnum;
-use Hanaboso\CommonsBundle\Metrics\Impl\MongoDbSender;
+use Hanaboso\CommonsBundle\Metrics\Impl\CurlSender;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
@@ -33,8 +33,8 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
      */
     public function testCurlMetrics(): void
     {
-        $mongo = self::createMock(MongoDbSender::class);
-        $mongo
+        $curlSender = self::createMock(CurlSender::class);
+        $curlSender
             ->expects(self::any())
             ->method('send')->will(
                 self::returnCallback(
@@ -48,7 +48,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
                 ),
             );
 
-        $loader = new MetricsSenderLoader($mongo);
+        $loader = new MetricsSenderLoader($curlSender);
 
         $client = self::createMock(Client::class);
         $client->method('send')->willReturn(new Response(200, [], ''));
@@ -87,10 +87,10 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
      */
     public function testSendCurlMetrics(): void
     {
-        $mongo = $this->createPartialMock(MongoDbSender::class, ['send']);
-        $mongo->expects(self::any())->method('send')->willReturn(TRUE);
+        $curlSender = $this->createPartialMock(CurlSender::class, ['send']);
+        $curlSender->expects(self::any())->method('send')->willReturn(TRUE);
 
-        CurlMetricUtils::sendCurlMetrics($mongo, ['request_duration' => 2], '1', '2', 'user', 'app');
+        CurlMetricUtils::sendCurlMetrics($curlSender, ['request_duration' => 2], '1', '2', 'user', 'app');
 
         self::assertFake();
     }

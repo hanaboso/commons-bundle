@@ -81,6 +81,11 @@ final class LogstashFormatter extends NormalizerFormatter
             unset($record['context']['topology_id']);
         }
 
+        if (isset($record['context']['is_for_ui'])) {
+            $message['is_for_ui'] = $record['context']['is_for_ui'];
+            unset($record['context']['is_for_ui']);
+        }
+
         if (isset($record['context']['topology_name'])) {
             $message['topology_name'] = $record['context']['topology_name'];
             unset($record['context']['topology_name']);
