@@ -2,12 +2,9 @@
 
 namespace Hanaboso\CommonsBundle\Metrics\Impl;
 
-use GuzzleHttp\Psr7\Request;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
-use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
-use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
+use Hanaboso\CommonsBundle\WorkerApi\Client;
 use Hanaboso\Utils\Date\DateTimeUtils;
-use Hanaboso\Utils\String\Json;
 use Throwable;
 
 /**
@@ -19,17 +16,11 @@ final class CurlSender implements MetricsSenderInterface
 {
 
     /**
-     * @var int
-     */
-    private int $timeout = 5;
-
-    /**
      * CurlSender constructor.
      *
-     * @param CurlClientFactory $curlClientFactory
-     * @param string            $host
+     * @param Client $client
      */
-    public function __construct(private readonly CurlClientFactory $curlClientFactory, private readonly string $host)
+    public function __construct(private readonly Client $client)
     {
     }
 
@@ -43,7 +34,6 @@ final class CurlSender implements MetricsSenderInterface
     public function send(array $fields, array $tags = [], bool $isProcessMetrics = TRUE): bool
     {
         try {
-            $client            = $this->curlClientFactory->create(['timeout' => $this->timeout]);
             $fields['created'] = DateTimeUtils::getUtcDateTime()->getTimestamp();
 
             $data = [
@@ -51,17 +41,13 @@ final class CurlSender implements MetricsSenderInterface
                 'tags'   => $tags,
             ];
 
-            $request = new Request(
-                CurlManager::METHOD_POST,
+            $res = $this->client->send(
                 sprintf(
-                    '%s/metrics/%s',
-                    $this->host,
+                    'metrics/%s',
                     $isProcessMetrics ? 'monolith' : 'connectors',
                 ),
-                ['Content-Type' => 'application/json'],
-                Json::encode($data),
+                $data,
             );
-            $res     = $client->send($request);
 
             return $res->getStatusCode() === 200;
         } catch (Throwable) {
