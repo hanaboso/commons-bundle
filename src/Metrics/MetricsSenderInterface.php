@@ -2,8 +2,6 @@
 
 namespace Hanaboso\CommonsBundle\Metrics;
 
-use Exception;
-
 /**
  * Interface MetricsSenderInterface
  *
@@ -15,10 +13,10 @@ interface MetricsSenderInterface
     /**
      * @param mixed[] $fields
      * @param mixed[] $tags
+     * @param bool    $isProcessMetrics
      *
      * @return bool
-     * @throws Exception
      */
-    public function send(array $fields, array $tags = []): bool;
+    public function send(array $fields, array $tags, bool $isProcessMetrics = TRUE): bool;
 
 }
