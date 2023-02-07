@@ -41,7 +41,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
                     static function (array $times, array $data): bool {
                         $data;
 
-                        self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT]);
+                        self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value]);
 
                         return TRUE;
                     },

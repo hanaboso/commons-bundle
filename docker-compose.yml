@@ -21,7 +21,7 @@ services:
             - MARIADB_USER=root
             - MARIADB_PASS=root
             - WORKER_API=https://connector.com
-            - ORCHESTY_API_KEY:ThisIsNotRealKEy
+            - ORCHESTY_API_KEY=ThisIsNotRealKEy
 
     mongo:
         image: mongo:latest

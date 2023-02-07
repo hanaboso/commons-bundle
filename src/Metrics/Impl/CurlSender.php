@@ -3,7 +3,7 @@
 namespace Hanaboso\CommonsBundle\Metrics\Impl;
 
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
-use Hanaboso\CommonsBundle\WorkerApi\Client;
+use Hanaboso\CommonsBundle\WorkerApi\ClientInterface;
 use Hanaboso\Utils\Date\DateTimeUtils;
 use Throwable;
 
@@ -18,9 +18,9 @@ final class CurlSender implements MetricsSenderInterface
     /**
      * CurlSender constructor.
      *
-     * @param Client $client
+     * @param ClientInterface $client
      */
-    public function __construct(private readonly Client $client)
+    public function __construct(private readonly ClientInterface $client)
     {
     }
 
