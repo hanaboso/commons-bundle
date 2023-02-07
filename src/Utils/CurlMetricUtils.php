@@ -64,26 +64,26 @@ final class CurlMetricUtils
         $info = [];
 
         if ($user) {
-            $info[MetricsEnum::USER_ID] = $user;
+            $info[MetricsEnum::USER_ID->value] = $user;
         }
 
         if ($application) {
-            $info[MetricsEnum::APPLICATION_ID] = $application;
+            $info[MetricsEnum::APPLICATION_ID->value] = $application;
         }
 
         if ($nodeId) {
-            $info[MetricsEnum::NODE_ID] = $nodeId;
+            $info[MetricsEnum::NODE_ID->value] = $nodeId;
         }
 
         if ($correlationId) {
-            $info[MetricsEnum::CORRELATION_ID] = $correlationId;
+            $info[MetricsEnum::CORRELATION_ID->value] = $correlationId;
         }
 
         $sender->send(
             [
-                MetricsEnum::REQUEST_TOTAL_DURATION_SENT => $timeData[self::KEY_REQUEST_DURATION],
-                MetricsEnum::APPLICATION_ID              => $application,
-                MetricsEnum::USER_ID                     => $user,
+                MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value => $timeData[self::KEY_REQUEST_DURATION],
+                MetricsEnum::APPLICATION_ID->value              => $application,
+                MetricsEnum::USER_ID->value                     => $user,
             ],
             $info,
             FALSE,

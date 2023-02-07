@@ -16,7 +16,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @package Hanaboso\CommonsBundle\WorkerApi
  */
-final class Client
+final class Client implements ClientInterface
 {
 
     /**
@@ -46,16 +46,21 @@ final class Client
     }
 
     /**
-     * @param string            $uri
-     * @param mixed[]|LogRecord $data
+     * @param string                 $uri
+     * @param mixed[]|LogRecord|null $data
+     * @param string                 $method
      *
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function send(string $uri, array | LogRecord $data): ResponseInterface
+    public function send(
+        string $uri,
+        array | LogRecord|null $data = NULL,
+        string $method = CurlManager::METHOD_POST,
+    ): ResponseInterface
     {
         $request = new Request(
-            CurlManager::METHOD_POST,
+            $method,
             sprintf('%s%s', $this->host, $uri),
             [
                 'Content-Type' => 'application/json',

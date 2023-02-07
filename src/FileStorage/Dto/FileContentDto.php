@@ -5,7 +5,6 @@ namespace Hanaboso\CommonsBundle\FileStorage\Dto;
 use Hanaboso\CommonsBundle\Enum\FileFormatEnum;
 use Hanaboso\CommonsBundle\Enum\StorageTypeEnum;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
-use Hanaboso\Utils\Exception\EnumException;
 
 /**
  * Class FileContentDto
@@ -29,7 +28,7 @@ final class FileContentDto
      */
     function __construct(private string $content, private string $format, private ?string $filename = NULL)
     {
-        $this->type = StorageTypeEnum::PERSISTENT;
+        $this->type = StorageTypeEnum::PERSISTENT->value;
     }
 
     /**
@@ -68,11 +67,7 @@ final class FileContentDto
      */
     public function setStorageType(string $type): FileContentDto
     {
-        try {
-            StorageTypeEnum::isValid($type);
-        } catch (EnumException $e) {
-            $e;
-
+        if (!StorageTypeEnum::tryFrom($type)) {
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE,
@@ -119,11 +114,7 @@ final class FileContentDto
      */
     public function setFormat(string $format): FileContentDto
     {
-        try {
-            FileFormatEnum::isValid($format);
-        } catch (EnumException $e) {
-            $e;
-
+        if (!FileFormatEnum::tryFrom($format)) {
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $format),
                 FileStorageException::INVALID_FILE_FORMAT,
