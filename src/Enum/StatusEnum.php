@@ -2,29 +2,17 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
-use Hanaboso\Utils\Enum\EnumAbstract;
-
 /**
  * Class StatusEnum
  *
  * @package Hanaboso\CommonsBundle\Enum
  */
-final class StatusEnum extends EnumAbstract
+enum StatusEnum: string
 {
 
-    public const NEW      = 'New';
-    public const STARTING = 'Starting';
-    public const RUNNING  = 'Running';
-    public const STOPPED  = 'Stopped';
-
-    /**
-     * @var string[]
-     */
-    protected static array $choices = [
-        self::NEW      => 'New',
-        self::STARTING => 'Starting',
-        self::RUNNING  => 'Running',
-        self::STOPPED  => 'Stopped',
-    ];
+    case NEW      = 'New';
+    case STARTING = 'Starting';
+    case RUNNING  = 'Running';
+    case STOPPED  = 'Stopped';
 
 }

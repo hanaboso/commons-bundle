@@ -2,25 +2,15 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
-use Hanaboso\Utils\Enum\EnumAbstract;
-
 /**
  * Class HandlerEnum
  *
  * @package Hanaboso\CommonsBundle\Enum
  */
-final class HandlerEnum extends EnumAbstract
+enum HandlerEnum: string
 {
 
-    public const ACTION = 'action';
-    public const EVENT  = 'event';
-
-    /**
-     * @var string[]
-     */
-    protected static array $choices = [
-        self::ACTION => 'action',
-        self::EVENT  => 'event',
-    ];
+    case ACTION = 'action';
+    case EVENT  = 'event';
 
 }

@@ -2,27 +2,16 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
-use Hanaboso\Utils\Enum\EnumAbstract;
-
 /**
  * Class NotificationSenderEnum
  *
  * @package Hanaboso\CommonsBundle\Enum
  */
-final class NotificationSenderEnum extends EnumAbstract
+enum NotificationSenderEnum: string
 {
 
-    public const CURL   = 'curl';
-    public const EMAIL  = 'email';
-    public const RABBIT = 'rabbit';
-
-    /**
-     * @var string[]
-     */
-    protected static array $choices = [
-        self::CURL   => self::CURL,
-        self::EMAIL  => self::EMAIL,
-        self::RABBIT => self::RABBIT,
-    ];
+    case CURL   = 'curl';
+    case EMAIL  = 'email';
+    case RABBIT = 'rabbit';
 
 }

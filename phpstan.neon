@@ -50,7 +50,6 @@ parameters:
 				- Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverAbstract
 				- Hanaboso\CommonsBundle\Process\ProcessDtoAbstract
 				- Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract
-				- Hanaboso\Utils\Enum\EnumAbstract
 				- Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract
 				- Monolog\Formatter\NormalizerFormatter
 				- Monolog\Handler\AbstractProcessingHandler

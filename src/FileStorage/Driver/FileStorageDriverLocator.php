@@ -37,9 +37,9 @@ final class FileStorageDriverLocator
     public function get(string $type): FileStorageDriverInterface
     {
         return match ($type) {
-            StorageTypeEnum::PERSISTENT => $this->persistent,
-            StorageTypeEnum::TEMPORARY => $this->temporary,
-            StorageTypeEnum::PUBLIC => $this->public,
+            StorageTypeEnum::PERSISTENT->value => $this->persistent,
+            StorageTypeEnum::TEMPORARY->value => $this->temporary,
+            StorageTypeEnum::PUBLIC->value => $this->public,
             default => throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE,
