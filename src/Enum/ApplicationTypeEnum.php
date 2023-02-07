@@ -2,26 +2,16 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
-use Hanaboso\Utils\Enum\EnumAbstract;
-
 /**
  * Class ApplicationTypeEnum
  *
  * @package Hanaboso\CommonsBundle\Enum
  */
-final class ApplicationTypeEnum extends EnumAbstract
+enum ApplicationTypeEnum: string
 {
 
-    public const CRON    = 'cron';
-    public const WEBHOOK = 'webhook';
-
-    /**
-     * @var string[]
-     */
-    protected static array $choices = [
-        self::CRON    => self::CRON,
-        self::WEBHOOK => self::WEBHOOK,
-    ];
+    case CRON    = 'cron';
+    case WEBHOOK = 'webhook';
 
     /**
      * @param string $type
@@ -30,7 +20,7 @@ final class ApplicationTypeEnum extends EnumAbstract
      */
     public static function isWebhook(string $type): bool
     {
-        return $type === self::WEBHOOK;
+        return $type === self::WEBHOOK->value;
     }
 
     /**
@@ -40,7 +30,7 @@ final class ApplicationTypeEnum extends EnumAbstract
      */
     public static function isCron(string $type): bool
     {
-        return $type === self::CRON;
+        return $type === self::CRON->value;
     }
 
 }

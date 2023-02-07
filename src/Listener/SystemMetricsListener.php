@@ -112,14 +112,14 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
 
         $this->metricsSender->getSender()->send(
             [
-                MetricsEnum::REQUEST_TOTAL_DURATION => $times[CurlMetricUtils::KEY_REQUEST_DURATION],
-                MetricsEnum::CPU_USER_TIME          => $times[CurlMetricUtils::KEY_USER_TIME],
-                MetricsEnum::CPU_KERNEL_TIME        => $times[CurlMetricUtils::KEY_KERNEL_TIME],
+                MetricsEnum::REQUEST_TOTAL_DURATION->value => $times[CurlMetricUtils::KEY_REQUEST_DURATION],
+                MetricsEnum::CPU_USER_TIME->value          => $times[CurlMetricUtils::KEY_USER_TIME],
+                MetricsEnum::CPU_KERNEL_TIME->value        => $times[CurlMetricUtils::KEY_KERNEL_TIME],
             ],
             [
-                MetricsEnum::TOPOLOGY_ID    => $headers->get(PipesHeaders::TOPOLOGY_ID),
-                MetricsEnum::CORRELATION_ID => $headers->get(PipesHeaders::CORRELATION_ID),
-                MetricsEnum::NODE_ID        => $headers->get(PipesHeaders::NODE_ID),
+                MetricsEnum::TOPOLOGY_ID->value    => $headers->get(PipesHeaders::TOPOLOGY_ID),
+                MetricsEnum::CORRELATION_ID->value => $headers->get(PipesHeaders::CORRELATION_ID),
+                MetricsEnum::NODE_ID->value        => $headers->get(PipesHeaders::NODE_ID),
             ],
         );
     }

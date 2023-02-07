@@ -2,34 +2,20 @@
 
 namespace Hanaboso\CommonsBundle\Enum;
 
-use Hanaboso\Utils\Enum\EnumAbstract;
-
 /**
  * Class FileFormatEnum
  *
  * @package Hanaboso\CommonsBundle\Enum
  */
-final class FileFormatEnum extends EnumAbstract
+enum FileFormatEnum: string
 {
 
-    public const XML  = 'xml';
-    public const JSON = 'json';
-    public const CSV  = 'csv';
-    public const XLS  = 'xls';
-    public const XLSX = 'xlsx';
-    public const ODS  = 'ods';
-    public const PDF  = 'pdf';
-
-    /**
-     * @var string[]
-     */
-    protected static array $choices = [
-        self::XML  => 'XML',
-        self::JSON => 'JSON',
-        self::CSV  => 'CSV',
-        self::XLSX => 'XLSX',
-        self::ODS  => 'ODS',
-        self::PDF  => 'PDF',
-    ];
+    case XML  = 'xml';
+    case JSON = 'json';
+    case CSV  = 'csv';
+    case XLS  = 'xls';
+    case XLSX = 'xlsx';
+    case ODS  = 'ods';
+    case PDF  = 'pdf';
 
 }

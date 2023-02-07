@@ -9,7 +9,6 @@ use Hanaboso\CommonsBundle\Enum\StorageTypeEnum;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\FileInterface;
 use Hanaboso\CommonsBundle\FileStorage\FileTypes;
-use Hanaboso\Utils\Exception\EnumException;
 
 /**
  * Class File
@@ -101,17 +100,12 @@ class File implements FileInterface
      */
     public function setFileFormat(string $format): FileInterface
     {
-        try {
-            FileFormatEnum::isValid($format);
-        } catch (EnumException $e) {
-            $e;
-
+        if (!FileFormatEnum::tryFrom($format)) {
             throw new FileStorageException(
                 sprintf('Given file format [%s] is not a valid option.', $format),
                 FileStorageException::INVALID_FILE_FORMAT,
             );
         }
-
         $this->mimeType   = FileTypes::fromExtension($format);
         $this->fileFormat = $format;
 
@@ -182,17 +176,12 @@ class File implements FileInterface
      */
     public function setStorageType(string $type): FileInterface
     {
-        try {
-            StorageTypeEnum::isValid($type);
-        } catch (EnumException $e) {
-            $e;
-
+        if (!StorageTypeEnum::tryFrom($type)) {
             throw new FileStorageException(
                 sprintf('Given storage type [%s] is not a valid option.', $type),
                 FileStorageException::INVALID_STORAGE_TYPE,
             );
         }
-
         $this->storageType = $type;
 
         return $this;

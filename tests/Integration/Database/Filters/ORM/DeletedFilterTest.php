@@ -33,7 +33,7 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
 
         $repository = $this->em->getRepository(TestEntity::class);
 
-        self::assertObjectHasAttribute('name', (object) $repository->findOneBy(['name' => 'example1']));
+        self::assertTrue(property_exists((object) $repository->findOneBy(['name' => 'example1']), 'name'));
         self::assertNull($repository->findOneBy(['name' => 'example2']));
     }
 
@@ -52,7 +52,7 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
 
         $this->em->getFilters()->disable(DeletedFilter::NAME);
 
-        self::assertObjectHasAttribute('name', (object) $repository->findOneBy(['name' => 'example']));
+        self::assertTrue(property_exists((object) $repository->findOneBy(['name' => 'example']), 'name'));
     }
 
     /**

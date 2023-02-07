@@ -2,7 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\Monolog;
 
-use Hanaboso\CommonsBundle\WorkerApi\Client;
+use Hanaboso\CommonsBundle\WorkerApi\ClientInterface;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
@@ -19,11 +19,15 @@ final class HttpHandler extends AbstractProcessingHandler
     /**
      * HttpHandler constructor.
      *
-     * @param Client $client
-     * @param Level  $level
-     * @param bool   $bubble
+     * @param ClientInterface $client
+     * @param Level           $level
+     * @param bool            $bubble
      */
-    public function __construct(private readonly Client $client, Level $level = Level::Debug, bool $bubble = TRUE,)
+    public function __construct(
+        private readonly ClientInterface $client,
+        Level $level = Level::Debug,
+        bool $bubble = TRUE,
+    )
     {
         parent::__construct($level, $bubble);
     }
