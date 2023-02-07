@@ -19,7 +19,7 @@
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/mongodb-odm-bundle": "^4.5",
         "doctrine/orm": "^2.14",
-        "hanaboso/php-check-utils": "^1.4",
+        "hanaboso/php-check-utils": "^1.4.9",
         "php-imap/php-imap": "^4.5",
         "symfony/mailer": "^v6.2",
         "symfony/monolog-bundle": "^v3.8",
