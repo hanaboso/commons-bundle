@@ -2,6 +2,7 @@
 
 namespace Hanaboso\CommonsBundle\WorkerApi;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Monolog\LogRecord;
 use Psr\Http\Message\ResponseInterface;
@@ -20,6 +21,7 @@ interface ClientInterface
      * @param string                 $method
      *
      * @return ResponseInterface
+     * @throws GuzzleException
      */
     public function send(
         string $uri,
