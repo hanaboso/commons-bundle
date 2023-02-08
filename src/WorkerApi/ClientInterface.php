@@ -20,13 +20,13 @@ interface ClientInterface
      * @param mixed[]|LogRecord|null $data
      * @param string                 $method
      *
-     * @return ResponseInterface|null
+     * @return ResponseInterface
      * @throws GuzzleException
      */
     public function send(
         string $uri,
         array | LogRecord|null $data = NULL,
         string $method = CurlManager::METHOD_POST,
-    ): ResponseInterface|null;
+    ): ResponseInterface;
 
 }
