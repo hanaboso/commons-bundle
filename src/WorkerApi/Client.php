@@ -50,14 +50,14 @@ final class Client implements ClientInterface
      * @param mixed[]|LogRecord|null $data
      * @param string                 $method
      *
-     * @return ResponseInterface
+     * @return ResponseInterface|null
      * @throws GuzzleException
      */
     public function send(
         string $uri,
         array | LogRecord|null $data = NULL,
         string $method = CurlManager::METHOD_POST,
-    ): ResponseInterface
+    ): ResponseInterface|null
     {
         $request = new Request(
             $method,

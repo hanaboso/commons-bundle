@@ -49,7 +49,7 @@ final class CurlSender implements MetricsSenderInterface
                 $data,
             );
 
-            return $res->getStatusCode() === 200;
+            return $res?->getStatusCode() === 200;
         } catch (Throwable) {
             return FALSE;
         }
