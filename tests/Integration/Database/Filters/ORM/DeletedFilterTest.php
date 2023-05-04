@@ -17,10 +17,12 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Database\Filters\ORM\DeletedFilter::addFilterConstraint
      *
-     * @throws Exception;
+     * @throws Exception
      */
     public function testAddFilterConstraint(): void
     {
+        $this->clearMysql();
+
         $testEntity1 = new TestEntity();
         $testEntity1->setName('example1');
         $testEntity1->setDeleted(FALSE);

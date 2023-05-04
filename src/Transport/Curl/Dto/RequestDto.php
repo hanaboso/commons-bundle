@@ -61,11 +61,11 @@ final class RequestDto
      * @throws CurlException
      */
     public static function from(
-        RequestDto $dto,
+        self $dto,
         ProcessDtoAbstract $debugInfo,
         ?Uri $uri = NULL,
         ?string $method = NULL,
-    ): RequestDto
+    ): self
     {
         $self = new self($uri ?? new Uri((string) $dto->getUri(TRUE)), $method ?? $dto->getMethod(), $debugInfo);
         $self->setHeaders($dto->getHeaders());
@@ -108,7 +108,7 @@ final class RequestDto
      *
      * @return RequestDto
      */
-    public function setUri(Uri $uri): RequestDto
+    public function setUri(Uri $uri): self
     {
         $this->uri = $uri;
 
@@ -173,7 +173,7 @@ final class RequestDto
      *
      * @return RequestDto
      */
-    public function setDebugInfo(ProcessDto $dto): RequestDto
+    public function setDebugInfo(ProcessDto $dto): self
     {
         $this->debugInfo = PipesHeaders::debugInfo($dto->getHeaders());
 

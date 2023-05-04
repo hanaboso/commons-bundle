@@ -17,10 +17,10 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::__construct()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::__construct
      *
      * @throws Exception
      */
@@ -47,8 +47,8 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getPrefix()
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptImplAbstract::__construct()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getPrefix
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptImplAbstract::__construct
      *
      * @throws Exception
      */
@@ -63,9 +63,9 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt
      *
      * @throws Exception
      */
@@ -82,9 +82,9 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt
      *
      * @throws Exception
      */

@@ -37,7 +37,7 @@ class TestEntityNoDeletedProp
      *
      * @return TestEntityNoDeletedProp
      */
-    public function setName(string $name): TestEntityNoDeletedProp
+    public function setName(string $name): self
     {
         $this->name = $name;
 

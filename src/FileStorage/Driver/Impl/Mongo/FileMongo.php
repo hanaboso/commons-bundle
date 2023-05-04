@@ -73,7 +73,7 @@ class FileMongo
      *
      * @return FileMongo
      */
-    public function setFilename(string $filename): FileMongo
+    public function setFilename(string $filename): self
     {
         $this->filename = $filename;
 
@@ -93,7 +93,7 @@ class FileMongo
      *
      * @return FileMongo
      */
-    public function setUploadDate(DateTimeInterface $uploadDate): FileMongo
+    public function setUploadDate(DateTimeInterface $uploadDate): self
     {
         $this->uploadDate = $uploadDate;
 
@@ -113,7 +113,7 @@ class FileMongo
      *
      * @return FileMongo
      */
-    public function setLength(int $length): FileMongo
+    public function setLength(int $length): self
     {
         $this->length = $length;
 
@@ -133,7 +133,7 @@ class FileMongo
      *
      * @return FileMongo
      */
-    public function setChunkSize(int $chunkSize): FileMongo
+    public function setChunkSize(int $chunkSize): self
     {
         $this->chunkSize = $chunkSize;
 

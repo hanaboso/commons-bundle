@@ -37,7 +37,7 @@ class TestDocNoDeletedProp
      *
      * @return TestDocNoDeletedProp
      */
-    public function setName(string $name): TestDocNoDeletedProp
+    public function setName(string $name): self
     {
         $this->name = $name;
 

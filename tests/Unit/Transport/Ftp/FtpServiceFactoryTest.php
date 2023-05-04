@@ -27,7 +27,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     private $factory;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory
      *
      * @throws Exception
@@ -40,7 +40,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService
      *
      * @throws Exception
      */
@@ -52,7 +52,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService
      *
      * @throws FtpException
      */

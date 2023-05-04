@@ -7,7 +7,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Promise\FulfilledPromise;
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\RejectedPromise;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
@@ -33,8 +32,8 @@ final class CurlManagerTest extends TestCase
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::setTimeout()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::setTimeout
      *
      * @throws Exception
      */
@@ -53,7 +52,6 @@ final class CurlManagerTest extends TestCase
 
         $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
-        /** @var CurlSender $curlSender */
         $curlSender = self::createMock(CurlSender::class);
 
         $loader = new MetricsSenderLoader($curlSender);
@@ -71,7 +69,7 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
      *
      * @throws Exception
      */
@@ -80,7 +78,6 @@ final class CurlManagerTest extends TestCase
         self::expectException(CurlException::class);
         $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
-        /** @var CurlSender $curlSender */
         $curlSender = self::createMock(CurlSender::class);
         $loader     = new MetricsSenderLoader($curlSender);
 
@@ -90,7 +87,7 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
      *
      * @throws Exception
      */
@@ -102,7 +99,7 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
      *
      * @throws Exception
      */
@@ -115,7 +112,7 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::from()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::from
      *
      * @throws Exception
      */
@@ -124,8 +121,8 @@ final class CurlManagerTest extends TestCase
         $processDto = new ProcessDto();
         $processDto->setHeaders(
             [
-                PipesHeaders::NODE_ID        => '123',
                 PipesHeaders::CORRELATION_ID => 'aaa222',
+                PipesHeaders::NODE_ID        => '123',
             ],
         );
 
@@ -204,7 +201,6 @@ final class CurlManagerTest extends TestCase
      */
     public function testSendAsyncException(): void
     {
-        /** @var Promise $promise */
         $promise = new RejectedPromise(
             new ServerException(
                 'Ups, something with server went wrong.',
@@ -233,7 +229,6 @@ final class CurlManagerTest extends TestCase
      */
     public function testSendAsyncReject(): void
     {
-        /** @var Promise $promise */
         $promise = new RejectedPromise(
             new Exception('Ups, something went wrong.'),
         );

@@ -150,7 +150,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::listDir()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::listDir
      *
      * @throws Exception
      */
@@ -230,7 +230,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::dirExists()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::dirExists
      * @throws Exception
      */
     public function testDirExists(): void
@@ -241,7 +241,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDir()
+     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDir
      *
      * @throws Exception
      */
@@ -254,7 +254,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDir()
+     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDir
      *
      * @throws Exception
      */
@@ -267,8 +267,8 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDirRecursive()
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::isFile()
+     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDirRecursive
+     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::isFile
      *
      * @throws Exception
      */
@@ -276,7 +276,11 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     {
         $this->mockSftpFn(
             [
-                'isConnected' => TRUE, 'pwd' => '/path/', 'chdir' => FALSE, 'is_file' => FALSE, 'mkdir' => TRUE,
+            'chdir' => FALSE,
+            'isConnected' => TRUE,
+            'is_file' => FALSE,
+            'mkdir' => TRUE,
+            'pwd' => '/path/',
             ],
         );
 
@@ -306,7 +310,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove
      *
      * @throws Exception
      */
@@ -319,7 +323,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove
      *
      * @throws Exception
      */
@@ -332,7 +336,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::getResource()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::getResource
      * @throws Exception
      */
     public function testGetResourceErr(): void

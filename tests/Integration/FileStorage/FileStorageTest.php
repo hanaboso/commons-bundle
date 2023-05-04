@@ -24,9 +24,9 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
 
     /**
      * @covers \Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::saveFileFromContent()
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::getFileStorage()
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::deleteFile()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::saveFileFromContent
+     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::getFileStorage
+     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::deleteFile
      * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage
      *
      * @throws Exception

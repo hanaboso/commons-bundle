@@ -4,6 +4,8 @@ includes:
 parameters:
 	ignoreErrors:
 		-
+			message: '#is not subtype of type#'
+		-
 			message: '#Calling putenv\(\) is forbidden, might overwrite existing variables#'
 			path: src/Transport/Udp/UDPSender.php
 		-

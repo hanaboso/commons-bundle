@@ -44,7 +44,7 @@ final class FileContentDto
      *
      * @return FileContentDto
      */
-    public function setFilename(string $filename): FileContentDto
+    public function setFilename(string $filename): self
     {
         $this->filename = $filename;
 
@@ -65,7 +65,7 @@ final class FileContentDto
      * @return FileContentDto
      * @throws FileStorageException
      */
-    public function setStorageType(string $type): FileContentDto
+    public function setStorageType(string $type): self
     {
         if (!StorageTypeEnum::tryFrom($type)) {
             throw new FileStorageException(
@@ -91,7 +91,7 @@ final class FileContentDto
      *
      * @return FileContentDto
      */
-    public function setContent(string $content): FileContentDto
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
@@ -112,7 +112,7 @@ final class FileContentDto
      * @return FileContentDto
      * @throws FileStorageException
      */
-    public function setFormat(string $format): FileContentDto
+    public function setFormat(string $format): self
     {
         if (!FileFormatEnum::tryFrom($format)) {
             throw new FileStorageException(

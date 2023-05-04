@@ -40,7 +40,7 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
     /**
      * @covers \Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter::addFilterCriteria
      *
-     * @throws Exception;
+     * @throws Exception
      */
     public function testDisableFilter(): void
     {

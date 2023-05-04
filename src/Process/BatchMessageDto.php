@@ -44,8 +44,8 @@ final class BatchMessageDto
     public function toArray(): array
     {
         return [
-            'headers' => $this->headers ?: new stdClass(),
             'body'    => $this->body,
+            'headers' => $this->headers ?: new stdClass(),
         ];
     }
 

@@ -42,7 +42,7 @@ final class RequestHeaderDto
      *
      * @return RequestHeaderDto
      */
-    public function setParam(string $key, mixed $value): RequestHeaderDto
+    public function setParam(string $key, mixed $value): self
     {
         $this->params[$key] = $value;
 

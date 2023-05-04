@@ -22,11 +22,11 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     private MongoFileDriver $driver;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save()
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::get()
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::delete()
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::generatePath()
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::setPathGenerator()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::get
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::delete
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::generatePath
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::setPathGenerator
      *
      * @throws Exception
      */
@@ -36,7 +36,6 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
         $this->dm->clear();
         $this->driver->setPathGenerator(new HashPathGenerator());
 
-        /** @var FileMongoTest $fileContent */
         $fileContent = $this->driver->get($res->getUrl());
         self::assertEquals('test_content', $fileContent);
 
@@ -48,7 +47,7 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save()
+     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save
      *
      * @throws FileStorageException
      */

@@ -7,7 +7,6 @@ use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
-use LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -21,38 +20,19 @@ final class MetricsLoaderTest extends KernelTestCaseAbstract
     use CustomAssertTrait;
 
     /**
-     * @covers       \Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader::getSender
-     *
-     * @dataProvider metricsDataProvider
-     *
-     * @param MetricsSenderInterface|null $mongoSender
-     * @param string|null                 $exp
+     * @covers \Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader::getSender
      *
      * @throws Exception
      */
-    public function testLoaderMissingSender(?MetricsSenderInterface $mongoSender, ?string $exp = NULL): void
-    {
-        $loader = new MetricsSenderLoader($mongoSender);
-        if ($exp) {
-            self::expectException(LogicException::class);
-            self::expectExceptionMessage($exp);
-        }
-
-        $loader->getSender();
-        self::assertFake();
-    }
-
-    /**
-     * @return mixed[]
-     *
-     * @throws Exception
-     */
-    public function metricsDataProvider(): array
+    public function testLoaderMissingSender(): void
     {
         /** @var MetricsSenderInterface|MockObject $sender */
         $sender = self::createMock(MetricsSenderInterface::class);
 
-        return [[$sender]];
+        $loader = new MetricsSenderLoader($sender);
+
+        $loader->getSender();
+        self::assertFake();
     }
 
 }

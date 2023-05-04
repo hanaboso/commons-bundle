@@ -49,7 +49,7 @@ class TestEntityTrait
      *
      * @return TestEntityTrait
      */
-    public function setName(string $name): TestEntityTrait
+    public function setName(string $name): self
     {
         $this->name = $name;
 

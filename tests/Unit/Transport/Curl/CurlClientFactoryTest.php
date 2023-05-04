@@ -17,7 +17,7 @@ final class CurlClientFactoryTest extends TestCase
     use CustomAssertTrait;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory::create()
+     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory::create
      */
     public function testCreate(): void
     {

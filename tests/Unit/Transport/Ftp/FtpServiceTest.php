@@ -21,10 +21,10 @@ final class FtpServiceTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::uploadFile()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::uploadFile
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect
      *
      * @throws Exception
      */
@@ -49,10 +49,10 @@ final class FtpServiceTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFile()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFile
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect
      *
      * @throws Exception
      */
@@ -75,10 +75,10 @@ final class FtpServiceTest extends TestCase
 
     /**
      * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFiles()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login()
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect()
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFiles
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login
+     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect
      *
      * @throws Exception
      */

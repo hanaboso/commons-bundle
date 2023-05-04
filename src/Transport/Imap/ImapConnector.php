@@ -32,7 +32,7 @@ final class ImapConnector
      * @return ImapConnector
      * @throws InvalidParameterException
      */
-    public function create(ImapConfigDto $dto): ImapConnector
+    public function create(ImapConfigDto $dto): self
     {
         $this->mailbox = new Mailbox(
             sprintf('{%s:993%s}%s', $dto->getHost(), $dto->getPath(), $dto->getFolder()),
@@ -56,10 +56,10 @@ final class ImapConnector
             $mail = $this->getMail($mailId);
 
             $mails[] = [
-                self::ID           => (string) $mail->id,
-                self::TIME         => DateTimeUtils::getUtcDateTime($mail->date ?? 'now'),
                 self::FROM_ADDRESS => $mail->fromAddress,
+                self::ID           => (string) $mail->id,
                 self::SUBJECT      => $mail->subject ?? '',
+                self::TIME         => DateTimeUtils::getUtcDateTime($mail->date ?? 'now'),
             ];
         }
 

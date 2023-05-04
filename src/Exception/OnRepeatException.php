@@ -68,7 +68,7 @@ final class OnRepeatException extends Exception
      *
      * @return OnRepeatException
      */
-    public function setInterval(int $interval): OnRepeatException
+    public function setInterval(int $interval): self
     {
         $this->interval = $interval;
 
@@ -80,7 +80,7 @@ final class OnRepeatException extends Exception
      *
      * @return OnRepeatException
      */
-    public function setMaxHops(int $maxHops): OnRepeatException
+    public function setMaxHops(int $maxHops): self
     {
         $this->maxHops = $maxHops;
 

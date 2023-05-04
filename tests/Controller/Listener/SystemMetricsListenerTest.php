@@ -36,9 +36,9 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
     public function testListenerWithPipesHeader(): void
     {
         $headers = [
-            sprintf('HTTP_%s', PipesHeaders::TOPOLOGY_ID)    => 'topoId',
             sprintf('HTTP_%s', PipesHeaders::CORRELATION_ID) => 'correlationId',
             sprintf('HTTP_%s', PipesHeaders::NODE_ID)        => 'nodeId',
+            sprintf('HTTP_%s', PipesHeaders::TOPOLOGY_ID)    => 'topoId',
         ];
         $this->sendRequest('GET', '/test/route', [], $headers);
 
@@ -65,8 +65,8 @@ final class SystemMetricsListenerTest extends ControllerTestCaseAbstract
     {
         self::assertEquals(
             [
-                KernelEvents::TERMINATE  => 'onKernelTerminate',
                 KernelEvents::CONTROLLER => 'onKernelController',
+                KernelEvents::TERMINATE  => 'onKernelTerminate',
             ],
             SystemMetricsListener::getSubscribedEvents(),
         );

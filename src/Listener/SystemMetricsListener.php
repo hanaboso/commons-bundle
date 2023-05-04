@@ -91,8 +91,8 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::TERMINATE  => 'onKernelTerminate',
             KernelEvents::CONTROLLER => 'onKernelController',
+            KernelEvents::TERMINATE  => 'onKernelTerminate',
         ];
     }
 
@@ -112,14 +112,14 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
 
         $this->metricsSender->getSender()->send(
             [
-                MetricsEnum::REQUEST_TOTAL_DURATION->value => $times[CurlMetricUtils::KEY_REQUEST_DURATION],
-                MetricsEnum::CPU_USER_TIME->value          => $times[CurlMetricUtils::KEY_USER_TIME],
                 MetricsEnum::CPU_KERNEL_TIME->value        => $times[CurlMetricUtils::KEY_KERNEL_TIME],
+                MetricsEnum::CPU_USER_TIME->value          => $times[CurlMetricUtils::KEY_USER_TIME],
+                MetricsEnum::REQUEST_TOTAL_DURATION->value => $times[CurlMetricUtils::KEY_REQUEST_DURATION],
             ],
             [
-                MetricsEnum::TOPOLOGY_ID->value    => $headers->get(PipesHeaders::TOPOLOGY_ID),
                 MetricsEnum::CORRELATION_ID->value => $headers->get(PipesHeaders::CORRELATION_ID),
                 MetricsEnum::NODE_ID->value        => $headers->get(PipesHeaders::NODE_ID),
+                MetricsEnum::TOPOLOGY_ID->value    => $headers->get(PipesHeaders::TOPOLOGY_ID),
             ],
         );
     }

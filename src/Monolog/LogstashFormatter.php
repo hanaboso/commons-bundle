@@ -112,9 +112,9 @@ final class LogstashFormatter extends NormalizerFormatter
 
         $data = [
             'class'   => $e::class,
-            'message' => $e->getMessage(),
             'code'    => $e->getCode(),
             'file'    => sprintf('%s:%s', $e->getFile(), $e->getLine()),
+            'message' => $e->getMessage(),
         ];
 
         if ($e instanceof SoapFault) {

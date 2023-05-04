@@ -61,10 +61,10 @@ final class SoapHelper
     public static function parseResponseHeaders(?string $headers = NULL): array
     {
         $result = [
-            'version'    => NULL,
-            'statusCode' => NULL,
-            'reason'     => NULL,
             'headers'    => NULL,
+            'reason'     => NULL,
+            'statusCode' => NULL,
+            'version'    => NULL,
         ];
 
         if ($headers === NULL) {

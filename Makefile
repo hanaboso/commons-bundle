@@ -35,8 +35,7 @@ composer-outdated:
 
 # Console
 clear-cache:
-	$(DE) rm -rf var/log
-	$(DE) php tests/testApp/bin/console cache:clear --env=test
+	$(DE) rm -rf var
 	$(DE) php tests/testApp/bin/console cache:warmup --env=test
 
 database-create:

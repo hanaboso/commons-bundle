@@ -22,7 +22,7 @@ final class SoapHelperTest extends TestCase
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeRequestHeaders()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeRequestHeaders
      */
     public function testComposeRequestHeaders(): void
     {
@@ -69,7 +69,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
      */
     public function testComposeArgumentsWsdl(): void
     {
@@ -80,7 +80,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
      */
     public function testComposeArgumentsNonWsdl(): void
     {
@@ -93,7 +93,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
      */
     public function testComposeArgumentsNonWsdlNull(): void
     {
@@ -104,7 +104,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders
      */
     public function testParseResponseHeaders(): void
     {
@@ -127,14 +127,14 @@ Content-Length: nnnn';
         self::assertInstanceOf(HeaderBag::class, $headerBag);
 
         $expectedValues = [
-            'content-type'   => ['text/xml; charset="utf-8"'],
             'content-length' => ['nnnn'],
+            'content-type'   => ['text/xml; charset="utf-8"'],
         ];
         self::assertEquals($expectedValues, $headerBag->all());
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders
      */
     public function testParseResponseHeadersEmpty(): void
     {

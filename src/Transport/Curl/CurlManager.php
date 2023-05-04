@@ -60,7 +60,7 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      *
      * @return CurlManager
      */
-    public function setMetricsSender(MetricsSenderLoader $metricsSender): CurlManager
+    public function setMetricsSender(MetricsSenderLoader $metricsSender): self
     {
         $this->metricsSender = $metricsSender;
 
@@ -72,7 +72,7 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
      *
      * @return CurlManager
      */
-    public function setTimeout(int $timeout): CurlManager
+    public function setTimeout(int $timeout): self
     {
         $this->timeout = $timeout;
 

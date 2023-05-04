@@ -49,7 +49,7 @@ class TestDocumentTrait
      *
      * @return TestDocumentTrait
      */
-    public function setName(string $name): TestDocumentTrait
+    public function setName(string $name): self
     {
         $this->name = $name;
 

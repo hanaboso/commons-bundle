@@ -53,7 +53,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
      *
      * @return SoapManager
      */
-    public function setMetricsSender(MetricsSenderLoader $metricsSender): SoapManager
+    public function setMetricsSender(MetricsSenderLoader $metricsSender): self
     {
         $this->metricsSender = $metricsSender;
 
@@ -197,9 +197,9 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         $options['stream_context'] = stream_context_create(
             [
                 'ssl' => [
+                    'allow_self_signed' => TRUE,
                     'verify_peer'       => FALSE,
                     'verify_peer_name'  => FALSE,
-                    'allow_self_signed' => TRUE,
                 ],
             ],
         );

@@ -228,7 +228,7 @@ abstract class ProcessDtoAbstract
     /**
      *
      */
-    public function removeRepeater(): ProcessDtoAbstract
+    public function removeRepeater(): self
     {
         $this->removeHeader(PipesHeaders::REPEAT_INTERVAL);
         $this->removeHeader(PipesHeaders::REPEAT_MAX_HOPS);

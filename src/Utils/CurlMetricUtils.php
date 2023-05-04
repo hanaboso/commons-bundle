@@ -35,9 +35,9 @@ final class CurlMetricUtils
         $endMetrics = self::getCurrentMetrics();
 
         return [
+            self::KEY_KERNEL_TIME      => $endMetrics[self::KEY_CPU][SystemUsage::CPU_TIME_KERNEL] - $startCpuKernel,
             self::KEY_REQUEST_DURATION => $endMetrics[self::KEY_TIMESTAMP] - $startTime,
             self::KEY_USER_TIME        => $endMetrics[self::KEY_CPU][SystemUsage::CPU_TIME_USER] - $startCpuUser,
-            self::KEY_KERNEL_TIME      => $endMetrics[self::KEY_CPU][SystemUsage::CPU_TIME_KERNEL] - $startCpuKernel,
         ];
     }
 
@@ -81,8 +81,8 @@ final class CurlMetricUtils
 
         $sender->send(
             [
-                MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value => $timeData[self::KEY_REQUEST_DURATION],
                 MetricsEnum::APPLICATION_ID->value              => $application,
+                MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value => $timeData[self::KEY_REQUEST_DURATION],
                 MetricsEnum::USER_ID->value                     => $user,
             ],
             $info,
@@ -96,8 +96,8 @@ final class CurlMetricUtils
     public static function getCurrentMetrics(): array
     {
         return [
-            self::KEY_TIMESTAMP => SystemUsage::getCurrentTimestamp(),
             self::KEY_CPU       => SystemUsage::getCpuTimes(),
+            self::KEY_TIMESTAMP => SystemUsage::getCurrentTimestamp(),
         ];
     }
 

@@ -89,7 +89,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeader
      * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::decorateLimitKey()
+     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::decorateLimitKey
      *
      * @throws Exception
      */
@@ -118,8 +118,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
 
         self::assertEquals(
             [
-                'result-message' => 'it is ok',
                 'result-code'    => '0',
+                'result-message' => 'it is ok',
             ],
             $processDto->getHeaders(),
         );
@@ -182,8 +182,8 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         $dto->setLimitExceeded('Bobr');
         $headers = $dto->getHeaders();
         self::assertEquals([
-                               'result-message' => 'Bobr',
                                'result-code'    => '1004',
+                               'result-message' => 'Bobr',
                            ], $headers);
     }
 
@@ -218,10 +218,10 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
         );
         $processDto->setForceFollowers(['testFollower1', 'testFollower2']);
         self::assertEquals([
-            'worker-followers'   => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
             'force-target-queue' => '1,2',
-            'result-message'  => 'Message will be force re-routed to [1,2] follower(s).',
             'result-code'     => '1002',
+            'result-message'  => 'Message will be force re-routed to [1,2] follower(s).',
+            'worker-followers'   => '[{"name":"testFollower1","id":"1"},{"name":"testFollower2","id":"2"}]',
         ], $processDto->getHeaders());
         $processDto->removeForceFollowers();
         self::assertEquals([
@@ -266,10 +266,10 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     private function getSetRepeaterHeaders(): array
     {
         return [
-            PipesHeaders::RESULT_CODE => (string) ProcessDtoAbstract::REPEAT,
             'repeat-interval'     => '10',
             'repeat-max-hops'     => '20',
             'result-message'      => 'queue',
+            PipesHeaders::RESULT_CODE => (string) ProcessDtoAbstract::REPEAT,
         ];
     }
 

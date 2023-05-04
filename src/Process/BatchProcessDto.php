@@ -56,8 +56,8 @@ final class BatchProcessDto extends ProcessDtoAbstract
         }
 
         $newHeaders = [
-            PipesHeaders::USER        => NULL,
             PipesHeaders::LIMITER_KEY => NULL,
+            PipesHeaders::USER        => NULL,
         ];
 
         if ($user){

@@ -30,13 +30,13 @@ final class SoapClientFactoryTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create
      *
      * @throws Exception
      */
     public function testCreateSoapClientWsdlFail(): void
     {
-        $request = new RequestDtoWsdl('functionName', [], 'namespace', new Uri('abc'));
+        $request = new RequestDtoWsdl('functionName', [], 'namespace', new Uri('https://example.com'));
         $request->setVersion(SOAP_1_2);
 
         self::expectException(SoapException::class);
@@ -47,7 +47,7 @@ final class SoapClientFactoryTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create
      *
      * @throws Exception
      */

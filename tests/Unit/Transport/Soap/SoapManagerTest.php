@@ -27,11 +27,11 @@ final class SoapManagerTest extends TestCase
     use CustomAssertTrait;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::handleResponse()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::getHeadersAsString()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::sendMetrics()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::setMetricsSender()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::handleResponse
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::getHeadersAsString
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::sendMetrics
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::setMetricsSender
      *
      * @throws Exception
      */
@@ -50,7 +50,6 @@ final class SoapManagerTest extends TestCase
         $request = new RequestDto('', [], '', new Uri(''));
         $request->setVersion(SOAP_1_2);
 
-        /** @var CurlSender $influx */
         $influx      = self::createMock(CurlSender::class);
         $loader      = new MetricsSenderLoader($influx);
         $soapManager = new SoapManager($soapClientFactory);
@@ -63,11 +62,11 @@ final class SoapManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::handleResponse()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::getHeadersAsString()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::composeOptions()
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::setMetricsSender()
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::handleResponse
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::getHeadersAsString
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::composeOptions
+     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::setMetricsSender
      * @throws SoapException
      */
     public function testSendLastHeadersNull(): void

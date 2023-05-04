@@ -62,7 +62,6 @@ final class FileStorage
         $driver = $this->locator->get($content->getStorageType());
         $info   = $driver->save($content->getContent(), $content->getFilename());
 
-        /** @var FileInterface $file */
         $file = new $this->fileNamespace();
         $file
             ->setFilename($content->getFilename() ?? $info->getUrl())
@@ -117,7 +116,6 @@ final class FileStorage
      */
     public function getFileDocument(string $fileId): FileInterface
     {
-        /** @var FileInterface|null $file */
         $file = $this->dm->getRepository($this->fileNamespace)->find($fileId);
 
         if (!$file) {

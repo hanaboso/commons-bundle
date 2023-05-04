@@ -19,10 +19,10 @@ final class CryptManagerTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::encrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation()
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::__construct()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::encrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::__construct
      *
      * @throws Exception
      */
@@ -48,8 +48,8 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation
      *
      * @throws Exception
      */
@@ -62,8 +62,8 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation
      *
      * @throws Exception
      */
@@ -76,7 +76,7 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::transfer()
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::transfer
      *
      * @throws Exception
      */

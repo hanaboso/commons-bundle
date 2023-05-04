@@ -70,7 +70,7 @@ final class ImapConfigDto
      *
      * @return ImapConfigDto
      */
-    public function setPath(string $path): ImapConfigDto
+    public function setPath(string $path): self
     {
         $this->path = $path;
 
@@ -82,7 +82,7 @@ final class ImapConfigDto
      *
      * @return ImapConfigDto
      */
-    public function setFolder(string $folder): ImapConfigDto
+    public function setFolder(string $folder): self
     {
         $this->folder = $folder;
 

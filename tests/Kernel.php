@@ -35,11 +35,11 @@ final class Kernel extends BaseKernel
     {
         $contents = [
             AwsBundle::class             => ['all' => TRUE],
-            FrameworkBundle::class       => ['all' => TRUE],
             DoctrineBundle::class        => ['all' => TRUE],
-            MonologBundle::class         => ['all' => TRUE],
             DoctrineMongoDBBundle::class => ['all' => TRUE],
+            FrameworkBundle::class       => ['all' => TRUE],
             HbPFCommonsBundle::class     => ['all' => TRUE],
+            MonologBundle::class         => ['all' => TRUE],
 
         ];
         foreach ($contents as $class => $envs) {

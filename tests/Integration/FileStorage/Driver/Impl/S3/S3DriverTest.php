@@ -24,13 +24,13 @@ final class S3DriverTest extends KernelTestCaseAbstract
 {
 
     private const FAKE_AWS_CONNECTION_ARGS = [
-        'region'      => 's-west-2',
-        'version'     => '2006-03-01',
         'credentials' => [
             'key'    => 'key',
             'secret' => 'secret',
         ],
         'endpoint'    => 'ttps://vpce-0f89a33420c193abc-bluzidnv',
+        'region'      => 's-west-2',
+        'version'     => '2006-03-01',
     ];
 
     /**

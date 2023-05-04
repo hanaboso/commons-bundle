@@ -17,13 +17,13 @@ final class AdvancedWindwalkerCryptTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::encrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getCrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::__construct()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::normalizeLengthOfSecretKey()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Wrappers\SodiumCipherWrapper::derivateSecureKeys()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Wrappers\SodiumCipherWrapper::pbkdf2()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::encrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getCrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::__construct
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::normalizeLengthOfSecretKey
+     * @covers \Hanaboso\CommonsBundle\Crypt\Wrappers\SodiumCipherWrapper::derivateSecureKeys
+     * @covers \Hanaboso\CommonsBundle\Crypt\Wrappers\SodiumCipherWrapper::pbkdf2
      *
      * @throws Exception
      */
@@ -50,8 +50,8 @@ final class AdvancedWindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getPrefix()
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptImplAbstract::__construct()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getPrefix
+     * @covers \Hanaboso\CommonsBundle\Crypt\CryptImplAbstract::__construct
      *
      * @throws Exception
      */
@@ -66,9 +66,9 @@ final class AdvancedWindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::encrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getCrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::encrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getCrypt
      *
      * @throws Exception
      */
@@ -85,9 +85,9 @@ final class AdvancedWindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::encrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::decrypt()
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getCrypt()
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::encrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::decrypt
+     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\AdwancedWindwalkerCrypt::getCrypt
      *
      * @throws Exception
      */

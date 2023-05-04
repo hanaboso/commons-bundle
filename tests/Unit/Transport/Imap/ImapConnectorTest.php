@@ -61,8 +61,8 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
 
         $this->mockImapMailBox(
             [
-                'searchMailbox' => [1, 2],
                 'getMail'       => $mail,
+                'searchMailbox' => [1, 2],
             ],
         );
 

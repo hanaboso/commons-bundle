@@ -39,7 +39,7 @@ class TestEntity
      *
      * @return TestEntity
      */
-    public function setName(string $name): TestEntity
+    public function setName(string $name): self
     {
         $this->name = $name;
 

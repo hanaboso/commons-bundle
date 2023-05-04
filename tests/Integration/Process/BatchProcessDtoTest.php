@@ -26,8 +26,8 @@ final class BatchProcessDtoTest extends DatabaseTestCaseAbstract
         self::assertEquals('testCursor', $batchProcessDto->getBatchCursor('0'));
         self::assertEquals([
             'cursor'            => 'testCursor',
-            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. Data will be send to follower(s).',
             'result-code'    => '1010',
+            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. Data will be send to follower(s).',
         ], $batchProcessDto->getHeaders());
         $batchProcessDto->removeBatchCursor();
         self::assertEquals([], $batchProcessDto->getHeaders());
@@ -45,8 +45,8 @@ final class BatchProcessDtoTest extends DatabaseTestCaseAbstract
         self::assertEquals('testCursor', $batchProcessDto->getBatchCursor('0'));
         self::assertEquals([
             'cursor'            => 'testCursor',
-            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. No follower will be called.',
             'result-code'    => '1011',
+            'result-message' => 'Message will be used as a iterator with cursor [testCursor]. No follower will be called.',
         ], $batchProcessDto->getHeaders());
         $batchProcessDto->removeBatchCursor();
         self::assertEquals([], $batchProcessDto->getHeaders());

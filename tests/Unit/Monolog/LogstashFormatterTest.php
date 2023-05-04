@@ -28,7 +28,7 @@ final class LogstashFormatterTest extends TestCase
     private LogstashFormatter $logstashFormatter;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
      *
      * @throws Exception
      */
@@ -42,19 +42,19 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp' => 1_505_381_163_375,
-                'hostname'  => 'localhost',
-                'type'      => 'test-service',
-                'message'   => 'Test message',
                 'channel'   => 'test',
+                'hostname'  => 'localhost',
+                'message'   => 'Test message',
                 'severity'  => 'INFO',
+                'timestamp' => 1_505_381_163_375,
+                'type'      => 'test-service',
             ],
             $message,
         );
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
      *
      * @throws Exception
      */
@@ -79,23 +79,23 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp'      => 1_505_381_163_375,
-                'hostname'       => 'localhost',
-                'type'           => 'test-service',
-                'message'        => 'Test message',
                 'channel'        => 'test',
-                'severity'       => 'INFO',
                 'correlation_id' => '123',
+                'hostname'       => 'localhost',
+                'message'        => 'Test message',
                 'node_id'        => '456',
                 'node_name'      => 'name',
+                'severity'       => 'INFO',
+                'timestamp'      => 1_505_381_163_375,
                 'topology_id'    => '1',
+                'type'           => 'test-service',
             ],
             $message,
         );
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
      *
      * @throws Exception
      */
@@ -119,7 +119,7 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
      *
      * @throws Exception
      */
@@ -133,8 +133,8 @@ final class LogstashFormatterTest extends TestCase
                 'Test message',
                 [
                     'correlation_id' => '123',
-                    'node_id'        => '456',
                     'exception'      => new Exception('Default exception'),
+                    'node_id'        => '456',
                 ],
             ),
         );
@@ -145,7 +145,7 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format()
+     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
      *
      * @throws Exception
      */
@@ -158,8 +158,8 @@ final class LogstashFormatterTest extends TestCase
                 Level::Info,
                 'Test message',
                 [
-                    'type'          => 'starting_point',
                     'topology_name' => 'topology_1',
+                    'type'          => 'starting_point',
                 ],
             ),
         );
@@ -168,13 +168,13 @@ final class LogstashFormatterTest extends TestCase
 
         self::assertEquals(
             [
-                'timestamp'     => 1_505_381_163_375,
-                'hostname'      => 'localhost',
-                'type'          => 'starting_point',
-                'message'       => 'Test message',
                 'channel'       => 'test',
+                'hostname'      => 'localhost',
+                'message'       => 'Test message',
                 'severity'      => 'INFO',
+                'timestamp'     => 1_505_381_163_375,
                 'topology_name' => 'topology_1',
+                'type'          => 'starting_point',
             ],
             $message,
         );

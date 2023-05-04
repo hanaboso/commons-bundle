@@ -25,7 +25,7 @@ interface FileInterface
      *
      * @return FileInterface
      */
-    public function setFilename(string $filename): FileInterface;
+    public function setFilename(string $filename): self;
 
     /**
      * @return string
@@ -37,7 +37,7 @@ interface FileInterface
      *
      * @return FileInterface
      */
-    public function setFileFormat(string $format): FileInterface;
+    public function setFileFormat(string $format): self;
 
     /**
      * @return string
@@ -49,7 +49,7 @@ interface FileInterface
      *
      * @return FileInterface
      */
-    public function setFileUrl(string $url): FileInterface;
+    public function setFileUrl(string $url): self;
 
     /**
      * @return string
@@ -61,7 +61,7 @@ interface FileInterface
      *
      * @return FileInterface
      */
-    public function setSize(string $size): FileInterface;
+    public function setSize(string $size): self;
 
     /**
      * @return string
@@ -73,6 +73,6 @@ interface FileInterface
      *
      * @return FileInterface
      */
-    public function setStorageType(string $type): FileInterface;
+    public function setStorageType(string $type): self;
 
 }
