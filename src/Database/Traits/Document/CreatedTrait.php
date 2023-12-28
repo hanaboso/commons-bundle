@@ -15,9 +15,8 @@ trait CreatedTrait
 
     /**
      * @var DateTime
-     *
-     * @ODM\Field(type="date")
      */
+    #[ODM\Field(type: 'date')]
     protected DateTime $created;
 
     /**

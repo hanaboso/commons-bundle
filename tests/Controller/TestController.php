@@ -17,10 +17,9 @@ final class TestController
     use ControllerTrait;
 
     /**
-     * @Route("/test/route", methods={"GET", "OPTIONS"})
-     *
      * @return Response
      */
+    #[Route('/test/route', methods: ['GET'])]
     public function getNodesAction(): Response
     {
         return $this->getResponse([]);

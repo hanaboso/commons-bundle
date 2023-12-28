@@ -17,9 +17,8 @@ trait UpdatedTrait
 
     /**
      * @var DateTime
-     *
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: 'datetime')]
     protected DateTime $updated;
 
     /**
@@ -31,9 +30,9 @@ trait UpdatedTrait
     }
 
     /**
-     * @ORM\PreUpdate()
      * @throws DateTimeException
      */
+    #[ORM\PreUpdate()]
     public function preUpdate(): void
     {
         $this->updated = DateTimeUtils::getUtcDateTime();

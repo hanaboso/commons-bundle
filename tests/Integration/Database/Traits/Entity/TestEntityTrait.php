@@ -14,9 +14,8 @@ use Hanaboso\Utils\Exception\DateTimeException;
  * Class TestEntityTrait
  *
  * @package CommonsBundleTests\Integration\Database\Traits\Entity
- *
- * @ORM\Entity()
  */
+#[ORM\Entity()]
 class TestEntityTrait
 {
 
@@ -27,9 +26,8 @@ class TestEntityTrait
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected string $name;
 
     /**

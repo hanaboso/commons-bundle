@@ -4,7 +4,6 @@ namespace CommonsBundleTests\Unit\Transport\Soap\Dto;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseDto;
-use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
 
 /**
  * Class ResponseDtoTest
@@ -25,7 +24,6 @@ final class ResponseDtoTest extends KernelTestCaseAbstract
         $dto = new ResponseDto('response', NULL, NULL);
         self::assertEquals('response', $dto->getSoapCallResponse());
         self::assertNull($dto->getLastResponseHeaders());
-        self::assertInstanceOf(ResponseHeaderDto::class, $dto->getResponseHeaderDto());
     }
 
 }

@@ -12,9 +12,8 @@ use Hanaboso\Utils\Exception\DateTimeException;
  * Class FileMongo
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
- *
- * @ODM\File(bucketName="files")
  */
+#[ODM\File(bucketName: 'files')]
 class FileMongo
 {
 
@@ -22,30 +21,26 @@ class FileMongo
 
     /**
      * @var string
-     *
-     * @ODM\File\Filename()
      */
+    #[ODM\File\Filename()]
     protected string $filename;
 
     /**
      * @var DateTimeInterface
-     *
-     * @ODM\File\UploadDate()
      */
+    #[ODM\File\UploadDate()]
     protected DateTimeInterface $uploadDate;
 
     /**
      * @var int
-     *
-     * @ODM\File\Length()
      */
+    #[ODM\File\Length()]
     protected int $length;
 
     /**
      * @var int
-     *
-     * @ODM\File\ChunkSize()
      */
+    #[ODM\File\ChunkSize()]
     protected int $chunkSize;
 
     /**

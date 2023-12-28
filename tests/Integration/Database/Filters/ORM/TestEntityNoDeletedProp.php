@@ -9,9 +9,8 @@ use Hanaboso\CommonsBundle\Database\Traits\Entity\IdTrait;
  * Class TestEntityNoDeletedProp
  *
  * @package CommonsBundleTests\Integration\Database\Filters\ORM
- *
- * @ORM\Entity()
  */
+#[ORM\Entity()]
 class TestEntityNoDeletedProp
 {
 
@@ -19,9 +18,8 @@ class TestEntityNoDeletedProp
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected string $name;
 
     /**

@@ -7,7 +7,6 @@ use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Metrics\Impl\CurlSender;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
-use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
@@ -58,7 +57,6 @@ final class SoapManagerTest extends TestCase
 
         self::assertEquals($soapCallResponse, $result->getSoapCallResponse());
         self::assertEquals($lastResponseHeaders, $result->getLastResponseHeaders());
-        self::assertInstanceOf(ResponseHeaderDto::class, $result->getResponseHeaderDto());
     }
 
     /**

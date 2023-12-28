@@ -14,9 +14,8 @@ trait DeletedTrait
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     protected bool $deleted = FALSE;
 
     /**

@@ -57,9 +57,9 @@ final class ResponseDto
     }
 
     /**
-     * @return ResponseHeaderDto|null
+     * @return ResponseHeaderDto
      */
-    public function getResponseHeaderDto(): ?ResponseHeaderDto
+    public function getResponseHeaderDto(): ResponseHeaderDto
     {
         return $this->responseHeaderDto;
     }

@@ -14,9 +14,8 @@ use Hanaboso\CommonsBundle\FileStorage\FileTypes;
  * Class File
  *
  * @package Hanaboso\CommonsBundle\FileStorage\Document
- *
- * @ODM\Document
  */
+#[ODM\Document]
 class File implements FileInterface
 {
 
@@ -24,44 +23,38 @@ class File implements FileInterface
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string")
      */
+    #[ODM\Field(type: 'string')]
     private string $filename;
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string", nullable=false)
      */
+    #[ODM\Field(type: 'string', nullable: FALSE)]
     private string $fileFormat;
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string", nullable=false)
      */
+    #[ODM\Field(type: 'string', nullable: FALSE)]
     private string $mimeType;
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string")
      */
+    #[ODM\Field(type: 'string')]
     private string $fileUrl;
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string")
      */
+    #[ODM\Field(type: 'string')]
     private string $size;
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string")
      */
+    #[ODM\Field(type: 'string')]
     private string $storageType;
 
     /**

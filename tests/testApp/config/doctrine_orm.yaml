@@ -19,12 +19,12 @@ doctrine:
         proxy_namespace: OrmProxies
         mappings:
             TestEntity:
-                type: annotation
+                type: attribute
                 dir: '%kernel.project_dir%/tests/Integration/Database/Filters/ORM'
                 is_bundle: false
                 prefix: CommonsBundleTests\Integration\Database\Filters\ORM
             TestEntityTrait:
-                type: annotation
+                type: attribute
                 dir: '%kernel.project_dir%/tests/Integration/Database/Traits/Entity'
                 is_bundle: false
                 prefix: CommonsBundleTests\Integration\Database\Traits\Entity

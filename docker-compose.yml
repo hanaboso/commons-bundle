@@ -6,7 +6,6 @@ services:
         user: ${DEV_UID}:${DEV_GID}
         volumes:
             - ./:/var/www:cached
-            - ${SSH_AUTH}:/tmp/.ssh-auth-sock
             - ${HOME}/dev/.composer:${HOME}/dev/.composer:cached
         environment:
             - APP_ENV=dev

@@ -14,11 +14,10 @@ trait IdTrait
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="bigint", nullable=false, options={"unsigned":true})
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Id()]
+    #[ORM\Column(type: 'bigint', nullable: FALSE, options: ['unsigned' => TRUE])]
     protected string $id;
 
     /**

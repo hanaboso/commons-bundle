@@ -14,9 +14,8 @@ use Hanaboso\Utils\Exception\DateTimeException;
  * Class TestDocumentTrait
  *
  * @package CommonsBundleTests\Integration\Database\Traits\Document
- *
- * @ODM\Document()
  */
+#[ODM\Document]
 class TestDocumentTrait
 {
 
@@ -27,9 +26,8 @@ class TestDocumentTrait
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string")
      */
+    #[ODM\Field(type: 'string')]
     protected string $name;
 
     /**

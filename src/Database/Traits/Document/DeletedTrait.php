@@ -14,9 +14,8 @@ trait DeletedTrait
 
     /**
      * @var bool
-     *
-     * @ODM\Field(type="bool")
      */
+    #[ODM\Field(type: 'bool')]
     protected bool $deleted = FALSE;
 
     /**

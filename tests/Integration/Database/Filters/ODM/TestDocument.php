@@ -10,9 +10,8 @@ use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
  * Class TestDocument
  *
  * @package CommonsBundleTests\Integration\Database\Filters\ODM
- *
- * @ODM\Document()
  */
+#[ODM\Document]
 class TestDocument
 {
 
@@ -22,8 +21,8 @@ class TestDocument
     /**
      * @var string
      *
-     * @ODM\Field(type="string")
      */
+    #[ODM\Field(type: 'string')]
     protected string $name;
 
     /**

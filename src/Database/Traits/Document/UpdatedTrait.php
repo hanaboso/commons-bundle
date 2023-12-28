@@ -17,9 +17,8 @@ trait UpdatedTrait
 
     /**
      * @var DateTime
-     *
-     * @ODM\Field(type="date")
      */
+    #[ODM\Field(type: 'date')]
     protected DateTime $updated;
 
     /**
@@ -31,9 +30,9 @@ trait UpdatedTrait
     }
 
     /**
-     * @ODM\PreUpdate()
      * @throws DateTimeException
      */
+    #[ODM\PreUpdate()]
     public function preUpdate(): void
     {
         $this->updated = DateTimeUtils::getUtcDateTime();

@@ -15,9 +15,8 @@ trait CreatedTrait
 
     /**
      * @var DateTime
-     *
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: 'datetime')]
     protected DateTime $created;
 
     /**

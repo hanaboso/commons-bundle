@@ -22,22 +22,22 @@ doctrine_mongodb:
         default:
             mappings:
                 FileDocument:
-                    type: annotation
+                    type: attribute
                     is_bundle: false
                     dir: "%src_dir%/src/FileStorage/Document"
                     prefix: Hanaboso\CommonsBundle\FileStorage\Document
                 FileMongo:
-                    type: annotation
+                    type: attribute
                     is_bundle: false
                     dir: "%src_dir%/src/FileStorage/Driver/Impl/Mongo"
                     prefix: Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo
                 TestDocument:
-                    type: annotation
+                    type: attribute
                     dir: '%kernel.project_dir%/tests/Integration/Database/Filters/ODM'
                     is_bundle: false
                     prefix: CommonsBundleTests\Integration\Database\Filters\ODM
                 TestDocumentTrait:
-                    type: annotation
+                    type: attribute
                     dir: '%kernel.project_dir%/tests/Integration/Database/Traits/Document'
                     is_bundle: false
                     prefix: CommonsBundleTests\Integration\Database\Traits\Document

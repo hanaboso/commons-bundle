@@ -9,9 +9,8 @@ use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
  * Class TestDocNoDeletedProp
  *
  * @package CommonsBundleTests\Integration\Database\Filters\ODM
- *
- * @ODM\Document()
  */
+#[ODM\Document]
 class TestDocNoDeletedProp
 {
 
@@ -19,9 +18,8 @@ class TestDocNoDeletedProp
 
     /**
      * @var string
-     *
-     * @ODM\Field(type="string")
      */
+    #[ODM\Field(type: 'string')]
     protected string $name;
 
     /**

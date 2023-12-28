@@ -155,19 +155,17 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
         $request;
         $response = new ResponseDto($soapCallResponse, $lastResponseHeaders, $outputHeaders);
 
-        if ($response->getResponseHeaderDto()) {
-            /** @var ResponseHeaderDto $headers */
-            $headers = $response->getResponseHeaderDto();
-            $this->logger->debug(
-                sprintf(
-                    'Response: Status Code: %s, Reason Phrase: %s, Headers: %s, Body: %s',
-                    $headers->getHttpStatusCode(),
-                    $headers->getHttpReason(),
-                    $response->getLastResponseHeaders(),
-                    $response->getSoapCallResponse(),
-                ),
-            );
-        }
+        /** @var ResponseHeaderDto $headers */
+        $headers = $response->getResponseHeaderDto();
+        $this->logger->debug(
+            sprintf(
+                'Response: Status Code: %s, Reason Phrase: %s, Headers: %s, Body: %s',
+                $headers->getHttpStatusCode(),
+                $headers->getHttpReason(),
+                $response->getLastResponseHeaders(),
+                $response->getSoapCallResponse(),
+            ),
+        );
 
         return $response;
     }
