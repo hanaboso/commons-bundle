@@ -3766,16 +3766,16 @@
         },
         {
             "name": "hanaboso/php-check-utils",
-            "version": "1.6.3",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hanaboso/php-check-utils.git",
-                "reference": "3243a5e0aac25a08bb3b5b2c61e62b4ffa3f08d1"
+                "reference": "d11560ce4206ac5241473c50a76cc54ffdad06a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/3243a5e0aac25a08bb3b5b2c61e62b4ffa3f08d1",
-                "reference": "3243a5e0aac25a08bb3b5b2c61e62b4ffa3f08d1",
+                "url": "https://api.github.com/repos/hanaboso/php-check-utils/zipball/d11560ce4206ac5241473c50a76cc54ffdad06a6",
+                "reference": "d11560ce4206ac5241473c50a76cc54ffdad06a6",
                 "shasum": ""
             },
             "require": {
@@ -3846,9 +3846,9 @@
             "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
             "support": {
                 "issues": "https://github.com/hanaboso/php-check-utils/issues",
-                "source": "https://github.com/hanaboso/php-check-utils/tree/1.6.3"
+                "source": "https://github.com/hanaboso/php-check-utils/tree/1.6.4"
             },
-            "time": "2024-06-19T08:02:37+00:00"
+            "time": "2024-06-19T16:47:36+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
