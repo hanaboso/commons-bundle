@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Listener\SystemMetricsListener;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Hanaboso\Utils\System\PipesHeaders;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
  *
  * @package CommonsBundleTests\Integration\Listener
  */
+#[CoversClass(SystemMetricsListener::class)]
 final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
 {
 
@@ -29,7 +31,7 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
     private $listener;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Listener\SystemMetricsListener::onKernelController
+     * @return void
      */
     public function testOnKernelController(): void
     {
@@ -42,7 +44,7 @@ final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Listener\SystemMetricsListener::onKernelTerminate
+     * @return void
      */
     public function testOnKernelTerminate(): void
     {

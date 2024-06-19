@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Crypt\CryptInterface;
 use Hanaboso\CommonsBundle\Crypt\CryptManager;
 use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
 use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
+use PHPUnit\Framework\Attributes\CoversClass;
 use stdClass;
 
 /**
@@ -15,15 +16,11 @@ use stdClass;
  *
  * @package CommonsBundleTests\Unit\Crypt
  */
+#[CoversClass(CryptManager::class)]
 final class CryptManagerTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::encrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::__construct
-     *
      * @throws Exception
      */
     public function testEncryptAndDecrypt(): void
@@ -48,9 +45,6 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation
-     *
      * @throws Exception
      */
     public function testDecryptUnsupportedImpl(): void
@@ -62,9 +56,6 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::decrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::getImplementation
-     *
      * @throws Exception
      */
     public function testDecryptBadImpl(): void
@@ -76,8 +67,6 @@ final class CryptManagerTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptManager::transfer
-     *
      * @throws Exception
      */
     public function testTransfer(): void

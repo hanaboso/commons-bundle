@@ -9,6 +9,7 @@ use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Hanaboso\Utils\String\Json;
 use Monolog\Level;
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SoapFault;
 
@@ -17,6 +18,7 @@ use SoapFault;
  *
  * @package CommonsBundleTests\Unit\Monolog
  */
+#[CoversClass(LogstashFormatter::class)]
 final class LogstashFormatterTest extends TestCase
 {
 
@@ -28,8 +30,6 @@ final class LogstashFormatterTest extends TestCase
     private LogstashFormatter $logstashFormatter;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
-     *
      * @throws Exception
      */
     public function testFormat(): void
@@ -54,8 +54,6 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
-     *
      * @throws Exception
      */
     public function testFormatPipes(): void
@@ -95,8 +93,6 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
-     *
      * @throws Exception
      */
     public function testFormatException(): void
@@ -119,8 +115,6 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
-     *
      * @throws Exception
      */
     public function testFormatExceptionPipes(): void
@@ -145,8 +139,6 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::format
-     *
      * @throws Exception
      */
     public function testContext(): void
@@ -181,8 +173,6 @@ final class LogstashFormatterTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatter::normalizeException
-     *
      * @throws Exception
      */
     public function testNormalizeException(): void

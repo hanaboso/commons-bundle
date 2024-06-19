@@ -9,18 +9,18 @@ use GuzzleHttp\Psr7\Response;
 use Hanaboso\CommonsBundle\Metrics\Impl\CurlSender;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\WorkerApi\Client as WorkerApiClient;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class CurlSenderTest
  *
  * @package CommonsBundleTests\Integration\Metrics\Impl
  */
+#[CoversClass(CurlSender::class)]
 final class CurlSenderTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Metrics\Impl\CurlSender::send
-     *
      * @throws Exception
      */
     public function testSend(): void

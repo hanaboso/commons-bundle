@@ -3,6 +3,7 @@
 namespace CommonsBundleTests;
 
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\ControllerTestTrait;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\RestoreErrorHandlersTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -14,6 +15,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
 {
 
     use ControllerTestTrait;
+    use RestoreErrorHandlersTrait;
 
     /**
      *
@@ -23,6 +25,16 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
         parent::setUp();
 
         $this->client = self::createClient([], []);
+    }
+
+    /**
+     * @return void
+     */
+    protected function tearDown(): void {
+        parent::tearDown();
+
+        $this->restoreErrorHandler();
+        $this->restoreExceptionHandler();
     }
 
 }

@@ -9,6 +9,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto as RequestDtoWsdl;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,6 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package CommonsBundleTests\Integration\Transport\Soap
  */
+#[CoversClass(SoapClientFactory::class)]
 final class SoapClientFactoryTest extends TestCase
 {
 
@@ -30,8 +32,6 @@ final class SoapClientFactoryTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create
-     *
      * @throws Exception
      */
     public function testCreateSoapClientWsdlFail(): void
@@ -47,8 +47,6 @@ final class SoapClientFactoryTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory::create
-     *
      * @throws Exception
      */
     public function testCreateSoapClientNonWsdl(): void

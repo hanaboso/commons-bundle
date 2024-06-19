@@ -6,28 +6,18 @@ use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Document\File;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class FileTest
  *
  * @package CommonsBundleTests\Integration\FileStorage\Document
  */
+#[CoversClass(File::class)]
 final class FileTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::getFilename
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setFilename
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setFileFormat
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::getFileFormat
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::getMimeType
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::getFileUrl
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setFileUrl
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::getSize
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setSize
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::getStorageType
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setStorageType
-     *
      * @throws Exception
      */
     public function testFile(): void
@@ -49,8 +39,6 @@ final class FileTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setFileFormat
-     *
      * @throws Exception
      */
     public function testFileFormatException(): void
@@ -61,8 +49,6 @@ final class FileTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Document\File::setStorageType
-     *
      * @throws Exception
      */
     public function testStorageTypeException(): void

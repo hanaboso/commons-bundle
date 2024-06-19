@@ -4,19 +4,19 @@ namespace CommonsBundleTests\Unit\Event;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Event\ProcessStatusEvent;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ProcessStatusEventTest
  *
  * @package CommonsBundleTests\Unit\Event
  */
+#[CoversClass(ProcessStatusEvent::class)]
 final class ProcessStatusEventTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Event\ProcessStatusEvent::getProcessId
-     * @covers \Hanaboso\CommonsBundle\Event\ProcessStatusEvent::getStatus
-     * @covers \Hanaboso\CommonsBundle\Event\ProcessStatusEvent
+     * @return void
      */
     public function testGetProcessId(): void
     {

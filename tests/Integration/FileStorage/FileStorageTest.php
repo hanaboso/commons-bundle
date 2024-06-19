@@ -12,6 +12,7 @@ use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto;
 use Hanaboso\CommonsBundle\FileStorage\Dto\FileInfoDto;
 use Hanaboso\CommonsBundle\FileStorage\FileStorage;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -19,16 +20,12 @@ use PHPUnit\Framework\MockObject\MockObject;
  *
  * @package CommonsBundleTests\Integration\FileStorage
  */
+#[CoversClass(FileContentDto::class)]
+#[CoversClass(FileStorage::class)]
 final class FileStorageTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Dto\FileContentDto
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::saveFileFromContent
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::getFileStorage
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::deleteFile
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage
-     *
      * @throws Exception
      */
     public function testFileStorage(): void
@@ -51,8 +48,6 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\FileStorage::getFileDocument
-     *
      * @throws FileStorageException
      * @throws Exception
      */

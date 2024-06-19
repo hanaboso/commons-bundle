@@ -14,12 +14,14 @@ use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Monolog\Level;
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class HttpHandlerTest
  *
  * @package CommonsBundleTests\Unit\Monolog
  */
+#[CoversClass(HttpHandler::class)]
 final class HttpHandlerTest extends KernelTestCaseAbstract
 {
 
@@ -27,9 +29,6 @@ final class HttpHandlerTest extends KernelTestCaseAbstract
     use CustomAssertTrait;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\HttpHandler
-     * @covers \Hanaboso\CommonsBundle\Monolog\HttpHandler::write
-     *
      * @throws Exception
      */
     public function testHttpHandler(): void

@@ -7,6 +7,7 @@ use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -14,14 +15,13 @@ use PHPUnit\Framework\MockObject\MockObject;
  *
  * @package CommonsBundleTests\Unit\Metrics
  */
+#[CoversClass(MetricsSenderLoader::class)]
 final class MetricsLoaderTest extends KernelTestCaseAbstract
 {
 
     use CustomAssertTrait;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader::getSender
-     *
      * @throws Exception
      */
     public function testLoaderMissingSender(): void

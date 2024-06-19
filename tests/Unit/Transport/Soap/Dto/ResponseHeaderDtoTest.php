@@ -4,21 +4,19 @@ namespace CommonsBundleTests\Unit\Transport\Soap\Dto;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ResponseHeaderDtoTest
  *
  * @package CommonsBundleTests\Unit\Transport\Soap\Dto
  */
+#[CoversClass(ResponseHeaderDto::class)]
 final class ResponseHeaderDtoTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto::getHttpHeaders
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto::getHttpVersion
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto::getHttpStatusCode
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\ResponseHeaderDto::getHttpReason
+     * @return void
      */
     public function testResponseHeaderDto(): void
     {

@@ -7,6 +7,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto as RequestDtoNo
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\Wsdl\RequestDto as RequestDtoWsdl;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapHelper;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SoapParam;
 use SoapVar;
@@ -18,11 +19,12 @@ use Symfony\Component\HttpFoundation\HeaderBag;
  *
  * @package CommonsBundleTests\Unit\Transport\Soap
  */
+#[CoversClass(SoapHelper::class)]
 final class SoapHelperTest extends TestCase
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeRequestHeaders
+     * @return void
      */
     public function testComposeRequestHeaders(): void
     {
@@ -37,9 +39,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArgumentsForNonWsdl
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeDataForSoapParam
+     * @return void
      */
     public function testComposeArguments(): void
     {
@@ -69,7 +69,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
+     * @return void
      */
     public function testComposeArgumentsWsdl(): void
     {
@@ -80,7 +80,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
+     * @return void
      */
     public function testComposeArgumentsNonWsdl(): void
     {
@@ -93,7 +93,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::composeArguments
+     * @return void
      */
     public function testComposeArgumentsNonWsdlNull(): void
     {
@@ -104,7 +104,7 @@ final class SoapHelperTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders
+     * @return void
      */
     public function testParseResponseHeaders(): void
     {
@@ -134,7 +134,7 @@ Content-Length: nnnn';
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapHelper::parseResponseHeaders
+     * @return void
      */
     public function testParseResponseHeadersEmpty(): void
     {

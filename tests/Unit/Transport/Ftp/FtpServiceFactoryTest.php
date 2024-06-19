@@ -10,12 +10,14 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class FtpServiceFactoryTest
  *
  * @package CommonsBundleTests\Unit\Transport\Ftp
  */
+#[CoversClass(FtpServiceFactory::class)]
 final class FtpServiceFactoryTest extends KernelTestCaseAbstract
 {
 
@@ -27,9 +29,6 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     private $factory;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory
-     *
      * @throws Exception
      */
     public function testGetServiceFtp(): void
@@ -40,8 +39,6 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService
-     *
      * @throws Exception
      */
     public function testGetServiceSftp(): void
@@ -52,8 +49,6 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::getFtpService
-     *
      * @throws FtpException
      */
     public function testGetServiceUnknown(): void
@@ -65,7 +60,7 @@ final class FtpServiceFactoryTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpServiceFactory::setLogger
+     * @return void
      */
     public function testSetLogger(): void
     {

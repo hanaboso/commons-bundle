@@ -10,6 +10,7 @@ use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use PhpImap\IncomingMail;
 use PhpImap\IncomingMailHeader;
 use PhpImap\Mailbox;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -17,6 +18,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  *
  * @package CommonsBundleTests\Unit\Transport\Imap
  */
+#[CoversClass(ImapConnector::class)]
 final class ImapConnectorTest extends KernelTestCaseAbstract
 {
 
@@ -33,7 +35,6 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     private ImapConnector $connector;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::create
      * @throws Exception
      */
     public function testCreate(): void
@@ -44,9 +45,6 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::listMails
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::getMail
-     *
      * @throws Exception
      */
     public function testListMails(): void
@@ -70,8 +68,6 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::deleteMail
-     *
      * @throws Exception
      */
     public function testDeleteMail(): void
@@ -83,9 +79,6 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::moveMail
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::checkMailbox
-     *
      * @throws Exception
      */
     public function testMoveMail(): void
@@ -97,7 +90,6 @@ final class ImapConnectorTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConnector::checkMailbox
      * @throws Exception
      */
     public function testCheckMailBox(): void

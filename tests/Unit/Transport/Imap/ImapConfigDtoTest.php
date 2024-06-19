@@ -4,24 +4,19 @@ namespace CommonsBundleTests\Unit\Transport\Imap;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ImapConfigDtoTest
  *
  * @package CommonsBundleTests\Unit\Transport\Imap
  */
+#[CoversClass(ImapConfigDto::class)]
 final class ImapConfigDtoTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto::getHost
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto::getUser
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto::getPath
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto::getFolder
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto::getPassword
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto::setPath
-     * @covers \Hanaboso\CommonsBundle\Transport\Imap\ImapConfigDto::setFolder
+     * @return void
      */
     public function testImapConfigDto(): void
     {

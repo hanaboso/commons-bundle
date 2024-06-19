@@ -9,12 +9,14 @@ use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class FtpAdapterTest
  *
  * @package CommonsBundleTests\Unit\Transport\Ftp\Adapter
  */
+#[CoversClass(FtpAdapter::class)]
 final class FtpAdapterTest extends KernelTestCaseAbstract
 {
 
@@ -39,7 +41,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter
      * @throws FtpException
      */
     public function testConnect(): void
@@ -52,7 +53,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter
      * @throws FtpException
      */
     public function testConnectErr(): void
@@ -64,8 +64,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::login
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::getResource
      * @throws FtpException
      */
     public function testLogin(): void
@@ -81,7 +79,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::login
      * @throws FtpException
      */
     public function testLoginErr(): void
@@ -94,8 +91,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::disconnect
-     *
      * @throws FtpException
      */
     public function testDisconnect(): void
@@ -107,8 +102,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::disconnect
-     *
      * @throws FtpException
      */
     public function testDisconnectErr(): void
@@ -121,8 +114,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::uploadFile
-     *
      * @throws FtpException
      */
     public function testUploadFile(): void
@@ -134,8 +125,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::uploadFile
-     *
      * @throws FtpException
      */
     public function testUploadFileErr(): void
@@ -148,8 +137,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::downloadFile
-     *
      * @throws FtpException
      */
     public function testDownloadFileErr(): void
@@ -162,8 +149,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::downloadFile
-     *
      * @throws FtpException
      */
     public function testDownloadFile(): void
@@ -176,7 +161,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::listDir
      * @throws FtpException
      */
     public function testListDir(): void
@@ -189,7 +173,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::listDir
      * @throws FtpException
      */
     public function testListDirErr(): void
@@ -201,7 +184,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::dirExists
      * @throws FtpException
      */
     public function testDirExists(): void
@@ -214,7 +196,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::dirExists
      * @throws FtpException
      */
     public function testDirExistsErr(): void
@@ -227,8 +208,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::makeDir
-     *
      * @throws FtpException
      */
     public function testMakeDir(): void
@@ -241,8 +220,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::makeDir
-     *
      * @throws FtpException
      */
     public function testMakeDirErr(): void
@@ -255,7 +232,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::remove
      * @throws FtpException
      */
     public function testRemove(): void
@@ -268,7 +244,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::remove
      * @throws FtpException
      */
     public function testRemoveErr(): void
@@ -281,7 +256,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::getResource
      * @throws FtpException
      */
     public function testGetResource(): void
@@ -293,9 +267,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::makeDirRecursive
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\FtpAdapter::isFile
-     *
      * @throws FtpException
      */
     public function testMakeDirRecursive(): void

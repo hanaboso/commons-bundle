@@ -5,19 +5,21 @@ namespace CommonsBundleTests\Unit\Monolog;
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Monolog\LogstashFormatterFactory;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class LogstashFormatterFactoryTest
  *
  * @package CommonsBundleTests\Unit\Monolog
  */
+#[CoversClass(LogstashFormatterFactory::class)]
 final class LogstashFormatterFactoryTest extends KernelTestCaseAbstract
 {
 
     use CustomAssertTrait;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Monolog\LogstashFormatterFactory::create
+     * @return void
      */
     public function testCreate(): void
     {

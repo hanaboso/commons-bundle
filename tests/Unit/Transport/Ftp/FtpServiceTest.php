@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpService;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 
@@ -16,16 +17,11 @@ use SplFileInfo;
  *
  * @package CommonsBundleTests\Unit\Transport\Ftp
  */
+#[CoversClass(FtpService::class)]
 final class FtpServiceTest extends TestCase
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::uploadFile
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect
-     *
      * @throws Exception
      */
     public function testUploadFile(): void
@@ -48,12 +44,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFile
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect
-     *
      * @throws Exception
      */
     public function testDownloadFile(): void
@@ -74,12 +64,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFiles
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect
-     *
      * @throws Exception
      */
     public function testDownloadFiles(): void
@@ -104,8 +88,8 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::getAdapter
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::setLogger
+     * @return void
+     * @throws FtpException
      */
     public function testGetAdapter(): void
     {
@@ -119,8 +103,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::uploadFile
-     *
      * @throws FtpException
      */
     public function testUploadFileErr(): void
@@ -143,7 +125,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFile
      * @throws FtpException
      */
     public function testDownloadFileErr(): void
@@ -164,7 +145,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::downloadFiles
      * @throws FtpException
      */
     public function testDownloadFilesErr(): void
@@ -186,7 +166,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::connect
      * @throws FtpException
      */
     public function testConnectErr(): void
@@ -201,7 +180,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::disconnect
      * @throws FtpException
      */
     public function testDisconnectErr(): void
@@ -219,7 +197,6 @@ final class FtpServiceTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpService::login
      * @throws FtpException
      */
     public function testLogin(): void

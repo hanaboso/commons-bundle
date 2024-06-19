@@ -17,12 +17,14 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class CurlMetricsUtilsTest
  *
  * @package CommonsBundleTests\Unit\Utils
  */
+#[CoversClass(CurlMetricUtils::class)]
 final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 {
 
@@ -81,8 +83,6 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Utils\CurlMetricUtils::sendCurlMetrics
-     *
      * @throws Exception
      */
     public function testSendCurlMetrics(): void

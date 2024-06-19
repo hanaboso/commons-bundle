@@ -20,6 +20,7 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -28,13 +29,11 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @package CommonsBundleTests\Unit\Transport\Curl
  */
+#[CoversClass(CurlManager::class)]
 final class CurlManagerTest extends TestCase
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::setTimeout
-     *
      * @throws Exception
      */
     public function testSend(): void
@@ -69,8 +68,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
-     *
      * @throws Exception
      */
     public function testSendFail(): void
@@ -87,8 +84,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
-     *
      * @throws Exception
      */
     public function testSendFailMethod(): void
@@ -99,8 +94,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
-     *
      * @throws Exception
      */
     public function testSendFailBody(): void
@@ -112,8 +105,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::from
-     *
      * @throws Exception
      */
     public function testFrom(): void
@@ -136,7 +127,7 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlException::getResponse
+     * @return void
      */
     public function testCurlException(): void
     {
@@ -146,8 +137,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::send
-     *
      * @throws CurlException
      */
     public function testSendErr(): void
@@ -170,9 +159,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::sendAsync
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::logResponse
-     *
      * @throws CurlException
      */
     public function testSendAsync(): void
@@ -196,7 +182,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::sendAsync
      * @throws CurlException
      */
     public function testSendAsyncException(): void
@@ -223,8 +208,6 @@ final class CurlManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlManager::sendAsync
-     *
      * @throws CurlException
      */
     public function testSendAsyncReject(): void

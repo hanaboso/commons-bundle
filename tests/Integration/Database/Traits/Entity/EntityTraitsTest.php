@@ -5,23 +5,18 @@ namespace CommonsBundleTests\Integration\Database\Traits\Entity;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\Utils\Exception\DateTimeException;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class EntityTraitsTest
  *
  * @package CommonsBundleTests\Integration\Database\Traits\Entity
  */
+#[CoversClass(TestEntityTrait::class)]
 final class EntityTraitsTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Entity\TestEntityTrait::preUpdate
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Entity\TestEntityTrait::isDeleted
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Entity\TestEntityTrait::setDeleted
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Entity\TestEntityTrait::getCreated
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Entity\TestEntityTrait::getId
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Entity\TestEntityTrait::getUpdated
-     *
      * @throws DateTimeException
      * @throws Exception
      */

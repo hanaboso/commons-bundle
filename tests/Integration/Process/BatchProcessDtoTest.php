@@ -4,20 +4,19 @@ namespace CommonsBundleTests\Integration\Process;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Hanaboso\CommonsBundle\Process\BatchProcessDto;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class BatchProcessDtoTest
  *
  * @package CommonsBundleTests\Integration\Process
  */
+#[CoversClass(BatchProcessDto::class)]
 final class BatchProcessDtoTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\BatchProcessDto::setBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\BatchProcessDto::getBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\BatchProcessDto::removeBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\BatchProcessDto::removeRelatedHeaders
+     * @return void
      */
     public function testSetBatchCursor(): void
     {
@@ -34,9 +33,7 @@ final class BatchProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\BatchProcessDto::setBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\BatchProcessDto::removeBatchCursor
-     * @covers \Hanaboso\CommonsBundle\Process\BatchProcessDto::removeRelatedHeaders
+     * @return void
      */
     public function testSetBatchCursorIterateOnly(): void
     {

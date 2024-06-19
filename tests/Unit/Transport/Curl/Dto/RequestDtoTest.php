@@ -8,22 +8,18 @@ use Hanaboso\CommonsBundle\Process\ProcessDto;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class RequestDtoTest
  *
  * @package CommonsBundleTests\Unit\Transport\Curl\Dto
  */
+#[CoversClass(RequestDto::class)]
 final class RequestDtoTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::getUriString
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::getUri
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::setUri
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::setBody
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::setDebugInfo
-     *
      * @throws CurlException
      */
     public function testRequestDto(): void
@@ -44,8 +40,6 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto::setBody
-     *
      * @throws CurlException
      */
     public function testRequestDtoErr(): void
@@ -57,8 +51,6 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto
-     *
      * @throws CurlException
      */
     public function testRequestConstrErr(): void

@@ -11,6 +11,7 @@ use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver;
 use Hanaboso\Utils\File\File;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub\Exception as PhpUnitException;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  *
  * @package CommonsBundleTests\Integration\FileStorage\Driver\Impl\S3
  */
+#[CoversClass(S3Driver::class)]
 final class S3DriverTest extends KernelTestCaseAbstract
 {
 
@@ -74,7 +76,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
         $uploadedFile = new UploadedFile($this->path, '');
         $file         = $driver->save(File::getContent((string) $uploadedFile->getRealPath()));
 
-        $file->getSize();
+        self::assertEquals(61_725, $file->getSize());
         self::assertEquals(File::getContent($this->path), $driver->get($file->getUrl()));
 
         self::expectException(FileStorageException::class);
@@ -84,8 +86,6 @@ final class S3DriverTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\S3\S3Driver::save
-     *
      * @throws Exception
      */
     public function testDriverErr(): void

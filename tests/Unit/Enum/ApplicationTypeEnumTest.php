@@ -4,17 +4,19 @@ namespace CommonsBundleTests\Unit\Enum;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Enum\ApplicationTypeEnum;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ApplicationTypeEnumTest
  *
  * @package CommonsBundleTests\Unit\Enum
  */
+#[CoversClass(ApplicationTypeEnum::class)]
 final class ApplicationTypeEnumTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Enum\ApplicationTypeEnum::isWebhook
+     * @return void
      */
     public function testIsWebhook(): void
     {
@@ -22,7 +24,7 @@ final class ApplicationTypeEnumTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Enum\ApplicationTypeEnum::isCron
+     * @return void
      */
     public function testIsCron(): void
     {

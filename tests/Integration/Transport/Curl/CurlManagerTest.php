@@ -51,7 +51,8 @@ final class CurlManagerTest extends KernelTestCaseAbstract
         $curlManager = self::getContainer()->get('hbpf.transport.curl_manager');
 
         $requestDto = new RequestDto(new Uri('some-unknown-address'), CurlManager::METHOD_GET, new ProcessDto());
-        $curlManager->send($requestDto)->getStatusCode();
+        $resp       = $curlManager->send($requestDto)->getStatusCode();
+        self::assertEquals(404, $resp);
     }
 
 }

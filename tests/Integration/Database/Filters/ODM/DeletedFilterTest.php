@@ -5,18 +5,18 @@ namespace CommonsBundleTests\Integration\Database\Filters\ODM;
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class DeletedFilterTest
  *
  * @package CommonsBundleTests\Integration\Database\Filters\ODM
  */
+#[CoversClass(DeletedFilter::class)]
 final class DeletedFilterTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter::addFilterCriteria
-     *
      * @throws Exception
      */
     public function testAddFilterCriteria(): void
@@ -38,8 +38,6 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter::addFilterCriteria
-     *
      * @throws Exception
      */
     public function testDisableFilter(): void
@@ -56,8 +54,6 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Database\Filters\ODM\DeletedFilter::addFilterCriteria
-     *
      * @throws Exception
      */
     public function testAddFilter(): void

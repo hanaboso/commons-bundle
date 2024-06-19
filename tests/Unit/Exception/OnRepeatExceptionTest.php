@@ -5,21 +5,19 @@ namespace CommonsBundleTests\Unit\Exception;
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Exception\OnRepeatException;
 use Hanaboso\CommonsBundle\Process\ProcessDto;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class OnRepeatExceptionTest
  *
  * @package CommonsBundleTests\Unit\Exception
  */
+#[CoversClass(OnRepeatException::class)]
 final class OnRepeatExceptionTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Exception\OnRepeatException
-     * @covers \Hanaboso\CommonsBundle\Exception\OnRepeatException::getInterval
-     * @covers \Hanaboso\CommonsBundle\Exception\OnRepeatException::setInterval
-     * @covers \Hanaboso\CommonsBundle\Exception\OnRepeatException::setMaxHops
-     * @covers \Hanaboso\CommonsBundle\Exception\OnRepeatException::getProcessDto
+     * @return void
      */
     public function testOnRepeatException(): void
     {

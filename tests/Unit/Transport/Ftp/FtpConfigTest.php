@@ -4,12 +4,14 @@ namespace CommonsBundleTests\Unit\Transport\Ftp;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class FtpConfigTest
  *
  * @package CommonsBundleTests\Unit\Transport\Ftp
  */
+#[CoversClass(FtpConfig::class)]
 final class FtpConfigTest extends KernelTestCaseAbstract
 {
 
@@ -19,8 +21,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     private FtpConfig $config;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig::getHost
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig
+     * @return void
      */
     public function testGetHost(): void
     {
@@ -28,7 +29,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig::isSsl
+     * @return void
      */
     public function testIsSsl(): void
     {
@@ -36,7 +37,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig::getPort
+     * @return void
      */
     public function testGetPort(): void
     {
@@ -44,7 +45,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig::getTimeout
+     * @return void
      */
     public function testGetTimeout(): void
     {
@@ -52,7 +53,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig::getUsername
+     * @return void
      */
     public function testGetUsername(): void
     {
@@ -60,7 +61,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig::getPassword
+     * @return void
      */
     public function testGetPassword(): void
     {

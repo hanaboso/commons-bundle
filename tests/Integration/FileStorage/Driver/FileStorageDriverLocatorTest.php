@@ -7,19 +7,18 @@ use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class FileStorageDriverLocatorTest
  *
  * @package CommonsBundleTests\Integration\FileStorage\Driver
  */
+#[CoversClass(FileStorageDriverLocator::class)]
 final class FileStorageDriverLocatorTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator::get
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\FileStorageDriverLocator
-     *
      * @throws Exception
      */
     public function testGet(): void

@@ -41,8 +41,11 @@ final class HttpHandler extends AbstractProcessingHandler
      */
     protected function write(LogRecord $record): void
     {
+        /** @var array<string, string|int|bool> $context */
+        $context = $record['context'];
+
         try {
-            if (isset($record['context']['is_for_ui']) && $record['context']['is_for_ui']) {
+            if (isset($context['is_for_ui']) && $context['is_for_ui']) {
                 $this->client->send('/logger/logs', $record);
             }
         } catch (Throwable) {}

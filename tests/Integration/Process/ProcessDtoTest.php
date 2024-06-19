@@ -9,12 +9,14 @@ use Hanaboso\CommonsBundle\Process\ProcessDtoAbstract;
 use Hanaboso\Utils\Exception\PipesFrameworkException;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ProcessDtoTest
  *
  * @package CommonsBundleTests\Integration\Process
  */
+#[CoversClass(ProcessDto::class)]
 final class ProcessDtoTest extends DatabaseTestCaseAbstract
 {
 
@@ -37,15 +39,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setData
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getData
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRepeater
-     *
      * @throws Exception
      */
     public function testSetRepeater(): void
@@ -81,16 +74,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setData
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getData
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setLimiter
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setHeaders
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::decorateLimitKey
-     *
      * @throws Exception
      */
     public function testSetLimiter(): void
@@ -106,10 +89,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setSuccessProcess
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setStatusHeader
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::validateStatus
-     *
      * @throws Exception
      */
     public function testProcess(): void
@@ -129,8 +108,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
-     *
      * @throws Exception
      */
     public function testSetRepeaterIntervalErr(): void
@@ -140,8 +117,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setRepeater
-     *
      * @throws Exception
      */
     public function testSetRepeaterHopsErr(): void
@@ -151,8 +126,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::getJsonData
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setJsonData
+     * @return void
      */
     public function testJsonData(): void
     {
@@ -163,7 +137,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeHeaders
+     * @return void
      */
     public function testRemoveHeaders(): void
     {
@@ -174,7 +148,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setLimitExceeded
+     * @return void
      */
     public function testSetLimitExceeded(): void
     {
@@ -188,8 +162,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setLimiterWithGroup
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeLimiter
+     * @return void
      */
     public function testSetLimiterWithGroup(): void
     {
@@ -201,10 +174,6 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setForceFollowers
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeForceFollowers
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
-     *
      * @throws Exception
      */
     public function testSetForceFollowers(): void
@@ -230,9 +199,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::setForceFollowers
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeForceFollowers
-     * @covers \Hanaboso\CommonsBundle\Process\ProcessDto::removeRelatedHeaders
+     * @return void
      */
     public function testSetForceFollowersFollowerNotAvailable(): void
     {

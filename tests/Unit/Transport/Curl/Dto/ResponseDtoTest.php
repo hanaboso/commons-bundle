@@ -6,21 +6,18 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto;
 use Hanaboso\Utils\String\Json;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ResponseDtoTest
  *
  * @package CommonsBundleTests\Unit\Transport\Curl\Dto
  */
+#[CoversClass(ResponseDto::class)]
 final class ResponseDtoTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto::getReasonPhrase
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto::getBody
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto::getJsonBody
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\Dto\ResponseDto::getHeaders
-     *
      * @throws Exception
      */
     public function testResponseDto(): void

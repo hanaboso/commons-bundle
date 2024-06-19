@@ -12,6 +12,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapManager;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SoapClient;
 
@@ -20,18 +21,13 @@ use SoapClient;
  *
  * @package CommonsBundleTests\Unit\Transport\Soap
  */
+#[CoversClass(SoapManager::class)]
 final class SoapManagerTest extends TestCase
 {
 
     use CustomAssertTrait;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::handleResponse
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::getHeadersAsString
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::sendMetrics
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::setMetricsSender
-     *
      * @throws Exception
      */
     public function testSend(): void
@@ -60,11 +56,6 @@ final class SoapManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::handleResponse
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::getHeadersAsString
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::composeOptions
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::setMetricsSender
      * @throws SoapException
      */
     public function testSendLastHeadersNull(): void
@@ -89,8 +80,6 @@ final class SoapManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::sendMetrics
-     *
      * @throws SoapException
      */
     public function testSendSendMetrics(): void
@@ -114,8 +103,6 @@ final class SoapManagerTest extends TestCase
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\SoapManager::send
-     *
      * @throws SoapException
      */
     public function testSendErr(): void

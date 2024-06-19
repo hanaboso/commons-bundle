@@ -6,26 +6,18 @@ use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo;
 use Hanaboso\Utils\Date\DateTimeUtils;
 use Hanaboso\Utils\Exception\DateTimeException;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class FileMongoTest
  *
  * @package CommonsBundleTests\Integration\FileStorage\Driver\Impl\Mongo
  */
+#[CoversClass(FileMongo::class)]
 final class FileMongoTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::getFilename
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::setFilename
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::getUploadDate
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::setUploadDate
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::getLength
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::setLength
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::getChunkSize
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\FileMongo::setChunkSize
-     *
      * @throws DateTimeException
      */
     public function testFileMongo(): void

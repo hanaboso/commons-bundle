@@ -4,6 +4,7 @@ namespace CommonsBundleTests\Unit\Transport\Curl;
 
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -11,13 +12,14 @@ use PHPUnit\Framework\TestCase;
  *
  * @package CommonsBundleTests\Unit\Transport\Curl
  */
+#[CoversClass(CurlClientFactory::class)]
 final class CurlClientFactoryTest extends TestCase
 {
 
     use CustomAssertTrait;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory::create
+     * @return void
      */
     public function testCreate(): void
     {

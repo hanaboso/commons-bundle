@@ -7,12 +7,14 @@ use GuzzleHttp\Psr7\Uri;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class RequestDtoTest
  *
  * @package CommonsBundleTests\Unit\Transport\Soap\Dto\NonWsdl
  */
+#[CoversClass(RequestDto::class)]
 final class RequestDtoTest extends KernelTestCaseAbstract
 {
 
@@ -24,7 +26,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     private RequestDto $dto;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\NonWsdl\RequestDto::getType
+     * @return void
      */
     public function testGetType(): void
     {
@@ -32,7 +34,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract::setAuth
+     * @return void
      */
     public function testSetAuth(): void
     {
@@ -41,7 +43,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract::getFunction
+     * @return void
      */
     public function testGetFunction(): void
     {
@@ -49,7 +51,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract::getArguments
+     * @return void
      */
     public function testGetArguments(): void
     {
@@ -57,16 +59,6 @@ final class RequestDtoTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract::getHeader
-     */
-    public function testGetHeaders(): void
-    {
-        $this->dto->getHeader();
-        self::assertFake();
-    }
-
-    /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestDtoAbstract::setVersion
      * @throws SoapException
      */
     public function testSetVersionErr(): void

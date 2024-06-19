@@ -7,12 +7,14 @@ use Exception;
 use Hanaboso\CommonsBundle\Exception\FileStorageException;
 use Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver;
 use Hanaboso\CommonsBundle\FileStorage\PathGenerator\HashPathGenerator;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class MongoFileDriverTest
  *
  * @package CommonsBundleTests\Integration\FileStorage\Driver\Impl\Mongo
  */
+#[CoversClass(MongoFileDriver::class)]
 final class MongoFileDriverTest extends DatabaseTestCaseAbstract
 {
 
@@ -22,12 +24,6 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     private MongoFileDriver $driver;
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::get
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::delete
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::generatePath
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::setPathGenerator
-     *
      * @throws Exception
      */
     public function testFileStorage(): void
@@ -47,8 +43,6 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save
-     *
      * @throws FileStorageException
      */
     public function testSaverErr(): void
@@ -59,8 +53,6 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::delete
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::getDocument
      * @throws FileStorageException
      */
     public function testDeleteErr(): void
@@ -71,9 +63,6 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::delete
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::save
-     * @covers \Hanaboso\CommonsBundle\FileStorage\Driver\Impl\Mongo\MongoFileDriver::getDocument
      * @throws FileStorageException
      * @throws Exception
      */

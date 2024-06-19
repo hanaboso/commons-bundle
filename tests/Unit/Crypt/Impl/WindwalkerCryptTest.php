@@ -6,6 +6,7 @@ use CommonsBundleTests\KernelTestCaseAbstract;
 use Exception;
 use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
 use Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt;
+use PHPUnit\Framework\Attributes\CoversClass;
 use stdClass;
 
 /**
@@ -13,15 +14,11 @@ use stdClass;
  *
  * @package CommonsBundleTests\Unit\Crypt\Impl
  */
+#[CoversClass(WindwalkerCrypt::class)]
 final class WindwalkerCryptTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::__construct
-     *
      * @throws Exception
      */
     public function testEncryptAndDecrypt(): void
@@ -47,9 +44,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getPrefix
-     * @covers \Hanaboso\CommonsBundle\Crypt\CryptImplAbstract::__construct
-     *
      * @throws Exception
      */
     public function testGetPrefix(): void
@@ -63,10 +57,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt
-     *
      * @throws Exception
      */
     public function testEncryptAndDecryptFail(): void
@@ -82,10 +72,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::getCrypt
-     *
      * @throws Exception
      */
     public function testEncryptAndDecrypt2(): void
@@ -105,8 +91,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::encrypt
-     *
      * @throws CryptException
      */
     public function testEncryptErr(): void
@@ -120,8 +104,6 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Crypt\Impl\WindwalkerCrypt::decrypt
-     *
      * @throws CryptException
      */
     public function testDecryptErr(): void

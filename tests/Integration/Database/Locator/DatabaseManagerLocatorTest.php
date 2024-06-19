@@ -8,12 +8,14 @@ use Doctrine\ORM\EntityManager;
 use Exception;
 use Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator;
 use LogicException;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class DatabaseManagerLocatorTest
  *
  * @package CommonsBundleTests\Integration\Database\Locator
  */
+#[CoversClass(DatabaseManagerLocator::class)]
 final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
 {
 
@@ -41,11 +43,6 @@ final class DatabaseManagerLocatorTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::get
-     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::getEm
-     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator::getDm
-     * @covers \Hanaboso\CommonsBundle\Database\Locator\DatabaseManagerLocator
-     *
      * @throws Exception
      */
     public function testGet(): void

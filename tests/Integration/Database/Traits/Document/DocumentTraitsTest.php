@@ -4,23 +4,18 @@ namespace CommonsBundleTests\Integration\Database\Traits\Document;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class DocumentTraitsTest
  *
  * @package CommonsBundleTests\Integration\Database\Traits\Document
  */
+#[CoversClass(TestDocumentTrait::class)]
 final class DocumentTraitsTest extends DatabaseTestCaseAbstract
 {
 
     /**
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Document\TestDocumentTrait::getCreated
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Document\TestDocumentTrait::getUpdated
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Document\TestDocumentTrait::getId
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Document\TestDocumentTrait::setDeleted
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Document\TestDocumentTrait::isDeleted
-     * @covers \CommonsBundleTests\Integration\Database\Traits\Document\TestDocumentTrait::preUpdate
-     *
      * @throws Exception
      */
     public function testDocumentTraits(): void

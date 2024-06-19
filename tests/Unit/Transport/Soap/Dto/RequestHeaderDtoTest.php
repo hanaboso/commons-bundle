@@ -4,19 +4,19 @@ namespace CommonsBundleTests\Unit\Transport\Soap\Dto;
 
 use CommonsBundleTests\KernelTestCaseAbstract;
 use Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestHeaderDto;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class RequestHeaderDtoTest
  *
  * @package CommonsBundleTests\Unit\Transport\Soap\Dto
  */
+#[CoversClass(RequestHeaderDto::class)]
 final class RequestHeaderDtoTest extends KernelTestCaseAbstract
 {
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestHeaderDto::getNamespace
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestHeaderDto::getParams
-     * @covers \Hanaboso\CommonsBundle\Transport\Soap\Dto\RequestHeaderDto::setParam
+     * @return void
      */
     public function testHeaderDto(): void
     {

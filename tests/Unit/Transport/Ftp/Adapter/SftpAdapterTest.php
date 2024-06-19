@@ -11,6 +11,7 @@ use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
 use phpseclib3\Net\SFTP;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -18,6 +19,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  *
  * @package CommonsBundleTests\Unit\Transport\Ftp\Adapter
  */
+#[CoversClass(SftpAdapter::class)]
 final class SftpAdapterTest extends KernelTestCaseAbstract
 {
 
@@ -47,8 +49,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::connect
-     *
      * @throws Exception
      */
     public function testConnection(): void
@@ -59,8 +59,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::login
-     *
      * @throws Exception
      */
     public function testLogin(): void
@@ -72,7 +70,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::login
      * @throws Exception
      */
     public function testLoginErr(): void
@@ -84,9 +81,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::disconnect
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::getResource
-     *
      * @throws Exception
      */
     public function testDisconnect(): void
@@ -98,8 +92,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::uploadFile
-     *
      * @throws Exception
      */
     public function testUploadFile(): void
@@ -111,8 +103,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::uploadFile
-     *
      * @throws Exception
      */
     public function testUploadFileErr(): void
@@ -124,8 +114,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::downloadFile
-     *
      * @throws Exception
      */
     public function testDownloadFile(): void
@@ -137,8 +125,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::downloadFile
-     *
      * @throws Exception
      */
     public function testDownloadFileErr(): void
@@ -150,8 +136,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::listDir
-     *
      * @throws Exception
      */
     public function testListDir(): void
@@ -168,8 +152,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::listDir
-     *
      * @throws Exception
      */
     public function testListDirErr(): void
@@ -181,8 +163,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::listDirAdvanced
-     *
      * @throws Exception
      */
     public function testAdvancedListDir(): void
@@ -217,8 +197,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::listDirAdvanced
-     *
      * @throws Exception
      */
     public function testListDirAdvanceErr(): void
@@ -230,7 +208,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::dirExists
      * @throws Exception
      */
     public function testDirExists(): void
@@ -241,8 +218,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDir
-     *
      * @throws Exception
      */
     public function testMakeDir(): void
@@ -254,8 +229,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDir
-     *
      * @throws Exception
      */
     public function testMakeDirErr(): void
@@ -267,9 +240,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::makeDirRecursive
-     * @covers  \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::isFile
-     *
      * @throws Exception
      */
     public function testMakeDirRecursive(): void
@@ -289,7 +259,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::rename
      * @throws Exception
      */
     public function testRename(): void
@@ -310,8 +279,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove
-     *
      * @throws Exception
      */
     public function testRemove(): void
@@ -323,8 +290,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::remove
-     *
      * @throws Exception
      */
     public function testRemoveErr(): void
@@ -336,7 +301,6 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @covers \Hanaboso\CommonsBundle\Transport\Ftp\Adapter\SftpAdapter::getResource
      * @throws Exception
      */
     public function testGetResourceErr(): void
