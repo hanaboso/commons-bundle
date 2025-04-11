@@ -27,13 +27,13 @@ final class RequestDtoTest extends KernelTestCaseAbstract
         $dto = new RequestDto(new Uri('www.example.com?id=5'), CurlManager::METHOD_POST, new ProcessDto());
 
         self::assertEquals('www.example.com?id=5', $dto->getUri(TRUE));
-        self::assertEquals('www.example.com?id=5', $dto->getUriString());
+        self::assertSame('www.example.com?id=5', $dto->getUriString());
 
         $dto->setUri(new Uri('www.example.cz?id=5'));
-        self::assertEquals('www.example.cz?id=5', $dto->getUriString());
+        self::assertSame('www.example.cz?id=5', $dto->getUriString());
 
         $dto->setBody('body');
-        self::assertEquals('body', $dto->getBody());
+        self::assertSame('body', $dto->getBody());
 
         $dto->setDebugInfo(new ProcessDto());
         self::assertEquals([], $dto->getDebugInfo());

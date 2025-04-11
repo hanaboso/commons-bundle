@@ -12,7 +12,7 @@ use Windwalker\Crypt\Cipher\SodiumCipher;
 final class SodiumCipherWrapper extends SodiumCipher
 {
 
-    private const PBKDF2_CACHE = 'pbkdf2_%s_%s';
+    private const string PBKDF2_CACHE = 'pbkdf2_%s_%s';
 
     /**
      * @param string      $key
@@ -59,7 +59,16 @@ final class SodiumCipherWrapper extends SodiumCipher
      */
     protected function pbkdf2($algorithm, $password, $salt, $count, $keyLength, $rawOutput = FALSE): string
     {
-        return bin2hex(hash_pbkdf2(strtolower($algorithm), $password, $salt, $count, $keyLength, $rawOutput));
+        return bin2hex(
+            hash_pbkdf2(
+                strtolower($algorithm), // @phpstan-ignore-line
+                $password,
+                $salt,
+                $count, // @phpstan-ignore-line
+                $keyLength, // @phpstan-ignore-line
+                $rawOutput,
+            ),
+        );
     }
 
 }

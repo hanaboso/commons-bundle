@@ -52,7 +52,7 @@ final class SoapManagerTest extends TestCase
         $result = $soapManager->send($request);
 
         self::assertEquals($soapCallResponse, $result->getSoapCallResponse());
-        self::assertEquals($lastResponseHeaders, $result->getLastResponseHeaders());
+        self::assertSame($lastResponseHeaders, $result->getLastResponseHeaders());
     }
 
     /**

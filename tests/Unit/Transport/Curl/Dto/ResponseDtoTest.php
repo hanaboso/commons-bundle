@@ -24,8 +24,8 @@ final class ResponseDtoTest extends KernelTestCaseAbstract
     {
         $dto = new ResponseDto(205, 'created', Json::encode('body'), ['header' => 1]);
 
-        self::assertEquals('created', $dto->getReasonPhrase());
-        self::assertEquals('"body"', $dto->getBody());
+        self::assertSame('created', $dto->getReasonPhrase());
+        self::assertSame('"body"', $dto->getBody());
         self::assertEquals([0 => 'body'], $dto->getJsonBody());
         self::assertEquals(['header' => 1], $dto->getHeaders());
     }

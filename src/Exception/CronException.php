@@ -12,8 +12,8 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 final class CronException extends PipesFrameworkExceptionAbstract
 {
 
-    public const CRON_EXCEPTION = self::OFFSET + 1;
+    public const int CRON_EXCEPTION = self::OFFSET + 1;
 
-    protected const OFFSET = 2_700;
+    protected const int OFFSET = 2_700;
 
 }

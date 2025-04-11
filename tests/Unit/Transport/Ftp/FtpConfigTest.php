@@ -25,7 +25,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
      */
     public function testGetHost(): void
     {
-        self::assertEquals('host', $this->config->getHost());
+        self::assertSame('host', $this->config->getHost());
     }
 
     /**
@@ -41,7 +41,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
      */
     public function testGetPort(): void
     {
-        self::assertEquals(222, $this->config->getPort());
+        self::assertSame(222, $this->config->getPort());
     }
 
     /**
@@ -49,7 +49,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
      */
     public function testGetTimeout(): void
     {
-        self::assertEquals(5, $this->config->getTimeout());
+        self::assertSame(5, $this->config->getTimeout());
     }
 
     /**
@@ -57,7 +57,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
      */
     public function testGetUsername(): void
     {
-        self::assertEquals('guest', $this->config->getUsername());
+        self::assertSame('guest', $this->config->getUsername());
     }
 
     /**
@@ -65,7 +65,7 @@ final class FtpConfigTest extends KernelTestCaseAbstract
      */
     public function testGetPassword(): void
     {
-        self::assertEquals('guest', $this->config->getPassword());
+        self::assertSame('guest', $this->config->getPassword());
     }
 
     /**

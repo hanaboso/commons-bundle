@@ -12,17 +12,17 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 final class FtpException extends PipesFrameworkExceptionAbstract
 {
 
-    public const CONNECTION_FAILED          = self::OFFSET + 1;
-    public const CONNECTION_CLOSE_FAILED    = self::OFFSET + 2;
-    public const LOGIN_FAILED               = self::OFFSET + 3;
-    public const FILE_UPLOAD_FAILED         = self::OFFSET + 4;
-    public const FILE_DOWNLOAD_FAILED       = self::OFFSET + 5;
-    public const CONNECTION_NOT_ESTABLISHED = self::OFFSET + 6;
-    public const UNABLE_TO_CREATE_DIR       = self::OFFSET + 7;
-    public const FILES_LISTING_FAILED       = self::OFFSET + 8;
-    public const UNKNOWN_ADAPTER_TYPE       = self::OFFSET + 9;
-    public const CREATING_SUBSYSTEM_FAILED  = self::OFFSET + 10;
+    public const int CONNECTION_FAILED          = self::OFFSET + 1;
+    public const int CONNECTION_CLOSE_FAILED    = self::OFFSET + 2;
+    public const int LOGIN_FAILED               = self::OFFSET + 3;
+    public const int FILE_UPLOAD_FAILED         = self::OFFSET + 4;
+    public const int FILE_DOWNLOAD_FAILED       = self::OFFSET + 5;
+    public const int CONNECTION_NOT_ESTABLISHED = self::OFFSET + 6;
+    public const int UNABLE_TO_CREATE_DIR       = self::OFFSET + 7;
+    public const int FILES_LISTING_FAILED       = self::OFFSET + 8;
+    public const int UNKNOWN_ADAPTER_TYPE       = self::OFFSET + 9;
+    public const int CREATING_SUBSYSTEM_FAILED  = self::OFFSET + 10;
 
-    protected const OFFSET = 2_500;
+    protected const int OFFSET = 2_500;
 
 }

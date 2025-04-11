@@ -21,7 +21,7 @@ final class ProcessStatusEventTest extends KernelTestCaseAbstract
     public function testGetProcessId(): void
     {
         $processId = new ProcessStatusEvent('1', TRUE);
-        self::assertEquals('1', $processId->getProcessId());
+        self::assertSame('1', $processId->getProcessId());
         self::assertTrue($processId->getStatus());
     }
 

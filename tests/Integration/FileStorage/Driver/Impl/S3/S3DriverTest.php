@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 final class S3DriverTest extends KernelTestCaseAbstract
 {
 
-    private const FAKE_AWS_CONNECTION_ARGS = [
+    private const array FAKE_AWS_CONNECTION_ARGS = [
         'credentials' => [
             'key'    => 'key',
             'secret' => 'secret',
@@ -77,7 +77,7 @@ final class S3DriverTest extends KernelTestCaseAbstract
         $file         = $driver->save(File::getContent((string) $uploadedFile->getRealPath()));
 
         self::assertEquals(61_725, $file->getSize());
-        self::assertEquals(File::getContent($this->path), $driver->get($file->getUrl()));
+        self::assertSame(File::getContent($this->path), $driver->get($file->getUrl()));
 
         self::expectException(FileStorageException::class);
         self::expectExceptionCode(FileStorageException::FILE_NOT_FOUND);

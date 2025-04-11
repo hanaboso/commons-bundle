@@ -24,7 +24,7 @@ final class FileStorageDtoTest extends DatabaseTestCaseAbstract
         $dto = new FileStorageDto(new File(), 'data');
 
         self::assertInstanceOf(File::class, $dto->getFile());
-        self::assertEquals('data', $dto->getContent());
+        self::assertSame('data', $dto->getContent());
     }
 
 }

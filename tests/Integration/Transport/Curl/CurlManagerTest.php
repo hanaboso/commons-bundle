@@ -36,7 +36,7 @@ final class CurlManagerTest extends KernelTestCaseAbstract
 
         $requestDto = new RequestDto(new Uri('https://google.cz'), CurlManager::METHOD_GET, new ProcessDto());
         $requestDto->setHeaders(['Cache-Control' => 'private, max-age=0']);
-        self::assertEquals(200, $curlManager->send($requestDto)->getStatusCode());
+        self::assertSame(200, $curlManager->send($requestDto)->getStatusCode());
     }
 
     /**
@@ -52,7 +52,7 @@ final class CurlManagerTest extends KernelTestCaseAbstract
 
         $requestDto = new RequestDto(new Uri('some-unknown-address'), CurlManager::METHOD_GET, new ProcessDto());
         $resp       = $curlManager->send($requestDto)->getStatusCode();
-        self::assertEquals(404, $resp);
+        self::assertSame(404, $resp);
     }
 
 }

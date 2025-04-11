@@ -28,10 +28,10 @@ final class FileContentDtoTest extends DatabaseTestCaseAbstract
             ->setContent('data')
             ->setFormat('csv');
 
-        self::assertEquals('name', $dto->getFilename());
-        self::assertEquals('persistent', $dto->getStorageType());
-        self::assertEquals('data', $dto->getContent());
-        self::assertEquals('csv', $dto->getFormat());
+        self::assertSame('name', $dto->getFilename());
+        self::assertSame('persistent', $dto->getStorageType());
+        self::assertSame('data', $dto->getContent());
+        self::assertSame('csv', $dto->getFormat());
     }
 
     /**
@@ -39,7 +39,7 @@ final class FileContentDtoTest extends DatabaseTestCaseAbstract
      */
     public function testSetStorage(): void
     {
-        $dto = (new FileContentDto('data', 'csv', 'name'));
+        $dto = new FileContentDto('data', 'csv', 'name');
 
         self::expectException(FileStorageException::class);
         $dto->setStorageType('private');
@@ -50,7 +50,7 @@ final class FileContentDtoTest extends DatabaseTestCaseAbstract
      */
     public function testSetFormat(): void
     {
-        $dto = (new FileContentDto('data', 'csv', 'name'));
+        $dto = new FileContentDto('data', 'csv', 'name');
 
         self::expectException(FileStorageException::class);
         $dto->setFormat('png');

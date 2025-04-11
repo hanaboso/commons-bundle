@@ -20,8 +20,8 @@ final class FtpServiceFactory implements LoggerAwareInterface
 
     use LoggerTrait;
 
-    public const ADAPTER_FTP  = 'ftp';
-    public const ADAPTER_SFTP = 'sftp';
+    public const string ADAPTER_FTP  = 'ftp';
+    public const string ADAPTER_SFTP = 'sftp';
 
     /**
      * FtpServiceFactory constructor.

@@ -21,7 +21,7 @@ final class FileTypesTest extends DatabaseTestCaseAbstract
      */
     public function testFromFilename(): void
     {
-        self::assertEquals('text/csv', FileTypes::fromFilename('data.csv'));
+        self::assertSame('text/csv', FileTypes::fromFilename('data.csv'));
 
         self::expectException(FileStorageException::class);
         FileTypes::fromExtension('abc');

@@ -24,7 +24,7 @@ final class SoapManager implements SoapManagerInterface, LoggerAwareInterface
 
     use LoggerTrait;
 
-    public const CONNECTION_TIMEOUT = 15;
+    public const int CONNECTION_TIMEOUT = 15;
 
     /**
      * @var MetricsSenderLoader|null

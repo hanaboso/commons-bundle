@@ -49,7 +49,7 @@ final class WindwalkerCryptTest extends KernelTestCaseAbstract
     public function testGetPrefix(): void
     {
         $crypt = new WindwalkerCrypt('ADFAF1A6A1SEASCA6FA6C1A26SEV6S6S26S2V6SVV+94S8363SDDV6SDV645');
-        self::assertEquals('001_', $crypt->getPrefix());
+        self::assertSame('001_', $crypt->getPrefix());
 
         self::expectException(CryptException::class);
         self::expectExceptionCode(CryptException::BAD_PREFIX_LENGTH);

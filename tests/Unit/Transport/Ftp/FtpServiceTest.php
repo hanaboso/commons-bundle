@@ -60,7 +60,7 @@ final class FtpServiceTest extends TestCase
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->downloadFile('abc');
 
-        self::assertEquals('abc', $result->getBasename());
+        self::assertSame('abc', $result->getBasename());
     }
 
     /**
@@ -83,8 +83,8 @@ final class FtpServiceTest extends TestCase
         $result = $service->downloadFiles('abc');
 
         self::assertCount(2, $result);
-        self::assertEquals('abc', $result[0]->getBasename());
-        self::assertEquals('def', $result[1]->getBasename());
+        self::assertSame('abc', $result[0]->getBasename());
+        self::assertSame('def', $result[1]->getBasename());
     }
 
     /**

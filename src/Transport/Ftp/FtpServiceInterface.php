@@ -12,10 +12,10 @@ use SplFileInfo;
 interface FtpServiceInterface
 {
 
-    public const HOST    = 'host';
-    public const SSL     = 'ssl';
-    public const PORT    = 'port';
-    public const TIMEOUT = 'timeout';
+    public const string HOST    = 'host';
+    public const string SSL     = 'ssl';
+    public const string PORT    = 'port';
+    public const string TIMEOUT = 'timeout';
 
     /**
      * @param string $remoteFile

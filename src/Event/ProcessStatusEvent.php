@@ -12,7 +12,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 final class ProcessStatusEvent extends Event
 {
 
-    public const PROCESS_FINISHED = 'finished';
+    public const string PROCESS_FINISHED = 'finished';
 
     /**
      * ProcessStatusEvent constructor.

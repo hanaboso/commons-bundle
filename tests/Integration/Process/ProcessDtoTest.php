@@ -48,7 +48,7 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
             ->setData('data');
 
         self::assertEquals($this->getSetRepeaterHeaders(), $processDto->getHeaders());
-        self::assertEquals('data', $processDto->getData());
+        self::assertSame('data', $processDto->getData());
 
         $processDto->setHeaders(
             [

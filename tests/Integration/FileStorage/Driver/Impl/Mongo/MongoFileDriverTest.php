@@ -33,7 +33,7 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
         $this->driver->setPathGenerator(new HashPathGenerator());
 
         $fileContent = $this->driver->get($res->getUrl());
-        self::assertEquals('test_content', $fileContent);
+        self::assertSame('test_content', $fileContent);
 
         $this->dm->clear();
         $this->driver->delete($res->getUrl());

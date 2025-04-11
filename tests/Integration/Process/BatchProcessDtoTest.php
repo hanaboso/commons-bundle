@@ -22,7 +22,7 @@ final class BatchProcessDtoTest extends DatabaseTestCaseAbstract
     {
         $batchProcessDto = new BatchProcessDto();
         $batchProcessDto->setBatchCursor('testCursor');
-        self::assertEquals('testCursor', $batchProcessDto->getBatchCursor('0'));
+        self::assertSame('testCursor', $batchProcessDto->getBatchCursor('0'));
         self::assertEquals([
             'cursor'            => 'testCursor',
             'result-code'    => '1010',
@@ -39,7 +39,7 @@ final class BatchProcessDtoTest extends DatabaseTestCaseAbstract
     {
         $batchProcessDto = new BatchProcessDto();
         $batchProcessDto->setBatchCursor('testCursor', TRUE);
-        self::assertEquals('testCursor', $batchProcessDto->getBatchCursor('0'));
+        self::assertSame('testCursor', $batchProcessDto->getBatchCursor('0'));
         self::assertEquals([
             'cursor'            => 'testCursor',
             'result-code'    => '1011',

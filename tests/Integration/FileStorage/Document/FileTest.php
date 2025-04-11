@@ -30,12 +30,12 @@ final class FileTest extends DatabaseTestCaseAbstract
             ->setSize('1 kb')
             ->setStorageType('persistent');
 
-        self::assertEquals('csv', $file->getFileFormat());
-        self::assertEquals('filename', $file->getFilename());
-        self::assertEquals('text/csv', $file->getMimeType());
-        self::assertEquals('/path/', $file->getFileUrl());
-        self::assertEquals('1 kb', $file->getSize());
-        self::assertEquals('persistent', $file->getStorageType());
+        self::assertSame('csv', $file->getFileFormat());
+        self::assertSame('filename', $file->getFilename());
+        self::assertSame('text/csv', $file->getMimeType());
+        self::assertSame('/path/', $file->getFileUrl());
+        self::assertSame('1 kb', $file->getSize());
+        self::assertSame('persistent', $file->getStorageType());
     }
 
     /**

@@ -91,7 +91,7 @@ final class LogstashFormatter extends NormalizerFormatter
             unset($record['context']['topology_name']);
         }
 
-        if (!empty($record['context'])) {
+        if ($record['context'] !== []) {
             foreach ($record['context'] as $key => $val) {
                 $message[$key] = $val;
             }
@@ -106,7 +106,7 @@ final class LogstashFormatter extends NormalizerFormatter
      *
      * @return mixed[]
      */
-    protected function normalizeException(Throwable $e, int $depth = 0): array
+    protected function normalizeException(Throwable $e, int $depth = 0): array // @phpstan-ignore-line
     {
         $depth;
 

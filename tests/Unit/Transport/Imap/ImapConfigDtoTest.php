@@ -22,11 +22,11 @@ final class ImapConfigDtoTest extends KernelTestCaseAbstract
     {
         $config = new ImapConfigDto('guest', 'guest', 'host');
 
-        self::assertEquals('folder', $config->setFolder('folder')->getFolder());
-        self::assertEquals('path', $config->setPath('path')->getPath());
-        self::assertEquals('guest', $config->getUser());
-        self::assertEquals('guest', $config->getPassword());
-        self::assertEquals('host', $config->getHost());
+        self::assertSame('folder', $config->setFolder('folder')->getFolder());
+        self::assertSame('path', $config->setPath('path')->getPath());
+        self::assertSame('guest', $config->getUser());
+        self::assertSame('guest', $config->getPassword());
+        self::assertSame('host', $config->getHost());
     }
 
 }

@@ -60,10 +60,10 @@ final class CurlManagerTest extends TestCase
         $curlManager->setTimeout(5);
         $result = $curlManager->send($requestDto);
 
-        self::assertEquals(200, $result->getStatusCode());
-        self::assertEquals('OK', $result->getReasonPhrase());
+        self::assertSame(200, $result->getStatusCode());
+        self::assertSame('OK', $result->getReasonPhrase());
         self::assertEquals(['header_key' => ['header_value']], $result->getHeaders());
-        self::assertEquals($body, $result->getBody());
+        self::assertSame($body, $result->getBody());
         self::assertEquals(['abc' => 'def'], $result->getJsonBody());
     }
 
@@ -121,8 +121,8 @@ final class CurlManagerTest extends TestCase
 
         $res = RequestDto::from($requestDto, $processDto, new Uri('www.google.com'), CurlManager::METHOD_POST);
 
-        self::assertEquals('www.google.com', $res->getUriString());
-        self::assertEquals(CurlManager::METHOD_POST, $res->getMethod());
+        self::assertSame('www.google.com', $res->getUriString());
+        self::assertSame(CurlManager::METHOD_POST, $res->getMethod());
         self::assertEquals(['node-id' => '123', 'correlation-id' => 'aaa222'], $res->getDebugInfo());
     }
 
@@ -176,7 +176,7 @@ final class CurlManagerTest extends TestCase
 
         /** @var Response $response */
         $response = $manager->sendAsync($dto)->wait();
-        self::assertEquals(202, $response->getStatusCode());
+        self::assertSame(202, $response->getStatusCode());
         self::assertArrayHasKey('Accept-Language', $response->getHeaders());
         self::assertArrayHasKey('Accept', $response->getHeaders());
     }

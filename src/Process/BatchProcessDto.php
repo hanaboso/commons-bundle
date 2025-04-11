@@ -13,8 +13,8 @@ use Hanaboso\Utils\System\PipesHeaders;
 final class BatchProcessDto extends ProcessDtoAbstract
 {
 
-    public const BATCH_CURSOR_WITH_FOLLOWERS = 1_010;
-    public const BATCH_CURSOR_ONLY           = 1_011;
+    public const int BATCH_CURSOR_WITH_FOLLOWERS = 1_010;
+    public const int BATCH_CURSOR_ONLY           = 1_011;
 
     /**
      * @var BatchMessageDto[]

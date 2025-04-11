@@ -29,7 +29,7 @@ final class RequestHeaderDtoTest extends KernelTestCaseAbstract
             ],
             $dto->getParams(),
         );
-        self::assertEquals('/namespace/', $dto->getNamespace());
+        self::assertSame('/namespace/', $dto->getNamespace());
         $dto->setParam('param1', 5);
 
         self::assertEquals(

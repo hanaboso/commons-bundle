@@ -12,10 +12,10 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 final class CryptException extends PipesFrameworkExceptionAbstract
 {
 
-    public const UNKNOWN_PREFIX    = self::OFFSET + 1;
-    public const REMOVED_PREFIX    = self::OFFSET + 2;
-    public const BAD_PREFIX_LENGTH = self::OFFSET + 3;
+    public const int UNKNOWN_PREFIX    = self::OFFSET + 1;
+    public const int REMOVED_PREFIX    = self::OFFSET + 2;
+    public const int BAD_PREFIX_LENGTH = self::OFFSET + 3;
 
-    protected const OFFSET = 1_300;
+    protected const int OFFSET = 1_300;
 
 }

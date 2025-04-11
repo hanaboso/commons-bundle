@@ -10,7 +10,7 @@ namespace Hanaboso\CommonsBundle\Transport\Soap;
 interface SoapManagerInterface
 {
 
-    public const MODE_WSDL     = 'wsdl';
-    public const MODE_NON_WSDL = 'non-wsdl';
+    public const string MODE_WSDL     = 'wsdl';
+    public const string MODE_NON_WSDL = 'non-wsdl';
 
 }

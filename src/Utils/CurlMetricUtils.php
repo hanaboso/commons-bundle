@@ -15,11 +15,11 @@ use Hanaboso\Utils\System\SystemUsage;
 final class CurlMetricUtils
 {
 
-    public const KEY_TIMESTAMP        = 'timestamp';
-    public const KEY_CPU              = 'cpu';
-    public const KEY_REQUEST_DURATION = 'request_duration';
-    public const KEY_USER_TIME        = 'user_time';
-    public const KEY_KERNEL_TIME      = 'kernel_time';
+    public const string KEY_TIMESTAMP        = 'timestamp';
+    public const string KEY_CPU              = 'cpu';
+    public const string KEY_REQUEST_DURATION = 'request_duration';
+    public const string KEY_USER_TIME        = 'user_time';
+    public const string KEY_KERNEL_TIME      = 'kernel_time';
 
     /**
      * @param mixed[] $startMetrics

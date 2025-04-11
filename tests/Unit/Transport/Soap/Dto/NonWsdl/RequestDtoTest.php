@@ -30,7 +30,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
      */
     public function testGetType(): void
     {
-        self::assertEquals('non-wsdl', $this->dto->getType());
+        self::assertSame('non-wsdl', $this->dto->getType());
     }
 
     /**
@@ -47,7 +47,7 @@ final class RequestDtoTest extends KernelTestCaseAbstract
      */
     public function testGetFunction(): void
     {
-        self::assertEquals('fn', $this->dto->getFunction());
+        self::assertSame('fn', $this->dto->getFunction());
     }
 
     /**

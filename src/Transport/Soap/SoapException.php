@@ -12,11 +12,11 @@ use Hanaboso\Utils\Exception\PipesFrameworkExceptionAbstract;
 final class SoapException extends PipesFrameworkExceptionAbstract
 {
 
-    public const UNKNOWN_EXCEPTION     = self::OFFSET;
-    public const UNKNOWN_SOAP_VERSION  = self::OFFSET + 1;
-    public const INVALID_FUNCTION_CALL = self::OFFSET + 2;
-    public const INVALID_WSDL          = self::OFFSET + 3;
+    public const int UNKNOWN_EXCEPTION     = self::OFFSET;
+    public const int UNKNOWN_SOAP_VERSION  = self::OFFSET + 1;
+    public const int INVALID_FUNCTION_CALL = self::OFFSET + 2;
+    public const int INVALID_WSDL          = self::OFFSET + 3;
 
-    protected const OFFSET = 900;
+    protected const int OFFSET = 900;
 
 }

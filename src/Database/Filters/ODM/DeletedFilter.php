@@ -13,7 +13,7 @@ use Doctrine\ODM\MongoDB\Query\Filter\BsonFilter;
 final class DeletedFilter extends BsonFilter
 {
 
-    public const NAME = 'deleted';
+    public const string NAME = 'deleted';
 
     /**
      * @param ClassMetadata $class

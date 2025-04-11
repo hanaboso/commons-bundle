@@ -25,8 +25,8 @@ final class OnRepeatExceptionTest extends KernelTestCaseAbstract
         $exception->setMaxHops(4);
         $exception->setInterval(70_000);
 
-        self::assertEquals(70_000, $exception->getInterval());
-        self::assertEquals(4, $exception->getMaxHops());
+        self::assertSame(70_000, $exception->getInterval());
+        self::assertSame(4, $exception->getMaxHops());
         self::assertNotEmpty($exception->getProcessDto());
     }
 

@@ -16,10 +16,10 @@ use PhpImap\Mailbox;
 final class ImapConnector
 {
 
-    public const ID           = 'id';
-    public const TIME         = 'time';
-    public const FROM_ADDRESS = 'fromAddress';
-    public const SUBJECT      = 'subject';
+    public const string ID           = 'id';
+    public const string TIME         = 'time';
+    public const string FROM_ADDRESS = 'fromAddress';
+    public const string SUBJECT      = 'subject';
 
     /**
      * @var Mailbox
@@ -102,7 +102,7 @@ final class ImapConnector
     {
         $mailboxes = $this->mailbox->getMailboxes(sprintf('*%s*', $name));
 
-        if (empty($mailboxes)) {
+        if ($mailboxes === []) {
             $this->mailbox->createMailbox($name);
 
             return (string) $this->mailbox->getMailboxes(sprintf('*%s*', $name))[0]['shortpath'];

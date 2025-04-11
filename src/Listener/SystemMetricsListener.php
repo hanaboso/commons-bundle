@@ -28,7 +28,7 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
 
     use LoggerTrait;
 
-    public const METRICS_ATTRIBUTES_KEY = 'system_metrics';
+    public const string METRICS_ATTRIBUTES_KEY = 'system_metrics';
 
     /**
      * SystemMetricsListener constructor.
@@ -86,7 +86,7 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
     }
 
     /**
-     * @return array<string, array<int|string, array<int|string, int|string>|int|string>|string>
+     * @return array<string, string>
      */
     public static function getSubscribedEvents(): array
     {

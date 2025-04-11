@@ -19,10 +19,10 @@ use Hanaboso\CommonsBundle\FileStorage\PathGenerator\PathGeneratorInterface;
 final class S3Driver extends FileStorageDriverAbstract
 {
 
-    private const BUCKET_FIELD = 'Bucket';
-    private const KEY_FIELD    = 'Key';
-    private const BODY_FIELD   = 'Body';
-    private const META_FIELD   = 'Metadata';
+    private const string BUCKET_FIELD = 'Bucket';
+    private const string KEY_FIELD    = 'Key';
+    private const string BODY_FIELD   = 'Body';
+    private const string META_FIELD   = 'Metadata';
 
     /**
      * S3Driver constructor.

@@ -23,9 +23,9 @@ final class ResponseHeaderDtoTest extends KernelTestCaseAbstract
         $dto = new ResponseHeaderDto(NULL, 'v2', 202, 'done');
 
         self::assertNull($dto->getHttpHeaders());
-        self::assertEquals('v2', $dto->getHttpVersion());
-        self::assertEquals(202, $dto->getHttpStatusCode());
-        self::assertEquals('done', $dto->getHttpReason());
+        self::assertSame('v2', $dto->getHttpVersion());
+        self::assertSame(202, $dto->getHttpStatusCode());
+        self::assertSame('done', $dto->getHttpReason());
     }
 
 }

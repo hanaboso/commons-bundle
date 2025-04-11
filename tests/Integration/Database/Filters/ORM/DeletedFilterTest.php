@@ -72,7 +72,7 @@ final class DeletedFilterTest extends DatabaseTestCaseAbstract
                 'test_entity_no_deleted_prop',
             );
 
-        self::assertEquals('', $filter);
+        self::assertSame('', $filter);
     }
 
 }

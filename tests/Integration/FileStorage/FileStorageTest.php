@@ -34,13 +34,13 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
         $dto     = new FileContentDto('test_content', 'csv', 'test_name');
 
         $file = $storage->saveFileFromContent($dto);
-        self::assertEquals('test_name', $file->getFilename());
-        self::assertEquals('fileUrl', $file->getFileUrl());
-        self::assertEquals('7', $file->getSize());
+        self::assertSame('test_name', $file->getFilename());
+        self::assertSame('fileUrl', $file->getFileUrl());
+        self::assertSame('7', $file->getSize());
         self::assertNotEmpty($file->getStorageType());
 
         $content = $storage->getFileStorage($file);
-        self::assertEquals('test_content', $content->getContent());
+        self::assertSame('test_content', $content->getContent());
 
         $storage->deleteFile($file);
         $file = $this->dm->getRepository(File::class)->find($file->getId());

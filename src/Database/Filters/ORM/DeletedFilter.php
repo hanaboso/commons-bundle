@@ -13,7 +13,7 @@ use Doctrine\ORM\Query\Filter\SQLFilter;
 final class DeletedFilter extends SQLFilter
 {
 
-    public const NAME = 'deleted';
+    public const string NAME = 'deleted';
 
     /**
      * @param ClassMetadata $targetEntity

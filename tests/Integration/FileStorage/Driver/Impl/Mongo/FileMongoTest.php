@@ -29,9 +29,9 @@ final class FileMongoTest extends DatabaseTestCaseAbstract
             ->setUploadDate(DateTimeUtils::getUtcDateTime());
 
         $mongo->getUploadDate();
-        self::assertEquals('name', $mongo->getFilename());
-        self::assertEquals(100, $mongo->getChunkSize());
-        self::assertEquals(100, $mongo->getLength());
+        self::assertSame('name', $mongo->getFilename());
+        self::assertSame(100, $mongo->getChunkSize());
+        self::assertSame(100, $mongo->getLength());
     }
 
 }

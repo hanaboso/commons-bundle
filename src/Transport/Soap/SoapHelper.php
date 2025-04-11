@@ -27,7 +27,7 @@ final class SoapHelper
     {
         $requestHeader = $request->getHeader();
 
-        if (empty($requestHeader->getParams())) {
+        if ($requestHeader->getParams() === []) {
             return [];
         }
 
@@ -92,7 +92,7 @@ final class SoapHelper
      */
     private static function composeArgumentsForNonWsdl(RequestDtoAbstract $request): ?array
     {
-        if (empty($request->getArguments())) {
+        if ($request->getArguments() === []) {
             return NULL;
         }
 

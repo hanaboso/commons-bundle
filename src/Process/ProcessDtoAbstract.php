@@ -14,22 +14,22 @@ use Hanaboso\Utils\System\PipesHeaders;
 abstract class ProcessDtoAbstract
 {
 
-    public const SUCCESS = 0;
+    public const int SUCCESS = 0;
 
     // NON_STANDARD: 1000+
-    public const REPEAT                  = 1_001;
-    public const FORWARD_TO_TARGET_QUEUE = 1_002;
-    public const DO_NOT_CONTINUE         = 1_003;
-    public const SPLITTER_BATCH_END      = 1_005;
-    public const LIMIT_EXCEEDED          = 1_004;
-    public const STOP_AND_FAILED         = 1_006;
+    public const int REPEAT                  = 1_001;
+    public const int FORWARD_TO_TARGET_QUEUE = 1_002;
+    public const int DO_NOT_CONTINUE         = 1_003;
+    public const int SPLITTER_BATCH_END      = 1_005;
+    public const int LIMIT_EXCEEDED          = 1_004;
+    public const int STOP_AND_FAILED         = 1_006;
 
     // MESSAGE ERRORS: 2000+
-    public const UNKNOWN_ERROR   = 2_001;
-    public const INVALID_HEADERS = 2_002;
-    public const INVALID_CONTENT = 2_003;
+    public const int UNKNOWN_ERROR   = 2_001;
+    public const int INVALID_HEADERS = 2_002;
+    public const int INVALID_CONTENT = 2_003;
 
-    public const ALLOWED_RESULT_CODES = [self::STOP_AND_FAILED, self::DO_NOT_CONTINUE];
+    public const array ALLOWED_RESULT_CODES = [self::STOP_AND_FAILED, self::DO_NOT_CONTINUE];
 
     /**
      * @var string

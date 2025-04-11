@@ -12,7 +12,7 @@ use Hanaboso\CommonsBundle\Crypt\Exceptions\CryptException;
 final class CryptManager
 {
 
-    public const PREFIX_LENGTH = 4;
+    public const int PREFIX_LENGTH = 4;
 
     /**
      * @var CryptInterface[]
@@ -87,7 +87,7 @@ final class CryptManager
     private function getImplementation(?string $prefix): CryptInterface
     {
         // Pick first if provider not specified
-        if ($prefix === NULL && !empty($this->providers)) {
+        if ($prefix === NULL && $this->providers !== []) {
             return reset($this->providers);
         }
 
