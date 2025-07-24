@@ -13,17 +13,17 @@ trait IdTrait
 {
 
     /**
-     * @var string
+     * @var int
      */
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Id()]
     #[ORM\Column(type: 'bigint', nullable: FALSE, options: ['unsigned' => TRUE])]
-    protected string $id;
+    protected int $id;
 
     /**
-     * @return string
+     * @return int
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

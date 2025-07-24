@@ -10,6 +10,7 @@ doctrine:
                 dbname:   "%env(string:MARIADB_DB)%"
                 user:     "%env(string:MARIADB_USER)%"
                 password: "%env(string:MARIADB_PASS)%"
+                server_version: '10.5.8-MariaDB'
     orm:
         default_entity_manager: ~
         auto_generate_proxy_classes: "%kernel.debug%"

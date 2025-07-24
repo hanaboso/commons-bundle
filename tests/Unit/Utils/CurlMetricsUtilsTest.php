@@ -38,16 +38,14 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $curlSender = self::createMock(CurlSender::class);
         $curlSender
             ->expects(self::any())
-            ->method('send')->will(
-                self::returnCallback(
-                    static function (array $times, array $data): bool {
-                        $data;
+            ->method('send')->willReturnCallback(
+                static function (array $times, array $data): bool {
+                    $data;
 
-                        self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value]);
+                    self::assertGreaterThanOrEqual(0, $times[MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value]);
 
-                        return TRUE;
-                    },
-                ),
+                    return TRUE;
+                },
             );
 
         $loader = new MetricsSenderLoader($curlSender);

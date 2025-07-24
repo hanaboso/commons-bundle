@@ -320,7 +320,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     }
 
     /**
-     * @param mixed[] $fns
+     * @param array<non-empty-string, mixed> $fns
      *
      * @throws Exception
      */

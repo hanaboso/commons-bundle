@@ -6,6 +6,10 @@ parameters:
 		-
 			message: '#is not subtype of type#'
 		-
+			identifier: method.internalClass
+		-
+			identifier: new.internalClass
+		-
 			message: '#Calling putenv\(\) is forbidden, might overwrite existing variables#'
 			path: src/Transport/Udp/UDPSender.php
 		-

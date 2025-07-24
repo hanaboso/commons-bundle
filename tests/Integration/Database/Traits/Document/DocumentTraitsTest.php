@@ -4,14 +4,12 @@ namespace CommonsBundleTests\Integration\Database\Traits\Document;
 
 use CommonsBundleTests\DatabaseTestCaseAbstract;
 use Exception;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class DocumentTraitsTest
  *
  * @package CommonsBundleTests\Integration\Database\Traits\Document
  */
-#[CoversClass(TestDocumentTrait::class)]
 final class DocumentTraitsTest extends DatabaseTestCaseAbstract
 {
 
