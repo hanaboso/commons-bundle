@@ -70,6 +70,28 @@ abstract class ProcessDtoAbstract
     }
 
     /**
+     * @param string                       $entity
+     * @param string                       $key
+     * @param array<array<string, string>> $fields
+     */
+    public function addAuditHeader(string $entity, string $key, array $fields): static
+    {
+        /** @var array<string, array{key: string, fields: array<array<string, string>>}> $auditData */
+        $auditData       = Json::decode($this->getHeader(PipesHeaders::AUDIT_ENTITY, '{}'));
+        $auditDataEntity = $auditData[$entity] ?? NULL;
+
+        if ($auditDataEntity) {
+            array_push($auditData[$entity]['fields'], ...$fields);
+        } else {
+            $auditData[$entity] = ['key' => $key, 'fields' => $fields];
+        }
+
+        $this->addHeader(PipesHeaders::AUDIT_ENTITY, Json::encode($auditData));
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getData(): string

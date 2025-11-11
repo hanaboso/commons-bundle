@@ -217,6 +217,35 @@ final class ProcessDtoTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @return void
+     */
+    public function testAddAuditHeader(): void
+    {
+        $processDto = new ProcessDto();
+        $processDto->addAuditHeader('one', 'id', [['id' => '1', 'externalId' => 'A']]);
+        $processDto->addAuditHeader('one', 'id', [['id' => '2', 'externalId' => 'B']]);
+        $processDto->addAuditHeader('two', 'id', [['id' => '3', 'externalId' => 'C']]);
+
+        // phpcs:disable SlevomatCodingStandard.Arrays.AlphabeticallySortedByKeys.IncorrectKeyOrder
+        self::assertEquals(Json::encode([
+            'one' => [
+                'key'    => 'id',
+                'fields' => [
+                    ['id' => '1', 'externalId' => 'A'],
+                    ['id' => '2', 'externalId' => 'B'],
+                ],
+            ],
+            'two' => [
+                'key'    => 'id',
+                'fields' => [
+                    ['id' => '3', 'externalId' => 'C'],
+                ],
+            ],
+        ]), $processDto->getHeader(PipesHeaders::AUDIT_ENTITY));
+        // phpcs:enable SlevomatCodingStandard.Arrays.AlphabeticallySortedByKeys.IncorrectKeyOrder
+    }
+
+    /**
      * @return mixed[]
      */
     private function getSetStopProcessHeaders(): array
