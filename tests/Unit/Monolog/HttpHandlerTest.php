@@ -14,6 +14,7 @@ use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Monolog\Level;
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -21,6 +22,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
  *
  * @package CommonsBundleTests\Unit\Monolog
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(HttpHandler::class)]
 final class HttpHandlerTest extends KernelTestCaseAbstract
 {

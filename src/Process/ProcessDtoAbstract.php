@@ -373,7 +373,7 @@ abstract class ProcessDtoAbstract
         return $this->data;
     }
 
-    /**
+    /*
      * ------------------------------------- HELPERS -----------------------------------------------
      */
 

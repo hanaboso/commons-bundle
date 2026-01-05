@@ -23,7 +23,7 @@ interface ClientInterface
      */
     public function send(
         string $uri,
-        array | LogRecord|null $data = NULL,
+        array|LogRecord|null $data = NULL,
         string $method = CurlManager::METHOD_POST,
     ): ResponseInterface;
 

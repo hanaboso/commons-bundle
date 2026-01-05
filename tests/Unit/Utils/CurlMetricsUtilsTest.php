@@ -17,6 +17,7 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -24,6 +25,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
  *
  * @package CommonsBundleTests\Unit\Utils
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(CurlMetricUtils::class)]
 final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
 {

@@ -20,7 +20,6 @@ class TestDocument
 
     /**
      * @var string
-     *
      */
     #[ODM\Field(type: 'string')]
     protected string $name;

@@ -7,6 +7,7 @@ use Exception;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderInterface;
 use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -15,6 +16,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  *
  * @package CommonsBundleTests\Unit\Metrics
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(MetricsSenderLoader::class)]
 final class MetricsLoaderTest extends KernelTestCaseAbstract
 {

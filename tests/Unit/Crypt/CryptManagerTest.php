@@ -80,7 +80,7 @@ final class CryptManagerTest extends KernelTestCaseAbstract
         self::assertEquals($expected, $transferedData);
     }
 
-    /**
+    /*
      * -------------------------------------------- HELPERS ----------------------------------------
      */
 

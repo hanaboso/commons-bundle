@@ -67,7 +67,7 @@ final class WindwalkerCrypt extends CryptImplAbstract
         }
     }
 
-    /**
+    /*
      * ------------------------------------------- HELPERS ----------------------------------------
      */
 

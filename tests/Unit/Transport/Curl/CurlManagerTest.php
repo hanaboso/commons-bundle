@@ -20,6 +20,7 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\Utils\String\Json;
 use Hanaboso\Utils\System\PipesHeaders;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -29,6 +30,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @package CommonsBundleTests\Unit\Transport\Curl
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(CurlManager::class)]
 final class CurlManagerTest extends TestCase
 {

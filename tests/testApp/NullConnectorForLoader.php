@@ -3,11 +3,11 @@
 namespace CommonsBundleTests\testApp;
 
 /**
- * Class NullConnectorForLoaderTest
+ * Class NullConnectorForLoader
  *
  * @package CommonsBundleTests\testApp
  */
-final class NullConnectorForLoaderTest
+final class NullConnectorForLoader
 {
 
 }

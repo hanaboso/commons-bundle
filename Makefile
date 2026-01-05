@@ -1,9 +1,9 @@
 .PHONY: init-dev test
 
-DC=docker-compose
-DE=docker-compose exec -T app
-DM=docker-compose exec -T mariadb
-DEC=docker-compose exec -T app composer
+DC=docker compose
+DE=docker compose exec -T app
+DM=docker compose exec -T mariadb
+DEC=docker compose exec -T app composer
 
 .env:
 	sed -e "s/{DEV_UID}/$(shell if [ "$(shell uname)" = "Linux" ]; then echo $(shell id -u); else echo '1001'; fi)/g" \
@@ -12,8 +12,7 @@ DEC=docker-compose exec -T app composer
 
 # Docker
 docker-up-force: .env
-	$(DC) build
-	$(DC) pull --ignore-pull-failures
+	$(DC) pull --ignore-buildable
 	$(DC) up -d --force-recreate --remove-orphans
 
 docker-down-clean: .env
@@ -35,6 +34,7 @@ composer-outdated:
 # Console
 clear-cache:
 	$(DE) rm -rf var
+	$(DE) php tests/testApp/bin/console cache:clear --env=test
 	$(DE) php tests/testApp/bin/console cache:warmup --env=test
 
 database-create:
