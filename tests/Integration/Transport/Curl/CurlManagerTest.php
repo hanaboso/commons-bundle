@@ -12,12 +12,14 @@ use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlManager;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
 /**
  * Class CurlManagerTest
  *
  * @package CommonsBundleTests\Integration\Transport\Curl
  */
+#[AllowMockObjectsWithoutExpectations]
 final class CurlManagerTest extends KernelTestCaseAbstract
 {
 

@@ -45,10 +45,12 @@ final class CurlMetricUtils
      * @param MetricsSenderInterface $sender
      * @param mixed[]                $timeData
      * @param string|null            $nodeId
+     * @param string|null            $topologyId
      * @param string|null            $correlationId
-     *
      * @param string|null            $user
      * @param string|null            $application
+     * @param int|null               $responseCode
+     * @param string|null            $responseError
      *
      * @throws Exception
      */
@@ -56,9 +58,12 @@ final class CurlMetricUtils
         MetricsSenderInterface $sender,
         array $timeData,
         ?string $nodeId = NULL,
+        ?string $topologyId = NULL,
         ?string $correlationId = NULL,
         ?string $user = NULL,
         ?string $application = NULL,
+        ?int $responseCode = NULL,
+        ?string $responseError = NULL,
     ): void
     {
         $info = [];
@@ -75,19 +80,24 @@ final class CurlMetricUtils
             $info[MetricsEnum::NODE_ID->value] = $nodeId;
         }
 
+        if ($topologyId) {
+            $info[MetricsEnum::TOPOLOGY_ID->value] = $topologyId;
+        }
+
         if ($correlationId) {
             $info[MetricsEnum::CORRELATION_ID->value] = $correlationId;
         }
 
-        $sender->send(
-            [
-                MetricsEnum::APPLICATION_ID->value              => $application,
-                MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value => $timeData[self::KEY_REQUEST_DURATION],
-                MetricsEnum::USER_ID->value                     => $user,
-            ],
-            $info,
-            FALSE,
-        );
+        $fields = [
+            MetricsEnum::REQUEST_RESPONSE_CODE->value       => $responseCode,
+            MetricsEnum::REQUEST_TOTAL_DURATION_SENT->value => $timeData[self::KEY_REQUEST_DURATION],
+        ];
+
+        if ($responseError) {
+            $fields = array_merge($fields, [MetricsEnum::REQUEST_RESPONSE_ERROR->value => $responseError]);
+        }
+
+        $sender->send($fields, $info, FALSE);
     }
 
     /**

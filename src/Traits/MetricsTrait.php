@@ -7,6 +7,7 @@ use Hanaboso\CommonsBundle\Metrics\MetricsSenderLoader;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlException;
 use Hanaboso\CommonsBundle\Transport\Curl\Dto\RequestDto;
 use Hanaboso\CommonsBundle\Utils\CurlMetricUtils;
+use Hanaboso\Utils\System\PipesHeaders;
 
 /**
  * Trait MetricsTrait
@@ -27,11 +28,13 @@ trait MetricsTrait
     private array $startTimes;
 
     /**
-     * @param RequestDto $dto
+     * @param RequestDto  $dto
+     * @param int         $responseCode
+     * @param string|null $responseBody
      *
      * @throws CurlException
      */
-    protected function sendMetrics(RequestDto $dto): void
+    protected function sendMetrics(RequestDto $dto, int $responseCode, ?string $responseBody): void
     {
         if ($this->metricsSender !== NULL) {
             $info  = $dto->getDebugInfo();
@@ -41,10 +44,13 @@ trait MetricsTrait
                 CurlMetricUtils::sendCurlMetrics(
                     $this->metricsSender->getSender(),
                     $times,
-                    $info['node_id'][0] ?? NULL,
-                    $info['correlation_id'][0] ?? NULL,
-                    $info['user'][0] ?? NULL,
-                    $info['application'][0] ?? NULL,
+                    $info[PipesHeaders::NODE_ID] ?? NULL,
+                    $info[PipesHeaders::TOPOLOGY_ID] ?? NULL,
+                    $info[PipesHeaders::CORRELATION_ID] ?? NULL,
+                    $info[PipesHeaders::USER] ?? NULL,
+                    $info[PipesHeaders::APPLICATION] ?? NULL,
+                    $responseCode,
+                    $responseBody,
                 );
             } catch (Exception $e) {
                 throw new CurlException($e->getMessage(), $e->getCode(), $e);

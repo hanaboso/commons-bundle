@@ -3,10 +3,10 @@ services:
         class: CommonsBundleTests\Controller\TestController
 
     hbpf.connector.null:
-        class: CommonsBundleTests\testApp\NullConnectorForLoaderTest
+        class: CommonsBundleTests\testApp\NullConnectorForLoader
 
     hbpf.connector.null1:
-        class: CommonsBundleTests\testApp\NullConnectorForLoaderTest
+        class: CommonsBundleTests\testApp\NullConnectorForLoader
 
     hbpf.connector.null2:
-        class: CommonsBundleTests\testApp\NullConnectorForLoaderTest
+        class: CommonsBundleTests\testApp\NullConnectorForLoader

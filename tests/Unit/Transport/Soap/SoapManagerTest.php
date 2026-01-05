@@ -12,6 +12,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapManager;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SoapClient;
@@ -21,6 +22,7 @@ use SoapClient;
  *
  * @package CommonsBundleTests\Unit\Transport\Soap
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(SoapManager::class)]
 final class SoapManagerTest extends TestCase
 {

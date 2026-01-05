@@ -36,6 +36,9 @@ parameters:
 		-
 			message: '#Property SoapFault\:\:\$faultactor \(string\) in isset\(\) is not nullable#'
 			path: src/Monolog/LogstashFormatter.php
+		-
+			message: '#.*#'
+			path: tests/testApp/config/reference.php
 	symfony:
 		containerXmlPath: %rootDir%/../../../var/cache/test/CommonsBundleTests_KernelTestDebugContainer.xml
 	ergebnis:

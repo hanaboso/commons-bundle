@@ -192,7 +192,9 @@ final class FtpAdapter implements FtpAdapterInterface
         return @ftp_size($this->getResource(), $file) !== -1;
     }
 
-    /**************************************** HELPERS ****************************************/
+    /*
+     * ------------------------------------------- HELPERS ----------------------------------------
+     */
 
     /**
      * @return mixed

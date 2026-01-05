@@ -135,7 +135,9 @@ final class FtpService implements FtpServiceInterface, LoggerAwareInterface
         return $downloaded;
     }
 
-    /**************************************** HELPERS ****************************************/
+    /*
+     * ------------------------------------------- HELPERS ----------------------------------------
+     */
 
     /**
      * @throws FtpException

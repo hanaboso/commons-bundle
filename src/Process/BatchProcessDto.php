@@ -41,7 +41,7 @@ final class BatchProcessDto extends ProcessDtoAbstract
      *
      * @return $this
      */
-    public function addItem(array | string $body, ?string $user = NULL, ?string $limit = NULL): self
+    public function addItem(array|string $body, ?string $user = NULL, ?string $limit = NULL): self
     {
         /** @var string $b */
         $b = $body;

@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Response;
 use Hanaboso\CommonsBundle\Metrics\Impl\CurlSender;
 use Hanaboso\CommonsBundle\Transport\Curl\CurlClientFactory;
 use Hanaboso\CommonsBundle\WorkerApi\Client as WorkerApiClient;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -16,6 +17,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
  *
  * @package CommonsBundleTests\Integration\Metrics\Impl
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(CurlSender::class)]
 final class CurlSenderTest extends KernelTestCaseAbstract
 {

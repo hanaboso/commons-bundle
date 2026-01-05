@@ -11,6 +11,7 @@ use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use phpmock\phpunit\PHPMock;
 use phpseclib3\Net\SFTP;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -19,6 +20,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  *
  * @package CommonsBundleTests\Unit\Transport\Ftp\Adapter
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(SftpAdapter::class)]
 final class SftpAdapterTest extends KernelTestCaseAbstract
 {

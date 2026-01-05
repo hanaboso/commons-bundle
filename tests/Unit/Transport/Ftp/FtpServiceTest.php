@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Transport\Ftp\Exception\FtpException;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpConfig;
 use Hanaboso\CommonsBundle\Transport\Ftp\FtpService;
 use Monolog\Logger;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
@@ -17,6 +18,7 @@ use SplFileInfo;
  *
  * @package CommonsBundleTests\Unit\Transport\Ftp
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(FtpService::class)]
 final class FtpServiceTest extends TestCase
 {

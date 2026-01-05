@@ -8,6 +8,7 @@ use Hanaboso\CommonsBundle\Listener\SystemMetricsListener;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use Hanaboso\Utils\System\PipesHeaders;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
  *
  * @package CommonsBundleTests\Integration\Listener
  */
+#[AllowMockObjectsWithoutExpectations]
 #[CoversClass(SystemMetricsListener::class)]
 final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
 {

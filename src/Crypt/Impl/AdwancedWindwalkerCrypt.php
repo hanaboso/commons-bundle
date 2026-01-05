@@ -69,7 +69,7 @@ final class AdwancedWindwalkerCrypt extends CryptImplAbstract
         }
     }
 
-    /**
+    /*
      * ------------------------------------------- HELPERS ----------------------------------------
      */
 

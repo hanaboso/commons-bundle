@@ -94,32 +94,31 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 
             $this->startTimes = CurlMetricUtils::getCurrentMetrics();
             $psrResponse      = $client->send($this->createRequest($dto), $this->prepareOptions($options));
-            $this->sendMetrics($dto);
+            $code             = $psrResponse->getStatusCode();
+            $body             = $psrResponse->getBody()->getContents();
+            $this->sendMetrics($dto, $code, $code >= 300 ? $body : NULL);
 
-            $response = new ResponseDto(
-                $psrResponse->getStatusCode(),
-                $psrResponse->getReasonPhrase(),
-                $psrResponse->getBody()->getContents(),
-                $psrResponse->getHeaders(),
-            );
+            $response = new ResponseDto($code, $psrResponse->getReasonPhrase(), $body, $psrResponse->getHeaders());
 
             $this->logAfterSend($psrResponse, $dto);
             unset($psrResponse);
 
             return $response;
         } catch (RequestException $exception) {
-            $this->sendMetrics($dto);
             $response = $exception->getResponse();
             $message  = $exception->getMessage();
+            $code     = $exception->getCode();
             if ($response) {
                 $message = $response->getBody()->getContents();
+                $code    = $response->getStatusCode();
                 $response->getBody()->rewind();
             }
+            $this->sendMetrics($dto, $code, $message);
             $this->logAfterError($exception, $dto, $message);
 
             throw $this->throwCurlError($exception, $message, $response);
         } catch (Throwable $exception) {
-            $this->sendMetrics($dto);
+            $this->sendMetrics($dto, 500, 'Unknown error');
             $this->logAfterError($exception, $dto);
 
             throw  $this->throwCurlError($exception);
@@ -143,21 +142,26 @@ final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
             ->then(
                 function (ResponseInterface $response) use ($dto): ResponseInterface {
                     $this->logResponse($response);
-                    $this->sendMetrics($dto);
+                    $code = $response->getStatusCode();
+                    $this->sendMetrics($dto, $code, $code >= 300 ? $response->getBody()->getContents() : NULL);
+                    $response->getBody()->rewind();
 
                     return $response;
                 },
                 function (Exception $e) use ($dto): void {
-                    $this->sendMetrics($dto);
                     if ($e instanceof RequestException) {
                         $response = $e->getResponse();
                         $message  = $e->getMessage();
+                        $code     = $e->getCode();
                         if ($response) {
                             $message = $response->getBody()->getContents();
+                            $code    = $response->getStatusCode();
                             $response->getBody()->rewind();
                         }
+                        $this->sendMetrics($dto, $code, $message);
                         $this->logAfterError($e, $dto, $message);
                     } else {
+                        $this->sendMetrics($dto, 500, 'Unknown error');
                         $this->logAfterError($e, $dto);
                     }
 

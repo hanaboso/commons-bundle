@@ -96,7 +96,7 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
         ];
     }
 
-    /**
+    /*
      * ------------------------------------------ HELPERS ---------------------------------------
      */
 

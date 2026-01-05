@@ -74,7 +74,7 @@ final class CryptManager
         return $this->encrypt($this->decrypt($encryptedData), $newCryptProviderPrefix);
     }
 
-    /**
+    /*
      * ---------------------------------------- HELPERS --------------------------------------
      */
 

@@ -232,7 +232,9 @@ final class SftpAdapter implements FtpAdapterInterface
         return $this->getResource()->file_exists($path);
     }
 
-    /**************************************** HELPERS ****************************************/
+    /*
+     * ------------------------------------------- HELPERS ----------------------------------------
+     */
 
     /**
      * @return SFTP
