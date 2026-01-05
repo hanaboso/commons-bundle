@@ -24,5 +24,7 @@ enum MetricsEnum: string
     case CPU_USER_TIME               = 'fpm_cpu_user_time';
     case CPU_KERNEL_TIME             = 'fpm_cpu_kernel_time';
     case REQUEST_TOTAL_DURATION_SENT = 'sent_request_total_duration';
+    case REQUEST_RESPONSE_CODE       = 'response_code';
+    case REQUEST_RESPONSE_ERROR      = 'response_error';
 
 }

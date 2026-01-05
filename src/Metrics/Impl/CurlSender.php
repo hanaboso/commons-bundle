@@ -34,7 +34,7 @@ final class CurlSender implements MetricsSenderInterface
     public function send(array $fields, array $tags = [], bool $isProcessMetrics = TRUE): bool
     {
         try {
-            $fields['created'] = DateTimeUtils::getUtcDateTime()->getTimestamp();
+            $fields['created'] = DateTimeUtils::getUtcDateTime()->format(DateTimeUtils::DATE_TIME_GO);
 
             $data = [
                 'fields' => $fields,
