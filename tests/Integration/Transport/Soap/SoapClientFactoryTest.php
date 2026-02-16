@@ -10,6 +10,7 @@ use Hanaboso\CommonsBundle\Transport\Soap\SoapClientFactory;
 use Hanaboso\CommonsBundle\Transport\Soap\SoapException;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -34,6 +35,7 @@ final class SoapClientFactoryTest extends TestCase
     /**
      * @throws Exception
      */
+    #[WithoutErrorHandler]
     public function testCreateSoapClientWsdlFail(): void
     {
         $request = new RequestDtoWsdl('functionName', [], 'namespace', new Uri('https://example.com'));

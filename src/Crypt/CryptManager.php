@@ -93,7 +93,7 @@ final class CryptManager
 
         // Use selected provider
         if (array_key_exists($prefix ?? '', $this->providers)) {
-            return $this->providers[$prefix];
+            return $this->providers[$prefix ?? ''];
         }
 
         // BC break
