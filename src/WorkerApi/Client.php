@@ -66,7 +66,7 @@ final class Client implements ClientInterface
                 'Content-Type' => 'application/json',
                 'orchesty-api-key' => $this->apiKey,
             ],
-            Json::encode($data),
+            $data !== NULL ? Json::encode($data) : NULL,
         );
 
         return $this->client->send($request);
