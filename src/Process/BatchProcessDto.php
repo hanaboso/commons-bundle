@@ -55,10 +55,7 @@ final class BatchProcessDto extends ProcessDtoAbstract
             $limits[explode(';',$limit)[0]] = $limit;
         }
 
-        $newHeaders = [
-            PipesHeaders::LIMITER_KEY => NULL,
-            PipesHeaders::USER        => NULL,
-        ];
+        $newHeaders = [];
 
         if ($user){
             $newHeaders[PipesHeaders::USER] = $user;
