@@ -43,7 +43,7 @@ final class CurlSender implements MetricsSenderInterface
 
             $res = $this->client->send(
                 sprintf(
-                    'metrics/%s',
+                    '/metrics/%s',
                     $isProcessMetrics ? 'monolith' : 'connectors',
                 ),
                 $data,

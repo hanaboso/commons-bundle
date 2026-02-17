@@ -49,6 +49,11 @@ final class RequestDto
         }
 
         $this->debugInfo = PipesHeaders::debugInfo($debugInfo->getHeaders());
+        $currentApp      = $debugInfo->getCurrentApp();
+
+        if ($currentApp) {
+            $this->debugInfo[PipesHeaders::APPLICATION] = $currentApp;
+        }
     }
 
     /**
@@ -176,6 +181,11 @@ final class RequestDto
     public function setDebugInfo(ProcessDto $dto): self
     {
         $this->debugInfo = PipesHeaders::debugInfo($dto->getHeaders());
+        $currentApp      = $dto->getCurrentApp();
+
+        if ($currentApp) {
+            $this->debugInfo[PipesHeaders::APPLICATION] = $currentApp;
+        }
 
         return $this;
     }
