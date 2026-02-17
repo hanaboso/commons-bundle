@@ -49,6 +49,7 @@ trait MetricsTrait
                     $info[PipesHeaders::CORRELATION_ID] ?? NULL,
                     $info[PipesHeaders::USER] ?? NULL,
                     $info[PipesHeaders::APPLICATION] ?? NULL,
+                    $dto->getUriString(),
                     $responseCode,
                     $responseBody,
                 );

@@ -18,6 +18,7 @@ enum MetricsEnum: string
     case NODE_ID        = 'node_id';
     case USER_ID        = 'user_id';
     case APPLICATION_ID = 'application_id';
+    case URL            = 'url';
 
     // Fields
     case REQUEST_TOTAL_DURATION      = 'fpm_request_total_duration';

@@ -49,6 +49,7 @@ final class CurlMetricUtils
      * @param string|null            $correlationId
      * @param string|null            $user
      * @param string|null            $application
+     * @param string|null            $url
      * @param int|null               $responseCode
      * @param string|null            $responseError
      *
@@ -62,6 +63,7 @@ final class CurlMetricUtils
         ?string $correlationId = NULL,
         ?string $user = NULL,
         ?string $application = NULL,
+        ?string $url = NULL,
         ?int $responseCode = NULL,
         ?string $responseError = NULL,
     ): void
@@ -86,6 +88,10 @@ final class CurlMetricUtils
 
         if ($correlationId) {
             $info[MetricsEnum::CORRELATION_ID->value] = $correlationId;
+        }
+
+        if ($url) {
+            $info[MetricsEnum::URL->value] = $url;
         }
 
         $fields = [

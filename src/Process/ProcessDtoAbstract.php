@@ -42,12 +42,18 @@ abstract class ProcessDtoAbstract
     protected array $headers;
 
     /**
+     * @var string
+     */
+    protected string $currentApp;
+
+    /**
      * ProcessDtoAbstract constructor.
      */
     public function __construct()
     {
-        $this->data    = '';
-        $this->headers = [];
+        $this->data       = '';
+        $this->headers    = [];
+        $this->currentApp = '';
     }
 
     /**
@@ -67,6 +73,26 @@ abstract class ProcessDtoAbstract
     public function getUser(): ?string
     {
         return $this->headers[PipesHeaders::USER] ?? NULL;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentApp(): string
+    {
+        return $this->currentApp;
+    }
+
+    /**
+     * @param string $currentApp
+     *
+     * @return $this
+     */
+    public function setCurrentApp(string $currentApp): self
+    {
+        $this->currentApp = $currentApp;
+
+        return $this;
     }
 
     /**
