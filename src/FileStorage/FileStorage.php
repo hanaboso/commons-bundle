@@ -53,9 +53,9 @@ final class FileStorage
      *
      * @return FileInterface
      * @throws FileStorageException
-     * @throws ORMException
-     * @throws OptimisticLockException
      * @throws MongoDBException
+     * @throws OptimisticLockException
+     * @throws ORMException
      */
     public function saveFileFromContent(FileContentDto $content): FileInterface
     {
@@ -93,9 +93,9 @@ final class FileStorage
      * @param FileInterface $file
      *
      * @throws FileStorageException
-     * @throws ORMException
-     * @throws OptimisticLockException
      * @throws MongoDBException
+     * @throws OptimisticLockException
+     * @throws ORMException
      */
     public function deleteFile(FileInterface $file): void
     {

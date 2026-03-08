@@ -24,8 +24,8 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
 final class SystemMetricsListenerTest extends DatabaseTestCaseAbstract
 {
 
-    use PrivateTrait;
     use CustomAssertTrait;
+    use PrivateTrait;
 
     /**
      * @var SystemMetricsListener

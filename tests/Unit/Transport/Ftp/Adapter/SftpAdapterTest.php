@@ -25,9 +25,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 final class SftpAdapterTest extends KernelTestCaseAbstract
 {
 
+    use CustomAssertTrait;
     use PHPMock;
     use PrivateTrait;
-    use CustomAssertTrait;
 
     /**
      * @var SftpAdapter

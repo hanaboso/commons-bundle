@@ -63,8 +63,8 @@ final class MongoFileDriverTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @throws FileStorageException
      * @throws Exception
+     * @throws FileStorageException
      */
     public function testDeleteFileExistsErr(): void
     {

@@ -27,8 +27,8 @@ use Throwable;
 final class CurlManager implements CurlManagerInterface, LoggerAwareInterface
 {
 
-    use MetricsTrait;
     use LoggerTrait;
+    use MetricsTrait;
 
     public const string METHOD_GET     = 'GET';
     public const string METHOD_POST    = 'POST';

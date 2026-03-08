@@ -50,8 +50,8 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
     }
 
     /**
-     * @throws FileStorageException
      * @throws Exception
+     * @throws FileStorageException
      */
     public function testGetFileDocument(): void
     {

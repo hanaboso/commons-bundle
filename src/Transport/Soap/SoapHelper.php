@@ -77,7 +77,7 @@ final class SoapHelper
         if (count($parts) > 2) {
             $result['version']    = explode('/', $parts[0])[1];
             $result['statusCode'] = $parts[1];
-            $result['reason']     = $parts[2] ?? NULL;
+            $result['reason']     = $parts[2];
         }
 
         $result['headers'] = new HeaderBag(Utils::headersFromLines($headers));

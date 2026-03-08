@@ -15,8 +15,8 @@ use Hanaboso\CommonsBundle\Database\Traits\Entity\IdTrait;
 class TestEntity
 {
 
-    use IdTrait;
     use DeletedTrait;
+    use IdTrait;
 
     /**
      * @var string

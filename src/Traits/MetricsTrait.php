@@ -45,6 +45,7 @@ trait MetricsTrait
                     $this->metricsSender->getSender(),
                     $times,
                     $info[PipesHeaders::NODE_ID] ?? NULL,
+                    $info[PipesHeaders::NODE_NAME] ?? NULL,
                     $info[PipesHeaders::TOPOLOGY_ID] ?? NULL,
                     $info[PipesHeaders::CORRELATION_ID] ?? NULL,
                     $info[PipesHeaders::USER] ?? NULL,

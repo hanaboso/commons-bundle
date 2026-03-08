@@ -27,8 +27,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 final class HttpHandlerTest extends KernelTestCaseAbstract
 {
 
-    use PrivateTrait;
     use CustomAssertTrait;
+    use PrivateTrait;
 
     /**
      * @throws Exception

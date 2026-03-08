@@ -15,8 +15,8 @@ use Hanaboso\CommonsBundle\Database\Traits\Document\IdTrait;
 class TestDocument
 {
 
-    use IdTrait;
     use DeletedTrait;
+    use IdTrait;
 
     /**
      * @var string

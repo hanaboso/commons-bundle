@@ -19,9 +19,9 @@ use Hanaboso\Utils\Exception\DateTimeException;
 class TestDocumentTrait
 {
 
-    use IdTrait;
-    use DeletedTrait;
     use CreatedTrait;
+    use DeletedTrait;
+    use IdTrait;
     use UpdatedTrait;
 
     /**
