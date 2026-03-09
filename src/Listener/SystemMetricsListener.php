@@ -119,7 +119,6 @@ final class SystemMetricsListener implements EventSubscriberInterface, LoggerAwa
             [
                 MetricsEnum::CORRELATION_ID->value => $headers->get(PipesHeaders::CORRELATION_ID),
                 MetricsEnum::NODE_ID->value        => $headers->get(PipesHeaders::NODE_ID),
-                MetricsEnum::NODE_NAME->value      => $headers->get(PipesHeaders::NODE_NAME),
                 MetricsEnum::TOPOLOGY_ID->value    => $headers->get(PipesHeaders::TOPOLOGY_ID),
             ],
         );
