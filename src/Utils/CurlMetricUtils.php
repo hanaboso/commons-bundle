@@ -45,6 +45,7 @@ final class CurlMetricUtils
      * @param MetricsSenderInterface $sender
      * @param mixed[]                $timeData
      * @param string|null            $nodeId
+     * @param string|null            $nodeName
      * @param string|null            $topologyId
      * @param string|null            $correlationId
      * @param string|null            $user
@@ -59,6 +60,7 @@ final class CurlMetricUtils
         MetricsSenderInterface $sender,
         array $timeData,
         ?string $nodeId = NULL,
+        ?string $nodeName = NULL,
         ?string $topologyId = NULL,
         ?string $correlationId = NULL,
         ?string $user = NULL,
@@ -80,6 +82,10 @@ final class CurlMetricUtils
 
         if ($nodeId) {
             $info[MetricsEnum::NODE_ID->value] = $nodeId;
+        }
+
+        if ($nodeName) {
+            $info[MetricsEnum::NODE_NAME->value] = $nodeName;
         }
 
         if ($topologyId) {

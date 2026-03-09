@@ -90,7 +90,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
         $curlSender = $this->createPartialMock(CurlSender::class, ['send']);
         $curlSender->expects(self::any())->method('send')->willReturn(TRUE);
 
-        CurlMetricUtils::sendCurlMetrics($curlSender, ['request_duration' => 2], '1', '2', 'user', 'app');
+        CurlMetricUtils::sendCurlMetrics($curlSender, ['request_duration' => 2], '1', 'nodeName', '2', 'user', 'app');
 
         self::assertFake();
     }

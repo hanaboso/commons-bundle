@@ -13,7 +13,7 @@ DEC=docker compose exec -T app composer
 # Docker
 docker-up-force: .env
 	$(DC) pull --ignore-buildable
-	$(DC) up -d --force-recreate --remove-orphans
+	$(DC) up -d --build --force-recreate --remove-orphans
 
 docker-down-clean: .env
 	$(DC) down -v

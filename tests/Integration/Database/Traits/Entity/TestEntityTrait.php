@@ -19,10 +19,10 @@ use Hanaboso\Utils\Exception\DateTimeException;
 class TestEntityTrait
 {
 
-    use IdTrait;
-    use DeletedTrait;
-    use UpdatedTrait;
     use CreatedTrait;
+    use DeletedTrait;
+    use IdTrait;
+    use UpdatedTrait;
 
     /**
      * @var string

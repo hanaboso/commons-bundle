@@ -64,7 +64,7 @@ final class S3Driver extends FileStorageDriverAbstract
             $key = $args[self::KEY_FIELD];
 
             $innerFile = new FileInfoDto($key, (string) strlen($content));
-        } catch (S3Exception | Exception $e) {
+        } catch (Exception | S3Exception $e) {
             throw new FileStorageException(
                 sprintf("Cannot write file '%s': %s", $path, $e->getMessage()),
                 $e->getCode(),

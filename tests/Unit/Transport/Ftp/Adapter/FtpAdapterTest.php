@@ -20,9 +20,9 @@ use PHPUnit\Framework\Attributes\CoversClass;
 final class FtpAdapterTest extends KernelTestCaseAbstract
 {
 
+    use CustomAssertTrait;
     use PHPMock;
     use PrivateTrait;
-    use CustomAssertTrait;
 
     /**
      * @var FtpAdapter

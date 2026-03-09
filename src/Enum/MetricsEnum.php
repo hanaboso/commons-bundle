@@ -16,6 +16,7 @@ enum MetricsEnum: string
     case CORRELATION_ID = 'correlation_id';
     case TOPOLOGY_ID    = 'topology_id';
     case NODE_ID        = 'node_id';
+    case NODE_NAME      = 'node_name';
     case USER_ID        = 'user_id';
     case APPLICATION_ID = 'application_id';
     case URL            = 'url';
