@@ -76,6 +76,25 @@ abstract class ProcessDtoAbstract
     }
 
     /**
+     * @param string $sdk
+     *
+     * @return $this
+     */
+    public function setSdk(string $sdk): self {
+        $this->headers[PipesHeaders::SDK] = $sdk;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSdk(): ?string
+    {
+        return $this->headers[PipesHeaders::SDK] ?? NULL;
+    }
+
+    /**
      * @return string
      */
     public function getCurrentApp(): string

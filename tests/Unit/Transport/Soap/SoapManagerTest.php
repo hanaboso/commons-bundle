@@ -38,11 +38,11 @@ final class SoapManagerTest extends TestCase
         $lastResponseHeaders = 'def';
 
         $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
-        $client->expects(self::any())->method('__soapCall')->willReturn($soapCallResponse);
-        $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn($lastResponseHeaders);
+        $client->expects(self::atLeastOnce())->method('__soapCall')->willReturn($soapCallResponse);
+        $client->expects(self::atLeastOnce())->method('__getLastResponseHeaders')->willReturn($lastResponseHeaders);
 
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
-        $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
+        $soapClientFactory->expects(self::atLeastOnce())->method('create')->willReturn($client);
 
         $request = new RequestDto('', [], '', new Uri(''));
         $request->setVersion(SOAP_1_2);
@@ -63,10 +63,10 @@ final class SoapManagerTest extends TestCase
     public function testSendLastHeadersNull(): void
     {
         $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
-        $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn(NULL);
+        $client->expects(self::atLeastOnce())->method('__getLastResponseHeaders')->willReturn(NULL);
 
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
-        $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
+        $soapClientFactory->expects(self::atLeastOnce())->method('create')->willReturn($client);
 
         $request = new RequestDto('', [], 'namespace', new Uri(''), ['el1', 'el2']);
         $request->setVersion(SOAP_1_2);
@@ -86,14 +86,13 @@ final class SoapManagerTest extends TestCase
      */
     public function testSendSendMetrics(): void
     {
-        $client = self::createPartialMock(SoapClient::class, ['__soapCall', '__getLastResponseHeaders']);
-        $client->expects(self::any())->method('__getLastResponseHeaders')->willReturn(NULL);
+        $client = self::createPartialMock(SoapClient::class, ['__soapCall']);
 
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
-        $soapClientFactory->expects(self::any())->method('create')->willReturn($client);
+        $soapClientFactory->expects(self::atLeastOnce())->method('create')->willReturn($client);
 
         $metricsSender = self::createPartialMock(MetricsSenderLoader::class, ['getSender']);
-        $metricsSender->expects(self::any())->method('getSender')->willThrowException(new CurlException());
+        $metricsSender->expects(self::atLeastOnce())->method('getSender')->willThrowException(new CurlException());
 
         $request = new RequestDto('', [], 'namespace', new Uri(''), ['el1', 'el2']);
         $request->setVersion(SOAP_1_2);
@@ -110,7 +109,7 @@ final class SoapManagerTest extends TestCase
     public function testSendErr(): void
     {
         $soapClientFactory = self::createPartialMock(SoapClientFactory::class, ['create']);
-        $soapClientFactory->expects(self::any())->method('create')->willThrowException(new Exception());
+        $soapClientFactory->expects(self::atLeastOnce())->method('create')->willThrowException(new Exception());
 
         $request = new RequestDto('', [], '', new Uri(''));
         $request->setVersion(SOAP_1_2);
