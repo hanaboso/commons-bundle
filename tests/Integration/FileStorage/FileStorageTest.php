@@ -32,7 +32,12 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
      */
     public function testFileStorage(): void
     {
-        $storage = $this->mockStorageService();
+        $driver = self::createPartialMock(FileStorageDriverInterface::class, ['save', 'delete', 'get']);
+        $driver->expects(self::atLeastOnce())->method('save')->willReturn(new FileInfoDto('fileUrl', '7'));
+        $driver->expects(self::atLeastOnce())->method('delete');
+        $driver->expects(self::atLeastOnce())->method('get')->willReturn('test_content');
+
+        $storage = $this->createStorage($driver);
         $dto     = new FileContentDto('test_content', 'csv', 'test_name');
 
         $file = $storage->saveFileFromContent($dto);
@@ -55,7 +60,7 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
      */
     public function testGetFileDocument(): void
     {
-        $storage = $this->mockStorageService();
+        $storage = $this->createStorage(self::createMock(FileStorageDriverInterface::class));
         $file    = new File();
         $this->pfd($file);
 
@@ -65,18 +70,14 @@ final class FileStorageTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @param FileStorageDriverInterface|MockObject $driver
+     *
      * @return FileStorage
      *
      * @throws Exception
      */
-    private function mockStorageService(): FileStorage
+    private function createStorage(FileStorageDriverInterface|MockObject $driver): FileStorage
     {
-        /** @var FileStorageDriverInterface|MockObject $driver */
-        $driver = self::createPartialMock(FileStorageDriverInterface::class, ['save', 'delete', 'get']);
-        $driver->expects(self::any())->method('save')->willReturn(new FileInfoDto('fileUrl', '7'));
-        $driver->expects(self::any())->method('delete');
-        $driver->expects(self::any())->method('get')->willReturn('test_content');
-
         /** @var DatabaseManagerLocator $managerLocator */
         $managerLocator = self::getContainer()->get('hbpf.database_manager_locator');
 

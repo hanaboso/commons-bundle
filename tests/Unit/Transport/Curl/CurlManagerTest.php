@@ -46,10 +46,10 @@ final class CurlManagerTest extends TestCase
         $psr7Response = new Response(200, $headers, $body);
 
         $client = self::createPartialMock(Client::class, ['send']);
-        $client->expects(self::any())->method('send')->willReturn($psr7Response);
+        $client->expects(self::atLeastOnce())->method('send')->willReturn($psr7Response);
 
         $curlClientFactory = self::createPartialMock(CurlClientFactory::class, ['create']);
-        $curlClientFactory->expects(self::any())->method('create')->willReturn($client);
+        $curlClientFactory->expects(self::atLeastOnce())->method('create')->willReturn($client);
 
         $requestDto = new RequestDto(new Uri('http://example.com'), CurlManager::METHOD_GET, new ProcessDto());
 
@@ -144,7 +144,7 @@ final class CurlManagerTest extends TestCase
     public function testSendErr(): void
     {
         $factory = self::createMock(CurlClientFactory::class);
-        $factory->expects(self::any())->method('create')
+        $factory->expects(self::atLeastOnce())->method('create')
             ->willThrowException(
                 new RequestException(
                     'Ups, something went wrong',

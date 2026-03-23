@@ -203,7 +203,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
      */
     public function testListDirAdvanceErr(): void
     {
-        $this->mockSftpFn(['isConnected' => TRUE, 'nlist' => []]);
+        $this->mockSftpFn(['isConnected' => TRUE]);
 
         self::expectException(FtpException::class);
         $this->adapter->listDirAdvanced('dir');
@@ -307,7 +307,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
      */
     public function testGetResourceErr(): void
     {
-        $this->mockSftpFn(['isConnected' => FALSE, 'delete' => TRUE]);
+        $this->mockSftpFn(['isConnected' => FALSE]);
 
         self::expectException(FtpException::class);
         $this->adapter->remove('file');
@@ -329,7 +329,7 @@ final class SftpAdapterTest extends KernelTestCaseAbstract
     private function mockSftpFn(array $fns): void
     {
         foreach ($fns as $key => $value) {
-            $this->sftp->expects(self::any())->method($key)->willReturn($value);
+            $this->sftp->expects(self::atLeastOnce())->method($key)->willReturn($value);
         }
 
         $this->setProperty($this->adapter, 'sftp', $this->sftp);
