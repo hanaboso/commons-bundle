@@ -68,7 +68,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function testLogin(): void
     {
-        $this->mockFtpFunction('ftp_connect', TRUE);
         $this->mockFtpFunction('ftp_login', TRUE);
         $this->mockFtpFunction('ftp_pasv', TRUE);
         $this->mockFtpFunction('is_bool', FALSE);
@@ -260,8 +259,6 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
      */
     public function testGetResource(): void
     {
-        $this->mockFtpFunction('ftp_delete', TRUE);
-
         self::expectException(FtpException::class);
         $this->ftp->remove('file');
     }
@@ -288,7 +285,7 @@ final class FtpAdapterTest extends KernelTestCaseAbstract
     private function mockFtpFunction(string $name, $result): void
     {
         $this->getFunctionMock('Hanaboso\CommonsBundle\Transport\Ftp\Adapter', $name)
-            ->expects(self::any())
+            ->expects(self::atLeastOnce())
             ->willReturn($result);
     }
 

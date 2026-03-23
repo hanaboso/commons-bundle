@@ -32,12 +32,12 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'dirExists', 'makeDirRecursive', 'uploadFile'],
         );
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login');
-        $adapter->expects(self::any())->method('disconnect');
-        $adapter->expects(self::any())->method('dirExists')->willReturn(FALSE);
-        $adapter->expects(self::any())->method('makeDirRecursive');
-        $adapter->expects(self::any())->method('uploadFile');
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login');
+        $adapter->expects(self::atLeastOnce())->method('disconnect');
+        $adapter->expects(self::atLeastOnce())->method('dirExists')->willReturn(FALSE);
+        $adapter->expects(self::atLeastOnce())->method('makeDirRecursive');
+        $adapter->expects(self::atLeastOnce())->method('uploadFile');
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->uploadFile('abc', 'def');
@@ -54,10 +54,10 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'downloadFile'],
         );
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login');
-        $adapter->expects(self::any())->method('disconnect');
-        $adapter->expects(self::any())->method('downloadFile');
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login');
+        $adapter->expects(self::atLeastOnce())->method('disconnect');
+        $adapter->expects(self::atLeastOnce())->method('downloadFile');
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         $result  = $service->downloadFile('abc');
@@ -74,11 +74,11 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['connect', 'login', 'disconnect', 'listDir', 'downloadFile'],
         );
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login');
-        $adapter->expects(self::any())->method('disconnect');
-        $adapter->expects(self::any())->method('listDir')->willReturn(['abc', 'def']);
-        $adapter->expects(self::any())->method('downloadFile');
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login');
+        $adapter->expects(self::atLeastOnce())->method('disconnect');
+        $adapter->expects(self::atLeastOnce())->method('listDir')->willReturn(['abc', 'def']);
+        $adapter->expects(self::atLeastOnce())->method('downloadFile');
 
         $service = new FtpService($adapter, $this->getFtpConfig());
         /** @var SplFileInfo[] $result */
@@ -113,12 +113,12 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['uploadFile', 'connect', 'login', 'dirExists', 'makeDirRecursive', 'disconnect'],
         );
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login');
-        $adapter->expects(self::any())->method('disconnect');
-        $adapter->expects(self::any())->method('uploadFile')->willThrowException(new FtpException());
-        $adapter->expects(self::any())->method('dirExists')->willReturn(FALSE);
-        $adapter->expects(self::any())->method('makeDirRecursive');
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login');
+        $adapter->expects(self::atLeastOnce())->method('disconnect');
+        $adapter->expects(self::atLeastOnce())->method('uploadFile')->willThrowException(new FtpException());
+        $adapter->expects(self::atLeastOnce())->method('dirExists')->willReturn(FALSE);
+        $adapter->expects(self::atLeastOnce())->method('makeDirRecursive');
 
         $service = new FtpService($adapter, $this->getFtpConfig());
 
@@ -135,10 +135,10 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['downloadFile', 'connect', 'login', 'disconnect'],
         );
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login');
-        $adapter->expects(self::any())->method('disconnect');
-        $adapter->expects(self::any())->method('downloadFile')->willThrowException(new FtpException());
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login');
+        $adapter->expects(self::atLeastOnce())->method('disconnect');
+        $adapter->expects(self::atLeastOnce())->method('downloadFile')->willThrowException(new FtpException());
 
         $service = new FtpService($adapter, $this->getFtpConfig());
 
@@ -155,11 +155,11 @@ final class FtpServiceTest extends TestCase
             FtpAdapter::class,
             ['downloadFile', 'connect', 'login', 'listDir', 'disconnect'],
         );
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login');
-        $adapter->expects(self::any())->method('disconnect');
-        $adapter->expects(self::any())->method('downloadFile')->willThrowException(new FtpException());
-        $adapter->expects(self::any())->method('listDir')->willReturn(['abc', 'def']);
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login');
+        $adapter->expects(self::atLeastOnce())->method('disconnect');
+        $adapter->expects(self::atLeastOnce())->method('downloadFile')->willThrowException(new FtpException());
+        $adapter->expects(self::atLeastOnce())->method('listDir')->willReturn(['abc', 'def']);
 
         $service = new FtpService($adapter, $this->getFtpConfig());
 
@@ -173,7 +173,7 @@ final class FtpServiceTest extends TestCase
     public function testConnectErr(): void
     {
         $adapter = self::createPartialMock(FtpAdapter::class, ['connect']);
-        $adapter->expects(self::any())->method('connect')->willThrowException(new FtpException());
+        $adapter->expects(self::atLeastOnce())->method('connect')->willThrowException(new FtpException());
 
         $service = new FtpService($adapter, $this->getFtpConfig());
 
@@ -187,10 +187,10 @@ final class FtpServiceTest extends TestCase
     public function testDisconnectErr(): void
     {
         $adapter = self::createPartialMock(FtpAdapter::class, ['connect', 'login', 'downloadFile', 'disconnect']);
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login');
-        $adapter->expects(self::any())->method('downloadFile');
-        $adapter->expects(self::any())->method('disconnect')->willThrowException(new FtpException());
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login');
+        $adapter->expects(self::atLeastOnce())->method('downloadFile');
+        $adapter->expects(self::atLeastOnce())->method('disconnect')->willThrowException(new FtpException());
 
         $service = new FtpService($adapter, $this->getFtpConfig());
 
@@ -204,8 +204,8 @@ final class FtpServiceTest extends TestCase
     public function testLogin(): void
     {
         $adapter = self::createPartialMock(FtpAdapter::class, ['connect', 'login']);
-        $adapter->expects(self::any())->method('connect');
-        $adapter->expects(self::any())->method('login')->willThrowException(new FtpException());
+        $adapter->expects(self::atLeastOnce())->method('connect');
+        $adapter->expects(self::atLeastOnce())->method('login')->willThrowException(new FtpException());
 
         $service = new FtpService($adapter, $this->getFtpConfig());
 

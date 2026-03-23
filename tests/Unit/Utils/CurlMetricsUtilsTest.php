@@ -39,7 +39,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
     {
         $curlSender = self::createMock(CurlSender::class);
         $curlSender
-            ->expects(self::any())
+            ->expects(self::atLeastOnce())
             ->method('send')->willReturnCallback(
                 static function (array $times, array $data): bool {
                     $data;
@@ -70,7 +70,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
     public function testSendMetricsErr(): void
     {
         $sh = self::createMock(MetricsSenderLoader::class);
-        $sh->expects(self::any())->method('getSender')->willThrowException(new Exception());
+        $sh->expects(self::atLeastOnce())->method('getSender')->willThrowException(new Exception());
 
         $factory = self::createMock(CurlClientFactory::class);
 
@@ -88,7 +88,7 @@ final class CurlMetricsUtilsTest extends KernelTestCaseAbstract
     public function testSendCurlMetrics(): void
     {
         $curlSender = $this->createPartialMock(CurlSender::class, ['send']);
-        $curlSender->expects(self::any())->method('send')->willReturn(TRUE);
+        $curlSender->expects(self::atLeastOnce())->method('send')->willReturn(TRUE);
 
         CurlMetricUtils::sendCurlMetrics($curlSender, ['request_duration' => 2], '1', 'nodeName', '2', 'user', 'app');
 
